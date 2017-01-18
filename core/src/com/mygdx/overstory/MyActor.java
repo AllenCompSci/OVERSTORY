@@ -2,59 +2,33 @@ package com.mygdx.overstory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
 
 /**
  * Created by 226812 on 1/17/2017.
  */
-public class MyActor extends Actor{
-    Sprite sprite = new Sprite(new Texture(Gdx.files.internal("badlogic.jpg")));
+public class MyActor extends Actor {
+    Sprite sprite;
 
-    public MyActor(){
-        setBounds(getX(),getY(),getWidth(),getHeight());
+    public MyActor(String texture){
+        sprite = new Sprite(new Texture(Gdx.files.internal(texture)));
+
+
+        setBounds(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());
         setTouchable(Touchable.enabled);
 
-        addListener(new InputListener(){
-            @Override
-            public boolean keyDown(InputEvent event, int keycode) {
-                if(keycode == Input.Keys.W){
-                    MoveByAction mba = new MoveByAction();
-                    mba.setAmount(0f,100f);
-                    mba.setDuration(1f);
 
-                    MyActor.this.addAction(mba);
-                }
-                if(keycode == Input.Keys.S){
-                    MoveByAction mba = new MoveByAction();
-                    mba.setAmount(0f,-100f);
-                    mba.setDuration(1f);
-
-                    MyActor.this.addAction(mba);
-                }
-                if(keycode == Input.Keys.A){
-                    MoveByAction mba = new MoveByAction();
-                    mba.setAmount(-100f,0f);
-                    mba.setDuration(1f);
-
-                    MyActor.this.addAction(mba);
-                }
-                if(keycode == Input.Keys.D){
-                    MoveByAction mba = new MoveByAction();
-                    mba.setAmount(100f,0f);
-                    mba.setDuration(1f);
-
-                    MyActor.this.addAction(mba);
-                }
-                return true;
-            }
-        });
     }
 
     @Override
@@ -66,10 +40,18 @@ public class MyActor extends Actor{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
+
+        //Grabs and moves the object in its Center
+        //Refer to for centered mouse clicks
+        /*if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
+            MyActor.this.addAction(Actions.moveTo(Gdx.input.getX() - sprite.getWidth()/2, Gdx.graphics.getHeight() - Gdx.input.getY() - sprite.getHeight()/2));
+        }*/
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
     }
+
+
 }

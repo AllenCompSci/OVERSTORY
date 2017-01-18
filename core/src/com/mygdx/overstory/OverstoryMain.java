@@ -32,8 +32,14 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 		redeyes = new Enemy(new Sprite(new Texture("RedEyes.png")), 100f);
 		redeyes.setName("RedEyes Minion");
 		redeyes.setPosition(400,400);
+		redeyes.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				redeyes.removeHealth(player.DMG);
+			}
+		});
 
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f);
+		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10);
 		player.setName("Player");
 		player.setTouchable(Touchable.disabled);
 
@@ -78,9 +84,8 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		Vector2 coord = stage.screenToStageCoordinates(new Vector2(screenX, screenY));
 		MyActor hitActor = (MyActor) stage.hit(coord.x, coord.y, true);
-
 		if(hitActor != null){
-			hitActor.isHit = true;
+			hitActor.isHit();
 		}
 		return true;
 	}

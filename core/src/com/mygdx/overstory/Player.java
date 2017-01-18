@@ -17,9 +17,8 @@ public class Player extends Character {
     float xp;
 
 
-    public Player(Sprite sprite, float health) {
-        super(sprite);
-        this.health = health;
+    public Player(Sprite sprite, float health, float DMG) {
+        super(sprite, health, DMG);
 
         addListener(new InputListener(){
 
@@ -53,16 +52,5 @@ public class Player extends Character {
         });
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        sprite.draw(batch);
-        if(isHit){
-            health -= 10;
-            isHit = false;
-            Gdx.app.log(getName(), "Health : " + getHealth());
-        }
-        if(health <= 0){
-            Player.this.remove();
-        }
-    }
+
 }

@@ -17,8 +17,8 @@ public class Player extends Character {
     float xp;
 
 
-    public Player(Sprite sprite, float health, float DMG) {
-        super(sprite, health, DMG);
+    public Player(Sprite sprite, float health, float DMG, float x, float y, String Name) {
+        super(sprite, health, DMG, x, y, Name);
 
         addListener(new InputListener(){
 

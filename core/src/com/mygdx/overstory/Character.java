@@ -20,13 +20,31 @@ public class Character extends MyActor{
     float DEF; //Base Defence
     float LCK; //Chance for dodges and critical hits
 
-    public Character(Sprite sprite) {
+    public Character(Sprite sprite, float health) {
         super(sprite);
+        this.health = health;
+
+
+    }
+    public Character(Sprite sprite, float health, float DMG) {
+        super(sprite);
+        this.health = health;
+        this.DMG = DMG;
 
 
     }
 
-    public float getHealth(){return health;}
+    public float getHealth(){
+        Gdx.app.log(getName(), String.valueOf(health));
+        return health;
+    }
 
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        sprite.draw(batch);
+        if(health <= 0){
+            this.remove();
+        }
+    }
 
 }

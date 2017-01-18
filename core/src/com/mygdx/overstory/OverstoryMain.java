@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -22,7 +23,7 @@ public class OverstoryMain extends ApplicationAdapter{
 		stage = new Stage(viewport);
 		Gdx.input.setInputProcessor(stage);
 
-		Player player = new Player("badlogic.jpg");
+		Player player = new Player(new Sprite(new Texture("badlogic.jpg")));
 		stage.addActor(player);
 		stage.setKeyboardFocus(player);
 	}

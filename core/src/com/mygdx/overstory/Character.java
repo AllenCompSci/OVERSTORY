@@ -15,12 +15,12 @@ public class Character extends MyActor{
     float health;
     float Mspeed; //Movement speed
     float SPD; //Attack speed
-    float ATK; //Base Attack Damage
+    float DMG; //Base Attack Damage
     float DEF; //Base Defence
     float LCK; //Chance for dodges and critical hits
 
-    public Character(String texture) {
-        super(texture);
+    public Character(Sprite sprite) {
+        super(sprite);
 
 
     }

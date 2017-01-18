@@ -21,8 +21,8 @@ import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
 public class MyActor extends Actor {
     Sprite sprite;
 
-    public MyActor(String texture){
-        sprite = new Sprite(new Texture(Gdx.files.internal(texture)));
+    public MyActor(Sprite sprite){
+        this.sprite = sprite;
 
 
         setBounds(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());

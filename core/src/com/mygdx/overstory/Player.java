@@ -1,6 +1,7 @@
 package com.mygdx.overstory;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -13,8 +14,8 @@ public class Player extends Character {
     float xp;
 
 
-    public Player(String texture) {
-        super(texture);
+    public Player(Sprite sprite) {
+        super(sprite);
 
         addListener(new InputListener(){
 

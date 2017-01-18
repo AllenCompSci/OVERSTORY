@@ -20,6 +20,7 @@ import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
  */
 public class MyActor extends Actor {
     Sprite sprite;
+    boolean isHit = false;
 
     public MyActor(Sprite sprite){
         this.sprite = sprite;

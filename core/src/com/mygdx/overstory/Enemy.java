@@ -43,6 +43,8 @@ public class Enemy extends Character {
     public void draw(Batch batch, float parentAlpha) {
         sprite.draw(batch);
         if(health <= 0){
+            om.getPlayer().xp += this.xp;
+            Gdx.app.log(om.getPlayer().getName(), String.valueOf(om.getPlayer().xp));
             this.remove();
             sprite.getTexture().dispose();
         }

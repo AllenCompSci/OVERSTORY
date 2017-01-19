@@ -33,7 +33,7 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 
 
 
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10f, 0f, 0f, "Player");
+		player = new Player(new Sprite(new Texture("thor.png")), 100f, 10f, 0f, 0f, "Player");
 		player.setTouchable(Touchable.disabled);
 
 		stage.addActor(map);

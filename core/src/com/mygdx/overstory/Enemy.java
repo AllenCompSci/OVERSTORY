@@ -16,8 +16,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
+
     long time = 0;
     int enrandmvmt = 0;
+    float xp = 1f; //Amount of xp enemy drops
+
 
     public Enemy(Sprite sprite, float health, float DMG, float x, float y, String Name) {
         super(sprite, health, DMG, x , y, Name);

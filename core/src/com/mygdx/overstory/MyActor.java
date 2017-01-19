@@ -19,6 +19,8 @@ import com.mygdx.overstory.OverstoryMain;
 /**
  * Created by 226812 on 1/17/2017.
  */
+
+/*
 public class MyActor extends Actor {
     Sprite sprite;
     OverstoryMain om = new OverstoryMain();
@@ -48,6 +50,7 @@ public class MyActor extends Actor {
         /*if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
             MyActor.this.addAction(Actions.moveTo(Gdx.input.getX() - sprite.getWidth()/2, Gdx.graphics.getHeight() - Gdx.input.getY() - sprite.getHeight()/2));
         }*/
+/*
     }
 
     @Override
@@ -62,3 +65,4 @@ public class MyActor extends Actor {
 
 
 }
+*/

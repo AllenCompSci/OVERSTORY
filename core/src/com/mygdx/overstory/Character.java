@@ -13,6 +13,7 @@ import com.mygdx.overstory.OverstoryMain;
 /**
  * Created by chris on 1/17/2017.
  */
+/*
 public class Character extends MyActor{
     float health;
     float Mspeed; //Movement speed
@@ -52,3 +53,4 @@ public class Character extends MyActor{
     }
 
 }
+*/

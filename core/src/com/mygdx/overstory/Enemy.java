@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 /**
  * Created by chris on 1/17/2017.
  */
+
+/*
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
 
@@ -39,3 +41,5 @@ public class Enemy extends Character {
 
 
 }
+
+*/

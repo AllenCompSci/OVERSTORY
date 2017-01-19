@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 /**
  * Created by chris on 1/17/2017.
  */
+
+/*
 public class Player extends Character {
     float level;
     float xp;
@@ -54,3 +56,4 @@ public class Player extends Character {
 
 
 }
+*/

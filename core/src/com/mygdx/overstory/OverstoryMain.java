@@ -1,3 +1,5 @@
+// used this tutorial http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
+
 package com.mygdx.overstory;
 
 import com.badlogic.gdx.*;
@@ -6,67 +8,47 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.*;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
-	private static Stage stage;
-	private static MyActor map;
-
-	public Player getPlayer() {
-		return player;
-	}
-
-	private static Player player;
+public class OverstoryMain extends ApplicationAdapter implements InputProcessor {
+	Texture img;
+	TiledMap tiledMap;
+	OrthographicCamera camera;
+	TiledMapRenderer tiledMapRenderer;
 
 	@Override
-	public void create () {
-		stage = new Stage(new ScreenViewport());
-
-		map = new MyActor(new Sprite(new Texture("spaceimg.jpg")));
-		map.setName("Map");
-		map.setTouchable(Touchable.disabled);
+	public void create()
+	{
+		float w = Gdx.graphics.getWidth();
+		float h = Gdx.graphics.getWidth();
 
 
 
-
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10f, 0f, 0f, "Player");
-		player.setTouchable(Touchable.disabled);
-
-		stage.addActor(map);
-		//Must addActors after map to have them in front of map
-		spawnEnemy(new Texture("RedEyes.png"), 100f, 10f, 400f, 400f, "RedEyes Minion");
-		spawnEnemy(new Texture("RedEyes.png"), 100f, 10f, 800f, 800f, "RedEyes Minion2");
-		stage.addActor(player);
-
-		stage.setKeyboardFocus(player);
-
-		InputMultiplexer im = new InputMultiplexer(stage, this);
-		Gdx.input.setInputProcessor(im);
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, 100, 100);
+		camera.update();
+		tiledMap = new TmxMapLoader().load("testlevel.tmx");
+		tiledMapRenderer = new OrthoCachedTiledMapRenderer(tiledMap, 1/16f);
+		Gdx.input.setInputProcessor(this);
 	}
 
 	@Override
-	public void render () {
+	public void render()
+	{
+		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-	}
-	
-	@Override
-	public void dispose () {
-		player.sprite.getTexture().dispose();
-		map.sprite.getTexture().dispose();
-	}
-
-	public Stage getStage() {
-		return stage;
-	}
-
-	public void spawnEnemy(Texture texture, float health, float DMG, float x, float y, String Name){
-		stage.addActor(new Enemy(new Sprite(texture), health, DMG, x, y, Name));
+		camera.update();
+		tiledMapRenderer.setView(camera);
+		tiledMapRenderer.render();
 	}
 
 	@Override
@@ -76,31 +58,30 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 
 	@Override
 	public boolean keyUp(int keycode) {
+		if(keycode == Input.Keys.LEFT)
+			camera.translate(-32,0);
+		if(keycode == Input.Keys.RIGHT)
+			camera.translate(32,0);
+		if(keycode == Input.Keys.UP)
+			camera.translate(0,-32);
+		if(keycode == Input.Keys.DOWN)
+			camera.translate(0,32);
+		if(keycode == Input.Keys.NUM_1)
+			tiledMap.getLayers().get(0).setVisible(!tiledMap.getLayers().get(0).isVisible());
+		if(keycode == Input.Keys.NUM_2)
+			tiledMap.getLayers().get(1).setVisible(!tiledMap.getLayers().get(1).isVisible());
 		return false;
 	}
 
 	@Override
 	public boolean keyTyped(char character) {
+
 		return false;
 	}
 
-	//Checks what it hit
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		switch (button) {
-			case Input.Buttons.LEFT:
-				Vector2 coord = stage.screenToStageCoordinates(new Vector2(screenX, screenY));
-				MyActor hitActor = (MyActor) stage.hit(coord.x, coord.y, true);
-				if (hitActor != null) {
-					hitActor.isHit();
-				}
-				break;
-			case Input.Buttons.RIGHT:
-				Texture texture = new Texture("RedEyes.png");
-				spawnEnemy(texture, 100f, 10f, screenX - texture.getWidth()/2 ,Gdx.graphics.getHeight() - screenY - texture.getHeight()/2, "RedEyes Minion");
-				break;
-		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -122,4 +103,5 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	public boolean scrolled(int amount) {
 		return false;
 	}
+
 }

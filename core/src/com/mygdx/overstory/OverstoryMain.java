@@ -29,18 +29,10 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 		map.setName("Map");
 		map.setTouchable(Touchable.disabled);
 
-		redeyes = new Enemy(new Sprite(new Texture("RedEyes.png")), 100f);
-		redeyes.setName("RedEyes Minion");
-		redeyes.setPosition(400,400);
-		redeyes.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				redeyes.removeHealth(player.DMG);
-			}
-		});
+		redeyes = new Enemy(new Sprite(new Texture("RedEyes.png")), 100f, 400f, 400f, "RedEyes Minion");
 
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10);
-		player.setName("Player");
+
+		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 100f, 0f, 0f, "Player");
 		player.setTouchable(Touchable.disabled);
 
 		stage.addActor(map);
@@ -62,6 +54,10 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	
 	@Override
 	public void dispose () {
+	}
+
+	public Stage getStage() {
+		return stage;
 	}
 
 	@Override

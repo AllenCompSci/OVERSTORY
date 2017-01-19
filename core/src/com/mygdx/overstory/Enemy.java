@@ -4,8 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import static com.mygdx.overstory.*;
 
 /**
  * Created by chris on 1/17/2017.
@@ -13,9 +16,16 @@ import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
 
-    public Enemy(Sprite sprite, float health) {
-        super(sprite, health);
+    public Enemy(Sprite sprite, float health, float x, float y, String Name) {
+        super(sprite, health,x , y, Name);
         //AI movement
+
+        addListener(new ClickListener(){
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                removeHealth(10);
+            }
+        });
     }
 
     public void isHit(Character character) {

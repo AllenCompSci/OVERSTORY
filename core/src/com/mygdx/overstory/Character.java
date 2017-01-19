@@ -20,6 +20,7 @@ public class Character extends MyActor{
     float DMG; //Base Attack Damage
     float DEF; //Base Defence
     float LCK; //Chance for dodges and critical hits
+    long time = 0;
 
     public Character(Sprite sprite, float health, float x, float y, String Name) {
         super(sprite);
@@ -49,6 +50,12 @@ public class Character extends MyActor{
             this.remove();
             sprite.getTexture().dispose();
         }
+    }
+
+    public boolean confineToMap(float x, float y){
+        MyActor hitActor = (MyActor) om.getStage().hit(sprite.getX() + sprite.getWidth()/2 + x, sprite.getY() + sprite.getHeight()/2 + y, false);
+        if(hitActor == null) return false;
+        return true;
     }
 
 }

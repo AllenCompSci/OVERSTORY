@@ -1,9 +1,6 @@
 package com.mygdx.overstory;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,10 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
-	private Stage stage;
-	private MyActor map;
-	private Player player;
-	private Enemy redeyes;
+	private static Stage stage;
+	private static MyActor map;
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	private static Player player;
 
 	@Override
 	public void create () {
@@ -29,14 +30,16 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 		map.setName("Map");
 		map.setTouchable(Touchable.disabled);
 
-		redeyes = new Enemy(new Sprite(new Texture("RedEyes.png")), 100f, 400f, 400f, "RedEyes Minion");
 
 
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 100f, 0f, 0f, "Player");
+
+		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10f, 0f, 0f, "Player");
 		player.setTouchable(Touchable.disabled);
 
 		stage.addActor(map);
-		stage.addActor(redeyes);
+		//Must addActors after map to have them in front of map
+		spawnEnemy(new Texture("RedEyes.png"), 100f, 10f, 400f, 400f, "RedEyes Minion");
+		spawnEnemy(new Texture("RedEyes.png"), 100f, 10f, 800f, 800f, "RedEyes Minion2");
 		stage.addActor(player);
 
 		stage.setKeyboardFocus(player);
@@ -54,10 +57,16 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	
 	@Override
 	public void dispose () {
+		player.sprite.getTexture().dispose();
+		map.sprite.getTexture().dispose();
 	}
 
 	public Stage getStage() {
 		return stage;
+	}
+
+	public void spawnEnemy(Texture texture, float health, float DMG, float x, float y, String Name){
+		stage.addActor(new Enemy(new Sprite(texture), health, DMG, x, y, Name));
 	}
 
 	@Override
@@ -78,10 +87,18 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	//Checks what it hit
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		Vector2 coord = stage.screenToStageCoordinates(new Vector2(screenX, screenY));
-		MyActor hitActor = (MyActor) stage.hit(coord.x, coord.y, true);
-		if(hitActor != null){
-			hitActor.isHit();
+		switch (button) {
+			case Input.Buttons.LEFT:
+				Vector2 coord = stage.screenToStageCoordinates(new Vector2(screenX, screenY));
+				MyActor hitActor = (MyActor) stage.hit(coord.x, coord.y, true);
+				if (hitActor != null) {
+					hitActor.isHit();
+				}
+				break;
+			case Input.Buttons.RIGHT:
+				Texture texture = new Texture("RedEyes.png");
+				spawnEnemy(texture, 100f, 10f, screenX - texture.getWidth()/2 ,Gdx.graphics.getHeight() - screenY - texture.getHeight()/2, "RedEyes Minion");
+				break;
 		}
 		return true;
 	}

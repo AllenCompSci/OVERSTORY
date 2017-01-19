@@ -33,7 +33,7 @@ public class Player extends Character {
                         case Input.Keys.W:
                             if (confineToMap(0f, 100f)) {
                                 addAction(Actions.moveBy(0f, 100f, .2f));
-                                time = System.currentTimeMillis() + 300;
+                                time = System.currentTimeMillis() + 200;
 
                             }
                             break;
@@ -41,21 +41,21 @@ public class Player extends Character {
                         case Input.Keys.S:
                             if (confineToMap(0f, -100f)) {
                                 addAction(Actions.moveBy(0f, -100f, .2f));
-                                time = System.currentTimeMillis() + 300;
+                                time = System.currentTimeMillis() + 200;
                             }
                             break;
 
                         case Input.Keys.A:
                             if (confineToMap(-100f, 0f)) {
                                 addAction(Actions.moveBy(-100f, 0f, .2f));
-                                time = System.currentTimeMillis() + 300;
+                                time = System.currentTimeMillis() + 200;
                             }
                             break;
 
                         case Input.Keys.D:
                             if (confineToMap(100f, 0f)) {
                                 addAction(Actions.moveBy(100f, 0f, .2f));
-                                time = System.currentTimeMillis() + 300;
+                                time = System.currentTimeMillis() + 200;
                             }
                             break;
 

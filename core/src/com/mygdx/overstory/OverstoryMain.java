@@ -26,14 +26,14 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	public void create () {
 		stage = new Stage(new ScreenViewport());
 
-		map = new MyActor(new Sprite(new Texture("spaceimg.jpg")));
+		map = new MyActor(new Sprite(new Texture("floor.jpg")));
 		map.setName("Map");
 		map.setTouchable(Touchable.disabled);
 
 
 
 
-		player = new Player(new Sprite(new Texture("badlogic.jpg")), 100f, 10f, 0f, 0f, "Player");
+		player = new Player(new Sprite(new Texture("thor.png")), 100f, 10f, 0f, 0f, "Player");
 		player.setTouchable(Touchable.disabled);
 
 		stage.addActor(map);

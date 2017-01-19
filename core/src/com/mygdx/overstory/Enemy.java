@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
 
-    long time = 0;
     int enrandmvmt = 0;
     float xp = 1f; //Amount of xp enemy drops
 
@@ -52,19 +51,32 @@ public class Enemy extends Character {
         if(System.currentTimeMillis() > time) {
             enrandmvmt = (int)(Math.random() * 5 + 1);
             switch (enrandmvmt){
-                case 1: addAction(Actions.moveBy(100f, 0f, .2f));
-                    time = System.currentTimeMillis() + 400;
-                    break;
-                case 2: addAction(Actions.moveBy(-100f, 0f, .2f));
-                    time = System.currentTimeMillis() + 400;
-                    break;
-                case 3: addAction(Actions.moveBy(0f, 100f, .2f));
-                    time = System.currentTimeMillis() + 400;
-                    break;
-                case 4: addAction(Actions.moveBy(0f, -100f, .2f));
-                    time = System.currentTimeMillis() + 400;
-                    break;
-                case 5: addAction(Actions.moveBy(0f, 0f, .2f));
+                case 1:
+                    if(confineToMap(100f,0f)) {
+                        addAction(Actions.moveBy(100f, 0f, .2f));
+                        time = System.currentTimeMillis() + 400;
+                    }
+                        break;
+                case 2:
+                    if(confineToMap(-100f,0f)) {
+                        addAction(Actions.moveBy(-100f, 0f, .2f));
+                        time = System.currentTimeMillis() + 400;
+                    }
+                        break;
+                case 3:
+                    if(confineToMap(0f,100f)) {
+                        addAction(Actions.moveBy(0f, 100f, .2f));
+                        time = System.currentTimeMillis() + 400;
+                    }
+                        break;
+                case 4:
+                    if(confineToMap(0f,-100f)) {
+                        addAction(Actions.moveBy(0f, -100f, .2f));
+                        time = System.currentTimeMillis() + 400;
+                    }
+                        break;
+                case 5:
+                    addAction(Actions.moveBy(0f, 0f, .2f));
                     time = System.currentTimeMillis() + 400;
                 break;
             }
@@ -77,6 +89,8 @@ public class Enemy extends Character {
         removeHealth((float)(int)(om.getPlayer().DMG * (float)(Math.random() * 11 + 5)/10));
         //removeHealth((om.getPlayer().DMG);
     }
+
+
 
 
 }

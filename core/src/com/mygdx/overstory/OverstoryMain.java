@@ -14,6 +14,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	private static Stage stage;
+
+
+
 	private static MyActor map;
 
 	public Player getPlayer() {
@@ -64,6 +67,7 @@ public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	public Stage getStage() {
 		return stage;
 	}
+	public static MyActor getMap() { return map; }
 
 	public void spawnEnemy(Texture texture, float health, float DMG, float x, float y, String Name){
 		stage.addActor(new Enemy(new Sprite(texture), health, DMG, x, y, Name));

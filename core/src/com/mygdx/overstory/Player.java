@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -24,29 +25,43 @@ public class Player extends Character {
 
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
-                switch (keycode) {
 
-                    //Ill constrain movement later, just setting up classes.
+                //Ill constrain movement later, just setting up classes.
+                if(System.currentTimeMillis() > time) {
+                    switch (keycode) {
 
-                    case Input.Keys.W:
-                        addAction(Actions.moveBy(0f, 100f, 1f));
-                        break;
+                        case Input.Keys.W:
+                            if (confineToMap(0f, 100f)) {
+                                addAction(Actions.moveBy(0f, 100f, .2f));
+                                time = System.currentTimeMillis() + 300;
 
-                    case Input.Keys.S:
-                        addAction(Actions.moveBy(0f, -100f, 1f));
-                        break;
+                            }
+                            break;
 
-                    case Input.Keys.A:
-                        addAction(Actions.moveBy(-100f, 0f, 1f));
-                        break;
+                        case Input.Keys.S:
+                            if (confineToMap(0f, -100f)) {
+                                addAction(Actions.moveBy(0f, -100f, .2f));
+                                time = System.currentTimeMillis() + 300;
+                            }
+                            break;
 
-                    case Input.Keys.D:
-                        addAction(Actions.moveBy(100f, 0f, 1f));
-                        break;
+                        case Input.Keys.A:
+                            if (confineToMap(-100f, 0f)) {
+                                addAction(Actions.moveBy(-100f, 0f, .2f));
+                                time = System.currentTimeMillis() + 300;
+                            }
+                            break;
 
+                        case Input.Keys.D:
+                            if (confineToMap(100f, 0f)) {
+                                addAction(Actions.moveBy(100f, 0f, .2f));
+                                time = System.currentTimeMillis() + 300;
+                            }
+                            break;
 
                 }
-                return false;
+            }
+            return false;
             }
 
         });

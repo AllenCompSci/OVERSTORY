@@ -14,7 +14,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  */
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
-    float xp; //Amount of xp it gives character
 
     public Enemy(final Sprite sprite, float health, float DMG, float x, float y, String Name) {
         super(sprite, health, DMG, x , y, Name);

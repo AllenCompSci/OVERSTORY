@@ -14,12 +14,14 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
 import static com.badlogic.gdx.scenes.scene2d.utils.ScissorStack.getViewport;
+import com.mygdx.overstory.OverstoryMain;
 
 /**
  * Created by 226812 on 1/17/2017.
  */
 public class MyActor extends Actor {
     Sprite sprite;
+    OverstoryMain om = new OverstoryMain();
 
     public MyActor(Sprite sprite){
         this.sprite = sprite;
@@ -56,6 +58,7 @@ public class MyActor extends Actor {
     public void isHit(){
 
     }
+
 
 
 }

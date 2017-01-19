@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.actions.ColorAction;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import static com.mygdx.overstory.*;
 
 /**
  * Created by chris on 1/17/2017.
@@ -16,14 +15,14 @@ import static com.mygdx.overstory.*;
 public class Enemy extends Character {
     float GLD; //Amount of gold enemy drops
 
-    public Enemy(Sprite sprite, float health, float x, float y, String Name) {
-        super(sprite, health,x , y, Name);
+    public Enemy(final Sprite sprite, float health, float DMG, float x, float y, String Name) {
+        super(sprite, health, DMG, x , y, Name);
         //AI movement
 
         addListener(new ClickListener(){
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                removeHealth(10);
+                removeHealth(om.getPlayer().DMG);
             }
         });
     }

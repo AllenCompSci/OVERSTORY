@@ -47,6 +47,7 @@ public class Character extends MyActor{
         sprite.draw(batch);
         if(health <= 0){
             this.remove();
+            sprite.getTexture().dispose();
         }
     }
 

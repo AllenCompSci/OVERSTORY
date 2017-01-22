@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 /**
  * Created by chris on 1/19/2017.
@@ -22,6 +23,7 @@ public class Player implements InputProcessor{
     protected Sprite sprite;
     protected long time = 0;
     protected float speed = 4f;
+    protected Detection detection;
 
 
     private TiledMapTileLayer collisionLayer;

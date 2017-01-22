@@ -19,21 +19,17 @@ public class Player implements InputProcessor{
         return sprite;
     }
 
-    private Sprite sprite;
-    private long time = 0;
-    private long timeUP = 0;
-    private long timeDOWN = 0;
-    private long timeLEFT = 0;
-    private long timeRIGHT = 0;
-    private float speed = 4f;
+    protected Sprite sprite;
+    protected long time = 0;
+    protected float speed = 4f;
 
 
     private TiledMapTileLayer collisionLayer;
 
-    public Player(Sprite sprite, TiledMapTileLayer collisionLayer){
+    public Player(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer){
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
-        sprite.setPosition(32 * 5, 32 * 5);
+        sprite.setPosition(32 * x, 32 * y);
     }
 
     public void draw(Batch batch) {
@@ -97,25 +93,21 @@ public class Player implements InputProcessor{
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                 sprite.setY(sprite.getY() + speed);
-                timeUP = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
                 sprite.setY(sprite.getY() + -speed);
-                timeDOWN = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
                 sprite.setX(sprite.getX() + -speed);
-                timeLEFT = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                 sprite.setX(sprite.getX() + speed);
-                timeRIGHT = System.currentTimeMillis() + 1;
             }
         }
     }

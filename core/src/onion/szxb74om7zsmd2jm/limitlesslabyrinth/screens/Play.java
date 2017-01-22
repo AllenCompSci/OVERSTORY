@@ -11,6 +11,8 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 
 /**
@@ -21,8 +23,8 @@ public class Play implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-
     private Player player;
+    private Array<Enemy> enemies = new Array<Enemy>();
 
     @Override
     public void show() {
@@ -34,9 +36,10 @@ public class Play implements Screen {
         camera.zoom = .6f;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), (TiledMapTileLayer) map.getLayers().get(0));
+        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, (TiledMapTileLayer) map.getLayers().get(0));
 
         Gdx.input.setInputProcessor(player);
+        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, (TiledMapTileLayer) map.getLayers().get(0));
     }
 
     @Override
@@ -50,6 +53,9 @@ public class Play implements Screen {
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();
+        for(Enemy i : enemies){
+            i.draw(renderer.getBatch());
+        }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
     }
@@ -80,5 +86,9 @@ public class Play implements Screen {
     public void dispose() {
         map.dispose();
         renderer.dispose();
+    }
+
+    public void spawnEnemy(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer){
+        enemies.add(new Enemy(sprite, x, y, collisionLayer));
     }
 }

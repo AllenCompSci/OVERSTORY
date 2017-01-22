@@ -36,10 +36,10 @@ public class Play implements Screen {
         camera.zoom = .6f;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, (TiledMapTileLayer) map.getLayers().get(0));
+        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, (TiledMapTileLayer) map.getLayers().get(1));
 
         Gdx.input.setInputProcessor(player);
-        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, (TiledMapTileLayer) map.getLayers().get(0));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, (TiledMapTileLayer) map.getLayers().get(1));
     }
 
     @Override

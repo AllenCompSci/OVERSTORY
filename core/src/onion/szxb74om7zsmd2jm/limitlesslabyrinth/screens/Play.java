@@ -23,7 +23,10 @@ public class Play implements Screen {
     private TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
     private OrthographicCamera camera;
-    private Player player;
+    public Player getPlayer() {
+        return player;
+    }
+    private static Player player;
     private Array<Enemy> enemies = new Array<Enemy>();
 
     @Override
@@ -40,6 +43,7 @@ public class Play implements Screen {
 
         Gdx.input.setInputProcessor(player);
         spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, (TiledMapTileLayer) map.getLayers().get(1));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, (TiledMapTileLayer) map.getLayers().get(1));
     }
 
     @Override

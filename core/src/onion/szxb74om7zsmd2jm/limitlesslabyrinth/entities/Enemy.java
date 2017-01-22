@@ -5,17 +5,26 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 import java.util.Random;
 
 /**
  * Created by chris on 1/21/2017.
  */
-public class Enemy extends Player{
+public class Enemy extends Entity{
 
     public Enemy(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer) {
         super(sprite, x, y, collisionLayer);
+        detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
+
+    @Override
+    public void draw(Batch batch) {
+        sprite.draw(batch);
+        move();
+        detection.isInRadius(this);
+     }
 
     @Override
     public void move() {

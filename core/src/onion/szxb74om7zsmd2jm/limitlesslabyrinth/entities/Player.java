@@ -42,9 +42,14 @@ public class Player implements InputProcessor{
     }
 
 
-    public boolean checkCollision(float width, float height, float speed){
-        return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + speed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + speed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
-            && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + speed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + speed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+    public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
+        if(height == 0f) return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 - sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+        );
+        return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + speed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 - sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
         );
     }
 
@@ -90,25 +95,25 @@ public class Player implements InputProcessor{
 
     public void move(){
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            if (checkCollision(0f, sprite.getHeight(), speed)) {
+            if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                 sprite.setY(sprite.getY() + speed);
                 timeUP = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            if (checkCollision(0f, -sprite.getHeight(), speed)) {
+            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
                 sprite.setY(sprite.getY() + -speed);
                 timeDOWN = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            if (checkCollision(-sprite.getWidth(), 0f, speed)) {
+            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
                 sprite.setX(sprite.getX() + -speed);
                 timeLEFT = System.currentTimeMillis() + 1;
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            if (checkCollision(sprite.getWidth(), 0f, speed)) {
+            if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                 sprite.setX(sprite.getX() + speed);
                 timeRIGHT = System.currentTimeMillis() + 1;
             }

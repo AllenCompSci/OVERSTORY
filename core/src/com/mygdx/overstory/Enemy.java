@@ -54,30 +54,30 @@ public class Enemy extends Character {
                 case 1:
                     if(confineToMap(100f,0f)) {
                         addAction(Actions.moveBy(100f, 0f, .2f));
-                        time = System.currentTimeMillis() + 400;
+                        time = System.currentTimeMillis() + 300;
                     }
                         break;
                 case 2:
                     if(confineToMap(-100f,0f)) {
                         addAction(Actions.moveBy(-100f, 0f, .2f));
-                        time = System.currentTimeMillis() + 400;
+                        time = System.currentTimeMillis() + 300;
                     }
                         break;
                 case 3:
                     if(confineToMap(0f,100f)) {
                         addAction(Actions.moveBy(0f, 100f, .2f));
-                        time = System.currentTimeMillis() + 400;
+                        time = System.currentTimeMillis() + 300;
                     }
                         break;
                 case 4:
                     if(confineToMap(0f,-100f)) {
                         addAction(Actions.moveBy(0f, -100f, .2f));
-                        time = System.currentTimeMillis() + 400;
+                        time = System.currentTimeMillis() + 300;
                     }
                         break;
                 case 5:
                     addAction(Actions.moveBy(0f, 0f, .2f));
-                    time = System.currentTimeMillis() + 400;
+                    time = System.currentTimeMillis() + 300;
                 break;
             }
 

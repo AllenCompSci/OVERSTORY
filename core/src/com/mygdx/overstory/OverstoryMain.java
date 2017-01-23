@@ -14,9 +14,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class OverstoryMain extends ApplicationAdapter implements InputProcessor{
 	private static Stage stage;
-
-
-
 	private static MyActor map;
 
 	public Player getPlayer() {

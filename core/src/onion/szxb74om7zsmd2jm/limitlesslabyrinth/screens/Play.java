@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -28,6 +29,7 @@ public class Play implements Screen {
     }
     private static Player player;
     private Array<Enemy> enemies = new Array<Enemy>();
+    private InputMultiplexer im;
 
     @Override
     public void show() {
@@ -39,11 +41,15 @@ public class Play implements Screen {
         camera.zoom = .6f;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));
 
-        Gdx.input.setInputProcessor(player);
-        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, (TiledMapTileLayer) map.getLayers().get(1));
+        im = new InputMultiplexer(player);
+        Gdx.input.setInputProcessor(im);
+        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, 100f, (TiledMapTileLayer) map.getLayers().get(1));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 16, 16, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 17, 17, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
+        spawnEnemy(new Sprite(new Texture("still1.png")), 18, 18, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
     }
 
     @Override
@@ -59,6 +65,7 @@ public class Play implements Screen {
         renderer.getBatch().begin();
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
+            if(i.getHealth() <= 0) enemies.removeIndex(enemies.indexOf(i, true));
         }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
@@ -92,7 +99,8 @@ public class Play implements Screen {
         renderer.dispose();
     }
 
-    public void spawnEnemy(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer){
-        enemies.add(new Enemy(sprite, x, y, collisionLayer));
+    public void spawnEnemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
+        enemies.add(new Enemy(sprite, x, y, health, collisionLayer));
+        im.addProcessor(enemies.get(enemies.size - 1));
     }
 }

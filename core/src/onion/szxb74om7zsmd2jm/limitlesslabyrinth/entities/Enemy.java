@@ -14,8 +14,8 @@ import java.util.Random;
  */
 public class Enemy extends Entity{
 
-    public Enemy(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer) {
-        super(sprite, x, y, collisionLayer);
+    public Enemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer) {
+        super(sprite, x, y, health, collisionLayer);
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 
@@ -23,7 +23,12 @@ public class Enemy extends Entity{
     public void draw(Batch batch) {
         sprite.draw(batch);
         move();
-        detection.isInRadius(this);
+        if(detection.isInRadius(this)){
+            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
+                health -= 10;
+                Gdx.app.log("Enemy Health", String.valueOf(health));
+            }
+        }
      }
 
     @Override

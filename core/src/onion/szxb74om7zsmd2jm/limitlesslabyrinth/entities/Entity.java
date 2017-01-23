@@ -21,12 +21,19 @@ public class Entity implements InputProcessor {
     protected float speed = 4f;
     protected Detection detection;
 
+    public float getHealth() {
+        return health;
+    }
+
+    protected float health;
+
 
     protected TiledMapTileLayer collisionLayer;
 
-    public Entity(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer){
+    public Entity(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
+        this.health = health;
         sprite.setPosition(32 * x, 32 * y);
     }
 

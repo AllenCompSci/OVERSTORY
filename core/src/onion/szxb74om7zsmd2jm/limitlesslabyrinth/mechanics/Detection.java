@@ -26,7 +26,7 @@ public class Detection {
 
     public boolean isInRadius(Enemy enemy){
         distance = Math.sqrt(Math.pow(enemy.getSprite().getX() - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow(enemy.getSprite().getY() - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
-        if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
+        //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
         return radius >= distance;
     }
 }

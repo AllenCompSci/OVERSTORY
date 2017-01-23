@@ -17,8 +17,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
  */
 public class Player extends Entity {
 
-    public Player(Sprite sprite, float x, float y, TiledMapTileLayer collisionLayer){
-        super(sprite, x, y, collisionLayer);
+    public Player(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
+        super(sprite, x, y, health, collisionLayer);
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
     }

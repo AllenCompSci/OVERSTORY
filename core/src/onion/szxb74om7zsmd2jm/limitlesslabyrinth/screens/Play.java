@@ -47,7 +47,7 @@ public class Play implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
 
         camera = new OrthographicCamera();
-        camera.zoom = 4f;
+        camera.zoom = .6f;
         camera.setToOrtho(false);
 
         player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));

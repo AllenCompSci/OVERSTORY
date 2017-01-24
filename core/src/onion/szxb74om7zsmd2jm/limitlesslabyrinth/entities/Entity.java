@@ -6,14 +6,12 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Touchable;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 /**
  * Created by chris on 1/22/2017.
  */
-public class Entity extends Actor implements InputProcessor {
+public class Entity implements InputProcessor {
     public Sprite getSprite() {
         return sprite;
     }
@@ -27,10 +25,6 @@ public class Entity extends Actor implements InputProcessor {
         return health;
     }
 
-    public void setHealth(float health) {
-        this.health = health;
-    }
-
     protected float health;
 
 
@@ -41,8 +35,6 @@ public class Entity extends Actor implements InputProcessor {
         this.collisionLayer = collisionLayer;
         this.health = health;
         sprite.setPosition(32 * x, 32 * y);
-        setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
-        setTouchable(Touchable.enabled);
     }
 
 

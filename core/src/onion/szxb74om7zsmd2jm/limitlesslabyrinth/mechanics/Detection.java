@@ -2,7 +2,6 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
 
 import com.badlogic.gdx.Gdx;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -25,8 +24,8 @@ public class Detection {
         this.radius = radius;
     }
 
-    public boolean isInRadius(Entity entity){
-        distance = Math.sqrt(Math.pow(entity.getSprite().getX() - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow(entity.getSprite().getY() - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
+    public boolean isInRadius(Enemy enemy){
+        distance = Math.sqrt(Math.pow(enemy.getSprite().getX() - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow(enemy.getSprite().getY() - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
         return radius >= distance;
     }

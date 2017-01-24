@@ -12,7 +12,6 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
@@ -31,11 +30,9 @@ public class Play implements Screen {
     private static Player player;
     private Array<Enemy> enemies = new Array<Enemy>();
     private InputMultiplexer im;
-    private Stage stage;
 
     @Override
     public void show() {
-        stage = new Stage();
         map = new TmxMapLoader().load("test.tmx");
 
         renderer = new OrthogonalTiledMapRenderer(map);
@@ -45,10 +42,8 @@ public class Play implements Screen {
         camera.setToOrtho(false);
 
         player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));
-        stage.addActor(player);
 
-        Gdx.input.setInputProcessor(player);
-        im = new InputMultiplexer(stage);
+        im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
         spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, 100f, (TiledMapTileLayer) map.getLayers().get(1));
         spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
@@ -74,7 +69,6 @@ public class Play implements Screen {
         }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
-        stage.draw();
     }
 
     @Override
@@ -108,6 +102,5 @@ public class Play implements Screen {
     public void spawnEnemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
         enemies.add(new Enemy(sprite, x, y, health, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
-        stage.addActor(enemies.get(enemies.size - 1));
     }
 }

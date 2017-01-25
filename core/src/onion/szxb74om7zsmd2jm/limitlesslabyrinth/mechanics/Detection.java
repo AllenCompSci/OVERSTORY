@@ -25,8 +25,14 @@ public class Detection {
     }
 
     public boolean isInRadius(Enemy enemy){
-        distance = Math.sqrt(Math.pow(enemy.getSprite().getX() - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow(enemy.getSprite().getY() - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
+        distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
         return radius >= distance;
+    }
+
+    public boolean isInSmallRadius(Enemy enemy){
+        distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
+        //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
+        return (radius/3) >= distance;
     }
 }

@@ -101,7 +101,7 @@ public class Play implements Screen {
         spawnEnemy(new Sprite(new Texture("still1.png")), 16, 16, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
         spawnEnemy(new Sprite(new Texture("still1.png")), 17, 17, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
         spawnEnemy(new Sprite(new Texture("still1.png")), 18, 18, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "spawnEnemy"));
+        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
     }
 
     @Override
@@ -129,7 +129,7 @@ public class Play implements Screen {
         num = rand.nextInt(spawnTiles.length);
         if (System.currentTimeMillis() > time) {
             spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, (TiledMapTileLayer) getMap().getLayers().get(1));
-            time = System.currentTimeMillis() + 1000;
+            time = System.currentTimeMillis() + 1;
         }
     }
 

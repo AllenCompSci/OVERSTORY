@@ -27,8 +27,15 @@ public class Player extends Entity {
     public void draw(Batch batch) {
         sprite.draw(batch);
         move();
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) pl.setZoom(pl.getZoom() - .1f);
-        if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) pl.setZoom(pl.getZoom() + .1f);
+        if(pl.getZoom() >= .2) {
+            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+                pl.setZoom(pl.getZoom() - .1f);
+            }
+        }
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            pl.setZoom(pl.getZoom() + .1f);
+        }
+
     }
 }
 

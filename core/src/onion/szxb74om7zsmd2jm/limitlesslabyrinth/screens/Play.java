@@ -7,7 +7,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -39,6 +41,31 @@ public class Play implements Screen {
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
+
+    private Animation playerWalkingDown;
+    private Animation playerWalkingLeft;
+    private Animation playerWalkingRight;
+    private Animation playerWalkingUp;
+
+    public Animation fourFrameAnimationCreator(String pathToSprite)
+    {
+        Texture img = new Texture(pathToSprite);
+
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, 256, 256);
+
+        TextureRegion[] animationFrames = new TextureRegion[4];
+        int index = 0;
+
+        for(int i = 0; i < 2; i++)
+        {
+            for(int j = j < 2; j++)
+            {
+                animationFrames[index++] = tmpFrames[j][i];
+            }
+        }
+
+        return new Animation(1f/4f, animationFrames);
+    }
 
     @Override
     public void show() {

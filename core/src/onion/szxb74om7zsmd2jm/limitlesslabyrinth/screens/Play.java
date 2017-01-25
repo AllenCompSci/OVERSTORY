@@ -32,7 +32,22 @@ public class Play implements Screen {
     }
     private static TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-    private OrthographicCamera camera;
+
+    public float getZoom() {
+        return zoom;
+    }
+
+    public void setZoom(float zoom) {
+        this.zoom = zoom;
+    }
+
+    private static float zoom = .6f;
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+    private static OrthographicCamera camera;
     public Player getPlayer() {
         return player;
     }
@@ -58,7 +73,7 @@ public class Play implements Screen {
 
         for(int i = 0; i < 2; i++)
         {
-            for(int j = j < 2; j++)
+            for(int j = 0; j < 2; j++)
             {
                 animationFrames[index++] = tmpFrames[j][i];
             }
@@ -74,7 +89,7 @@ public class Play implements Screen {
         renderer = new OrthogonalTiledMapRenderer(map);
 
         camera = new OrthographicCamera();
-        camera.zoom = .6f;
+        camera.zoom = zoom;
         camera.setToOrtho(false);
 
         player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));
@@ -93,6 +108,7 @@ public class Play implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        camera.zoom = zoom;
 
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
         camera.update();

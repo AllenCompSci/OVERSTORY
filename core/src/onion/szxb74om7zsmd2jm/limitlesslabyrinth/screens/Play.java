@@ -96,11 +96,6 @@ public class Play implements Screen {
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
-        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, 100f, (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 16, 16, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 17, 17, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 18, 18, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
     }
 
@@ -118,7 +113,10 @@ public class Play implements Screen {
         renderer.getBatch().begin();
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
-            if(i.getHealth() <= 0) enemies.removeIndex(enemies.indexOf(i, true));
+            if(i.getHealth() <= 0) {
+                player.setXp(player.getXp() + i.getXpDrop());
+                enemies.removeIndex(enemies.indexOf(i, true));
+            }
         }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
@@ -128,10 +126,9 @@ public class Play implements Screen {
         int num = 0;
         num = rand.nextInt(spawnTiles.length);
         if (System.currentTimeMillis() > time) {
-            spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, (TiledMapTileLayer) getMap().getLayers().get(1));
+            spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, 1, (TiledMapTileLayer) getMap().getLayers().get(1));
             time = System.currentTimeMillis() + 1;
         }
-        Gdx.app.log("Time between frames", String.valueOf(Gdx.graphics.getDeltaTime()));
     }
 
     @Override
@@ -163,8 +160,8 @@ public class Play implements Screen {
 
     }
 
-    public void spawnEnemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
-        enemies.add(new Enemy(sprite, x, y, health, collisionLayer));
+    public void spawnEnemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer){
+        enemies.add(new Enemy(sprite, x, y, health, xpDrop, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 

@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 1/22/2017.
@@ -20,6 +21,7 @@ public class Entity implements InputProcessor {
     protected long time = 0;
     protected float speed = 4f;
     protected Detection detection;
+    protected Play pl = new Play();
 
     public float getHealth() {
         return health;

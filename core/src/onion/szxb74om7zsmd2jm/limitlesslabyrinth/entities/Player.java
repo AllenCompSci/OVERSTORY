@@ -23,7 +23,12 @@ public class Player extends Entity {
         this.collisionLayer = collisionLayer;
     }
 
-
-
+    @Override
+    public void draw(Batch batch) {
+        sprite.draw(batch);
+        move();
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) pl.setZoom(pl.getZoom() - .1f);
+        if(Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) pl.setZoom(pl.getZoom() + .1f);
+    }
 }
 

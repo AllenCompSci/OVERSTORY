@@ -131,6 +131,7 @@ public class Play implements Screen {
             spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, (TiledMapTileLayer) getMap().getLayers().get(1));
             time = System.currentTimeMillis() + 1;
         }
+        Gdx.app.log("Time between frames", String.valueOf(Gdx.graphics.getDeltaTime()));
     }
 
     @Override

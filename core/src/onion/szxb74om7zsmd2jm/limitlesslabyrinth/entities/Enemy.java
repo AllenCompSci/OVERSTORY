@@ -15,9 +15,14 @@ import java.util.Random;
  */
 public class Enemy extends Entity{
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
+    public int getXpDrop() {
+        return xpDrop;
+    }
+    private int xpDrop;
 
-    public Enemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer) {
+    public Enemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer) {
         super(sprite, x, y, health, collisionLayer);
+        this.xpDrop = xpDrop;
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 
@@ -28,7 +33,7 @@ public class Enemy extends Entity{
         if(detection.isInRadius(this)){
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                 health -= 10;
-                Gdx.app.log("Enemy Health", String.valueOf(health));
+                //Gdx.app.log("Enemy Health", String.valueOf(health));
             }
         }
      }

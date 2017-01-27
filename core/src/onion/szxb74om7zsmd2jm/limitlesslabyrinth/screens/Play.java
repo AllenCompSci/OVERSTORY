@@ -57,16 +57,13 @@ public class Play implements Screen {
     private int[][] spawnTiles;
     private long time = 0;
 
-    private Animation playerWalkingDown;
-    private Animation playerWalkingLeft;
-    private Animation playerWalkingRight;
-    private Animation playerWalkingUp;
 
-    public Animation fourFrameAnimationCreator(String pathToSprite)
+
+    public static Animation fourFrameAnimationCreator(String pathToSprite)
     {
         Texture img = new Texture(pathToSprite);
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(img, 256, 256);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, 64, 64);
 
         TextureRegion[] animationFrames = new TextureRegion[4];
         int index = 0;
@@ -92,16 +89,15 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(new Sprite(new Texture("knightstanding.png")), 10, 20, 100f, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
-        spawnEnemy(new Sprite(new Texture("still1.png")), 1, 1, 100f, (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 15, 15, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 16, 16, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 17, 17, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnEnemy(new Sprite(new Texture("still1.png")), 18, 18, 100f,  (TiledMapTileLayer) map.getLayers().get(1));
-        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "spawnEnemy"));
+        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+
+
+
+
     }
 
     @Override
@@ -118,7 +114,10 @@ public class Play implements Screen {
         renderer.getBatch().begin();
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
-            if(i.getHealth() <= 0) enemies.removeIndex(enemies.indexOf(i, true));
+            if(i.getHealth() <= 0) {
+                player.setXp(player.getXp() + i.getXpDrop());
+                enemies.removeIndex(enemies.indexOf(i, true));
+            }
         }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
@@ -128,8 +127,8 @@ public class Play implements Screen {
         int num = 0;
         num = rand.nextInt(spawnTiles.length);
         if (System.currentTimeMillis() > time) {
-            spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, (TiledMapTileLayer) getMap().getLayers().get(1));
-            time = System.currentTimeMillis() + 1000;
+            spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, 1, (TiledMapTileLayer) getMap().getLayers().get(1));
+            time = System.currentTimeMillis() + 1;
         }
     }
 
@@ -162,8 +161,8 @@ public class Play implements Screen {
 
     }
 
-    public void spawnEnemy(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
-        enemies.add(new Enemy(sprite, x, y, health, collisionLayer));
+    public void spawnEnemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer){
+        enemies.add(new Enemy(sprite, x, y, health, xpDrop, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 

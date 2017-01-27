@@ -22,6 +22,7 @@ public class Entity implements InputProcessor {
     protected float speed = 4f;
     protected Detection detection;
     protected Play pl = new Play();
+    protected String state = "still";
 
     public float getHealth() {
         return health;
@@ -41,6 +42,9 @@ public class Entity implements InputProcessor {
 
 
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
+
+       // return true;
+
         if(height == 0f) return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 - sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
@@ -49,6 +53,7 @@ public class Entity implements InputProcessor {
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 - sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
         );
+
     }
 
     public void draw(Batch batch) {
@@ -65,6 +70,8 @@ public class Entity implements InputProcessor {
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
                 sprite.setY(sprite.getY() + -speed);
+                state = "down";
+
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){

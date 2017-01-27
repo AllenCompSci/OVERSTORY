@@ -59,8 +59,9 @@ public class Enemy extends Entity{
         }
         int num;
         Random rand = new Random();
+
             if(canmove.size() == 0){
-                num = rand.nextInt(5 + 1);
+                num = 5;// rand.nextInt(5 + 1);
             }
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));

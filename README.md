@@ -17,4 +17,4 @@ Created basic enemy movement, then upgraded that movement to track the player, c
 
 # Chris DeLaGarza
 ## Week 1
-    
+Created the tilemap, the player, the enemies. Added health, xp, leveling, and enemy waves system. Added health bar for enemies that works. Added collision, and a way to spawn enemies around the edge of the map at a random location. Enemies can be killed. Enemies drop xp.

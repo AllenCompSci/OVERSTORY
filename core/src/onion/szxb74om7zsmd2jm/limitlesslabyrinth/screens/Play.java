@@ -89,7 +89,7 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("knightstanding.png")), 10, 20, 100f, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(new Sprite(new Texture("thor32.png")), 10, 20, 100f, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);

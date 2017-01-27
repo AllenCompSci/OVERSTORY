@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -19,6 +20,7 @@ public class Enemy extends Entity{
         return xpDrop;
     }
     private int xpDrop;
+    Sprite healthBar = new Sprite(new Texture("greenbar.png"));
 
     public Enemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer) {
         super(sprite, x, y, health, collisionLayer);
@@ -29,10 +31,13 @@ public class Enemy extends Entity{
     @Override
     public void draw(Batch batch) {
         sprite.draw(batch);
+        healthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+        healthBar.draw(batch);
         move();
         if(detection.isInRadius(this)){
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                 health -= 10;
+                healthBar.setScale(healthBar.getScaleX() - .1f, healthBar.getScaleY());
                 //Gdx.app.log("Enemy Health", String.valueOf(health));
             }
         }

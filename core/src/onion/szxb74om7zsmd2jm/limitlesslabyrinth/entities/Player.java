@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -29,6 +30,14 @@ public class Player extends Entity {
     private int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
+    private int waveAmount = 10;
+    public int getEnemiesAlive() {
+        return enemiesAlive;
+    }
+    public void setEnemiesAlive(int enemiesAlive) {
+        this.enemiesAlive = enemiesAlive;
+    }
+    private int enemiesAlive = 0;
 
     private Animation playerWalkingDown;
     private Animation playerWalkingLeft;
@@ -45,10 +54,14 @@ public class Player extends Entity {
     @Override
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-
-            sprite.draw(batch);
+        sprite.draw(batch);
 
         move();
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && enemiesAlive == 0){
+            pl.setSpawnCount(waveAmount);
+            enemiesAlive = waveAmount;
+            waveAmount *= 2;
+        }
         if(xpToLevel - xp <= 0){
             level++;
             xpToLevel *= 2;

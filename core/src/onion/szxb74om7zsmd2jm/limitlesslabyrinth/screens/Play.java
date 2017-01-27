@@ -56,6 +56,13 @@ public class Play implements Screen {
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
+    public int getSpawnCount() {
+        return spawnCount;
+    }
+    public void setSpawnCount(int spawnCount) {
+        this.spawnCount = spawnCount;
+    }
+    private static int spawnCount = 0;
 
 
 
@@ -117,18 +124,21 @@ public class Play implements Screen {
             if(i.getHealth() <= 0) {
                 player.setXp(player.getXp() + i.getXpDrop());
                 enemies.removeIndex(enemies.indexOf(i, true));
+                player.setEnemiesAlive(player.getEnemiesAlive() - 1);
             }
         }
         player.draw(renderer.getBatch());
         renderer.getBatch().end();
-
-        //Spawning in enemies every n seconds
-        Random rand = new Random();
-        int num = 0;
-        num = rand.nextInt(spawnTiles.length);
-        if (System.currentTimeMillis() > time) {
-            spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, 1, (TiledMapTileLayer) getMap().getLayers().get(1));
-            time = System.currentTimeMillis() + 1;
+        if(spawnCount > 0) {
+            //Spawning in enemies every n seconds
+            Random rand = new Random();
+            int num = 0;
+            num = rand.nextInt(spawnTiles.length);
+            if (System.currentTimeMillis() > time) {
+                spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, 1, (TiledMapTileLayer) getMap().getLayers().get(1));
+                time = System.currentTimeMillis() + 1;
+            }
+            spawnCount--;
         }
     }
 

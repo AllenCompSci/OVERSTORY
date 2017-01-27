@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -11,6 +12,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 1/19/2017.
@@ -25,16 +27,27 @@ public class Player extends Entity {
     private int xp = 0;
     private int level = 1;
     private int xpToLevel = 10;
+    //private String state = "still";
+    private float elapsedTime;
+
+    private Animation playerWalkingDown;
+    private Animation playerWalkingLeft;
+    private Animation playerWalkingRight;
+    private Animation playerWalkingUp;
 
     public Player(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
         super(sprite, x, y, health, collisionLayer);
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
+        playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
     }
 
     @Override
     public void draw(Batch batch) {
-        sprite.draw(batch);
+        elapsedTime += Gdx.graphics.getDeltaTime();
+
+            sprite.draw(batch);
+
         move();
         if(xpToLevel - xp <= 0){
             level++;

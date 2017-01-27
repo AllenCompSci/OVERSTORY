@@ -57,16 +57,13 @@ public class Play implements Screen {
     private int[][] spawnTiles;
     private long time = 0;
 
-    private Animation playerWalkingDown;
-    private Animation playerWalkingLeft;
-    private Animation playerWalkingRight;
-    private Animation playerWalkingUp;
 
-    public Animation fourFrameAnimationCreator(String pathToSprite)
+
+    public static Animation fourFrameAnimationCreator(String pathToSprite)
     {
         Texture img = new Texture(pathToSprite);
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(img, 256, 256);
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, 64, 64);
 
         TextureRegion[] animationFrames = new TextureRegion[4];
         int index = 0;
@@ -92,11 +89,15 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), 5, 5, 100f, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(new Sprite(new Texture("knightstanding.png")), 10, 20, 100f, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+
+
+
+
     }
 
     @Override

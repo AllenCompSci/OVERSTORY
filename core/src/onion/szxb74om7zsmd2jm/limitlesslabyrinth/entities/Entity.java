@@ -23,20 +23,29 @@ public class Entity implements InputProcessor {
     protected Detection detection;
     protected Play pl = new Play();
     protected String state = "still";
+    protected float fullHealth;
 
+    public float getDmg() {
+        return dmg;
+    }
+
+    public void setDmg(float dmg) {
+        this.dmg = dmg;
+    }
+
+    protected float dmg;
     public float getHealth() {
         return health;
     }
-
     protected float health;
-
-
     protected TiledMapTileLayer collisionLayer;
 
-    public Entity(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
+    public Entity(Sprite sprite, float x, float y, float dmg, float health, TiledMapTileLayer collisionLayer){
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
         this.health = health;
+        this.dmg = dmg;
+        this.fullHealth = health;
         sprite.setPosition(32 * x, 32 * y);
     }
 

@@ -44,8 +44,8 @@ public class Player extends Entity {
     private Animation playerWalkingRight;
     private Animation playerWalkingUp;
 
-    public Player(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
-        super(sprite, x, y, health, collisionLayer);
+    public Player(Sprite sprite, float x, float y, float dmg, float health, TiledMapTileLayer collisionLayer){
+        super(sprite, x, y, dmg, health, collisionLayer);
         this.sprite = sprite;
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
@@ -69,11 +69,11 @@ public class Player extends Entity {
         }
         if(pl.getZoom() >= .2) {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                pl.setZoom(pl.getZoom() - .1f);
+                pl.setZoom(pl.getZoom() - .02f);
             }
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            pl.setZoom(pl.getZoom() + .1f);
+            pl.setZoom(pl.getZoom() + .02f);
         }
 
     }

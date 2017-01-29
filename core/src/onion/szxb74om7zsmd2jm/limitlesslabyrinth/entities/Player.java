@@ -52,7 +52,7 @@ public class Player extends Entity {
         this.dmg = 10f;
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
-        sprite.setPosition(32 * x, 32 * y);
+        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 
     @Override

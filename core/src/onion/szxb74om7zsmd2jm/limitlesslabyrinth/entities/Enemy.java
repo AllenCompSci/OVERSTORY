@@ -22,6 +22,7 @@ public class Enemy extends Entity{
     protected int xpDrop;
     Sprite healthBar = new Sprite(new Texture("greenbar.png"));
     Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
+    protected float healthBarX = 0;
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -30,7 +31,7 @@ public class Enemy extends Entity{
     @Override
     public void draw(Batch batch) {
         sprite.draw(batch);
-        healthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+        healthBar.setPosition(sprite.getX() - healthBarX, sprite.getY() + sprite.getHeight());
         lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
         lostHealthBar.draw(batch);
         healthBar.draw(batch);
@@ -42,8 +43,8 @@ public class Enemy extends Entity{
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
                 //Enemy loses health and is represented on the health bar
                 health -= pl.getPlayer().getDmg();
+                healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
                 healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
-                //Gdx.app.log("Enemy Health", String.valueOf(health));
             }
         }
      }

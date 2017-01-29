@@ -19,14 +19,12 @@ public class Enemy extends Entity{
     public int getXpDrop() {
         return xpDrop;
     }
-    private int xpDrop;
+    protected int xpDrop;
     Sprite healthBar = new Sprite(new Texture("greenbar.png"));
     Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
 
-    public Enemy(Sprite sprite, float x, float y, float dmg, float health, int xpDrop, TiledMapTileLayer collisionLayer) {
-        super(sprite, x, y, dmg, health, collisionLayer);
-        this.xpDrop = xpDrop;
-        detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
+    public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
+        super(x, y, level, collisionLayer);
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -100,6 +99,18 @@ public class Enemy extends Entity{
             }
         }
         canmove.clear();
+    }
+
+
+    // Default method for xp drop - gives no xp. should override in other classes
+    public int determineXP(int level)
+    {
+        return 0;
+    }
+
+    public float determineHealth(int level)
+    {
+        return 0;
     }
 
 }

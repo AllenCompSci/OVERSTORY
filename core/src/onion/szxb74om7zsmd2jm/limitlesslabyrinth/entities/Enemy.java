@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -19,26 +18,32 @@ public class Enemy extends Entity{
     public int getXpDrop() {
         return xpDrop;
     }
-    private int xpDrop;
+    protected int xpDrop;
     Sprite healthBar = new Sprite(new Texture("greenbar.png"));
+    Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
+    protected float healthBarX = 0;
 
-    public Enemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer) {
-        super(sprite, x, y, health, collisionLayer);
-        this.xpDrop = xpDrop;
-        detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
+    public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
+        super(x, y, level, collisionLayer);
     }
 
     @Override
     public void draw(Batch batch) {
         sprite.draw(batch);
-        healthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+        healthBar.setPosition(sprite.getX() - healthBarX, sprite.getY() + sprite.getHeight());
+        lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
+        lostHealthBar.draw(batch);
         healthBar.draw(batch);
         move();
+
+        //Enemy checking for player
         if(detection.isInRadius(this)){
+            //Enemy is hit
             if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-                health -= 10;
-                healthBar.setScale(healthBar.getScaleX() - .1f, healthBar.getScaleY());
-                //Gdx.app.log("Enemy Health", String.valueOf(health));
+                //Enemy loses health and is represented on the health bar
+                health -= pl.getPlayer().getDmg();
+                healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+                healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
             }
         }
      }
@@ -94,6 +99,20 @@ public class Enemy extends Entity{
             }
         }
         canmove.clear();
+    }
+
+
+    // Default method for xp drop - gives no xp. should override in other classes
+
+    /** These functions allow for the placement of a formula in the subclass. Make sure to override. **/
+    public int determineXP(int level)
+    {
+        return 0;
+    }
+
+    public float determineHealth(int level)
+    {
+        return 0;
     }
 
 }

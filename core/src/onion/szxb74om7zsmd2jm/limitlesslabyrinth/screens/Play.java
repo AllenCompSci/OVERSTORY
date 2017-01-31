@@ -179,7 +179,7 @@ public class Play implements Screen {
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
         enemies.add(new ash(x, y, level, collisionLayer));
-        enemies.add(new Brute(x, y, level, collisionLayer));
+        //enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 

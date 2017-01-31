@@ -24,6 +24,7 @@ public class Detection {
         this.radius = radius;
     }
 
+    //Checks whether player is within the radius of the entity
     public boolean isInRadius(Enemy enemy){
         distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
@@ -34,5 +35,11 @@ public class Detection {
         distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
         return (radius/3) >= distance;
+    }
+
+    public boolean isInBigRadius(Enemy enemy){
+        distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
+        //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
+        return (radius*10) <= distance;
     }
 }

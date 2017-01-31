@@ -44,11 +44,15 @@ public class Player extends Entity {
     private Animation playerWalkingRight;
     private Animation playerWalkingUp;
 
-    public Player(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
-        super(sprite, x, y, health, collisionLayer);
-        this.sprite = sprite;
+    public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
+        super(x, y, level, collisionLayer);
+        this.sprite = new Sprite(new Texture("thor32.png"));
+        this.health = 100f;
+        this.fullHealth = health;
+        this.dmg = 10f;
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
+        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 
     @Override
@@ -57,23 +61,29 @@ public class Player extends Entity {
         sprite.draw(batch);
 
         move();
+
+        //Starts a new wave of enemies only when all the enemies of the last wave have been killed
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && enemiesAlive == 0){
             pl.setSpawnCount(waveAmount);
             enemiesAlive = waveAmount;
             waveAmount *= 2;
         }
+
+        //checks whether xp is enough to level up
         if(xpToLevel - xp <= 0){
             level++;
             xpToLevel *= 2;
             Gdx.app.log("Level", String.valueOf(level));
         }
+
+        //checks for zoom in or out
         if(pl.getZoom() >= .2) {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                pl.setZoom(pl.getZoom() - .1f);
+                pl.setZoom(pl.getZoom() - .02f);
             }
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            pl.setZoom(pl.getZoom() + .1f);
+            pl.setZoom(pl.getZoom() + .02f);
         }
 
     }

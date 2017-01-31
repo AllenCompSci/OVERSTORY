@@ -23,28 +23,28 @@ public class Entity implements InputProcessor {
     protected Detection detection;
     protected Play pl = new Play();
     protected String state = "still";
-
+    protected float fullHealth;
+    public float getDmg() {
+        return dmg;
+    }
+    public void setDmg(float dmg) {
+        this.dmg = dmg;
+    }
+    protected float dmg;
     public float getHealth() {
         return health;
     }
-
     protected float health;
-
-
     protected TiledMapTileLayer collisionLayer;
+    protected int level;
 
-    public Entity(Sprite sprite, float x, float y, float health, TiledMapTileLayer collisionLayer){
-        this.sprite = sprite;
+    public Entity(float x, float y, int level, TiledMapTileLayer collisionLayer){
         this.collisionLayer = collisionLayer;
-        this.health = health;
-        sprite.setPosition(32 * x, 32 * y);
+        this.level = level;
     }
 
-
+//checks three points in front of the character
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
-
-       // return true;
-
         if(height == 0f) return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
                 && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 - sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
@@ -61,6 +61,7 @@ public class Entity implements InputProcessor {
         move();
     }
 
+    //checks for entity movement input
     public void move(){
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {

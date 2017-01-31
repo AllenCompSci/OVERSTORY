@@ -18,6 +18,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
 import java.util.Random;
@@ -32,21 +34,16 @@ public class Play implements Screen {
     }
     private static TiledMap map;
     private OrthogonalTiledMapRenderer renderer;
-
     public float getZoom() {
         return zoom;
     }
-
     public void setZoom(float zoom) {
         this.zoom = zoom;
     }
-
     private static float zoom = .6f;
-
     public OrthographicCamera getCamera() {
         return camera;
     }
-
     private static OrthographicCamera camera;
     public Player getPlayer() {
         return player;
@@ -96,7 +93,7 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(new Sprite(new Texture("thor32.png")), 10, 20, 100f, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
@@ -119,11 +116,19 @@ public class Play implements Screen {
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();
+
+        //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
+            //checks if enemy is dead
             if(i.getHealth() <= 0) {
+                //gives player exp
                 player.setXp(player.getXp() + i.getXpDrop());
+
+                //removes the enemy from the render
                 enemies.removeIndex(enemies.indexOf(i, true));
+
+                //
                 player.setEnemiesAlive(player.getEnemiesAlive() - 1);
             }
         }
@@ -135,7 +140,7 @@ public class Play implements Screen {
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
-                spawnEnemy(new Sprite(new Texture("still1.png")), spawnTiles[num][0], spawnTiles[num][1], 100f, 1, (TiledMapTileLayer) getMap().getLayers().get(1));
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1));
                 time = System.currentTimeMillis() + 1;
             }
             spawnCount--;
@@ -171,11 +176,14 @@ public class Play implements Screen {
 
     }
 
-    public void spawnEnemy(Sprite sprite, float x, float y, float health, int xpDrop, TiledMapTileLayer collisionLayer){
-        enemies.add(new Enemy(sprite, x, y, health, xpDrop, collisionLayer));
+    //spawns in an enemy
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
+        enemies.add(new ash(x, y, level, collisionLayer));
+        enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 
+    //checks a TMX map layer tiles for a property
     public int[][] checkMapLayerFor(TiledMapTileLayer layer, String string){
         int count = 0;
         for(int x = 0; x < layer.getWidth(); x++){

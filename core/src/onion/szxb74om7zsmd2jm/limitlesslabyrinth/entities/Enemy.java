@@ -15,6 +15,7 @@ import java.util.Random;
  */
 public class Enemy extends Entity{
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
+    private boolean isNavigating = false; //Checks if the enemy needs to move around an object
     public int getXpDrop() {
         return xpDrop;
     }
@@ -50,14 +51,15 @@ public class Enemy extends Entity{
 
     @Override
     public void move() {
-        //Checks what side of player enemy is on
-        //Above
-        if (sprite.getY() + sprite.getHeight() / 2 > pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
-            canmove.add(3);
-        }
-        //Below
+
+        //Checks which direction enemy should go
+        //Up
         if (sprite.getY() + sprite.getHeight() / 2 < pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
             canmove.add(4);
+        }
+        //Down
+        if (sprite.getY() + sprite.getHeight() / 2 > pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
+            canmove.add(3);
         }
         //Left
         if(sprite.getX() + sprite.getWidth()/2 > pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
@@ -67,17 +69,45 @@ public class Enemy extends Entity{
         if(sprite.getX() + sprite.getWidth()/2 < pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
             canmove.add(1);
         }
+      /*  if(canmove.contains(1) && canmove.contains(4)) canmove.add(5); //Up & Right
+        if(canmove.contains(2) && canmove.contains(4)) canmove.add(6); //Up & Left
+        if(canmove.contains(1) && canmove.contains(3)) canmove.add(7); //Down & Right
+        if(canmove.contains(2) && canmove.contains(3)) canmove.add(8); //Down & Left*/
         int num;
         Random rand = new Random();
 
             if(canmove.size() == 0){
-                num = 5;// rand.nextInt(5 + 1);
+                num = 9;// rand.nextInt(5 + 1);
             }
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
             }
 
         if(!detection.isInSmallRadius(this)) {
+     /*       if(num == 8){ //Down & Left
+                if (checkCollision(-sprite.getWidth(), -sprite.getHeight(), -speed/2, -speed/2)) {
+                    sprite.setY(sprite.getY() - speed/2);
+                    sprite.setX(sprite.getX() - speed/2);
+                }
+            }
+            if(num == 7){ //Down & Right
+                if (checkCollision(sprite.getWidth(), -sprite.getHeight(), speed/2, -speed/2)) {
+                    sprite.setY(sprite.getY() - speed/2);
+                    sprite.setX(sprite.getX() + speed/2);
+                }
+            }
+            if(num == 6){ //Up & Left
+                if (checkCollision(-sprite.getWidth(), sprite.getHeight(), -speed/2, speed/2)) {
+                    sprite.setY(sprite.getY() + speed/2);
+                    sprite.setX(sprite.getX() - speed/2);
+                }
+            }
+            if(num == 5){ //Up & Right
+                if (checkCollision(sprite.getWidth(), sprite.getHeight(), speed/2, speed/2)) {
+                    sprite.setY(sprite.getY() + speed/2);
+                    sprite.setX(sprite.getX() + speed/2);
+                }
+            }*/
             if (num == 4) { //Up
                 if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                     sprite.setY(sprite.getY() + speed);
@@ -93,7 +123,7 @@ public class Enemy extends Entity{
                     sprite.setX(sprite.getX() + -speed);
                 }
             }
-            if (num == 1) { // Right
+            if (num == 1) { //Right
                 if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                     sprite.setX(sprite.getX() + speed);
                 }
@@ -101,6 +131,12 @@ public class Enemy extends Entity{
         }
         canmove.clear();
     }
+
+
+
+
+
+
 
 
     // Default method for xp drop - gives no xp. should override in other classes

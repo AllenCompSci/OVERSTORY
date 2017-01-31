@@ -17,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Gui;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
@@ -33,14 +34,17 @@ public class Play implements Screen {
         return map;
     }
     private static TiledMap map;
-    private OrthogonalTiledMapRenderer renderer;
+    public OrthogonalTiledMapRenderer getRenderer() {
+        return renderer;
+    }
+    private static OrthogonalTiledMapRenderer renderer;
     public float getZoom() {
         return zoom;
     }
     public void setZoom(float zoom) {
         this.zoom = zoom;
     }
-    private static float zoom = .6f;
+    private static float zoom = 1f;
     public OrthographicCamera getCamera() {
         return camera;
     }
@@ -60,7 +64,7 @@ public class Play implements Screen {
         this.spawnCount = spawnCount;
     }
     private static int spawnCount = 0;
-
+    private Gui gui = new Gui();
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite)
@@ -101,21 +105,20 @@ public class Play implements Screen {
 
 
 
-
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.zoom = zoom;
-
-        camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
-        camera.update();
 
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();
+
+        camera.zoom = zoom;
+        camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
+        //camera.update();
 
         //renders the enemies
         for(Enemy i : enemies){
@@ -133,6 +136,10 @@ public class Play implements Screen {
             }
         }
         player.draw(renderer.getBatch());
+        gui.update();
+        camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
+        camera.update();
+
         renderer.getBatch().end();
         if(spawnCount > 0) {
             //Spawning in enemies every n seconds
@@ -178,7 +185,7 @@ public class Play implements Screen {
 
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
-        enemies.add(new ash(x, y, level, collisionLayer));
+        //enemies.add(new ash(x, y, level, collisionLayer));
         enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }

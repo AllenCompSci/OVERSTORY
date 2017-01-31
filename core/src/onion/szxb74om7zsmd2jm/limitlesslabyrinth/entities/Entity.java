@@ -72,7 +72,6 @@ public class Entity implements InputProcessor {
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
                 sprite.setY(sprite.getY() + -speed);
                 state = "down";
-
             }
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){

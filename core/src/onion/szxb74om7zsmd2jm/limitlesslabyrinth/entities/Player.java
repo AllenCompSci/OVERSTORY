@@ -59,7 +59,6 @@ public class Player extends Entity {
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
         sprite.draw(batch);
-
         move();
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
@@ -72,19 +71,11 @@ public class Player extends Entity {
         //checks whether xp is enough to level up
         if(xpToLevel - xp <= 0){
             level++;
+            dmg += level;
             xpToLevel *= 2;
             Gdx.app.log("Level", String.valueOf(level));
         }
 
-        //checks for zoom in or out
-        if(pl.getZoom() >= .2) {
-            if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-                pl.setZoom(pl.getZoom() - .02f);
-            }
-        }
-        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
-            pl.setZoom(pl.getZoom() + .02f);
-        }
 
     }
 }

@@ -16,7 +16,7 @@ public class Brute extends Enemy {
     {
         super(x, y, level, collisionLayer);
         this.xpDrop = determineXP(level);
-        this.sprite = new Sprite(new Texture("still1.png"));
+        this.sprite = new Sprite(new Texture("thor32.png"));
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = 10f;
@@ -31,6 +31,6 @@ public class Brute extends Enemy {
 
     @Override
     public float determineHealth(int level) {
-        return 100f * (float) level;
+        return 500f * (float) level;
     }
 }

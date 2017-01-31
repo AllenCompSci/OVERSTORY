@@ -103,6 +103,8 @@ public class Enemy extends Entity{
 
 
     // Default method for xp drop - gives no xp. should override in other classes
+
+    /** These functions allow for the placement of a formula in the subclass. Make sure to override. **/
     public int determineXP(int level)
     {
         return 0;

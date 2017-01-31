@@ -18,6 +18,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
@@ -178,6 +179,7 @@ public class Play implements Screen {
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
         enemies.add(new ash(x, y, level, collisionLayer));
+        enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 

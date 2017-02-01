@@ -136,6 +136,7 @@ public class Play implements Screen {
             }
         }
         player.draw(renderer.getBatch());
+        gui.input();
         gui.update();
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
         camera.update();

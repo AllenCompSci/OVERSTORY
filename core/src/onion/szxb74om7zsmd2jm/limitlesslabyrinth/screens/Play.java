@@ -64,7 +64,10 @@ public class Play implements Screen {
         this.spawnCount = spawnCount;
     }
     private static int spawnCount = 0;
-    private Gui gui = new Gui();
+    public Gui getGui() {
+        return gui;
+    }
+    private static Gui gui = new Gui();
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite)
@@ -118,7 +121,6 @@ public class Play implements Screen {
 
         camera.zoom = zoom;
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
-        //camera.update();
 
         //renders the enemies
         for(Enemy i : enemies){
@@ -186,8 +188,8 @@ public class Play implements Screen {
 
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
-        //enemies.add(new ash(x, y, level, collisionLayer));
-        enemies.add(new Brute(x, y, level, collisionLayer));
+        enemies.add(new ash(x, y, level, collisionLayer));
+        //enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }
 

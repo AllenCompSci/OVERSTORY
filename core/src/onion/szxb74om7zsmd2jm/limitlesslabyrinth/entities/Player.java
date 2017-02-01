@@ -49,7 +49,7 @@ public class Player extends Entity {
         this.sprite = new Sprite(new Texture("thor32.png"));
         this.health = 100f;
         this.fullHealth = health;
-        this.dmg = 10f;
+        this.dmg = pl.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);

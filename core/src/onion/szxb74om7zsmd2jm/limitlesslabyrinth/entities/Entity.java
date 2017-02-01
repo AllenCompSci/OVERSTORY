@@ -23,6 +23,9 @@ public class Entity implements InputProcessor {
     protected Detection detection;
     protected Play pl = new Play();
     protected String state = "still";
+    public float getFullHealth() {
+        return fullHealth;
+    }
     protected float fullHealth;
     public float getDmg() {
         return dmg;
@@ -33,6 +36,9 @@ public class Entity implements InputProcessor {
     protected float dmg;
     public float getHealth() {
         return health;
+    }
+    public void setHealth(float health) {
+        this.health = health;
     }
     protected float health;
     protected TiledMapTileLayer collisionLayer;

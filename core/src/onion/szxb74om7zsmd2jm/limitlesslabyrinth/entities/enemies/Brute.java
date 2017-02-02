@@ -16,7 +16,7 @@ public class Brute extends Enemy {
     {
         super(x, y, level, collisionLayer);
         this.xpDrop = determineXP(level);
-        this.sprite = new Sprite(new Texture("thor32.png"));
+        this.sprite = new Sprite(new Texture("Brute.png"));
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = 10f;

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Fists;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
@@ -19,25 +20,55 @@ public class Gui {
     private Sprite itemBox2;
     private Sprite itemBox3;
     private Sprite itemBox4;
-    private Weapon item1;
-    private Weapon item2;
-    private Weapon item3;
-    private Weapon item4;
-    private Weapon Equipped;
+    private static Item item1;
+    private static Item item2;
+    private static Item item3;
+    private static Item item4;
+    private static Item Equipped;
     private Texture HealthBar = new Texture("playerhealthbar.png");
     private Texture LostHealthBar = new Texture("playerredbar.png");
     private Texture ItemBox = new Texture("itemBox.png");
     private Texture SelectedBox = new Texture("selectedBox.png");
+    private Backpack backpack = new Backpack();
     private static float healthBarX = 0;
+    private static boolean isBackpackOpen = false;
     private static Play pl = new Play();
-    public Weapon getEquipped() {
+    public Item getEquipped() {
         return Equipped;
     }
-    public void setEquipped(Weapon equipped) {
+    public void setEquipped(Item equipped) {
         Equipped = equipped;
     }
-
-
+    public boolean getIsBackpackOpen() {
+        return isBackpackOpen;
+    }
+    public void setIsBackpackOpen(boolean isBackpackOpen) {
+        this.isBackpackOpen = isBackpackOpen;
+    }
+    public Item getItem1() {
+        return item1;
+    }
+    public void setItem1(Item item1) {
+        Gui.item1 = item1;
+    }
+    public Item getItem2() {
+        return item2;
+    }
+    public void setItem2(Item item2) {
+        Gui.item2 = item2;
+    }
+    public Item getItem3() {
+        return item3;
+    }
+    public void setItem3(Item item3) {
+        Gui.item3 = item3;
+    }
+    public Item getItem4() {
+        return item4;
+    }
+    public void setItem4(Item item4) {
+        Gui.item4 = item4;
+    }
 
     public Gui(){
         playerHealthBar = new Sprite(HealthBar);
@@ -88,6 +119,17 @@ public class Gui {
             pl.getPlayer().setDmg(Equipped.getDmg());
         }
 
+        /** Backpack open / close */
+        if(Gdx.input.isKeyJustPressed(Input.Keys.TAB)){
+            if(isBackpackOpen) {
+                isBackpackOpen = false;
+            }
+            else {
+                isBackpackOpen = true;
+            }
+        }
+
+
         /** Refer here to know how to remove health from player properly */
         /*if(Gdx.input.isKeyJustPressed(Input.Keys.N)){
             pl.getPlayer().setHealth(pl.getPlayer().getHealth() - 10f);
@@ -123,5 +165,12 @@ public class Gui {
         item2.getSprite().draw(pl.getRenderer().getBatch());
         item3.getSprite().draw(pl.getRenderer().getBatch());
         item4.getSprite().draw(pl.getRenderer().getBatch());
+
+        /** Backpack draw */
+        if(isBackpackOpen){
+            backpack.input();
+            backpack.draw();
+        }
+
     }
 }

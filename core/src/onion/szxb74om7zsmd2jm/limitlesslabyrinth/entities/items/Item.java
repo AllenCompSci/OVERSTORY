@@ -10,6 +10,11 @@ public class Item {
         return sprite;
     }
     protected Sprite sprite;
+    protected float dmg;
+    protected int lvl;
+    public float getDmg() {
+        return dmg;
+    }
 
     public Item(){
 

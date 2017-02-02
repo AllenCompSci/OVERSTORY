@@ -46,12 +46,12 @@ public class Player extends Entity {
 
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
-        this.sprite = new Sprite(new Texture("thor32.png"));
+        this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
         this.health = 100f;
         this.fullHealth = health;
         this.dmg = pl.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
-        playerWalkingDown = Play.fourFrameAnimationCreator("knightwalkingdown.png");
+        playerWalkingDown = Play.fourFrameAnimationCreator("knight/knightwalking.png");
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 

@@ -155,4 +155,6 @@ private void moveEnemy(int num){
         return 0;
     }
 
+    public float determineDamage(int level) {return 0;}
+
 }

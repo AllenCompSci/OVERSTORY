@@ -12,6 +12,15 @@ public class Arrow extends Projectile {
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;
         y = y1;
+        b = y1;
+        endX = x2;
+        endY = y2;
+        if(endX > x){
+            direction = true;
+        }
+        else{
+            direction = false;
+        }
     }
 
     public Arrow(){
@@ -20,6 +29,13 @@ public class Arrow extends Projectile {
 
     @Override
     public void draw() {
+        if(direction){
+            x++;
+        }
+        else{
+            x--;
+        }
+        y = slope * x + b;
         sprite.setPosition(x, y);
         sprite.draw(pl.getRenderer().getBatch());
     }

@@ -6,6 +6,8 @@ Ryan Jacobs, Justin Carter, Ryan King, Chris DeLaGarza
 # Ryan Jacobs
 ## Week 1
 focused on learning the libgdx library, created an animation function that takes in a spritesheet and converts it to an animation, changed character models, attempted to implement states
+## Week 2
+Began to add more enemies into the game, and created functions to determine their HP, XP, and DMG based on the enemy's current level. Added a way to set which enemies spawn into which wave, and going to add wave randomization.
 
 # Justin Carter
 ## Week 1

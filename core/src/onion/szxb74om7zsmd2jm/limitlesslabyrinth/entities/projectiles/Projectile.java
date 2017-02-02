@@ -12,6 +12,10 @@ public class Projectile {
     }
     protected float x;
     protected float y;
+    protected float endX;
+    protected float endY;
+    protected float b;
+    protected boolean direction;
     protected Sprite sprite;
     protected float slope;
     public float getSlope() {

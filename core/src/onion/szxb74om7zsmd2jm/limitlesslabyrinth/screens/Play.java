@@ -115,6 +115,10 @@ public class Play implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        /** REFER TO FOR MOUSE INPUT */
+        //Gdx.app.log("x", String.valueOf(player.getSprite().getX() + player.getSprite().getWidth()/2 + (Gdx.input.getX() - Gdx.graphics.getWidth()/2)));
+        //Gdx.app.log("y", String.valueOf(player.getSprite().getY() + player.getSprite().getHeight()/2 - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
+
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();

@@ -14,6 +14,8 @@ Art
 # Ryan King
 ## Week 1
 Created basic enemy movement, then upgraded that movement to track the player, created a basic pixel art item for testing, started painful process of trying to merge experimental tilemaps and master, set up README, and created enemy/player collision detection. 
+## Week 2
+Added more enemy travel directions to smoothen movement, started working on the long process of creating a pathfinding system for the enemies (attempted Dijkstra's algorithm and started working on a method called AStar).
 
 # Chris DeLaGarza
 ## Week 1

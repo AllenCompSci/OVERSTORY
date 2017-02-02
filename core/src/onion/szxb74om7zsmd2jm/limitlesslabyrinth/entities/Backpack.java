@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Sword;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -22,7 +23,7 @@ public class Backpack {
 
     public Backpack(){
         slots[0] = new Sprite(SelectedBox);
-        itemSlots[0] = new NullWeapon();
+        itemSlots[0] = new Sword();
         for(int i = 1; i < slots.length; i++){
             slots[i] = new Sprite(ItemBox);
             itemSlots[i] = new NullWeapon();

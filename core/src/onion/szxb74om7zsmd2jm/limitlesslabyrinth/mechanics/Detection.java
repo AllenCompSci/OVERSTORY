@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
 
 import com.badlogic.gdx.Gdx;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -41,5 +42,17 @@ public class Detection {
         distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (play.getPlayer().getSprite().getX() + play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (play.getPlayer().getSprite().getY() + play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
         return (radius*10) <= distance;
+    }
+
+    public boolean isProjectileInRadius(Enemy enemy){
+        for(Projectile i : play.getProjectiles()){
+            distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth()/2) - (enemy.getSprite().getX() + enemy.getSprite().getWidth()/2), 2) +
+                    Math.pow((i.getSprite().getY() + i.getSprite().getHeight()/2) - (enemy.getSprite().getY() + enemy.getSprite().getHeight()/2), 2));
+            if (radius/3 >= distance){
+                play.getProjectiles().removeIndex(play.getProjectiles().indexOf(i, true));
+                return true;
+            }
+        }
+        return false;
     }
 }

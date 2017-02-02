@@ -12,6 +12,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -76,6 +77,10 @@ public class Player extends Entity {
             Gdx.app.log("Level", String.valueOf(level));
         }
 
+        /** Fire projectile */
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && pl.getGui().getEquipped().getType() == "projectile"){
+            pl.getProjectiles().add(pl.getGui().getEquipped().getProjectile(sprite.getX(), sprite.getY(), pl.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), pl.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
+        }
 
     }
 }

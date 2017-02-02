@@ -23,6 +23,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
 import java.util.Random;
@@ -60,6 +61,10 @@ public class Play implements Screen {
     }
     private static Player player;
     private Array<Enemy> enemies = new Array<Enemy>();
+    public Array<Projectile> getProjectiles() {
+        return projectiles;
+    }
+    private static Array<Projectile> projectiles = new Array<Projectile>();
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
@@ -106,7 +111,7 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
@@ -121,12 +126,21 @@ public class Play implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+        for(Projectile i : projectiles){
+            Gdx.app.log("SLOPE", String.valueOf(i.getSlope()));
+        }
+
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();
 
         camera.zoom = zoom;
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
+
+        /** Renders the projectiles */
+        for(Projectile i : projectiles){
+            i.draw();
+        }
 
         //renders the enemies
         for(Enemy i : enemies){

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Bow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Fists;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
@@ -78,7 +79,7 @@ public class Gui {
         itemBox3 = new Sprite(ItemBox);
         itemBox4 = new Sprite(ItemBox);
         item1 = new Fists();
-        item2 = new NullWeapon();
+        item2 = new Bow();
         item3 = new NullWeapon();
         item4 = new NullWeapon();
         Equipped = item1;

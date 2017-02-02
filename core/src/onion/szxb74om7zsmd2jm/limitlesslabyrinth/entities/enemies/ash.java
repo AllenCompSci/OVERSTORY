@@ -18,7 +18,7 @@ public class ash extends Enemy{
         this.fullHealth = health;
         this.dmg = 10f;
         this.xpDrop = 1;
-        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+        sprite.setPosition(collisionLayer.getTileWidth() * x, collisionLayer.getTileHeight() * y);
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 }

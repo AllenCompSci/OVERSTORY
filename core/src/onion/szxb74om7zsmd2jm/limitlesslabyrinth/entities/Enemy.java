@@ -40,13 +40,23 @@ public class Enemy extends Entity{
         //Enemy checking for player
         if(detection.isInRadius(this)){
             //Enemy is hit
-            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-                //Enemy loses health and is represented on the health bar
-                health -= pl.getPlayer().getDmg();
-                healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-                healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+            if(pl.getGui().getEquipped().getType() == "melee") {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                    //Enemy loses health and is represented on the health bar
+                    health -= pl.getPlayer().getDmg();
+                    healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+                    healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+                }
             }
         }
+
+        /** Checking if hit by projectile */
+        if(detection.isProjectileInRadius(this)){
+            health -= pl.getPlayer().getDmg();
+            healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+            healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+        }
+
      }
 
     @Override

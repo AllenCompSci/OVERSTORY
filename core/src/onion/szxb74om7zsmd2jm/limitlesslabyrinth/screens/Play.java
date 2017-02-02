@@ -106,7 +106,8 @@ public class Play implements Screen {
         Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
-
+        //Get map collision for pathfinding
+            int[][] collideLocations = checkMapLayerFor(TiledMapTileLer) map.getLayers().get(2), "blocked"));
 
     }
 

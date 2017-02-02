@@ -137,8 +137,10 @@ public class Enemy extends Entity{
                 sprite.setX(sprite.getX() + speed);
             }
         }
+
     }
 
+    //Algorthim for pathfinding
 
 
 

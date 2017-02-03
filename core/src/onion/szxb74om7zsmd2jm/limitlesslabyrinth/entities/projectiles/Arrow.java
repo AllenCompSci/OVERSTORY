@@ -43,10 +43,10 @@ public class Arrow extends Projectile {
         sprite.setPosition(x, y);
         sprite.draw(pl.getRenderer().getBatch());
         if(direction){
-            x += Math.cos(theta) * 6;
+            x += Math.cos(theta) * 10;
         }
         else{
-            x -= Math.cos(theta) * 6;
+            x -= Math.cos(theta) * 10;
         }
         y = slope * x + b;
 

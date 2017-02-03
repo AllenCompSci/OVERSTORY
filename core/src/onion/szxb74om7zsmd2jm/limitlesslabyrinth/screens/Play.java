@@ -127,7 +127,7 @@ public class Play implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         for(Projectile i : projectiles){
-            Gdx.app.log("SLOPE", String.valueOf(i.getSlope()));
+            Gdx.app.log("Direction", String.valueOf(Math.atan(i.getSlope())));
         }
 
         renderer.setView(camera);

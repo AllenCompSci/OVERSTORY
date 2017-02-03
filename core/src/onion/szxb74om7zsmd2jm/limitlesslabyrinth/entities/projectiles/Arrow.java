@@ -16,16 +16,22 @@ public class Arrow extends Projectile {
         endX = x2;
         endY = y2;
         theta = Math.atan(slope);
+        sprite.rotate((float) Math.toDegrees(theta));
+        sprite.flip(true, false);
         if(endX > x){
             direction = true;
         }
         else{
             direction = false;
             theta *= -1;
+            sprite.flip(true, false);
         }
         if(endY < y){
             theta *= -1;
+            sprite.flip(false, true);
         }
+
+
     }
 
     public Arrow(){

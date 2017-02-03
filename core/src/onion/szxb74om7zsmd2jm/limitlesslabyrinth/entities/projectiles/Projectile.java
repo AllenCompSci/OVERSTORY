@@ -22,6 +22,9 @@ public class Projectile {
     public float getSlope() {
         return slope;
     }
+    public double getTheta() {
+        return theta;
+    }
     Play pl = new Play();
 
     public Projectile(){

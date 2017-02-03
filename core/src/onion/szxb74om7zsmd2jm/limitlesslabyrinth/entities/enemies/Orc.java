@@ -17,7 +17,7 @@ public class Orc extends Enemy {
         this.fullHealth = health;
         this.dmg = determineDamage(this.level);
         this.xpDrop = determineXP(this.level);
-        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+        sprite.setPosition(collisionLayer.getTileWidth() * x, collisionLayer.getTileHeight() * y);
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 

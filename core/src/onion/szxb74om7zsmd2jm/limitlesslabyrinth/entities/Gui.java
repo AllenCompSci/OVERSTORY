@@ -15,12 +15,21 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by 226812 on 1/27/2017.
  */
 public class Gui {
+    public int getSelected() {
+        return selected;
+    }
+    private static int selected = 0;
+    private long time1 = 0;
+    private long time2 = 0;
+    private long time3 = 0;
+    private long time4 = 0;
     private Sprite playerHealthBar;
     private Sprite playerLostHealthBar;
     private Sprite itemBox1;
     private Sprite itemBox2;
     private Sprite itemBox3;
     private Sprite itemBox4;
+    private static Sprite[] refreshItem = new Sprite[4];
     private static Item item1;
     private static Item item2;
     private static Item item3;
@@ -33,6 +42,7 @@ public class Gui {
     private Backpack backpack = new Backpack();
     private static float healthBarX = 0;
     private static boolean isBackpackOpen = false;
+    private static boolean[] isRefreshing = new boolean[4];
     private static Play pl = new Play();
     public Item getEquipped() {
         return Equipped;
@@ -70,6 +80,15 @@ public class Gui {
     public void setItem4(Item item4) {
         Gui.item4 = item4;
     }
+    public boolean[] getIsRefreshing() {
+        return isRefreshing;
+    }
+    public void setIsRefreshing(boolean isRefreshing, int sel) {
+        this.isRefreshing[sel] = isRefreshing;
+    }
+    public Sprite[] getRefreshItem() {
+        return refreshItem;
+    }
 
     public Gui(){
         playerHealthBar = new Sprite(HealthBar);
@@ -82,6 +101,18 @@ public class Gui {
         item2 = new Bow();
         item3 = new NullWeapon();
         item4 = new NullWeapon();
+        refreshItem[0] = new Sprite(new Texture("refreshBox.png"));
+        refreshItem[1] = new Sprite(new Texture("refreshBox.png"));
+        refreshItem[2] = new Sprite(new Texture("refreshBox.png"));
+        refreshItem[3] = new Sprite(new Texture("refreshBox.png"));
+        refreshItem[0].setScale(0);
+        refreshItem[1].setScale(0);
+        refreshItem[2].setScale(0);
+        refreshItem[3].setScale(0);
+        isRefreshing[0] = false;
+        isRefreshing[1] = false;
+        isRefreshing[2] = false;
+        isRefreshing[3] = false;
         Equipped = item1;
     }
 
@@ -92,6 +123,7 @@ public class Gui {
             itemBox2 = new Sprite(ItemBox);
             itemBox3 = new Sprite(ItemBox);
             itemBox4 = new Sprite(ItemBox);
+            selected = 0;
             Equipped = item1;
             pl.getPlayer().setDmg(Equipped.getDmg());
         }
@@ -100,6 +132,7 @@ public class Gui {
             itemBox1 = new Sprite(ItemBox);
             itemBox3 = new Sprite(ItemBox);
             itemBox4 = new Sprite(ItemBox);
+            selected = 1;
             Equipped = item2;
             pl.getPlayer().setDmg(Equipped.getDmg());
         }
@@ -108,6 +141,7 @@ public class Gui {
             itemBox2 = new Sprite(ItemBox);
             itemBox1 = new Sprite(ItemBox);
             itemBox4 = new Sprite(ItemBox);
+            selected = 2;
             Equipped = item3;
             pl.getPlayer().setDmg(Equipped.getDmg());
         }
@@ -116,6 +150,7 @@ public class Gui {
             itemBox2 = new Sprite(ItemBox);
             itemBox3 = new Sprite(ItemBox);
             itemBox1 = new Sprite(ItemBox);
+            selected = 3;
             Equipped = item4;
             pl.getPlayer().setDmg(Equipped.getDmg());
         }
@@ -166,6 +201,38 @@ public class Gui {
         item2.getSprite().draw(pl.getRenderer().getBatch());
         item3.getSprite().draw(pl.getRenderer().getBatch());
         item4.getSprite().draw(pl.getRenderer().getBatch());
+
+        /** Handle the refresh of items */
+        refreshItem[0].setPosition(itemBox1.getX(), itemBox1.getY());
+        refreshItem[1].setPosition(itemBox2.getX(), itemBox2.getY());
+        refreshItem[2].setPosition(itemBox3.getX(), itemBox3.getY());
+        refreshItem[3].setPosition(itemBox4.getX(), itemBox4.getY());
+        refreshItem[0].draw(pl.getRenderer().getBatch());
+        refreshItem[1].draw(pl.getRenderer().getBatch());
+        refreshItem[2].draw(pl.getRenderer().getBatch());
+        refreshItem[3].draw(pl.getRenderer().getBatch());
+        if(isRefreshing[0] && System.currentTimeMillis() > time1){
+            refreshItem[0].setScale(refreshItem[0].getScaleX() - .1f, refreshItem[0].getScaleY() - .1f);
+            time1 = System.currentTimeMillis() + 10;
+            if (refreshItem[0].getScaleX() <= 0) isRefreshing[0] = false;
+        }
+        if(isRefreshing[1] && System.currentTimeMillis() > time2){
+            refreshItem[1].setScale(refreshItem[1].getScaleX() - .1f, refreshItem[1].getScaleY() - .1f);
+            time2 = System.currentTimeMillis() + 10;
+            if (refreshItem[1].getScaleX() <= 0) isRefreshing[1] = false;
+        }
+        if(isRefreshing[2] && System.currentTimeMillis() > time3){
+            refreshItem[2].setScale(refreshItem[2].getScaleX() - .1f, refreshItem[2].getScaleY() - .1f);
+            time3 = System.currentTimeMillis() + 10;
+            if (refreshItem[2].getScaleX() <= 0) isRefreshing[2] = false;
+        }
+        if(isRefreshing[3] && System.currentTimeMillis() > time4){
+            refreshItem[3].setScale(refreshItem[3].getScaleX() - .1f, refreshItem[3].getScaleY() - .1f);
+            time4 = System.currentTimeMillis() + 10;
+            if (refreshItem[3].getScaleX() <= 0) isRefreshing[3] = false;
+        }
+
+
 
         /** Backpack draw */
         if(isBackpackOpen){

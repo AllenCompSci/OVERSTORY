@@ -19,11 +19,15 @@ public class Projectile {
     protected double theta;
     protected Sprite sprite;
     protected float slope;
+    protected long time = System.currentTimeMillis() + 5000;
     public float getSlope() {
         return slope;
     }
     public double getTheta() {
         return theta;
+    }
+    public long getTime() {
+        return time;
     }
     Play pl = new Play();
 

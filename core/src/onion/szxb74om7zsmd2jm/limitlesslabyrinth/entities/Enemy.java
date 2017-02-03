@@ -20,8 +20,8 @@ public class Enemy extends Entity{
         return xpDrop;
     }
     protected int xpDrop;
-    Sprite healthBar = new Sprite(new Texture("greenbar.png"));
-    Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
+    protected Sprite healthBar = new Sprite(new Texture("greenbar.png"));
+    protected Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
     protected float healthBarX = 0;
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
@@ -40,12 +40,14 @@ public class Enemy extends Entity{
         //Enemy checking for player
         if(detection.isInRadius(this)){
             //Enemy is hit
-            if(pl.getGui().getEquipped().getType() == "melee") {
+            if(pl.getGui().getEquipped().getType() == "melee" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     //Enemy loses health and is represented on the health bar
                     health -= pl.getPlayer().getDmg();
                     healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
                     healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+                    pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
+                    pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
                 }
             }
         }

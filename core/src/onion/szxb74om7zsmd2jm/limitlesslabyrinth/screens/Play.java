@@ -127,7 +127,10 @@ public class Play implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         for(Projectile i : projectiles){
-            Gdx.app.log("Direction", String.valueOf(i.getTheta()));
+            if(System.currentTimeMillis() > i.getTime()){
+                i.getSprite().getTexture().dispose();
+                projectiles.removeIndex(projectiles.indexOf(i, true));
+            }
         }
 
         renderer.setView(camera);

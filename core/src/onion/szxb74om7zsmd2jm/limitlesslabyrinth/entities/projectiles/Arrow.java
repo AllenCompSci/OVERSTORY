@@ -49,5 +49,6 @@ public class Arrow extends Projectile {
             x -= Math.cos(theta) * 6;
         }
         y = slope * x + b;
+
     }
 }

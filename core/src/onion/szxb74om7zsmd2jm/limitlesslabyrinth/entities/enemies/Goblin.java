@@ -18,7 +18,7 @@ public class Goblin extends Enemy {
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = determineDamage(this.level);
-        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+        sprite.setPosition(collisionLayer.getTileWidth() * x, collisionLayer.getTileHeight() * y);
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 

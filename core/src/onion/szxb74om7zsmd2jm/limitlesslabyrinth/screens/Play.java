@@ -20,6 +20,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Gui;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
@@ -30,6 +32,10 @@ import java.util.Random;
  * Created by chris on 1/19/2017.
  */
 public class Play implements Screen {
+
+    public enum MonsterType {
+        ASH, BRUTE, GOBLIN, ORC
+    }
 
     public TiledMap getMap() {
         return map;
@@ -159,12 +165,14 @@ public class Play implements Screen {
 
         renderer.getBatch().end();
         if(spawnCount > 0) {
+            MonsterType monster;
+            monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1));
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 1;
             }
             spawnCount--;
@@ -201,8 +209,23 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
-        enemies.add(new ash(x, y, level, collisionLayer));
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+        switch (monster){
+            case ASH:
+                enemies.add(new ash(x, y, level, collisionLayer));
+                break;
+            case BRUTE:
+                enemies.add(new Brute(x, y, level, collisionLayer));
+                break;
+            case GOBLIN:
+                enemies.add(new Goblin(x, y, level, collisionLayer));
+                break;
+            case ORC:
+                enemies.add(new Orc(x, y, level, collisionLayer));
+                break;
+        }
+
+
         //enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }

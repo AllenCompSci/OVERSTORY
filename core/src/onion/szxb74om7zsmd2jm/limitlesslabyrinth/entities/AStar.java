@@ -3,17 +3,22 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 /**
  * Created by 234578 on 2/2/2017.
  */
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
+
 import java.util.*;
 
 public class AStar {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
+    // private static Play pl = new Play();
+  //  private static int[][] collideLocations = pl.getCollideLocations();
 
     static class Cell{
         int heuristicCost = 0; //Heuristic cost
         int finalCost = 0; //G+H
         int i, j;
         Cell parent;
+
 
         Cell(int i, int j){
             this.i = i;
@@ -27,6 +32,7 @@ public class AStar {
     }
 
     //Blocked cells are just null Cell values in grid
+//    static Cell [][] grid = new Cell[collideLocations.length][collideLocations[0].length];
     static Cell [][] grid = new Cell[5][5];
 
     static PriorityQueue<Cell> open;
@@ -201,11 +207,14 @@ public class AStar {
         }else System.out.println("No possible path");
     }
 
+
     public static void main(String[] args) throws Exception{
         test(1, 5, 5, 0, 0, 3, 2, new int[][]{{0,4},{2,2},{3,1},{3,3}});
         test(2, 5, 5, 0, 0, 4, 4, new int[][]{{0,4},{2,2},{3,1},{3,3}});
         test(3, 7, 7, 2, 1, 5, 4, new int[][]{{4,1},{4,3},{5,3},{2,3}});
 
-        test(1, 5, 5, 0, 0, 4, 4, new int[][]{{3,4},{3,3},{4,3}});
+
+
+
     }
 }

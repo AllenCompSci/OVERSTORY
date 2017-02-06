@@ -68,6 +68,10 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
+    public int[][] getCollideLocations() {
+        return collideLocations;
+    }
+    private static int[][] collideLocations;
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite)
@@ -107,7 +111,7 @@ public class Play implements Screen {
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
         //Get map collision for pathfinding
-            int[][] collideLocations = checkMapLayerFor(TiledMapTileLer) map.getLayers().get(2), "blocked"));
+        collideLocations = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
 
     }
 

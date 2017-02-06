@@ -1,18 +1,23 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringJoiner;
+
 
 /**
  * Created by chris on 1/21/2017.
  */
+
 public class Enemy extends Entity{
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
     private boolean isNavigating = false; //Checks if the enemy needs to move around an object
@@ -23,6 +28,9 @@ public class Enemy extends Entity{
     Sprite healthBar = new Sprite(new Texture("greenbar.png"));
     Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
     protected float healthBarX = 0;
+    private static AStar findPath = new AStar();
+     private static Play pl = new Play();
+     private static int[][] collideLocations = pl.getCollideLocations();
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -60,6 +68,10 @@ public class Enemy extends Entity{
             }
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
+               Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
+
+
+                findPath.test(1, collideLocations.length, collideLocations.length, 5, 0,(int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collideLocations.length,(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collideLocationslength, collideLocations);
             }
 
         if(!detection.isInSmallRadius(this)) {

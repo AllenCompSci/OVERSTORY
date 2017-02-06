@@ -16,6 +16,8 @@ public class Projectile {
     protected float endY;
     protected float b;
     protected boolean direction;
+    protected boolean isContact;
+    protected boolean firstHit = false;
     protected double theta;
     protected Sprite sprite;
     protected float slope;
@@ -29,6 +31,9 @@ public class Projectile {
     public long getTime() {
         return time;
     }
+    public void setContact(boolean contact) {
+        isContact = contact;
+    }
     Play pl = new Play();
 
     public Projectile(){
@@ -36,4 +41,8 @@ public class Projectile {
     }
 
     public void draw(){}
+
+    public void contact(){
+        pl.getProjectiles().removeIndex(pl.getProjectiles().indexOf(this, true));
+    }
 }

@@ -26,6 +26,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -168,6 +170,7 @@ public class Play implements Screen {
 
         renderer.getBatch().end();
         if(spawnCount > 0) {
+           // MonsterType[] monsters = setMonsterCount(int round, int spawncount);
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
@@ -182,6 +185,11 @@ public class Play implements Screen {
         }
     }
 
+   /* private ArrayList<MonsterType> setMonsterCount(int round, int spawnCount)
+    {
+       // List<MonsterType> = new ArrayList<MonsterType>();
+    }
+*/
     @Override
     public void resize(int width, int height) {
         camera.viewportWidth = width;

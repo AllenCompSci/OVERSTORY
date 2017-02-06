@@ -22,7 +22,7 @@ public class Entity implements InputProcessor {
     protected float speed = 4f;
     protected Detection detection;
     protected Play pl = new Play();
-    protected String state = "still";
+    protected String state = "normal";
     public float getFullHealth() {
         return fullHealth;
     }
@@ -100,6 +100,7 @@ public class Entity implements InputProcessor {
 
     @Override
     public boolean keyUp(int keycode) {
+        state = "normal";
         return false;
     }
 

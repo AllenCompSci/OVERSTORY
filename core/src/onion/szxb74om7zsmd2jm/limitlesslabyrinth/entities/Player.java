@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -59,7 +56,12 @@ public class Player extends Entity {
     @Override
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        sprite.draw(batch);
+        if(state.equals("down")){
+            batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), (float)sprite.getX(), (float)sprite.getY());
+        }
+        if(state.equals("normal")) {
+            sprite.draw(batch);
+        }
         move();
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
@@ -78,8 +80,8 @@ public class Player extends Entity {
         }
 
         /** Fire projectile */
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && pl.getGui().getEquipped().getType() == "projectile" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]){
-            pl.getProjectiles().add(pl.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, pl.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), pl.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && pl.getGui().getEquipped().getType() == "projectile" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]) {
+            pl.getProjectiles().add(pl.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth() / 4, sprite.getY() + sprite.getHeight() / 4, pl.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth() / 2), pl.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight() / 2)));
             pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
             pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
         }

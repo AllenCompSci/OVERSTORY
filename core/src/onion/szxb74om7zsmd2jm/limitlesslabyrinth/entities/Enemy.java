@@ -71,7 +71,7 @@ public class Enemy extends Entity{
                Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
 
 
-                findPath.test(1, collideLocations.length, collideLocations.length, 5, 0,(int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collideLocations.length,(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collideLocationslength, collideLocations);
+                findPath.test(1, collisionLayer.getWidth(), collisionLayer.getHeight(), 5, 60,(int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collisionLayer.getWidth(),(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collisionLayer.getHeight(), collideLocations);
             }
 
         if(!detection.isInSmallRadius(this)) {

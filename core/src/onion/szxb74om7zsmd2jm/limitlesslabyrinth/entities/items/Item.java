@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 1/31/2017.
@@ -23,6 +24,7 @@ public class Item {
     public String getType() {
         return type;
     }
+    protected static Play pl = new Play();
 
     public Item(){
 

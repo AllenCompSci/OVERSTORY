@@ -39,6 +39,10 @@ public class Player extends Entity {
         this.enemiesAlive = enemiesAlive;
     }
     private int enemiesAlive = 0;
+    @Override
+    public void setDmg(float dmg) {
+        super.setDmg(dmg * (1 + ((10 * level) - 10)));
+    }
 
     private Animation playerWalkingDown;
     private Animation playerWalkingLeft;

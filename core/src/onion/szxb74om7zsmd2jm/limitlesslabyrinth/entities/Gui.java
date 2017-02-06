@@ -9,6 +9,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Bow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Fists;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.WizardStaff;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -99,7 +100,7 @@ public class Gui {
         itemBox4 = new Sprite(ItemBox);
         item1 = new Fists();
         item2 = new Bow();
-        item3 = new NullWeapon();
+        item3 = new WizardStaff();
         item4 = new NullWeapon();
         refreshItem[0] = new Sprite(new Texture("refreshBox.png"));
         refreshItem[1] = new Sprite(new Texture("refreshBox.png"));

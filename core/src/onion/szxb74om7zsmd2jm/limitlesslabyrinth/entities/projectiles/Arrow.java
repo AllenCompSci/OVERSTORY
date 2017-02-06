@@ -40,16 +40,7 @@ public class Arrow extends Projectile {
 
     @Override
     public void contact() {
-        if(direction){
-        x -= Math.cos(theta) * 10;
-        }
-        else{
-            x += Math.cos(theta) * 10;
-        }
-
-        /** WILL CHANGE TO SPAWN IN EXPLOSIVE INSTEAD */
-        slope = 0;
-        sprite.setScale(5f);
+        remove();
     }
 
     @Override
@@ -61,14 +52,6 @@ public class Arrow extends Projectile {
         }
         else{
             x -= Math.cos(theta) * 10;
-        }
-
-        if(isContact){
-            contact();
-            if(!firstHit){
-                time = System.currentTimeMillis() + 500;
-                firstHit = true;
-            }
         }
 
         y = slope * x + b;

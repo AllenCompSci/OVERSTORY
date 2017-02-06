@@ -40,9 +40,15 @@ public class Projectile {
 
     }
 
-    public void draw(){}
+    public void draw(){
+        sprite.draw(pl.getRenderer().getBatch());
+    }
 
     public void contact(){
+        remove();
+    }
+
+    public void remove(){
         pl.getProjectiles().removeIndex(pl.getProjectiles().indexOf(this, true));
     }
 }

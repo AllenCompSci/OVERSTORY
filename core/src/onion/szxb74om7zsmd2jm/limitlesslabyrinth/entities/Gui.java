@@ -5,11 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Bow;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Fists;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.WizardStaff;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -203,7 +200,7 @@ public class Gui {
         item3.getSprite().draw(pl.getRenderer().getBatch());
         item4.getSprite().draw(pl.getRenderer().getBatch());
 
-        /** Handle the refresh of items */
+        /** Handle the cool down of items */
         refreshItem[0].setPosition(itemBox1.getX(), itemBox1.getY());
         refreshItem[1].setPosition(itemBox2.getX(), itemBox2.getY());
         refreshItem[2].setPosition(itemBox3.getX(), itemBox3.getY());
@@ -214,22 +211,22 @@ public class Gui {
         refreshItem[3].draw(pl.getRenderer().getBatch());
         if(isRefreshing[0] && System.currentTimeMillis() > time1){
             refreshItem[0].setScale(refreshItem[0].getScaleX() - .1f, refreshItem[0].getScaleY() - .1f);
-            time1 = System.currentTimeMillis() + 10;
+            time1 = System.currentTimeMillis() + item1.getCooldown();
             if (refreshItem[0].getScaleX() <= 0) isRefreshing[0] = false;
         }
         if(isRefreshing[1] && System.currentTimeMillis() > time2){
             refreshItem[1].setScale(refreshItem[1].getScaleX() - .1f, refreshItem[1].getScaleY() - .1f);
-            time2 = System.currentTimeMillis() + 10;
+            time2 = System.currentTimeMillis() + item2.getCooldown();
             if (refreshItem[1].getScaleX() <= 0) isRefreshing[1] = false;
         }
         if(isRefreshing[2] && System.currentTimeMillis() > time3){
             refreshItem[2].setScale(refreshItem[2].getScaleX() - .1f, refreshItem[2].getScaleY() - .1f);
-            time3 = System.currentTimeMillis() + 10;
+            time3 = System.currentTimeMillis() + item3.getCooldown();
             if (refreshItem[2].getScaleX() <= 0) isRefreshing[2] = false;
         }
         if(isRefreshing[3] && System.currentTimeMillis() > time4){
             refreshItem[3].setScale(refreshItem[3].getScaleX() - .1f, refreshItem[3].getScaleY() - .1f);
-            time4 = System.currentTimeMillis() + 10;
+            time4 = System.currentTimeMillis() + item4.getCooldown();
             if (refreshItem[3].getScaleX() <= 0) isRefreshing[3] = false;
         }
 

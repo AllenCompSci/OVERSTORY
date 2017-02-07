@@ -60,7 +60,10 @@ public class Play implements Screen {
         return player;
     }
     private static Player player;
-    private Array<Enemy> enemies = new Array<Enemy>();
+    public Array<Enemy> getEnemies() {
+        return enemies;
+    }
+    private static Array<Enemy> enemies = new Array<Enemy>();
     public Array<Projectile> getProjectiles() {
         return projectiles;
     }
@@ -126,8 +129,6 @@ public class Play implements Screen {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-
-
         renderer.setView(camera);
         renderer.render();
         renderer.getBatch().begin();
@@ -138,24 +139,18 @@ public class Play implements Screen {
         for(Projectile i : projectiles){
             i.draw();
             if(System.currentTimeMillis() > i.getTime()){
-                i.getSprite().getTexture().dispose();
-                projectiles.removeIndex(projectiles.indexOf(i, true));
+                i.remove();
             }
         }
 
         //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
+            Gdx.app.log(String.valueOf(i.getSprite().getY()), String.valueOf(i.getSprite().getX()));
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
-                //gives player exp
                 player.setXp(player.getXp() + i.getXpDrop());
-
-                //removes the enemy from the render
                 enemies.removeIndex(enemies.indexOf(i, true));
-
-                //
-                player.setEnemiesAlive(player.getEnemiesAlive() - 1);
             }
         }
         player.draw(renderer.getBatch());
@@ -174,7 +169,7 @@ public class Play implements Screen {
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
-                time = System.currentTimeMillis() + 1;
+                time = System.currentTimeMillis() + 10;
             }
             spawnCount--;
         }

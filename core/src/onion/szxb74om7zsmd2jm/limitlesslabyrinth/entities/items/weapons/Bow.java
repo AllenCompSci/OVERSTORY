@@ -17,6 +17,7 @@ public class Bow extends Weapon {
         type = "projectile";
         projectile = new Arrow();
         projectileSprite = projectile.getSprite();
+        cooldown = 20;
     }
 
     @Override

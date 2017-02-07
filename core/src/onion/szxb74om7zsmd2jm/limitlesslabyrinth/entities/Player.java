@@ -26,19 +26,13 @@ public class Player extends Entity {
     public int getXp() {
         return xp;
     }
-    private int xp = 0;
-    private int level = 1;
-    private int xpToLevel = 10;
+    private static int xp = 0;
+    private static int level = 1;
+    private static int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
-    private int waveAmount = 10;
-    public int getEnemiesAlive() {
-        return enemiesAlive;
-    }
-    public void setEnemiesAlive(int enemiesAlive) {
-        this.enemiesAlive = enemiesAlive;
-    }
-    private int enemiesAlive = 0;
+    private static int waveAmount = 10;
+
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -67,9 +61,8 @@ public class Player extends Entity {
         move();
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && enemiesAlive == 0){
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && pl.getEnemies().size == 0){
             pl.setSpawnCount(waveAmount);
-            enemiesAlive = waveAmount;
             waveAmount *= 2;
         }
 

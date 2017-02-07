@@ -13,5 +13,6 @@ public class Sword extends Weapon {
         dmg = 20f;
         lvl = 1;
         type = "melee";
+        cooldown = 40;
     }
 }

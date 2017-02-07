@@ -37,7 +37,6 @@ public class Projectile {
     Play pl = new Play();
 
     public Projectile(){
-
     }
 
     public void draw(){
@@ -50,5 +49,6 @@ public class Projectile {
 
     public void remove(){
         pl.getProjectiles().removeIndex(pl.getProjectiles().indexOf(this, true));
+        sprite.getTexture().dispose();
     }
 }

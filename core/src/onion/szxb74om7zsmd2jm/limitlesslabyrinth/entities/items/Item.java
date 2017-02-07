@@ -16,10 +16,14 @@ public class Item {
     protected Sprite projectileSprite;
     protected Projectile projectile;
     protected float dmg;
+    protected long cooldown;
     protected int lvl;
     protected String type;
     public float getDmg() {
         return dmg;
+    }
+    public long getCooldown() {
+        return cooldown;
     }
     public String getType() {
         return type;

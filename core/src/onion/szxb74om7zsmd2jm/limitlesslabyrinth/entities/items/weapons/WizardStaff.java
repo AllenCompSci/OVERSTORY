@@ -18,6 +18,7 @@ public class WizardStaff extends Weapon{
         type = "projectile";
         projectile = new WizardOrb();
         projectileSprite = projectile.getSprite();
+        cooldown = 0;
     }
 
     @Override

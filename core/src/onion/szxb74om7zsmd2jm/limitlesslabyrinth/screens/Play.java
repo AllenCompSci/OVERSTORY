@@ -146,7 +146,6 @@ public class Play implements Screen {
         //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
-            Gdx.app.log(String.valueOf(i.getSprite().getY()), String.valueOf(i.getSprite().getX()));
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
                 player.setXp(player.getXp() + i.getXpDrop());

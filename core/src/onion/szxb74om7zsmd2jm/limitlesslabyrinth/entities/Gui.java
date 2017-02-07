@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mine;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -98,7 +99,7 @@ public class Gui {
         item1 = new Fists();
         item2 = new Bow();
         item3 = new WizardStaff();
-        item4 = new NullWeapon();
+        item4 = new Mine();
         refreshItem[0] = new Sprite(new Texture("refreshBox.png"));
         refreshItem[1] = new Sprite(new Texture("refreshBox.png"));
         refreshItem[2] = new Sprite(new Texture("refreshBox.png"));

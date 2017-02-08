@@ -22,7 +22,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 

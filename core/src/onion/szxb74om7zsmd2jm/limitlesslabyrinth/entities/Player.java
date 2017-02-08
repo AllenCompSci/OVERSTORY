@@ -33,6 +33,7 @@ public class Player extends Entity {
     private float elapsedTime;
     private static int waveAmount = 10;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
+    public Sprite front, back, left, right;
     public static FACE charFace;
     @Override
     public void setDmg(float dmg) {
@@ -47,14 +48,14 @@ public class Player extends Entity {
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
-        /* UNCOMMENT FOR Mr. Hudson smiles. 
+        /* UNCOMMENT FOR Mr. Hudson smiles. */
          charFace = FACE.DOWN;
         front = new Sprite(new Texture("front.png"));
         back = new Sprite(new Texture("back.png"));
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
         this.sprite = front;        
-        */
+
         this.health = 100f;
         this.fullHealth = health;
         this.dmg = pl.getGui().getEquipped().getDmg();

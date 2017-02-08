@@ -36,7 +36,8 @@ public class ShurikenProjectile extends Projectile {
 
     @Override
     public void contact() {
-        remove();
+        pl.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
+        //remove();
     }
 
     @Override

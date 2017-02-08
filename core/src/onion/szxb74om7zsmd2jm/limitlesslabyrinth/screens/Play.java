@@ -71,10 +71,12 @@ public class Play implements Screen {
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
+    public static int waveCount = 0;
     public int getSpawnCount() {
         return spawnCount;
     }
     public void setSpawnCount(int spawnCount) {
+        waveCount++;
         this.spawnCount = spawnCount;
     }
     private static int spawnCount = 0;
@@ -178,7 +180,7 @@ public class Play implements Screen {
                     monster = MonsterType.BRUTE;
                 else
                     monster = MonsterType.HYDRA;
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
             spawnCount--;

@@ -4,10 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -48,14 +45,15 @@ public class Player extends Entity {
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
-        /* UNCOMMENT FOR Mr. Hudson smiles. */
          charFace = FACE.DOWN;
         front = new Sprite(new Texture("front.png"));
         back = new Sprite(new Texture("back.png"));
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
-        this.sprite = front;        
 
+        /* UNCOMMENT FOR Mr. Hudson smiles.
+        this.sprite = front;
+        */
         this.health = 100f;
         this.fullHealth = health;
         this.dmg = pl.getGui().getEquipped().getDmg();
@@ -67,10 +65,18 @@ public class Player extends Entity {
     @Override
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        sprite.draw(batch);
-        charFace = FACE.DOWN;
+
+        charFace = FACE.UP;
         move();
-        spriteFace();
+        //spriteFace();
+        if(charFace == FACE.DOWN)
+        {
+            batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+        }
+        else
+        {
+            sprite.draw(batch);
+        }
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && pl.getEnemies().size == 0){

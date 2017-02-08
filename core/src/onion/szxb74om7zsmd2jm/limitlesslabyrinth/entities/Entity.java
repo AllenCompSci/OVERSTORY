@@ -21,7 +21,6 @@ public class Entity implements InputProcessor {
     protected long time = 0;
     protected float speed = 4f;
     protected Detection detection;
-    protected Play pl = new Play();
     protected String state = "still";
     public float getFullHealth() {
         return fullHealth;

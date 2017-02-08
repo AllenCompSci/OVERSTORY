@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 /**
@@ -14,7 +15,7 @@ public class Goblin extends Enemy {
     {
         super(x, y, level, collisionLayer);
         this.xpDrop = determineXP(level);
-        this.sprite = new Sprite(new Texture("thor32.png"));
+        this.sprite = new Sprite(spriteTextures.goblinTexture);
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = determineDamage(this.level);

@@ -7,6 +7,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.ShurikenProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 2/6/2017.
@@ -43,8 +44,8 @@ public class Shuriken extends Weapon{
         s0 = new ShurikenProjectile(x1, y1, x2, y2);
         s1 = new ShurikenProjectile(x1, y1, (float) (x2 - 80 * Math.sin(s0.getTheta())), (float) (y2 + 80 * Math.cos(s0.getTheta())));
         s2 = new ShurikenProjectile(x1, y1, (float) (x2 + 80 * Math.sin(s0.getTheta())), (float) (y2 - 80 * Math.cos(s0.getTheta())));
-        pl.getProjectiles().add(s1);
-        pl.getProjectiles().add(s2);
+        Play.getProjectiles().add(s1);
+        Play.getProjectiles().add(s2);
         return new ShurikenProjectile(x1, y1, x2, y2);
     }
 }

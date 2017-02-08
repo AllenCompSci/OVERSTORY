@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by taylor hudson on 2/8/2017.
@@ -18,7 +20,7 @@ public class Demon extends Enemy {
     {
         super(x, y, level, collisionLayer);
         this.xpDrop = determineXP(level);
-        Texture spriteSheet = new Texture(Gdx.files.internal("demon(64x64)(4col2row)(256x128).png"));
+        Texture spriteSheet = spriteTextures.demonTexture;
         TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 2);
         TextureRegion[] spriteFrames = new TextureRegion[8];
         int index = 0;
@@ -29,7 +31,7 @@ public class Demon extends Enemy {
         }
         animation = new Animation<TextureRegion>(.2f, spriteFrames);
         stateTime = 0f;
-        this.sprite = new Sprite(new Texture("demon standing.png"));
+        this.sprite = new Sprite(spriteTextures.demonStandingTexture);
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = 10f;
@@ -54,7 +56,7 @@ public class Demon extends Enemy {
         float x = sprite.getX();
         float y = sprite.getY();
         sprite.setPosition(x,y);
-        pl.getRenderer().getBatch().draw(currentFrame, x,y);
+        Play.getRenderer().getBatch().draw(currentFrame, x,y);
         //sprite.draw(batch);
         healthBar.setPosition(sprite.getX() - healthBarX, sprite.getY() + sprite.getHeight());
         lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
@@ -64,23 +66,23 @@ public class Demon extends Enemy {
         //Enemy checking for player
         if(detection.isInRadius(this)){
             //Enemy is hit
-            if(pl.getGui().getEquipped().getType() == "melee" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]) {
+            if(Play.getGui().getEquipped().getType() == "melee" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     //Enemy loses health and is represented on the health bar
-                    health -= pl.getPlayer().getDmg();
-                    healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-                    healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
-                    pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
-                    pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
+                    health -= Play.getPlayer().getDmg();
+                    healthBarX += ((Play.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+                    healthBar.setScale(healthBar.getScaleX() - Play.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+                    Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
+                    Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
                 }
             }
         }
 
         /** Checking if hit by projectile */
         if(detection.isProjectileInRadius(this)){
-            health -= pl.getPlayer().getDmg();
-            healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-            healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+            health -= Play.getPlayer().getDmg();
+            healthBarX += ((Play.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+            healthBar.setScale(healthBar.getScaleX() - Play.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
         }
 
 

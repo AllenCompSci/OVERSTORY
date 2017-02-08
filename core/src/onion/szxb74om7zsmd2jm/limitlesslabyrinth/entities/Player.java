@@ -28,7 +28,7 @@ public class Player extends Entity {
     private static int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
-    private static int waveAmount = 1000;
+    private static int waveAmount = 100000;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
     public static FACE charFace;
@@ -56,7 +56,7 @@ public class Player extends Entity {
         */
         this.health = 100f;
         this.fullHealth = health;
-        this.dmg = pl.getGui().getEquipped().getDmg();
+        this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
@@ -79,8 +79,8 @@ public class Player extends Entity {
         }
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && pl.getEnemies().size == 0){
-            pl.setSpawnCount(waveAmount);
+        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && Play.getEnemies().size == 0){
+            Play.setSpawnCount(waveAmount);
             waveAmount *= 2;
         }
 
@@ -93,9 +93,9 @@ public class Player extends Entity {
         }
 
         /** Fire projectile */
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && pl.getGui().getEquipped().getType() == "projectile" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]){
-            pl.getProjectiles().add(pl.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, pl.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), pl.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
-            pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Play.getGui().getEquipped().getType() == "projectile" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
+            Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
+            Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
            // pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
         }
     }

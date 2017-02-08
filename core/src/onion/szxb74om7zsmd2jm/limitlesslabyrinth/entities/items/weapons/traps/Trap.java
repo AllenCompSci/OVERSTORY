@@ -12,7 +12,6 @@ public class Trap extends Weapon {
     protected float radius;
     protected float x;
     protected float y;
-    protected Play pl = new Play();
 
     public Trap(){}
 

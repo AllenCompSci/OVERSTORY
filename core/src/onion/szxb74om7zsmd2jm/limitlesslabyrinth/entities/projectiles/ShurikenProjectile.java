@@ -3,6 +3,8 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 2/6/2017.
@@ -12,8 +14,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken
 public class ShurikenProjectile extends Projectile {
 
     public ShurikenProjectile(float x1, float y1, float x2, float y2){
-        dmg = pl.getPlayer().getDmg();
-        sprite = new Sprite(new Texture("shurikenProjectile.png"));
+        dmg = Play.getPlayer().getDmg();
+        sprite = new Sprite(spriteTextures.shurikenProjectileTexture);
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;
         y = y1;
@@ -36,7 +38,7 @@ public class ShurikenProjectile extends Projectile {
 
     @Override
     public void contact() {
-        pl.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
+        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
         //remove();
     }
 
@@ -44,7 +46,7 @@ public class ShurikenProjectile extends Projectile {
     public void draw() {
         theta = Math.atan(slope);
         sprite.setPosition(x, y);
-        sprite.draw(pl.getRenderer().getBatch());
+        sprite.draw(Play.getRenderer().getBatch());
         sprite.rotate(30);
         if(direction){
             x += Math.cos(theta) * 10;

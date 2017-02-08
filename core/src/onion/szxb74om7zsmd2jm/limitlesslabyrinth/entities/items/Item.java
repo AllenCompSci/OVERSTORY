@@ -28,7 +28,6 @@ public class Item {
     public String getType() {
         return type;
     }
-    protected static Play pl = new Play();
 
     public Item(){
 

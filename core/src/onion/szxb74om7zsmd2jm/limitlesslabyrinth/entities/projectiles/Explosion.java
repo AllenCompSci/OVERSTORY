@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -15,11 +16,11 @@ public class Explosion extends Projectile {
     float stateTime;
 
     public Explosion(float x, float y, float dmg){
-        animation = Play.fourFrameAnimationCreator("explosionSprites.png", 4,  4, .0001f);
+        animation = Play.fourFrameAnimationCreator(spriteTextures.explosionSpritesTexture, 4,  4, .0001f);
         this.dmg = dmg;
         this.x = x;
         this.y = y;
-        sprite = new Sprite(new Texture(Gdx.files.internal("explosion.png")));
+        sprite = new Sprite(spriteTextures.explosionTexture);
         stateTime = 0f;
 
         sprite.setPosition(x - sprite.getWidth()/2 ,y - sprite.getHeight()/2);
@@ -30,7 +31,7 @@ public class Explosion extends Projectile {
     public void draw() {
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        pl.getRenderer().getBatch().draw(currentFrame, sprite.getX(), sprite.getY());
+        Play.getRenderer().getBatch().draw(currentFrame, sprite.getX(), sprite.getY());
     }
 
     @Override

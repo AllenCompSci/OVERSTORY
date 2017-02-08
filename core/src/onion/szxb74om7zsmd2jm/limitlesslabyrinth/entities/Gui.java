@@ -42,13 +42,12 @@ public class Gui {
     private static float healthBarX = 0;
     private static boolean isBackpackOpen = false;
     private static boolean[] isRefreshing = new boolean[4];
-    private static Play pl = new Play();
     public Item getEquipped() {
         return Equipped;
     }
     public void setEquipped(Item equipped) {
         Equipped = equipped;
-        pl.getPlayer().setDmg(Equipped.getDmg());
+        Play.getPlayer().setDmg(Equipped.getDmg());
     }
     public boolean getIsBackpackOpen() {
         return isBackpackOpen;
@@ -125,7 +124,7 @@ public class Gui {
             itemBox4 = new Sprite(ItemBox);
             selected = 0;
             Equipped = item1;
-            pl.getPlayer().setDmg(Equipped.getDmg());
+            Play.getPlayer().setDmg(Equipped.getDmg());
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
             itemBox2 = new Sprite(SelectedBox);
@@ -134,7 +133,7 @@ public class Gui {
             itemBox4 = new Sprite(ItemBox);
             selected = 1;
             Equipped = item2;
-            pl.getPlayer().setDmg(Equipped.getDmg());
+            Play.getPlayer().setDmg(Equipped.getDmg());
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)){
             itemBox3 = new Sprite(SelectedBox);
@@ -143,7 +142,7 @@ public class Gui {
             itemBox4 = new Sprite(ItemBox);
             selected = 2;
             Equipped = item3;
-            pl.getPlayer().setDmg(Equipped.getDmg());
+            Play.getPlayer().setDmg(Equipped.getDmg());
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)){
             itemBox4 = new Sprite(SelectedBox);
@@ -152,7 +151,7 @@ public class Gui {
             itemBox1 = new Sprite(ItemBox);
             selected = 3;
             Equipped = item4;
-            pl.getPlayer().setDmg(Equipped.getDmg());
+            Play.getPlayer().setDmg(Equipped.getDmg());
         }
 
         /** Backpack open / close */
@@ -177,40 +176,40 @@ public class Gui {
     public void update(){
 
         /** Health Bar Update */
-        playerHealthBar.setPosition(pl.getCamera().position.x - pl.getCamera().viewportWidth/2 + 10 - healthBarX, pl.getCamera().position.y + pl.getCamera().viewportHeight/2 - 28);
-        playerLostHealthBar.setPosition(pl.getCamera().position.x - pl.getCamera().viewportWidth/2 + 10, pl.getCamera().position.y + pl.getCamera().viewportHeight/2 - 28);
-        playerLostHealthBar.draw(pl.getRenderer().getBatch());
-        playerHealthBar.draw(pl.getRenderer().getBatch());
+        playerHealthBar.setPosition(Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10 - healthBarX, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 28);
+        playerLostHealthBar.setPosition(Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 28);
+        playerLostHealthBar.draw(Play.getRenderer().getBatch());
+        playerHealthBar.draw(Play.getRenderer().getBatch());
 
         /** itemBox update */
-        itemBox1.setPosition(pl.getCamera().position.x - 150, pl.getCamera().position.y - pl.getCamera().viewportHeight/2 + 70);
-        itemBox2.setPosition(pl.getCamera().position.x - 50, pl.getCamera().position.y - pl.getCamera().viewportHeight/2 + 70);
-        itemBox3.setPosition(pl.getCamera().position.x + 50, pl.getCamera().position.y - pl.getCamera().viewportHeight/2 + 70);
-        itemBox4.setPosition(pl.getCamera().position.x + 150, pl.getCamera().position.y - pl.getCamera().viewportHeight/2 + 70);
-        itemBox1.draw(pl.getRenderer().getBatch());
-        itemBox2.draw(pl.getRenderer().getBatch());
-        itemBox3.draw(pl.getRenderer().getBatch());
-        itemBox4.draw(pl.getRenderer().getBatch());
+        itemBox1.setPosition(Play.getCamera().position.x - 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox2.setPosition(Play.getCamera().position.x - 50, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox3.setPosition(Play.getCamera().position.x + 50, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox4.setPosition(Play.getCamera().position.x + 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox1.draw(Play.getRenderer().getBatch());
+        itemBox2.draw(Play.getRenderer().getBatch());
+        itemBox3.draw(Play.getRenderer().getBatch());
+        itemBox4.draw(Play.getRenderer().getBatch());
 
         /** Items Update */
         item1.getSprite().setPosition(itemBox1.getX(), itemBox1.getY());
         item2.getSprite().setPosition(itemBox2.getX(), itemBox2.getY());
         item3.getSprite().setPosition(itemBox3.getX(), itemBox3.getY());
         item4.getSprite().setPosition(itemBox4.getX(), itemBox4.getY());
-        item1.getSprite().draw(pl.getRenderer().getBatch());
-        item2.getSprite().draw(pl.getRenderer().getBatch());
-        item3.getSprite().draw(pl.getRenderer().getBatch());
-        item4.getSprite().draw(pl.getRenderer().getBatch());
+        item1.getSprite().draw(Play.getRenderer().getBatch());
+        item2.getSprite().draw(Play.getRenderer().getBatch());
+        item3.getSprite().draw(Play.getRenderer().getBatch());
+        item4.getSprite().draw(Play.getRenderer().getBatch());
 
         /** Handle the cool down of items */
         refreshItem[0].setPosition(itemBox1.getX(), itemBox1.getY());
         refreshItem[1].setPosition(itemBox2.getX(), itemBox2.getY());
         refreshItem[2].setPosition(itemBox3.getX(), itemBox3.getY());
         refreshItem[3].setPosition(itemBox4.getX(), itemBox4.getY());
-        refreshItem[0].draw(pl.getRenderer().getBatch());
-        refreshItem[1].draw(pl.getRenderer().getBatch());
-        refreshItem[2].draw(pl.getRenderer().getBatch());
-        refreshItem[3].draw(pl.getRenderer().getBatch());
+        refreshItem[0].draw(Play.getRenderer().getBatch());
+        refreshItem[1].draw(Play.getRenderer().getBatch());
+        refreshItem[2].draw(Play.getRenderer().getBatch());
+        refreshItem[3].draw(Play.getRenderer().getBatch());
         if(isRefreshing[0] && System.currentTimeMillis() > time1){
             refreshItem[0].setScale(refreshItem[0].getScaleX() - .1f, refreshItem[0].getScaleY() - .1f);
             time1 = System.currentTimeMillis() + item1.getCooldown();

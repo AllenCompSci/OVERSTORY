@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -49,14 +50,14 @@ public class Enemy extends Entity{
         //Enemy checking for player
         if(detection.isInRadius(this)){
             //Enemy is hit
-            if(pl.getGui().getEquipped().getType() == "melee" && !pl.getGui().getIsRefreshing()[pl.getGui().getSelected()]) {
+            if(Play.getGui().getEquipped().getType() == "melee" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
                     //Enemy loses health and is represented on the health bar
-                    health -= pl.getPlayer().getDmg();
-                    healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-                    healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
-                    pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
-                    pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
+                    health -= Play.getPlayer().getDmg();
+                    healthBarX += ((Play.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+                    healthBar.setScale(healthBar.getScaleX() - Play.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+                    Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
+                    Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
                 }
             }
         }
@@ -92,19 +93,19 @@ public class Enemy extends Entity{
     private void setDirection(){
         //Checks which direction enemy should go
         //Up
-        if (sprite.getY() + sprite.getHeight() / 2 < pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
+        if (sprite.getY() + sprite.getHeight() / 2 < Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
             canmove.add(4);
         }
         //Down
-        if (sprite.getY() + sprite.getHeight() / 2 > pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
+        if (sprite.getY() + sprite.getHeight() / 2 > Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
             canmove.add(3);
         }
         //Left
-        if(sprite.getX() + sprite.getWidth()/2 > pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
+        if(sprite.getX() + sprite.getWidth()/2 > Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
             canmove.add(2);
         }
         //Right
-        if(sprite.getX() + sprite.getWidth()/2 < pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
+        if(sprite.getX() + sprite.getWidth()/2 < Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
             canmove.add(1);
         }
         if(canmove.contains(1) && canmove.contains(4)) canmove.add(5); //Up & Right

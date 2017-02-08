@@ -37,11 +37,12 @@ public class Play implements Screen {
         ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA
     }
 
+
     public TiledMap getMap() {
         return map;
     }
     private static TiledMap map;
-    public OrthogonalTiledMapRenderer getRenderer() {
+    public static OrthogonalTiledMapRenderer getRenderer() {
         return renderer;
     }
     private static OrthogonalTiledMapRenderer renderer;
@@ -52,19 +53,19 @@ public class Play implements Screen {
         this.zoom = zoom;
     }
     private static float zoom = 1f;
-    public OrthographicCamera getCamera() {
+    public static OrthographicCamera getCamera() {
         return camera;
     }
     private static OrthographicCamera camera;
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
     private static Player player;
-    public Array<Enemy> getEnemies() {
+    public static Array<Enemy> getEnemies() {
         return enemies;
     }
     private static Array<Enemy> enemies = new Array<Enemy>();
-    public Array<Projectile> getProjectiles() {
+    public static Array<Projectile> getProjectiles() {
         return projectiles;
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
@@ -72,15 +73,15 @@ public class Play implements Screen {
     private int[][] spawnTiles;
     private long time = 0;
     public static int waveCount = 0;
-    public int getSpawnCount() {
+    public static int getSpawnCount() {
         return spawnCount;
     }
-    public void setSpawnCount(int spawnCount) {
+    public static void setSpawnCount(int spawnCount) {
         waveCount++;
-        this.spawnCount = spawnCount;
+        Play.spawnCount = spawnCount;
     }
     private static int spawnCount = 0;
-    public Gui getGui() {
+    public static Gui getGui() {
         return gui;
     }
     private static Gui gui = new Gui();
@@ -104,16 +105,16 @@ public class Play implements Screen {
         {
             for(int j = 0; j < col; j++)
             {
-                System.out.println("i: " + i + ", j:" + j);
+               // System.out.println("i: " + i + ", j:" + j);
                 animationFrames[index++] = tmpFrames[i][j];
             }
         }
 
         return new Animation(1f/4f, animationFrames);
     }
-    public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col, float duration)
+    public static Animation fourFrameAnimationCreator(Texture texture, int row, int col, float duration)
     {
-        Texture img = new Texture(Gdx.files.internal(pathToSprite));
+        Texture img = texture;
 
         /*
         Texture spriteSheet = new Texture(Gdx.files.internal("redDragon(64x64)(4col2row)(256x128).png"));
@@ -129,7 +130,7 @@ public class Play implements Screen {
         {
             for(int j = 0; j < col; j++)
             {
-                System.out.println("i: " + i + ", j:" + j);
+                //System.out.println("i: " + i + ", j:" + j);
                 animationFrames[index++] = tmpFrames[i][j];
             }
         }
@@ -192,7 +193,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < 350) {
+        if(spawnCount > 0 && getEnemies().size > -1) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds

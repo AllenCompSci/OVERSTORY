@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by 226812 on 2/6/2017.
@@ -15,7 +16,7 @@ public class WizardOrb extends Projectile {
     float stateTime;
 
     public WizardOrb(float x1, float y1, float x2, float y2){
-        dmg = pl.getPlayer().getDmg();
+        dmg = Play.getPlayer().getDmg();
         sprite = new Sprite(new Texture(Gdx.files.internal("Frozen_Starlight.png")));
         spriteSheet = new Texture(Gdx.files.internal("mage-E-ani.png"));
         TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 3);
@@ -56,7 +57,7 @@ public class WizardOrb extends Projectile {
 
     @Override
     public void contact() {
-        pl.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
+        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
         remove();
     }
 
@@ -64,7 +65,7 @@ public class WizardOrb extends Projectile {
     public void draw() {
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        pl.getRenderer().getBatch().draw(currentFrame, x, y);
+        Play.getRenderer().getBatch().draw(currentFrame, x, y);
         sprite.setPosition(x,y);
         if(direction){
             x += Math.cos(theta) * 10;

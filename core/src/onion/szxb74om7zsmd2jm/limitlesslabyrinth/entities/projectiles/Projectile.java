@@ -41,13 +41,12 @@ public class Projectile {
     public float getDmg() {
         return dmg;
     }
-    Play pl = new Play();
 
     public Projectile(){
     }
 
     public void draw(){
-        sprite.draw(pl.getRenderer().getBatch());
+        sprite.draw(Play.getRenderer().getBatch());
     }
 
     public void contact(){
@@ -55,7 +54,7 @@ public class Projectile {
     }
 
     public void remove(){
-        pl.getProjectiles().removeIndex(pl.getProjectiles().indexOf(this, true));
-        sprite.getTexture().dispose();
+        Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(this, true));
+        //sprite.getTexture().dispose();
     }
 }

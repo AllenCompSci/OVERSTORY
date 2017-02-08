@@ -74,22 +74,26 @@ public class Entity implements InputProcessor {
             if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                 sprite.setY(sprite.getY() + speed);
             }
+             Player.charFace = Player.FACE.UP;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
                 sprite.setY(sprite.getY() + -speed);
                 state = "down";
             }
+             Player.charFace = Player.FACE.DOWN;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
                 sprite.setX(sprite.getX() + -speed);
             }
+             Player.charFace = Player.FACE.LEFT;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                 sprite.setX(sprite.getX() + speed);
             }
+             Player.charFace = Player.FACE.RIGHT;
         }
     }
 

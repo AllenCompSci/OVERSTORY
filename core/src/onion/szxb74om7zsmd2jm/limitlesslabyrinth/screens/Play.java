@@ -86,20 +86,26 @@ public class Play implements Screen {
     private static Gui gui = new Gui();
 
 
-    public static Animation fourFrameAnimationCreator(String pathToSprite)
+    public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
-        Texture img = new Texture(pathToSprite);
+        Texture img = new Texture(Gdx.files.internal(pathToSprite));
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(img, 64, 64);
+        /*
+        Texture spriteSheet = new Texture(Gdx.files.internal("redDragon(64x64)(4col2row)(256x128).png"));
+        TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 2);
+        TextureRegion[] spriteFrames = new TextureRegion[8];
+         */
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, img.getWidth()/col, img.getHeight()/row);
 
-        TextureRegion[] animationFrames = new TextureRegion[4];
+        TextureRegion[] animationFrames = new TextureRegion[row*col];
         int index = 0;
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < row; i++)
         {
-            for(int j = 0; j < 2; j++)
+            for(int j = 0; j < col; j++)
             {
-                animationFrames[index++] = tmpFrames[j][i];
+                System.out.println("i: " + i + ", j:" + j);
+                animationFrames[index++] = tmpFrames[i][j];
             }
         }
 
@@ -161,7 +167,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0) {
+        if(spawnCount > 0 && getEnemies().size < 350) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds

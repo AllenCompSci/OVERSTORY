@@ -9,18 +9,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken
  */
 
 
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-
 public class ShurikenProjectile extends Projectile {
 
     public ShurikenProjectile(float x1, float y1, float x2, float y2){
+        dmg = pl.getPlayer().getDmg();
         sprite = new Sprite(new Texture("shurikenProjectile.png"));
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;

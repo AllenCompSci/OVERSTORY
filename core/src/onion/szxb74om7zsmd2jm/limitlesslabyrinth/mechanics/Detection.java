@@ -56,4 +56,16 @@ public class Detection {
         }
         return false;
     }
+
+    public float projectileInRadiusDmg(Enemy enemy){
+        for(Projectile i : play.getProjectiles()){
+            distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth()/2) - (enemy.getSprite().getX() + enemy.getSprite().getWidth()/2), 2) +
+                    Math.pow((i.getSprite().getY() + i.getSprite().getHeight()/2) - (enemy.getSprite().getY() + enemy.getSprite().getHeight()/2), 2));
+            if (radius/3 >= distance - i.getSprite().getHeight()/2){
+                /** If projectile hits enemy, runs whatever happens in projectiles contact function */
+                return i.getDmg();
+            }
+        }
+        return 0;
+    }
 }

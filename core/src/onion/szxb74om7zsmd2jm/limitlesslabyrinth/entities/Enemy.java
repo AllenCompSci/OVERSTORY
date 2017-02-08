@@ -20,6 +20,13 @@ public class Enemy extends Entity{
         return xpDrop;
     }
     protected int xpDrop;
+    protected float dmgTaken;
+    public float getDmgTaken() {
+        return dmgTaken;
+    }
+    public void setDmgTaken(float dmgTaken) {
+        this.dmgTaken = dmgTaken;
+    }
     protected Sprite healthBar = new Sprite(new Texture("greenbar.png"));
     protected Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
     protected float healthBarX = 0;
@@ -36,6 +43,8 @@ public class Enemy extends Entity{
         lostHealthBar.draw(batch);
         healthBar.draw(batch);
         move();
+
+        dmgTaken = detection.projectileInRadiusDmg(this);
 
         //Enemy checking for player
         if(detection.isInRadius(this)){
@@ -54,9 +63,9 @@ public class Enemy extends Entity{
 
         /** Checking if hit by projectile */
         if(detection.isProjectileInRadius(this)){
-            health -= pl.getPlayer().getDmg();
-            healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-            healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+            health -= dmgTaken;
+            healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
+            healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
         }
 
      }

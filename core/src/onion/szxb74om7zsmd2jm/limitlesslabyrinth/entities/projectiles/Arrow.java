@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
  */
 public class Arrow extends Projectile {
     public Arrow(float x1, float y1, float x2, float y2){
+        dmg = pl.getPlayer().getDmg();
         sprite = new Sprite(new Texture("arrow.png"));
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;

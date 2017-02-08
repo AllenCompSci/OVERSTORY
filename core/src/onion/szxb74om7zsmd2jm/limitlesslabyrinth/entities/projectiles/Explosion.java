@@ -14,7 +14,8 @@ public class Explosion extends Projectile {
     Texture spriteSheet;
     float stateTime;
 
-    public Explosion(float x, float y){
+    public Explosion(float x, float y, float dmg){
+        this.dmg = dmg;
         this.x = x;
         this.y = y;
         sprite = new Sprite(new Texture(Gdx.files.internal("explosion.png")));

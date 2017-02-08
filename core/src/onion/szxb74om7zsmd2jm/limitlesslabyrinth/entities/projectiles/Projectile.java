@@ -10,6 +10,7 @@ public class Projectile {
     public Sprite getSprite() {
         return sprite;
     }
+    protected float dmg;
     protected float x;
     protected float y;
     protected float endX;
@@ -36,6 +37,9 @@ public class Projectile {
     }
     public void setContact(boolean contact) {
         isContact = contact;
+    }
+    public float getDmg() {
+        return dmg;
     }
     Play pl = new Play();
 

@@ -34,7 +34,7 @@ import java.util.Random;
 public class Play implements Screen {
 
     public enum MonsterType {
-        ASH, BRUTE, GOBLIN, ORC
+        ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA
     }
 
     public TiledMap getMap() {
@@ -164,9 +164,20 @@ public class Play implements Screen {
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
+            
+            
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
+                int gen = rand.nextInt(4);
+                 if(gen == 0)
+                    monster = MonsterType.DEMON;
+                else if(gen == 1)
+                    monster = MonsterType.DRAGON;
+                else if(gen ==2)
+                    monster = MonsterType.BRUTE;
+                else
+                    monster = MonsterType.HYDRA;
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
@@ -217,6 +228,15 @@ public class Play implements Screen {
                 break;
             case ORC:
                 enemies.add(new Orc(x, y, level, collisionLayer));
+                break;
+            case DEMON:
+                enemies.add(new Demon(x,y,level, collisionLayer));
+                break;
+            case DRAGON:
+                enemies.add(new Dragon(x,y,level,collisionLayer));
+                break;
+            case HYDRA:
+                enemies.add(new Hydra(x,y,level,collisionLayer));
                 break;
         }
 

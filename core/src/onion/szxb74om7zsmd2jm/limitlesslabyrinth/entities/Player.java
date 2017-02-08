@@ -32,7 +32,8 @@ public class Player extends Entity {
     //private String state = "still";
     private float elapsedTime;
     private static int waveAmount = 10;
-
+    public enum FACE{UP, DOWN, LEFT, RIGHT};
+    public static FACE charFace;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -46,6 +47,14 @@ public class Player extends Entity {
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
+        /* UNCOMMENT FOR Mr. Hudson smiles. 
+         charFace = FACE.DOWN;
+        front = new Sprite(new Texture("front.png"));
+        back = new Sprite(new Texture("back.png"));
+        left = new Sprite(new Texture("left.png"));
+        right = new Sprite(new Texture("right.png"));
+        this.sprite = front;        
+        */
         this.health = 100f;
         this.fullHealth = health;
         this.dmg = pl.getGui().getEquipped().getDmg();
@@ -58,7 +67,9 @@ public class Player extends Entity {
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
         sprite.draw(batch);
+        charFace = FACE.DOWN;
         move();
+        spriteFace();
 
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && pl.getEnemies().size == 0){
@@ -80,6 +91,22 @@ public class Player extends Entity {
             pl.getGui().getRefreshItem()[pl.getGui().getSelected()].setScale(1f);
             pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
         }
+    }
+    
+     public void spriteFace(){
+        float tempX = sprite.getX();
+        float tempY = sprite.getY();
+        if(charFace == FACE.LEFT)
+        {
+            this.sprite = left;
+        }
+        else if(charFace == FACE.RIGHT)
+            this.sprite = right;
+        else if(charFace == FACE.UP)
+            this.sprite = back;
+        else
+            this.sprite = front;
+        sprite.setPosition(tempX, tempY);
     }
 }
 

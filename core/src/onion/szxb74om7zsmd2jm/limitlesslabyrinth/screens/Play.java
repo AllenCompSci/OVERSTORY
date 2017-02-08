@@ -111,6 +111,31 @@ public class Play implements Screen {
 
         return new Animation(1f/4f, animationFrames);
     }
+    public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col, float duration)
+    {
+        Texture img = new Texture(Gdx.files.internal(pathToSprite));
+
+        /*
+        Texture spriteSheet = new Texture(Gdx.files.internal("redDragon(64x64)(4col2row)(256x128).png"));
+        TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 2);
+        TextureRegion[] spriteFrames = new TextureRegion[8];
+         */
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, img.getWidth()/col, img.getHeight()/row);
+
+        TextureRegion[] animationFrames = new TextureRegion[row*col];
+        int index = 0;
+
+        for(int i = 0; i < row; i++)
+        {
+            for(int j = 0; j < col; j++)
+            {
+                System.out.println("i: " + i + ", j:" + j);
+                animationFrames[index++] = tmpFrames[i][j];
+            }
+        }
+
+        return new Animation(duration, animationFrames);
+    }
 
     @Override
     public void show() {

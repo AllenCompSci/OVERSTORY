@@ -68,10 +68,12 @@ public class Enemy extends Entity{
             }
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
-               Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
+             //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
 
+                /**Need to address: Crashes when enemy sprite location is entered, gives inccorect player location **/
+                //(int) (sprite.getX() + sprite.getWidth()/2)/ collisionLayer.getWidth()/2 , (int) (sprite.getY() + sprite.getHeight()/2)/ collisionLayer.getHeight()/2
+                findPath.test(1, collisionLayer.getWidth()/2, collisionLayer.getHeight()/2, 2, 25, (int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collisionLayer.getWidth()/2,(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collisionLayer.getHeight()/2, collideLocations);
 
-                findPath.test(1, collisionLayer.getWidth(), collisionLayer.getHeight(), 5, 60,(int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collisionLayer.getWidth(),(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collisionLayer.getHeight(), collideLocations);
             }
 
         if(!detection.isInSmallRadius(this)) {
@@ -93,6 +95,7 @@ public class Enemy extends Entity{
         //Left
         if(sprite.getX() + sprite.getWidth()/2 > pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
             canmove.add(2);
+
         }
         //Right
         if(sprite.getX() + sprite.getWidth()/2 < pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){

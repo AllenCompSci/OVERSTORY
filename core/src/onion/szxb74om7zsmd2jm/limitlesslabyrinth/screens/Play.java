@@ -23,6 +23,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -68,11 +69,19 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
-    public int[][] getCollideLocations() {
-        return collideLocations;
-    }
+
     private static int[][] collideLocations;
 
+    //Switches collision grid from 32x32 to 64x64
+    /** Leaves in duplicates - need to fix **/
+    public int[][] getCollideLocations() {
+        for(int i = 0; i < collideLocations.length; i++){
+            for(int j = 0; j < collideLocations[0].length; j++){
+                collideLocations[i][j] /= 2;
+            }
+        }
+        return collideLocations;
+    }
 
     public static Animation fourFrameAnimationCreator(String pathToSprite)
     {

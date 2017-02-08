@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 
 /**
  * Created by chris on 2/6/2017.
@@ -18,11 +19,12 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 /** WORK IN PROGRESS */
 
 public class ShurikenProjectile extends Projectile {
+
     public ShurikenProjectile(float x1, float y1, float x2, float y2){
         sprite = new Sprite(new Texture("shurikenProjectile.png"));
         slope = ((y2 - y1)/(x2 - x1));
-        x = x1 - sprite.getWidth()/2;
-        y = y1 - sprite.getHeight()/2;
+        x = x1;
+        y = y1;
         b = y1 - slope * x1;
         endX = x2;
         endY = y2;
@@ -33,7 +35,6 @@ public class ShurikenProjectile extends Projectile {
         else{
             direction = false;
         }
-
 
     }
 
@@ -48,8 +49,10 @@ public class ShurikenProjectile extends Projectile {
 
     @Override
     public void draw() {
+        theta = Math.atan(slope);
         sprite.setPosition(x, y);
         sprite.draw(pl.getRenderer().getBatch());
+        sprite.rotate(30);
         if(direction){
             x += Math.cos(theta) * 10;
         }
@@ -59,5 +62,9 @@ public class ShurikenProjectile extends Projectile {
 
         y = slope * x + b;
 
+    }
+
+    public void createB(){
+        b = y - slope * x;
     }
 }

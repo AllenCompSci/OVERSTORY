@@ -25,6 +25,9 @@ public class Projectile {
     public float getSlope() {
         return slope;
     }
+    public void setSlope(float slope) {
+        this.slope = slope;
+    }
     public double getTheta() {
         return theta;
     }

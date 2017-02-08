@@ -99,7 +99,7 @@ public class Gui {
         item1 = new Fists();
         item2 = new Bow();
         item3 = new WizardStaff();
-        item4 = new Mine();
+        item4 = new Shuriken();
         refreshItem[0] = new Sprite(new Texture("refreshBox.png"));
         refreshItem[1] = new Sprite(new Texture("refreshBox.png"));
         refreshItem[2] = new Sprite(new Texture("refreshBox.png"));

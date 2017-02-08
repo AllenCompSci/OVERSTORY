@@ -83,7 +83,7 @@ public class Play implements Screen {
     private static Gui gui = new Gui();
 
 
-    public static Animation fourFrameAnimationCreator(String pathToSprite)
+    public static Animation AnimationCreator(String pathToSprite, int rows, int columns)
     {
         Texture img = new Texture(pathToSprite);
 
@@ -92,9 +92,9 @@ public class Play implements Screen {
         TextureRegion[] animationFrames = new TextureRegion[4];
         int index = 0;
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < rows; i++)
         {
-            for(int j = 0; j < 2; j++)
+            for(int j = 0; j < columns; j++)
             {
                 animationFrames[index++] = tmpFrames[j][i];
             }

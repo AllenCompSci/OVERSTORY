@@ -2,15 +2,9 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -49,7 +43,7 @@ public class Player extends Entity {
         this.fullHealth = health;
         this.dmg = pl.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
-        playerWalkingDown = Play.fourFrameAnimationCreator("knight/knightwalking.png");
+        playerWalkingDown = Play.AnimationCreator("knight/knightwalking.png", 2,2);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 

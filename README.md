@@ -18,6 +18,9 @@ Art
 Created basic enemy movement, then upgraded that movement to track the player, created a basic pixel art item for testing, started painful process of trying to merge experimental tilemaps and master, set up README, and created enemy/player collision detection. 
 ## Week 2
 Added more enemy travel directions to smoothen movement, started working on the long process of creating a pathfinding system for the enemies (attempted Dijkstra's algorithm and started working on a method called AStar).
+https://github.com/libgdx/gdx-ai/wiki/Pathfinding
+LibGDX has a pathfinding system built in based on the tilemaps. You would need to change the sprite associated with each character to 32x32 to fit the map. But the advantage is you simply draw the character at an offset with the animation sprites constantly. 
+This may help looks like a good rescource       
 
 # Chris DeLaGarza
 ## Week 1

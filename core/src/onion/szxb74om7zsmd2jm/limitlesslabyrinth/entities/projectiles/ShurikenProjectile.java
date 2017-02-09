@@ -38,8 +38,8 @@ public class ShurikenProjectile extends Projectile {
 
     @Override
     public void contact() {
-        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
-        //remove();
+        //Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
+        remove();
     }
 
     @Override

@@ -16,8 +16,6 @@ public class WizardStaff extends Weapon{
         dmg = 10f;
         lvl = 1;
         type = "projectile";
-        projectile = new WizardOrb();
-        projectileSprite = projectile.getSprite();
         cooldown = 0;
     }
 

@@ -28,7 +28,7 @@ public class Player extends Entity {
     private static int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
-    private static int waveAmount = 100000;
+    private static int waveAmount = 20;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
     public static FACE charFace;
@@ -96,7 +96,7 @@ public class Player extends Entity {
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Play.getGui().getEquipped().getType() == "projectile" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
             Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
-           // pl.getGui().setIsRefreshing(true, pl.getGui().getSelected());
+            Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
         }
     }
     

@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
+
 /**
  * Created by 226812 on 2/2/2017.
  */
@@ -18,7 +19,6 @@ public class Projectile {
     protected float b;
     protected boolean direction;
     protected boolean isContact;
-    protected boolean firstHit = false;
     protected double theta;
     protected Sprite sprite;
     protected float slope;
@@ -54,7 +54,7 @@ public class Projectile {
     }
 
     public void remove(){
-        Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(this, true));
-        //sprite.getTexture().dispose();
+        Play.getProjectiles().set(Play.getProjectiles().indexOf(this, true), null);
+        Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
     }
 }

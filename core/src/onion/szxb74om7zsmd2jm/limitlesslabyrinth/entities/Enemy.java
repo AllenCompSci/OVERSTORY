@@ -28,8 +28,8 @@ public class Enemy extends Entity{
     public void setDmgTaken(float dmgTaken) {
         this.dmgTaken = dmgTaken;
     }
-    protected Sprite healthBar = new Sprite(new Texture("greenbar.png"));
-    protected Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
+    protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
+    protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {

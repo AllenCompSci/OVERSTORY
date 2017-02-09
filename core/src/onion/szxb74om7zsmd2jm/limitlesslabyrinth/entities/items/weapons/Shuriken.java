@@ -14,15 +14,6 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 
 
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-/** WORK IN PROGRESS */
-
 public class Shuriken extends Weapon{
     private ShurikenProjectile s1;
     private ShurikenProjectile s2;
@@ -33,8 +24,6 @@ public class Shuriken extends Weapon{
         dmg = 10f;
         lvl = 1;
         type = "projectile";
-        projectile = new ShurikenProjectile();
-        projectileSprite = projectile.getSprite();
         cooldown = 10;
 
     }

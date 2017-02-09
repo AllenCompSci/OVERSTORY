@@ -19,4 +19,6 @@ public class spriteTextures {
     public static Texture dragonStandingTexture = new Texture("dragon.png");
     public static Texture hydraTexture = new Texture("hydra 2col1row.png");
     public static Texture hydraStandingTexture = new Texture("Hydra.png");
+    public static Texture healthBar = new Texture("greenbar.png");
+    public static Texture lostHealthBar = new Texture("redbar.png");
 }

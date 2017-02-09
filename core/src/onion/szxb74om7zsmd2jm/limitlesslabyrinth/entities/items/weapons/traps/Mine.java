@@ -19,8 +19,6 @@ public class Mine extends Trap {
         ammo = 5;
         type = "projectile";
 
-        projectile = new LandMine();
-        projectileSprite = projectile.getSprite();
         cooldown = 40;
     }
 

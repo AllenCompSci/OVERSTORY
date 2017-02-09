@@ -12,11 +12,9 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile
 public class Bow extends Weapon {
     public Bow(){
         sprite = new Sprite(new Texture("Bow.png"));
-        dmg = 10f;
+        dmg = 50f;
         lvl = 1;
         type = "projectile";
-        projectile = new Arrow();
-        projectileSprite = projectile.getSprite();
         cooldown = 20;
     }
 

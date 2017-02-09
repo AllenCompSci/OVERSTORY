@@ -37,7 +37,7 @@ public class Play implements Screen {
         ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA
     }
 
-
+    private static long garbageTime = 0;
     public TiledMap getMap() {
         return map;
     }
@@ -160,6 +160,13 @@ public class Play implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if(System.currentTimeMillis() > garbageTime){
+            System.gc();
+            garbageTime = System.currentTimeMillis() + 10000;
+        }
+
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -175,6 +182,9 @@ public class Play implements Screen {
             if(System.currentTimeMillis() > i.getTime()){
                 i.remove();
             }
+            if(projectiles.indexOf(null, true) != -1){
+                Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
+            }
         }
 
         //renders the enemies
@@ -183,7 +193,11 @@ public class Play implements Screen {
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
                 player.setXp(player.getXp() + i.getXpDrop());
-                enemies.removeIndex(enemies.indexOf(i, true));
+                enemies.set(enemies.indexOf(i, true), null);
+                enemies.removeIndex(enemies.indexOf(null, true));
+            }
+            if(enemies.indexOf(null, true) != -1) {
+                enemies.removeIndex(enemies.indexOf(null, true));
             }
         }
         player.draw(renderer.getBatch());
@@ -193,7 +207,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size > -1) {
+        if(spawnCount > 0 && getEnemies().size > -1 ) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds

@@ -166,7 +166,6 @@ public class Play implements Screen {
             garbageTime = System.currentTimeMillis() + 10000;
         }
 
-
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -207,7 +206,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size > -1 ) {
+        if(spawnCount > 0 && getEnemies().size < 350 ) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
@@ -229,7 +228,6 @@ public class Play implements Screen {
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
-            spawnCount--;
         }
     }
 
@@ -288,6 +286,7 @@ public class Play implements Screen {
                 break;
         }
 
+        spawnCount--;
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));

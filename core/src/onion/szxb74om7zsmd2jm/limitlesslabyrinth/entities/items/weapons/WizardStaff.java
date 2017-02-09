@@ -13,10 +13,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
 public class WizardStaff extends Weapon{
     public WizardStaff(){
         sprite = new Sprite(new Texture("staff.png"));
-        dmg = 10f;
+        dmg = 50f;
         lvl = 1;
         type = "projectile";
-        cooldown = 0;
+        cooldown = 40;
     }
 
     @Override

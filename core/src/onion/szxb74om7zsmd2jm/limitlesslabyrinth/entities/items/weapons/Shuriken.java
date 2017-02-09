@@ -21,7 +21,7 @@ public class Shuriken extends Weapon{
 
     public Shuriken(){
         sprite = new Sprite(new Texture("shuriken.png"));
-        dmg = 10f;
+        dmg = 20f;
         lvl = 1;
         type = "projectile";
         cooldown = 10;

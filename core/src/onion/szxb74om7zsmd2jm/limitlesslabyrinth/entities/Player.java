@@ -59,6 +59,7 @@ public class Player extends Entity {
         this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
+        //playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 
@@ -73,6 +74,20 @@ public class Player extends Entity {
         {
             batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
         }
+        /*
+        else if(charFace == FACE.UP)
+        {
+            //batch.draw((TextureRegion) playerWalkingUp.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
+        }
+        else if(charFace == FACE.LEFT)
+        {
+            //batch.draw((TextureRegion) playerWalkingLeft.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
+        }
+        else if(charFace == FACE.RIGHT)
+        {
+           // batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
+        }
+        */
         else
         {
             sprite.draw(batch);

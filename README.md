@@ -27,3 +27,7 @@ This may help looks like a good rescource
 # Chris DeLaGarza
 ## Week 1
 Created the tilemap, the player, the enemies. Added health, xp, leveling, and enemy waves system. Added health bar for enemies that works. Added collision, and a way to spawn enemies around the edge of the map at a random location. Enemies can be killed. Enemies drop xp.
+## Week 2
+Added more items and weapons. Also added a health bar for the player, and a backpack that functions correctly, as well as hot bars for items that can be swapped out with items in the backpack.
+## Week 3
+Worked on projectiles more, added proper explosions and shuriken that shoots 3 projectiles each time. Also fixed memory leakage to a great extent.

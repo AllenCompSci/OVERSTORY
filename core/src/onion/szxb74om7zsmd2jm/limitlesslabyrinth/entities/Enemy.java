@@ -1,5 +1,6 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,10 +11,13 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.StringJoiner;
+
 
 /**
  * Created by chris on 1/21/2017.
  */
+
 public class Enemy extends Entity{
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
     private boolean isNavigating = false; //Checks if the enemy needs to move around an object
@@ -31,6 +35,9 @@ public class Enemy extends Entity{
     protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
     protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
+    private static AStar findPath = new AStar();
+     private static Play pl = new Play();
+     private static int[][] collideLocations = pl.getCollideLocations();
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -82,6 +89,12 @@ public class Enemy extends Entity{
             }
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
+             //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
+
+                /**Need to address: Crashes when enemy sprite location is entered, gives inccorect player location **/
+                //(int) (sprite.getX() + sprite.getWidth()/2)/ collisionLayer.getWidth()/2 , (int) (sprite.getY() + sprite.getHeight()/2)/ collisionLayer.getHeight()/2
+                findPath.test(1, collisionLayer.getWidth()/2, collisionLayer.getHeight()/2, 2, 25, (int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collisionLayer.getWidth()/2,(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collisionLayer.getHeight()/2, collideLocations);
+
             }
 
         if(!detection.isInSmallRadius(this)) {
@@ -103,6 +116,7 @@ public class Enemy extends Entity{
         //Left
         if(sprite.getX() + sprite.getWidth()/2 > Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
             canmove.add(2);
+
         }
         //Right
         if(sprite.getX() + sprite.getWidth()/2 < Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
@@ -159,8 +173,10 @@ public class Enemy extends Entity{
                 sprite.setX(sprite.getX() + speed);
             }
         }
+
     }
 
+    //Algorthim for pathfinding
 
 
 

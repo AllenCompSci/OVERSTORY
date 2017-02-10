@@ -32,6 +32,7 @@ public class Player extends Entity {
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
     public static FACE charFace;
+    public static float CharX, CharY;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -51,9 +52,9 @@ public class Player extends Entity {
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
 
-        /* UNCOMMENT FOR Mr. Hudson smiles.
+        /* UNCOMMENT FOR Mr. Hudson smiles.  */
         this.sprite = front;
-        */
+
         this.health = 100f;
         this.fullHealth = health;
         this.dmg = Play.getGui().getEquipped().getDmg();
@@ -61,15 +62,18 @@ public class Player extends Entity {
         playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+
     }
 
     @Override
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-
-        charFace = FACE.UP;
+        sprite.draw(batch);
+        charFace = FACE.DOWN;
         move();
-        //spriteFace();
+        updatePOS();
+        spriteFace();
+        /*
         if(charFace == FACE.DOWN)
         {
             batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
@@ -87,12 +91,12 @@ public class Player extends Entity {
         {
            // batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
         }
-        */
+
         else
         {
             sprite.draw(batch);
         }
-
+        */
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && Play.getEnemies().size == 0){
             Play.setSpawnCount(waveAmount);
@@ -116,8 +120,7 @@ public class Player extends Entity {
     }
     
      public void spriteFace(){
-        float tempX = sprite.getX();
-        float tempY = sprite.getY();
+
         if(charFace == FACE.LEFT)
         {
             this.sprite = left;
@@ -128,7 +131,11 @@ public class Player extends Entity {
             this.sprite = back;
         else
             this.sprite = front;
-        sprite.setPosition(tempX, tempY);
+        sprite.setPosition(CharX, CharY);
+    }
+    private void updatePOS(){
+        CharX = sprite.getX();
+        CharY = sprite.getY();
     }
 }
 

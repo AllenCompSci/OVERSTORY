@@ -1,6 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by chris on 2/8/2017.
@@ -21,4 +22,31 @@ public class spriteTextures {
     public static Texture hydraStandingTexture = new Texture("Hydra.png");
     public static Texture healthBar = new Texture("greenbar.png");
     public static Texture lostHealthBar = new Texture("redbar.png");
+
+
+    public static Texture sheet(Play.MonsterType monster){
+        switch(monster){
+            case DEMON:
+                return demonTexture;
+            case DRAGON:
+                return dragonTexture;
+            case HYDRA:
+                return hydraTexture;
+
+        }
+        return null;
+    }
+
+    public static Texture stand(Play.MonsterType monster){
+        switch(monster){
+            case DEMON:
+                return demonStandingTexture;
+            case HYDRA:
+                return hydraStandingTexture;
+            case DRAGON:
+                return dragonStandingTexture;
+        }
+        return null;
+    }
+
 }

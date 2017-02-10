@@ -19,6 +19,7 @@ import java.util.StringJoiner;
  */
 
 public class Enemy extends Entity{
+    public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST};
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
     private boolean isNavigating = false; //Checks if the enemy needs to move around an object
     public int getXpDrop() {
@@ -50,6 +51,11 @@ public class Enemy extends Entity{
         healthBar.draw(batch);
         move();
 
+        DMGDETECT();
+
+     }
+
+    public void DMGDETECT(){
         dmgTaken = detection.projectileInRadiusDmg(this);
 
         //Enemy checking for player
@@ -73,8 +79,7 @@ public class Enemy extends Entity{
             healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
             healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
         }
-
-     }
+    }
 
     @Override
     public void move() {

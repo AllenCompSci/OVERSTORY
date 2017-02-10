@@ -26,7 +26,6 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -87,18 +86,6 @@ public class Play implements Screen {
     }
     private static Gui gui = new Gui();
 
-    private static int[][] collideLocations;
-
-    //Switches collision grid from 32x32 to 64x64
-    /** Leaves in duplicates - need to fix **/
-    public int[][] getCollideLocations() {
-        for(int i = 0; i < collideLocations.length; i++){
-            for(int j = 0; j < collideLocations[0].length; j++){
-                collideLocations[i][j] /= 2;
-            }
-        }
-        return collideLocations;
-    }
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
@@ -167,10 +154,7 @@ public class Play implements Screen {
         Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
-        //Get map collision for pathfinding
-        collideLocations = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
-
-    }
+           }
 
     @Override
     public void render(float delta) {

@@ -20,7 +20,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Gui;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.ash;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
 import java.util.ArrayList;
@@ -31,11 +34,16 @@ import java.util.Random;
  */
 public class Play implements Screen {
 
+    public enum MonsterType {
+        ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA
+    }
+
+    private static long garbageTime = 0;
     public TiledMap getMap() {
         return map;
     }
     private static TiledMap map;
-    public OrthogonalTiledMapRenderer getRenderer() {
+    public static OrthogonalTiledMapRenderer getRenderer() {
         return renderer;
     }
     private static OrthogonalTiledMapRenderer renderer;
@@ -46,26 +54,35 @@ public class Play implements Screen {
         this.zoom = zoom;
     }
     private static float zoom = 1f;
-    public OrthographicCamera getCamera() {
+    public static OrthographicCamera getCamera() {
         return camera;
     }
     private static OrthographicCamera camera;
-    public Player getPlayer() {
+    public static Player getPlayer() {
         return player;
     }
     private static Player player;
-    private Array<Enemy> enemies = new Array<Enemy>();
+    public static Array<Enemy> getEnemies() {
+        return enemies;
+    }
+    private static Array<Enemy> enemies = new Array<Enemy>();
+    public static Array<Projectile> getProjectiles() {
+        return projectiles;
+    }
+    private static Array<Projectile> projectiles = new Array<Projectile>();
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
-    public int getSpawnCount() {
+    public static int waveCount = 0;
+    public static int getSpawnCount() {
         return spawnCount;
     }
-    public void setSpawnCount(int spawnCount) {
-        this.spawnCount = spawnCount;
+    public static void setSpawnCount(int spawnCount) {
+        waveCount++;
+        Play.spawnCount = spawnCount;
     }
     private static int spawnCount = 0;
-    public Gui getGui() {
+    public static Gui getGui() {
         return gui;
     }
     private static Gui gui = new Gui();
@@ -83,24 +100,55 @@ public class Play implements Screen {
         return collideLocations;
     }
 
-    public static Animation fourFrameAnimationCreator(String pathToSprite)
+    public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
-        Texture img = new Texture(pathToSprite);
+        Texture img = new Texture(Gdx.files.internal(pathToSprite));
 
-        TextureRegion[][] tmpFrames = TextureRegion.split(img, 64, 64);
+        /*
+        Texture spriteSheet = new Texture(Gdx.files.internal("redDragon(64x64)(4col2row)(256x128).png"));
+        TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 2);
+        TextureRegion[] spriteFrames = new TextureRegion[8];
+         */
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, img.getWidth()/col, img.getHeight()/row);
 
-        TextureRegion[] animationFrames = new TextureRegion[4];
+        TextureRegion[] animationFrames = new TextureRegion[row*col];
         int index = 0;
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < row; i++)
         {
-            for(int j = 0; j < 2; j++)
+            for(int j = 0; j < col; j++)
             {
-                animationFrames[index++] = tmpFrames[j][i];
+               // System.out.println("i: " + i + ", j:" + j);
+                animationFrames[index++] = tmpFrames[i][j];
             }
         }
 
         return new Animation(1f/4f, animationFrames);
+    }
+    public static Animation fourFrameAnimationCreator(Texture texture, int row, int col, float duration)
+    {
+        Texture img = texture;
+
+        /*
+        Texture spriteSheet = new Texture(Gdx.files.internal("redDragon(64x64)(4col2row)(256x128).png"));
+        TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 2);
+        TextureRegion[] spriteFrames = new TextureRegion[8];
+         */
+        TextureRegion[][] tmpFrames = TextureRegion.split(img, img.getWidth()/col, img.getHeight()/row);
+
+        TextureRegion[] animationFrames = new TextureRegion[row*col];
+        int index = 0;
+
+        for(int i = 0; i < row; i++)
+        {
+            for(int j = 0; j < col; j++)
+            {
+                //System.out.println("i: " + i + ", j:" + j);
+                animationFrames[index++] = tmpFrames[i][j];
+            }
+        }
+
+        return new Animation(duration, animationFrames);
     }
 
     @Override
@@ -113,7 +161,7 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
 
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
@@ -126,6 +174,12 @@ public class Play implements Screen {
 
     @Override
     public void render(float delta) {
+
+        if(System.currentTimeMillis() > garbageTime){
+            System.gc();
+            garbageTime = System.currentTimeMillis() + 10000;
+        }
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -136,19 +190,27 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
 
+        for(Projectile i : projectiles){
+            i.draw();
+            if(System.currentTimeMillis() > i.getTime()){
+                i.remove();
+            }
+            if(projectiles.indexOf(null, true) != -1){
+                Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
+            }
+        }
+
         //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
-                //gives player exp
                 player.setXp(player.getXp() + i.getXpDrop());
-
-                //removes the enemy from the render
-                enemies.removeIndex(enemies.indexOf(i, true));
-
-                //
-                player.setEnemiesAlive(player.getEnemiesAlive() - 1);
+                enemies.set(enemies.indexOf(i, true), null);
+                enemies.removeIndex(enemies.indexOf(null, true));
+            }
+            if(enemies.indexOf(null, true) != -1) {
+                enemies.removeIndex(enemies.indexOf(null, true));
             }
         }
         player.draw(renderer.getBatch());
@@ -158,16 +220,28 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0) {
+        if(spawnCount > 0 && getEnemies().size < 350 ) {
+            MonsterType monster;
+            monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
+            
+            
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], 1, (TiledMapTileLayer) getMap().getLayers().get(1));
-                time = System.currentTimeMillis() + 1;
+                int gen = rand.nextInt(4);
+                 if(gen == 0)
+                    monster = MonsterType.DEMON;
+                else if(gen == 1)
+                    monster = MonsterType.DRAGON;
+                else if(gen ==2)
+                    monster = MonsterType.BRUTE;
+                else
+                    monster = MonsterType.HYDRA;
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
+                time = System.currentTimeMillis() + 10;
             }
-            spawnCount--;
         }
     }
 
@@ -201,8 +275,33 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
-        enemies.add(new ash(x, y, level, collisionLayer));
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+        switch (monster){
+            case ASH:
+                enemies.add(new ash(x, y, level, collisionLayer));
+                break;
+            case BRUTE:
+                enemies.add(new Brute(x, y, level, collisionLayer));
+                break;
+            case GOBLIN:
+                enemies.add(new Goblin(x, y, level, collisionLayer));
+                break;
+            case ORC:
+                enemies.add(new Orc(x, y, level, collisionLayer));
+                break;
+            case DEMON:
+                enemies.add(new Demon(x,y,level, collisionLayer));
+                break;
+            case DRAGON:
+                enemies.add(new Dragon(x,y,level,collisionLayer));
+                break;
+            case HYDRA:
+                enemies.add(new Hydra(x,y,level,collisionLayer));
+                break;
+        }
+
+        spawnCount--;
+
         //enemies.add(new Brute(x, y, level, collisionLayer));
         im.addProcessor(enemies.get(enemies.size - 1));
     }

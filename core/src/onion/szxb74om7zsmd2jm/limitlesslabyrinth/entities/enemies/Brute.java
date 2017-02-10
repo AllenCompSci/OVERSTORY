@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 
 /**
@@ -16,11 +17,11 @@ public class Brute extends Enemy {
     {
         super(x, y, level, collisionLayer);
         this.xpDrop = determineXP(level);
-        this.sprite = new Sprite(new Texture("thor32.png"));
+        this.sprite = new Sprite(spriteTextures.bruteTexture);
         this.health = determineHealth(level);
         this.fullHealth = health;
         this.dmg = 10f;
-        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+        sprite.setPosition(collisionLayer.getTileWidth() * x, collisionLayer.getTileHeight() * y);
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 

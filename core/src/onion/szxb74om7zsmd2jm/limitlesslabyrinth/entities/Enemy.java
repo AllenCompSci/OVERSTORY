@@ -25,8 +25,15 @@ public class Enemy extends Entity{
         return xpDrop;
     }
     protected int xpDrop;
-    Sprite healthBar = new Sprite(new Texture("greenbar.png"));
-    Sprite lostHealthBar = new Sprite(new Texture("redbar.png"));
+    protected float dmgTaken;
+    public float getDmgTaken() {
+        return dmgTaken;
+    }
+    public void setDmgTaken(float dmgTaken) {
+        this.dmgTaken = dmgTaken;
+    }
+    protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
+    protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
     private static AStar findPath = new AStar();
      private static Play pl = new Play();
@@ -45,16 +52,30 @@ public class Enemy extends Entity{
         healthBar.draw(batch);
         move();
 
+        dmgTaken = detection.projectileInRadiusDmg(this);
+
         //Enemy checking for player
         if(detection.isInRadius(this)){
             //Enemy is hit
-            if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
-                //Enemy loses health and is represented on the health bar
-                health -= pl.getPlayer().getDmg();
-                healthBarX += ((pl.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
-                healthBar.setScale(healthBar.getScaleX() - pl.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+            if(Play.getGui().getEquipped().getType() == "melee" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                    //Enemy loses health and is represented on the health bar
+                    health -= Play.getPlayer().getDmg();
+                    healthBarX += ((Play.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;
+                    healthBar.setScale(healthBar.getScaleX() - Play.getPlayer().getDmg() / fullHealth, healthBar.getScaleY());
+                    Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
+                    Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
+                }
             }
         }
+
+        /** Checking if hit by projectile */
+        if(detection.isProjectileInRadius(this)){
+            health -= dmgTaken;
+            healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
+            healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+        }
+
      }
 
     @Override
@@ -85,20 +106,20 @@ public class Enemy extends Entity{
     private void setDirection(){
         //Checks which direction enemy should go
         //Up
-        if (sprite.getY() + sprite.getHeight() / 2 < pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
+        if (sprite.getY() + sprite.getHeight() / 2 < Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
             canmove.add(4);
         }
         //Down
-        if (sprite.getY() + sprite.getHeight() / 2 > pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() / 2) {
+        if (sprite.getY() + sprite.getHeight() / 2 > Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
             canmove.add(3);
         }
         //Left
-        if(sprite.getX() + sprite.getWidth()/2 > pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
+        if(sprite.getX() + sprite.getWidth()/2 > Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
             canmove.add(2);
 
         }
         //Right
-        if(sprite.getX() + sprite.getWidth()/2 < pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth()/2){
+        if(sprite.getX() + sprite.getWidth()/2 < Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
             canmove.add(1);
         }
         if(canmove.contains(1) && canmove.contains(4)) canmove.add(5); //Up & Right
@@ -171,5 +192,7 @@ public class Enemy extends Entity{
     {
         return 0;
     }
+
+    public float determineDamage(int level) {return 0;}
 
 }

@@ -12,5 +12,6 @@ public class Fists extends Weapon{
         sprite = new Sprite(new Texture("fists.png"));
         dmg = 10f;
         lvl = 1;
+        type = "melee";
     }
 }

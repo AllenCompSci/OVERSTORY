@@ -12,5 +12,7 @@ public class Sword extends Weapon {
         sprite = new Sprite(new Texture("sword.png"));
         dmg = 20f;
         lvl = 1;
+        type = "melee";
+        cooldown = 40;
     }
 }

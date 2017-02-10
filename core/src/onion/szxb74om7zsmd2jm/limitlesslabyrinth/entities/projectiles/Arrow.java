@@ -42,7 +42,7 @@ public class Arrow extends Projectile {
 
     @Override
     public void contact() {
-        remove();
+        //remove();
     }
 
     @Override

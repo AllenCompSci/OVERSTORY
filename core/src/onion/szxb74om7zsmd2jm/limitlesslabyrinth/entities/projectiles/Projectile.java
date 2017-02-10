@@ -54,6 +54,7 @@ public class Projectile {
     }
 
     public void remove(){
+        sprite = null;
         Play.getProjectiles().set(Play.getProjectiles().indexOf(this, true), null);
         Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
     }

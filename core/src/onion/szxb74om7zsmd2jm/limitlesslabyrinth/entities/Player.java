@@ -28,7 +28,7 @@ public class Player extends Entity {
     private static int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
-    private static int waveAmount = 20;
+    private static int waveAmount = 200;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
     public static FACE charFace;
@@ -59,7 +59,7 @@ public class Player extends Entity {
         this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
         playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
-        //playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
+//        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
     }
 

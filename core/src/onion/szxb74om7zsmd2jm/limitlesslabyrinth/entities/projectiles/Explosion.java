@@ -35,11 +35,6 @@ public class Explosion extends Projectile {
     }
 
     @Override
-    public void remove() {
-        super.remove();
-    }
-
-    @Override
     public void contact() {
     }
 }

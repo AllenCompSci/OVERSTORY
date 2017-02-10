@@ -16,7 +16,7 @@ public class Mine extends Trap {
         sprite = new Sprite(new Texture("LandMineItem.png"));
         dmg = 1000f;
         lvl = 1;
-        ammo = 5;
+        ammo = 90;
         type = "projectile";
 
         cooldown = 40;

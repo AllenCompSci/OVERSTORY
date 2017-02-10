@@ -17,6 +17,10 @@ public class Entity implements InputProcessor {
         return sprite;
     }
 
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
+    }
+
     protected Sprite sprite;
     protected long time = 0;
     protected float speed = 4f;

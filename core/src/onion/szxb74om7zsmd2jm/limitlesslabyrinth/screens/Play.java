@@ -73,6 +73,7 @@ public class Play implements Screen {
     private int[][] spawnTiles;
     private long time = 0;
     public static int waveCount = 0;
+    private long count;
     public static int getSpawnCount() {
         return spawnCount;
     }
@@ -160,8 +161,8 @@ public class Play implements Screen {
     public void render(float delta) {
 
         if(System.currentTimeMillis() > garbageTime){
-            System.gc();
-            garbageTime = System.currentTimeMillis() + 10000;
+            Gdx.app.log("Enemies spawned so far", String.valueOf(count));
+            garbageTime = System.currentTimeMillis() + 50000;
         }
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -190,6 +191,7 @@ public class Play implements Screen {
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
                 player.setXp(player.getXp() + i.getXpDrop());
+                i.setSprite(null);
                 enemies.set(enemies.indexOf(i, true), null);
                 enemies.removeIndex(enemies.indexOf(null, true));
             }
@@ -204,7 +206,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < 350 ) {
+        if(spawnCount > 0 && getEnemies().size < 350) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
@@ -223,6 +225,7 @@ public class Play implements Screen {
                     monster = MonsterType.BRUTE;
                 else
                     monster = MonsterType.HYDRA;
+
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
@@ -260,6 +263,7 @@ public class Play implements Screen {
 
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+        count++;
         switch (monster){
             case ASH:
                 enemies.add(new ash(x, y, level, collisionLayer));
@@ -287,7 +291,6 @@ public class Play implements Screen {
         spawnCount--;
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
-        im.addProcessor(enemies.get(enemies.size - 1));
     }
 
     //checks a TMX map layer tiles for a property

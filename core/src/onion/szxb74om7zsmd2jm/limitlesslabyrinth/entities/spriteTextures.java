@@ -23,6 +23,10 @@ public class spriteTextures {
     public static Texture healthBar = new Texture("greenbar.png");
     public static Texture lostHealthBar = new Texture("redbar.png");
 
+    public static Texture LightningOrbSprites = new Texture("LightningOrb.png");
+    public static Texture LightningOrb = new Texture("LightningOrbArea.png");
+    public static Texture invisProjectileSprite = new Texture("invisArea.png");
+
 
     public static Texture sheet(Play.MonsterType monster){
         switch(monster){

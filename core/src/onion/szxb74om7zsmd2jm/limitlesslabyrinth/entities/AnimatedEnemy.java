@@ -17,7 +17,8 @@ public class AnimatedEnemy extends Enemy {
         private Animation<TextureRegion> animation;
         float stateTime;
         public static DIRECTION ENEMYFACING;
-        private float x, y;
+
+
         private boolean flipLEFT;
         public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster)
         {

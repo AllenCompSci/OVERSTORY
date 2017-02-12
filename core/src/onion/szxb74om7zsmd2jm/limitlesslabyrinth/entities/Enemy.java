@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import java.util.ArrayList;
@@ -36,6 +39,17 @@ public class Enemy extends Entity{
     protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
     protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
+    public float getX() {
+        return x;
+    }
+
+    protected float x;
+
+    public float getY() {
+        return y;
+    }
+
+    protected float y;
 
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
@@ -74,10 +88,28 @@ public class Enemy extends Entity{
         }
 
         /** Checking if hit by projectile */
-        if(detection.isProjectileInRadius(this)){
-            health -= dmgTaken;
-            healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
-            healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+
+        for(Projectile i : Play.getProjectiles()){
+            if(i.getName() == "invis"){
+                if (!i.getEnemiesHit().contains(this, true)) {
+                    if (detection.isInvisProjectileInRadius(this, (invisProjectile) i)) {
+                        i.getEnemiesHit().add(this);
+                        health -= dmgTaken;
+                        healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
+                        healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+                    }
+                }
+            }
+            else {
+                if (!i.getEnemiesHit().contains(this, true)) {
+                    if (detection.isProjectileInRadius(this, i)) {
+                        i.getEnemiesHit().add(this);
+                        health -= dmgTaken;
+                        healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
+                        healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+                    }
+                }
+            }
         }
     }
 

@@ -96,7 +96,7 @@ public class Gui {
         itemBox2 = new Sprite(ItemBox);
         itemBox3 = new Sprite(ItemBox);
         itemBox4 = new Sprite(ItemBox);
-        item1 = new Fists();
+        item1 = new LightningStaff();
         item2 = new Bow();
         item3 = new WizardStaff();
         item4 = new Shuriken();

@@ -24,7 +24,9 @@ public class spriteTextures {
     public static Texture hydraStandingTexture = new Texture("Hydra.png");
     public static Texture healthBar = new Texture("greenbar.png");
     public static Texture lostHealthBar = new Texture("redbar.png");
-
+    public static Texture LightningOrbSprites = new Texture("LightningOrb.png");
+    public static Texture LightningOrb = new Texture("LightningOrbArea.png");
+    public static Texture invisProjectileSprite = new Texture("invisArea.png");
 
     public static Texture basic32 = new Texture("32 pix\\32x32.png");
     public static Texture brittleSkelly = new Texture("32 pix\\BrittleSkeleton(2x4).png");

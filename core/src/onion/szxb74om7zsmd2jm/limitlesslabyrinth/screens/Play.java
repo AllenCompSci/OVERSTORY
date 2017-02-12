@@ -197,9 +197,7 @@ public class Play implements Screen {
             i.draw(renderer.getBatch());
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
-                player.setXp(player.getXp() + i.getXpDrop());
-                enemies.set(enemies.indexOf(i, true), null);
-                enemies.removeIndex(enemies.indexOf(null, true));
+                i.onDeath();
             }
             if(enemies.indexOf(null, true) != -1) {
                 enemies.removeIndex(enemies.indexOf(null, true));

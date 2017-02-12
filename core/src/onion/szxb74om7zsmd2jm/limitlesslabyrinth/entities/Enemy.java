@@ -224,4 +224,10 @@ public class Enemy extends Entity{
 
     public float determineDamage(int level) {return 0;}
 
+    @Override
+    public void onDeath() {
+        Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
+        Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
+    }
 }

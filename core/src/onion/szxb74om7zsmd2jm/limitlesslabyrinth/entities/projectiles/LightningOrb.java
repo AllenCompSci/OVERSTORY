@@ -64,10 +64,10 @@ public class LightningOrb extends Projectile {
         Play.getRenderer().getBatch().draw(currentFrame, x, y);
         sprite.setPosition(x,y);
         if(direction){
-            x += Math.cos(theta) * 10;
+            x += Math.cos(theta) * 13;
         }
         else{
-            x -= Math.cos(theta) * 10;
+            x -= Math.cos(theta) * 13;
         }
 
         y = slope * x + b;

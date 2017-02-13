@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullProjectileItem;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -22,9 +24,10 @@ public class Turret extends Entity{
     private long AttackTime = 0;
     private float slope;
     private double theta;
+
     public Turret(float x, float y, Item itemHeld){
         super(x,y);
-        sprite = new Sprite(spriteTextures.TurretSprite);
+        sprite = new Sprite(spriteTextures.TurretOffSprite);
         this.itemHeld = itemHeld;
         dmg = itemHeld.getDmg();
         sprite.setPosition(x,y);
@@ -39,6 +42,7 @@ public class Turret extends Entity{
         sprite.draw(Play.getRenderer().getBatch());
         fire();
         checkWeaponSwap();
+        ONorOFF();
     }
 
     private void fire(){
@@ -67,8 +71,13 @@ public class Turret extends Entity{
     private void checkWeaponSwap(){
         distance = Math.sqrt(Math.pow((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) - (sprite.getX() + sprite.getWidth() / 2), 2) +
                 Math.pow((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) - (sprite.getY() + sprite.getHeight() / 2), 2));
-        if(distance < 100 && Gdx.input.isKeyJustPressed(Input.Keys.P) && Play.getGui().getEquipped().getType() == "projectile"){
-            tempItem = itemHeld;
+        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.P) && Play.getGui().getEquipped().getType() == "projectile"){
+            if(itemHeld.getClass().equals(NullProjectileItem.class)){
+                tempItem = new NullWeapon();
+            }
+            else {
+                tempItem = itemHeld;
+            }
             if(Play.getGui().getSelected() == 0){
                 itemHeld = Play.getGui().getItem1();
                 Play.getGui().setItem1(tempItem);
@@ -89,6 +98,15 @@ public class Turret extends Entity{
                 Play.getGui().setItem4(tempItem);
                 Play.getGui().setEquipped(Play.getGui().getItem4());
             }
+        }
+    }
+
+    private void ONorOFF(){
+        if(itemHeld.getDmg() == 0){
+            sprite.setTexture(spriteTextures.TurretOffSprite);
+        }
+        else {
+            sprite.setTexture(spriteTextures.TurretOnSprite);
         }
     }
 }

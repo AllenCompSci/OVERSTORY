@@ -28,7 +28,8 @@ public class spriteTextures {
     public static Texture LightningOrb = new Texture("LightningOrbArea.png");
     public static Texture invisProjectileSprite = new Texture("invisArea.png");
     public static Texture TurretItemSprite = new Texture("TurretItem.png");
-    public static Texture TurretSprite = new Texture("Turret.png");
+    public static Texture TurretOffSprite = new Texture("TurretOff.png");
+    public static Texture TurretOnSprite = new Texture("TurretOn.png");
 
     public static Texture basic32 = new Texture("32 pix\\32x32x.png");
     public static Texture brittleSkelly = new Texture("32 pix\\BrittleSkeleton(2x4).png");

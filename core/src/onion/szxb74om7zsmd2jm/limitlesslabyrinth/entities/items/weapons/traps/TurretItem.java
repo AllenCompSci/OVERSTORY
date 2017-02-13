@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullProjectileItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.WizardStaff;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
@@ -23,7 +24,7 @@ public class TurretItem extends Trap {
 
     @Override
     public Turret placeTurret(float x, float y) {
-        Turret turret = new Turret(x, y, new WizardStaff());
+        Turret turret = new Turret(x, y, new NullProjectileItem());
         ammo--;
         if (ammo <= 0) {
             if (Play.getGui().getSelected() == 0) {

@@ -78,11 +78,11 @@ public class AnimatedEnemy extends Enemy {
               // currentFrame.flip(true, false); // MAKES ENEMIES FACE UPWARDS
            }
            else if(ENEMYFACING == DIRECTION.NORTH || ENEMYFACING == DIRECTION.NORTHEAST){
-                currentFrame.flip(false, true);
+                //currentFrame.flip(false, true);
            }
            else if(ENEMYFACING == DIRECTION.EAST || ENEMYFACING == DIRECTION.SOUTHEAST){
               // System.out.println("WEST");
-              currentFrame.flip(true, false);
+              //currentFrame.flip(true, false);
            }
             else{
 

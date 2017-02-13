@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Magic;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Sword;
@@ -32,6 +33,7 @@ public class Backpack {
         }
         itemSlots[1] = new Mine();
         itemSlots[2] = new TurretItem();
+        itemSlots[3] = new Magic();
     }
 
     public void input(){

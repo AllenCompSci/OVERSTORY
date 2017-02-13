@@ -15,8 +15,8 @@ public class WizardOrb extends Projectile {
     Texture spriteSheet;
     float stateTime;
 
-    public WizardOrb(float x1, float y1, float x2, float y2){
-        dmg = Play.getPlayer().getDmg();
+    public WizardOrb(float x1, float y1, float x2, float y2, float dmg){
+        this.dmg = dmg;
         sprite = new Sprite(new Texture(Gdx.files.internal("Frozen_Starlight.png")));
         spriteSheet = new Texture(Gdx.files.internal("mage-E-ani.png"));
         TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 3);

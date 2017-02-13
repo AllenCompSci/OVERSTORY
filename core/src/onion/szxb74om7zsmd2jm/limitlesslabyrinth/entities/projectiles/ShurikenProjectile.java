@@ -13,8 +13,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class ShurikenProjectile extends Projectile {
 
-    public ShurikenProjectile(float x1, float y1, float x2, float y2){
-        dmg = Play.getPlayer().getDmg();
+    public ShurikenProjectile(float x1, float y1, float x2, float y2, float dmg){
+        this.dmg = dmg;
         sprite = new Sprite(spriteTextures.shurikenProjectileTexture);
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;

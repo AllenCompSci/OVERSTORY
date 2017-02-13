@@ -8,8 +8,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by 226812 on 2/2/2017.
  */
 public class Arrow extends Projectile {
-    public Arrow(float x1, float y1, float x2, float y2){
-        dmg = Play.getPlayer().getDmg();
+    public Arrow(float x1, float y1, float x2, float y2, float dmg){
+        this.dmg = dmg;
         sprite = new Sprite(new Texture("arrow.png"));
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;

@@ -117,6 +117,13 @@ public class Player extends Entity {
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
         }
+
+        /** Places Turret */
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Play.getGui().getEquipped().getType() == "turret" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
+            Play.getTurrets().add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
+            Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
+            Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
+        }
     }
     
      public void spriteFace(){

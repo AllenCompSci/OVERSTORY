@@ -25,6 +25,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
 import java.util.Random;
@@ -76,6 +77,12 @@ public class Play implements Screen {
         return projectiles;
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
+
+    public static Array<Turret> getTurrets() {
+        return turrets;
+    }
+
+    private static Array<Turret> turrets = new Array<Turret>();
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
@@ -192,6 +199,10 @@ public class Play implements Screen {
             }
         }
 
+        for(Turret i : turrets){
+            i.draw();
+        }
+
         //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
@@ -242,6 +253,7 @@ public class Play implements Screen {
         camera.viewportHeight = height;
         camera.update();
     }
+
 
     @Override
     public void pause() {

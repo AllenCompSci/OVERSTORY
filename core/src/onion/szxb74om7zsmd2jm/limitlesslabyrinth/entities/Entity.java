@@ -1,5 +1,6 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -52,6 +53,9 @@ public class Entity implements InputProcessor {
         this.level = level;
     }
 
+    public Entity(float x, float y){
+
+    }
 //checks three points in front of the character
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
 

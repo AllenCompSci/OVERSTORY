@@ -9,6 +9,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeap
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Sword;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mine;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -30,6 +31,7 @@ public class Backpack {
             itemSlots[i] = new NullWeapon();
         }
         itemSlots[1] = new Mine();
+        itemSlots[2] = new TurretItem();
     }
 
     public void input(){
@@ -93,6 +95,12 @@ public class Backpack {
             Play.getGui().setItem4(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem4());
             Play.getPlayer().setDmg(Play.getGui().getItem4().getDmg());
+        }
+
+        /** Delete unwanted items */
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
+            itemSlots[selectedSlot] = new NullWeapon();
         }
     }
 

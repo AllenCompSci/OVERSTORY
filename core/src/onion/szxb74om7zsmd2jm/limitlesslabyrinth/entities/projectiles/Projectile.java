@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 
@@ -29,10 +30,8 @@ public class Projectile {
     protected double theta;
     protected Sprite sprite;
     protected float slope;
-    public String getName() {
-        return name;
-    }
     protected String name;
+    Item fromItem;
     protected long time = System.currentTimeMillis() + 5000;
     public float getSlope() {
         return slope;
@@ -51,6 +50,9 @@ public class Projectile {
     }
     public float getDmg() {
         return dmg;
+    }
+    public String getName() {
+        return name;
     }
 
     public Projectile(){

@@ -2,13 +2,15 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by 226812 on 2/2/2017.
  */
 public class Arrow extends Projectile {
-    public Arrow(float x1, float y1, float x2, float y2, float dmg){
+    public Arrow(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
+        this.fromItem = fromItem;
         this.dmg = dmg;
         sprite = new Sprite(new Texture("arrow.png"));
         slope = ((y2 - y1)/(x2 - x1));
@@ -42,6 +44,14 @@ public class Arrow extends Projectile {
 
     @Override
     public void contact() {
+
+        fromItem.setItemXP(fromItem.getItemXP() + 1);
+        /** Checks for item Level Up */
+        if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
+            fromItem.LVLup();
+            fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
         //remove();
     }
 

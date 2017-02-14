@@ -1,5 +1,6 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
@@ -15,6 +16,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 public class Entity implements InputProcessor {
     public Sprite getSprite() {
         return sprite;
+    }
+
+    public void setSprite(Sprite sprite) {
+        this.sprite = sprite;
     }
 
     protected Sprite sprite;
@@ -48,6 +53,9 @@ public class Entity implements InputProcessor {
         this.level = level;
     }
 
+    public Entity(float x, float y){
+
+    }
 //checks three points in front of the character
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
 
@@ -69,11 +77,13 @@ public class Entity implements InputProcessor {
 
     //checks for entity movement input
     public void move(){
+        Player.isWalking = false;
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                 sprite.setY(sprite.getY() + speed);
             }
              Player.charFace = Player.FACE.UP;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
@@ -81,18 +91,21 @@ public class Entity implements InputProcessor {
                 state = "down";
             }
              Player.charFace = Player.FACE.DOWN;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
                 sprite.setX(sprite.getX() + -speed);
             }
              Player.charFace = Player.FACE.LEFT;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                 sprite.setX(sprite.getX() + speed);
             }
              Player.charFace = Player.FACE.RIGHT;
+            Player.isWalking = true;
         }
     }
 
@@ -134,5 +147,9 @@ public class Entity implements InputProcessor {
     @Override
     public boolean scrolled(int amount) {
         return false;
+    }
+
+    public void onDeath(){
+
     }
 }

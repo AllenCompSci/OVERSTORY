@@ -15,11 +15,11 @@ public class Bow extends Weapon {
         dmg = 50f;
         lvl = 1;
         type = "projectile";
-        cooldown = 20;
+        cooldown = 5;
     }
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
-        return new Arrow(x1, y1, x2, y2);
+        return new Arrow(x1, y1, x2, y2, dmg);
     }
 }

@@ -24,9 +24,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -34,8 +35,14 @@ import java.util.Random;
  */
 public class Play implements Screen {
 
-    public enum MonsterType {
-        ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA
+     public enum MonsterType {
+        ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA, BRITTLESKELETON, BUNNY, DEMONSKELETON, ELITEORC, GHOST, GOZZLER, ORCBASE, ORCLEADER, PIRATEBUCANEER, PIRATECUTTHROAT, PRIESTESS, RIFTFRAGMENT, WATERELEMENT, SQUIRREL, VAMPIRE, WARLOCK, ZABWARLOCK,
+        AMBASSADOR, ANCIENTSCARAB, BARBAXE, WRAITH, BOGRAIDER, BONEBEAST, TOPHATNOBLE, CARNIPHILA, UNDEADCAVEBEAR, CLIFFSTRIDER, CORLERIANBARB, CRAWLER, CRUSHEDWALKER,
+        CRYSTALWOLF, DARKSTALKER, DEATHSTRIKE, DEEPTERROR, DESTROYER, DEVORGA, DIABOLICIMP, EARTHELMENTAL, GLOOTH, ENERGYELEMENTAL, OLDENERGYELEMENTAL, ENERGYSCORPION, ENRAGEDCRYSTALGOLEM, ENRAGEDGOLEM,
+        ETERNALGUARD, FERMRUMBRAS, GHOSTFERMRUMBRAS, FIREELEMENTAL, GARGOYLE, GLOOMBRINGER, GLOOTHMASHER, GORGON, GRIM, GRIMLEECH, HELLFLAYER, HELLHOUND, HIVEROVERSEER, INFECTEDWEEPER, INFERNALIST, JACKOLANTERN, JUGGERNAUNT, LADYBUG, LIZARDCHOSEN,
+        LIZARDHIGHGUARD, LIZARDLEGIONAIRE, LIZARDPRIEST, LIZARDZAOGUN, LOSTSOUL, MADMAGE, MASSIVERFIREELEMENTAL, MEDUSA, MIDNIGHTPANTHER, NIGHTMAREGAZ, NOBELLION, ORCMAURADER, ORCRIDER, OREWALKER, PHRODOMO, PINATADRAGON, PIRATECORSAIR, PIRATEGHOST,
+        PIRATEMARAUDER, PITBATTLER1, PITBATTLER2, PLAGUESMITH, PURPLETURTLE, REALITYREAVER, RIFT, RORC, SANDSCORPION, SEACRESTSERPENT, SEASERPENT, SERPENTSPAWN, SLIME, SNAKEGOD, SPECTRE, SPIRIT, SPITTER, STONEGOLEM, SVENBARB, THORNFIREWOLF, UNDEADGLADIATOR,
+        VEXCLAW, VULCONGRA, WASPOID, WATERELEMENTAL, WATERSERPENT, WEAKDEMON, WEREWOLF, WYVERN, YALAHAR
     }
 
     private static long garbageTime = 0;
@@ -70,10 +77,17 @@ public class Play implements Screen {
         return projectiles;
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
+
+    public static Array<Turret> getTurrets() {
+        return turrets;
+    }
+
+    private static Array<Turret> turrets = new Array<Turret>();
     private InputMultiplexer im;
     private int[][] spawnTiles;
     private long time = 0;
     public static int waveCount = 0;
+    private long count;
     public static int getSpawnCount() {
         return spawnCount;
     }
@@ -87,18 +101,6 @@ public class Play implements Screen {
     }
     private static Gui gui = new Gui();
 
-    private static int[][] collideLocations;
-
-    //Switches collision grid from 32x32 to 64x64
-    /** Leaves in duplicates - need to fix **/
-    public int[][] getCollideLocations() {
-        for(int i = 0; i < collideLocations.length; i++){
-            for(int j = 0; j < collideLocations[0].length; j++){
-                collideLocations[i][j] /= 2;
-            }
-        }
-        return collideLocations;
-    }
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
@@ -167,17 +169,14 @@ public class Play implements Screen {
         Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
-        //Get map collision for pathfinding
-        collideLocations = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
-
-    }
+           }
 
     @Override
     public void render(float delta) {
 
         if(System.currentTimeMillis() > garbageTime){
-            System.gc();
-            garbageTime = System.currentTimeMillis() + 10000;
+            Gdx.app.log("Enemies spawned so far", String.valueOf(count));
+            garbageTime = System.currentTimeMillis() + 50000;
         }
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -200,14 +199,16 @@ public class Play implements Screen {
             }
         }
 
+        for(Turret i : turrets){
+            i.draw();
+        }
+
         //renders the enemies
         for(Enemy i : enemies){
             i.draw(renderer.getBatch());
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
-                player.setXp(player.getXp() + i.getXpDrop());
-                enemies.set(enemies.indexOf(i, true), null);
-                enemies.removeIndex(enemies.indexOf(null, true));
+                i.onDeath();
             }
             if(enemies.indexOf(null, true) != -1) {
                 enemies.removeIndex(enemies.indexOf(null, true));
@@ -220,7 +221,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < 350 ) {
+        if(spawnCount > 0 && getEnemies().size < 350) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
@@ -239,6 +240,7 @@ public class Play implements Screen {
                     monster = MonsterType.BRUTE;
                 else
                     monster = MonsterType.HYDRA;
+
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
@@ -251,6 +253,7 @@ public class Play implements Screen {
         camera.viewportHeight = height;
         camera.update();
     }
+
 
     @Override
     public void pause() {
@@ -276,6 +279,8 @@ public class Play implements Screen {
 
     //spawns in an enemy
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+        count++;
+        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster()));
         switch (monster){
             case ASH:
                 enemies.add(new ash(x, y, level, collisionLayer));
@@ -303,7 +308,6 @@ public class Play implements Screen {
         spawnCount--;
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
-        im.addProcessor(enemies.get(enemies.size - 1));
     }
 
     //checks a TMX map layer tiles for a property

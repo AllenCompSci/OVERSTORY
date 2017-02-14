@@ -16,15 +16,15 @@ public class Mine extends Trap {
         sprite = new Sprite(new Texture("LandMineItem.png"));
         dmg = 1000f;
         lvl = 1;
-        ammo = 5;
-        type = "projectile";
+        ammo = 90;
+        type = "trap";
 
         cooldown = 40;
     }
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2) {
-        LandMine landMine = new LandMine(x1, y1, x2, y2);
+        LandMine landMine = new LandMine(x1, y1, x2, y2, dmg);
         ammo--;
         if(ammo <= 0){
             if(Play.getGui().getSelected() == 0) {

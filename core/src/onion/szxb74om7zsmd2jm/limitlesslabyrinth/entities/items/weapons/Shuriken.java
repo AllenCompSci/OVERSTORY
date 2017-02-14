@@ -30,11 +30,11 @@ public class Shuriken extends Weapon{
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2) {
-        s0 = new ShurikenProjectile(x1, y1, x2, y2);
-        s1 = new ShurikenProjectile(x1, y1, (float) (x2 - 80 * Math.sin(s0.getTheta())), (float) (y2 + 80 * Math.cos(s0.getTheta())));
-        s2 = new ShurikenProjectile(x1, y1, (float) (x2 + 80 * Math.sin(s0.getTheta())), (float) (y2 - 80 * Math.cos(s0.getTheta())));
+        s0 = new ShurikenProjectile(x1, y1, x2, y2, dmg);
+        s1 = new ShurikenProjectile(x1, y1, (float) (x2 - 80 * Math.sin(s0.getTheta())), (float) (y2 + 80 * Math.cos(s0.getTheta())), dmg);
+        s2 = new ShurikenProjectile(x1, y1, (float) (x2 + 80 * Math.sin(s0.getTheta())), (float) (y2 - 80 * Math.cos(s0.getTheta())), dmg);
         Play.getProjectiles().add(s1);
         Play.getProjectiles().add(s2);
-        return new ShurikenProjectile(x1, y1, x2, y2);
+        return new ShurikenProjectile(x1, y1, x2, y2, dmg);
     }
 }

@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ import java.util.StringJoiner;
  */
 
 public class Enemy extends Entity{
+    public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST};
     private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
     private boolean isNavigating = false; //Checks if the enemy needs to move around an object
     public int getXpDrop() {
@@ -35,9 +39,18 @@ public class Enemy extends Entity{
     protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
     protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
-    private static AStar findPath = new AStar();
-     private static Play pl = new Play();
-     private static int[][] collideLocations = pl.getCollideLocations();
+    public float getX() {
+        return x;
+    }
+
+    protected float x;
+
+    public float getY() {
+        return y;
+    }
+
+    protected float y;
+
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -52,6 +65,11 @@ public class Enemy extends Entity{
         healthBar.draw(batch);
         move();
 
+        DMGDETECT();
+
+     }
+
+    public void DMGDETECT(){
         dmgTaken = detection.projectileInRadiusDmg(this);
 
         //Enemy checking for player
@@ -70,13 +88,28 @@ public class Enemy extends Entity{
         }
 
         /** Checking if hit by projectile */
-        if(detection.isProjectileInRadius(this)){
-            health -= dmgTaken;
-            healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
-            healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
-        }
 
-     }
+        for(Projectile i : Play.getProjectiles()){
+            if(i.getName() == "invis"){
+                if (!i.getEnemiesHit().contains(this, true)) {
+                    if (detection.isInvisProjectileInRadius(this, (invisProjectile) i)) {
+                        i.getEnemiesHit().add(this);
+                        health -= dmgTaken;
+                        healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
+                        healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+                    }
+                }
+            }
+            else {
+                if (!i.getEnemiesHit().contains(this, true)) {
+                    if (detection.isProjectileInRadius(this, i)) {
+                        i.getEnemiesHit().add(this);
+                        takeDMG(dmgTaken);
+                    }
+                }
+            }
+        }
+    }
 
     @Override
     public void move() {
@@ -90,11 +123,6 @@ public class Enemy extends Entity{
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
              //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
-
-                /**Need to address: Crashes when enemy sprite location is entered, gives inccorect player location **/
-                //(int) (sprite.getX() + sprite.getWidth()/2)/ collisionLayer.getWidth()/2 , (int) (sprite.getY() + sprite.getHeight()/2)/ collisionLayer.getHeight()/2
-                findPath.test(1, collisionLayer.getWidth()/2, collisionLayer.getHeight()/2, 2, 25, (int) (pl.getPlayer().getSprite().getX() + pl.getPlayer().getSprite().getWidth() /2) / collisionLayer.getWidth()/2,(int) (pl.getPlayer().getSprite().getY() + pl.getPlayer().getSprite().getHeight() /2) / collisionLayer.getHeight()/2, collideLocations);
-
             }
 
         if(!detection.isInSmallRadius(this)) {
@@ -176,7 +204,6 @@ public class Enemy extends Entity{
 
     }
 
-    //Algorthim for pathfinding
 
 
 
@@ -195,4 +222,16 @@ public class Enemy extends Entity{
 
     public float determineDamage(int level) {return 0;}
 
+    @Override
+    public void onDeath() {
+        Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
+        Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
+    }
+
+    public void takeDMG(float dmg){
+        health -= dmg;
+        healthBarX += ((dmg / fullHealth) * sprite.getWidth()) / 2;
+        healthBar.setScale(healthBar.getScaleX() - dmg / fullHealth, healthBar.getScaleY());
+    }
 }

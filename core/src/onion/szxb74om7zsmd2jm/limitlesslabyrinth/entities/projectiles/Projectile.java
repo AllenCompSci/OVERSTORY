@@ -1,6 +1,8 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 
@@ -8,6 +10,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by 226812 on 2/2/2017.
  */
 public class Projectile {
+    public Array<Enemy> getEnemiesHit() {
+        return enemiesHit;
+    }
+    protected Array<Enemy> enemiesHit = new Array<Enemy>();
     public Sprite getSprite() {
         return sprite;
     }
@@ -19,9 +25,14 @@ public class Projectile {
     protected float b;
     protected boolean direction;
     protected boolean isContact;
+    protected boolean searching;
     protected double theta;
     protected Sprite sprite;
     protected float slope;
+    public String getName() {
+        return name;
+    }
+    protected String name;
     protected long time = System.currentTimeMillis() + 5000;
     public float getSlope() {
         return slope;

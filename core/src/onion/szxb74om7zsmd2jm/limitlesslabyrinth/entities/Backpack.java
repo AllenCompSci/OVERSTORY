@@ -5,10 +5,12 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Magic;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Sword;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mine;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -30,6 +32,8 @@ public class Backpack {
             itemSlots[i] = new NullWeapon();
         }
         itemSlots[1] = new Mine();
+        itemSlots[2] = new TurretItem();
+        itemSlots[3] = new Magic();
     }
 
     public void input(){
@@ -93,6 +97,12 @@ public class Backpack {
             Play.getGui().setItem4(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem4());
             Play.getPlayer().setDmg(Play.getGui().getItem4().getDmg());
+        }
+
+        /** Delete unwanted items */
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
+            itemSlots[selectedSlot] = new NullWeapon();
         }
     }
 

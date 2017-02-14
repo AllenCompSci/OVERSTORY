@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g3d.model.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -33,6 +35,7 @@ public class Player extends Entity {
     public Sprite front, back, left, right;
     public static FACE charFace;
     public static float CharX, CharY;
+    public static boolean isWalking = false;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -43,15 +46,21 @@ public class Player extends Entity {
     private Animation playerWalkingRight;
     private Animation playerWalkingUp;
 
+
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
          charFace = FACE.DOWN;
+       /*
         front = new Sprite(new Texture("front.png"));
         back = new Sprite(new Texture("back.png"));
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
-
+*/
+       front = new Sprite(new Texture("player/frontPurple.png"));
+        back = new Sprite(new Texture("player/backPurple.png"));
+        left = new Sprite(new Texture("player/leftPurple.png"));
+        right = new Sprite(new Texture("player/rightPurple.png"));
         /* UNCOMMENT FOR Mr. Hudson smiles.  */
         this.sprite = front;
 
@@ -59,8 +68,12 @@ public class Player extends Entity {
         this.fullHealth = health;
         this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
-        playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
+        //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
+        playerWalkingDown = Play.fourFrameAnimationCreator("player/front(2x8).png",2,8);
+        playerWalkingLeft = Play.fourFrameAnimationCreator("player/left(2x8).png",2,8);
+        playerWalkingRight = Play.fourFrameAnimationCreator("player/right(2x8).png",2,8);
+        playerWalkingUp = Play.fourFrameAnimationCreator("player/back(2x8).png",2,8);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
 
     }
@@ -68,35 +81,28 @@ public class Player extends Entity {
     @Override
     public void draw(Batch batch) {
         elapsedTime += Gdx.graphics.getDeltaTime();
-        sprite.draw(batch);
-        charFace = FACE.DOWN;
+        //sprite.draw(batch);
+        //charFace = FACE.DOWN;
         move();
         updatePOS();
         spriteFace();
-        /*
-        if(charFace == FACE.DOWN)
-        {
-            batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
-        }
-        /*
-        else if(charFace == FACE.UP)
-        {
-            //batch.draw((TextureRegion) playerWalkingUp.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
-        }
-        else if(charFace == FACE.LEFT)
-        {
-            //batch.draw((TextureRegion) playerWalkingLeft.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
-        }
-        else if(charFace == FACE.RIGHT)
-        {
-           // batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY())
-        }
 
+        if(isWalking) {
+            if (charFace == FACE.DOWN) {
+                batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+            } else if (charFace == FACE.UP) {
+                batch.draw((TextureRegion) playerWalkingUp.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+            } else if (charFace == FACE.LEFT) {
+                batch.draw((TextureRegion) playerWalkingLeft.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+            } else if (charFace == FACE.RIGHT) {
+                batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+            }
+        }
         else
         {
             sprite.draw(batch);
         }
-        */
+       /*  */
         //Starts a new wave of enemies only when all the enemies of the last wave have been killed
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && Play.getEnemies().size == 0){
             Play.setSpawnCount(waveAmount);

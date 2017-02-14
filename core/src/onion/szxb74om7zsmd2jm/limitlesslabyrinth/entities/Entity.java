@@ -77,11 +77,13 @@ public class Entity implements InputProcessor {
 
     //checks for entity movement input
     public void move(){
+        Player.isWalking = false;
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
             if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
                 sprite.setY(sprite.getY() + speed);
             }
              Player.charFace = Player.FACE.UP;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
             if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
@@ -89,18 +91,21 @@ public class Entity implements InputProcessor {
                 state = "down";
             }
              Player.charFace = Player.FACE.DOWN;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
             if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
                 sprite.setX(sprite.getX() + -speed);
             }
              Player.charFace = Player.FACE.LEFT;
+            Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
                 sprite.setX(sprite.getX() + speed);
             }
              Player.charFace = Player.FACE.RIGHT;
+            Player.isWalking = true;
         }
     }
 

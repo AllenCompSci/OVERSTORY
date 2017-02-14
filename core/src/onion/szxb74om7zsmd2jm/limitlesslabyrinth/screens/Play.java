@@ -100,7 +100,11 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
-
+    private static int[][] collideLocations;
+    public static int[][] getCollideLocations(){
+        return collideLocations;
+    }
+    // public static
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
@@ -168,6 +172,8 @@ public class Play implements Screen {
         im = new InputMultiplexer(player);
         Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+
+        collideLocations = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
 
            }
 

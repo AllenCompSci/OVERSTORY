@@ -46,7 +46,7 @@ public class Play implements Screen {
     }
 
     private static long garbageTime = 0;
-    public TiledMap getMap() {
+    public static TiledMap getMap() {
         return map;
     }
     private static TiledMap map;

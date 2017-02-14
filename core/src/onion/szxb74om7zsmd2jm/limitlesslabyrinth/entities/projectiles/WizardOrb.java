@@ -57,6 +57,14 @@ public class WizardOrb extends Projectile {
 
     @Override
     public void contact() {
+        /** Checks for item Level Up */
+        /*if(Equipped.getItemXP() >= Equipped.getXPtoLVL()){
+            Equipped.LVLup();
+            Equipped.setXPtoLVL(Equipped.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
+        */
+
         Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
         remove();
     }

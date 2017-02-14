@@ -13,5 +13,6 @@ public class NullWeapon extends Weapon {
         type = "melee";
         dmg = 0f;
         lvl = 1;
+        cooldown = 40;
     }
 }

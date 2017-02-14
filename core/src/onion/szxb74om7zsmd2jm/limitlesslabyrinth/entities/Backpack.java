@@ -34,6 +34,15 @@ public class Backpack {
         itemSlots[1] = new Mine();
         itemSlots[2] = new TurretItem();
         itemSlots[3] = new Magic();
+        itemSlots[4] = new Magic();
+        itemSlots[5] = new Magic();
+        itemSlots[6] = new Magic();
+        itemSlots[7] = new Magic();
+        itemSlots[8] = new Magic();
+        itemSlots[9] = new Magic();
+        itemSlots[10] = new Magic();
+        itemSlots[11] = new Magic();
+        itemSlots[12] = new Magic();
     }
 
     public void input(){

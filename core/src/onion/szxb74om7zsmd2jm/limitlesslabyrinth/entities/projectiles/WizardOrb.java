@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -15,7 +16,8 @@ public class WizardOrb extends Projectile {
     Texture spriteSheet;
     float stateTime;
 
-    public WizardOrb(float x1, float y1, float x2, float y2, float dmg){
+    public WizardOrb(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
+        this.fromItem = fromItem;
         this.dmg = dmg;
         sprite = new Sprite(new Texture(Gdx.files.internal("Frozen_Starlight.png")));
         spriteSheet = new Texture(Gdx.files.internal("mage-E-ani.png"));
@@ -57,7 +59,16 @@ public class WizardOrb extends Projectile {
 
     @Override
     public void contact() {
-        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
+        fromItem.setItemXP(fromItem.getItemXP() + 1);
+        /** Checks for item Level Up */
+        if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
+            fromItem.LVLup();
+            fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
+
+
+        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
         remove();
     }
 

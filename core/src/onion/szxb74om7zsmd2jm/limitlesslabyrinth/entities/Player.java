@@ -112,7 +112,7 @@ public class Player extends Entity {
         }
 
         /** Fire projectile */
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Play.getGui().getEquipped().getType() == "projectile" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "trap") && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
             Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());

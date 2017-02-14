@@ -50,20 +50,25 @@ public class Turret extends Entity{
             for (Enemy i : Play.getEnemies()) {
                 distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth() / 2) - (sprite.getX() + sprite.getWidth() / 2), 2) +
                         Math.pow((i.getSprite().getY() + i.getSprite().getHeight() / 2) - (sprite.getY() + sprite.getHeight() / 2), 2));
-                if (distance < 500) {
-                    slope = ((i.getSprite().getY() - sprite.getY())/(i.getSprite().getX() - sprite.getX()));
+                if(distance < 1000 && itemHeld.getType() == "projectile") {
+                    slope = ((i.getSprite().getY() - sprite.getY()) / (i.getSprite().getX() - sprite.getX()));
                     theta = Math.atan(slope);
                     sprite.setRotation((float) Math.toDegrees(theta));
-                    if(i.getSprite().getX() < sprite.getX()){
+                    if (i.getSprite().getX() < sprite.getX()) {
                         sprite.setFlip(true, true);
                     }
-                    if(i.getSprite().getX() > sprite.getX()){
+                    if (i.getSprite().getX() > sprite.getX()) {
                         sprite.setFlip(false, false);
                     }
                     Play.getProjectiles().add(itemHeld.getProjectile(sprite.getX(), sprite.getY(), i.getSprite().getX() + i.getSprite().getWidth() / 2, i.getSprite().getY() + i.getSprite().getHeight() / 2));
                     AttackTime = System.currentTimeMillis() + 200;
                     break;
                 }
+                else if(distance < 500 && itemHeld.getType() == "melee"){
+                    i.takeDMG(itemHeld.getDmg());
+                    AttackTime = System.currentTimeMillis() + 200;
+                }
+
             }
         }
     }
@@ -71,13 +76,8 @@ public class Turret extends Entity{
     private void checkWeaponSwap(){
         distance = Math.sqrt(Math.pow((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) - (sprite.getX() + sprite.getWidth() / 2), 2) +
                 Math.pow((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) - (sprite.getY() + sprite.getHeight() / 2), 2));
-        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.P) && Play.getGui().getEquipped().getType() == "projectile"){
-            if(itemHeld.getClass().equals(NullProjectileItem.class)){
-                tempItem = new NullWeapon();
-            }
-            else {
-                tempItem = itemHeld;
-            }
+        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.P) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "melee")){
+            tempItem = itemHeld;
             if(Play.getGui().getSelected() == 0){
                 itemHeld = Play.getGui().getItem1();
                 Play.getGui().setItem1(tempItem);

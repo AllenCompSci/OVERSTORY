@@ -10,6 +10,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 public class NullWeapon extends Weapon {
     public NullWeapon(){
         sprite = new Sprite(new Texture("nullItem.png"));
+        type = "melee";
         dmg = 0f;
         lvl = 1;
     }

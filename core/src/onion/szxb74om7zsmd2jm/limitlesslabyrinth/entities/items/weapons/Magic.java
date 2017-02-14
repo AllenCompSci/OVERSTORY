@@ -21,7 +21,7 @@ public class Magic extends Weapon {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
-        return new Spell(x1, y1, x2, y2, Play.getPlayer().getDmg()*3.9f, 0);
+        return new Spell(x1, y1, x2, y2, dmg*3.9f, 0);
     }
 
 

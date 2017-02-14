@@ -104,9 +104,7 @@ public class Enemy extends Entity{
                 if (!i.getEnemiesHit().contains(this, true)) {
                     if (detection.isProjectileInRadius(this, i)) {
                         i.getEnemiesHit().add(this);
-                        health -= dmgTaken;
-                        healthBarX += ((dmgTaken / fullHealth) * sprite.getWidth()) / 2;
-                        healthBar.setScale(healthBar.getScaleX() - dmgTaken / fullHealth, healthBar.getScaleY());
+                        takeDMG(dmgTaken);
                     }
                 }
             }
@@ -229,5 +227,11 @@ public class Enemy extends Entity{
         Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
         Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
         Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
+    }
+
+    public void takeDMG(float dmg){
+        health -= dmg;
+        healthBarX += ((dmg / fullHealth) * sprite.getWidth()) / 2;
+        healthBar.setScale(healthBar.getScaleX() - dmg / fullHealth, healthBar.getScaleY());
     }
 }

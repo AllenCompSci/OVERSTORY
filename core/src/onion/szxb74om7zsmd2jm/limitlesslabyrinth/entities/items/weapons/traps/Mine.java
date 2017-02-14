@@ -17,7 +17,7 @@ public class Mine extends Trap {
         dmg = 1000f;
         lvl = 1;
         ammo = 90;
-        type = "projectile";
+        type = "trap";
 
         cooldown = 40;
     }

@@ -18,13 +18,13 @@ public class TurretItem extends Trap {
         dmg = 0;
         lvl = 1;
         type = "turret";
-        ammo = 1;
+        ammo = 5;
         cooldown = 20;
     }
 
     @Override
     public Turret placeTurret(float x, float y) {
-        Turret turret = new Turret(x, y, new NullProjectileItem());
+        Turret turret = new Turret(x, y, new NullWeapon());
         ammo--;
         if (ammo <= 0) {
             if (Play.getGui().getSelected() == 0) {

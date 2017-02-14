@@ -11,7 +11,7 @@ public class LandMine extends Projectile {
     public LandMine(float x1, float y1, float x2, float y2, float dmg){
         this.dmg = dmg;
         sprite = new Sprite(new Texture("LandMine.png"));
-        x = Play.getPlayer().getSprite().getX();
+        x = Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2;
         y = Play.getPlayer().getSprite().getY();
     }
 

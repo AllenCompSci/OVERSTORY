@@ -8,6 +8,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.LightningOrb;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -15,7 +16,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 public class LightningStaff extends Weapon{
     public LightningStaff(){
-        sprite = new Sprite(new Texture("LightningStaff.png"));
+        sprite = new Sprite(spriteTextures.LightningStaffSprite);
         dmg = 100f;
         lvl = 1;
         type = "projectile";

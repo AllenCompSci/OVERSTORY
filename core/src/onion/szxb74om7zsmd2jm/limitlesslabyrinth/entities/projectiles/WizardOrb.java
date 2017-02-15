@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -19,8 +20,8 @@ public class WizardOrb extends Projectile {
     public WizardOrb(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
         this.fromItem = fromItem;
         this.dmg = dmg;
-        sprite = new Sprite(new Texture(Gdx.files.internal("Frozen_Starlight.png")));
-        spriteSheet = new Texture(Gdx.files.internal("mage-E-ani.png"));
+        sprite = new Sprite(spriteTextures.WizardOrbProjectileSprite);
+        spriteSheet = spriteTextures.WizardOrbAnimationTexture;
         TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 3);
         TextureRegion[] spriteFrames = new TextureRegion[12];
         int index = 0;

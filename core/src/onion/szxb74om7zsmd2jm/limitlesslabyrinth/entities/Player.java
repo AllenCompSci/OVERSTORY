@@ -46,6 +46,16 @@ public class Player extends Entity {
     private Animation playerWalkingRight;
     private Animation playerWalkingUp;
 
+    public void reset(){
+        xp = 0;
+        level = 1;
+        xpToLevel = 10;
+        waveAmount = 200;
+        isWalking = false;
+        this.health = 100f;
+        this.fullHealth = health;
+    }
+
 
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
@@ -150,5 +160,7 @@ public class Player extends Entity {
         CharX = sprite.getX();
         CharY = sprite.getY();
     }
+
+
 }
 

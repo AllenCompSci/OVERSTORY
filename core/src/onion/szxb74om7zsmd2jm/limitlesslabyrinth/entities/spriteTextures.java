@@ -1,6 +1,8 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType.*;
@@ -10,6 +12,19 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  */
 public class spriteTextures {
 
+    public static Texture WizardOrbProjectileSprite = new Texture("Frozen_Starlight.png");
+    public static Texture LandMineProjectileSprite = new Texture("LandMine.png");
+    public static Texture ArrowProjectileSprite = new Texture("arrow.png");
+    public static Texture WizardStaffSprite = new Texture("staff.png");
+    public static Texture SwordItemSprite = new Texture("sword.png");
+    public static Texture ShurikenItemSprite = new Texture("shuriken.png");
+    public static Texture NullProjectileItemSprite = new Texture("nullItem.png");
+    public static Texture MagicItemSprite = new Texture("SPELL.png");
+    public static Texture LightningStaffSprite = new Texture("LightningStaff.png");
+    public static Texture FistSprite = new Texture("fists.png");
+    public static Texture BowSprite = new Texture("Bow.png");
+    public static Texture LandMineItemSprite = new Texture("LandMineItem.png");
+    public static Texture guiRefreshBox = new Texture("refreshBox.png");
     public static Texture explosionTexture = new Texture("explosion.png");
     public static Texture explosionSpritesTexture = new Texture("explosionSprites.png");
     public static Texture shurikenProjectileTexture = new Texture("shurikenProjectile.png");
@@ -34,6 +49,7 @@ public class spriteTextures {
     public static Texture holy = new Texture("holy(2x4).png");
     public static Texture ice = new Texture("ice(2x4).png");
     public static Texture earth = new Texture("earth(2x4).png");
+    public static Texture WizardOrbAnimationTexture = new Texture("mage-E-ani.png");
 
     public static Texture basic32 = new Texture("32 pix/32x32x.png");
     public static Texture brittleSkelly = new Texture("32 pix/BrittleSkeleton(2x4).png");
@@ -190,6 +206,11 @@ public class spriteTextures {
     public static Texture pitberserker = new Texture("64 pix/Pit_Berserker(2x8).png");
     public static Texture pitblacking = new Texture("64 pix/Pit_Blackling(2x8).png");
 
+
+
+    /** Save Animations here */
+    public static Animation<TextureRegion> ExplosionAnimation = Play.fourFrameAnimationCreator(spriteTextures.explosionSpritesTexture, 4,  4, .0001f);
+    public static Animation<TextureRegion> LightningOrbAnimation = Play.fourFrameAnimationCreator(spriteTextures.LightningOrbSprites, 4,  4, .1f);
 
     public static Texture sheet(Play.MonsterType monster){
         switch(monster){

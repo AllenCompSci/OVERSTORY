@@ -6,6 +6,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeap
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.LandMine;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -13,7 +14,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 public class Mine extends Trap {
     public Mine(){
-        sprite = new Sprite(new Texture("LandMineItem.png"));
+        sprite = new Sprite(spriteTextures.LandMineItemSprite);
         dmg = 1000f;
         lvl = 1;
         ammo = 90;

@@ -6,13 +6,14 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 
 /**
  * Created by 226812 on 2/6/2017.
  */
 public class WizardStaff extends Weapon{
     public WizardStaff(){
-        sprite = new Sprite(new Texture("staff.png"));
+        sprite = new Sprite(spriteTextures.WizardStaffSprite);
         dmg = 50f;
         lvl = 1;
         type = "projectile";

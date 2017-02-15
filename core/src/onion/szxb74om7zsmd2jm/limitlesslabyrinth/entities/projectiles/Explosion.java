@@ -18,7 +18,7 @@ public class Explosion extends Projectile {
 
     public Explosion(float x, float y, float dmg, Item fromItem){
         this.fromItem = fromItem;
-        animation = Play.fourFrameAnimationCreator(spriteTextures.explosionSpritesTexture, 4,  4, .0001f);
+        animation = spriteTextures.ExplosionAnimation;
         this.dmg = dmg;
         this.x = x;
         this.y = y;

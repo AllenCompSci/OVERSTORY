@@ -5,13 +5,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 
 /**
  * Created by 226812 on 2/2/2017.
  */
 public class Bow extends Weapon {
     public Bow(){
-        sprite = new Sprite(new Texture("Bow.png"));
+        sprite = new Sprite(spriteTextures.BowSprite);
         dmg = 50f;
         lvl = 1;
         type = "projectile";

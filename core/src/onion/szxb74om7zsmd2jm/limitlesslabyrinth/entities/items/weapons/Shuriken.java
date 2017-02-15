@@ -7,6 +7,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.ShurikenProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -20,7 +21,7 @@ public class Shuriken extends Weapon{
     private ShurikenProjectile s0;
 
     public Shuriken(){
-        sprite = new Sprite(new Texture("shuriken.png"));
+        sprite = new Sprite(spriteTextures.ShurikenItemSprite);
         dmg = 20f;
         lvl = 1;
         type = "projectile";

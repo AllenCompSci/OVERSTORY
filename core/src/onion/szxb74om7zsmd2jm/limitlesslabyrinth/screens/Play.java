@@ -16,6 +16,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Gui;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
@@ -84,17 +85,17 @@ public class Play implements Screen {
         return enemies;
     }
     private static Array<Enemy> enemies = new Array<Enemy>();
+    private static Array<Enemy> enemiesEmpty = new Array<Enemy>();
     public static Array<Projectile> getProjectiles() {
         return projectiles;
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
-
+    private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
     public static Array<Turret> getTurrets() {
         return turrets;
     }
-
     private static Array<Turret> turrets = new Array<Turret>();
-    private InputMultiplexer im;
+    private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
     private long time = 0;
     public static int waveCount = 0;
@@ -111,6 +112,23 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
+
+    public void reset(){
+        player.reset();
+        gui.reset();
+        gui.getBackpack().reset();
+
+        /** Reset the Play static variables */
+        enemies = enemiesEmpty;
+        projectiles = projectilesEmpty;
+        turrets = turretsEmpty;
+        System.gc();
+        spawnCount = 0;
+        garbageTime = 0;
+        waveCount = 0;
+
+        LimitlessLabyrinth.setPlay();
+    }
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
@@ -167,20 +185,13 @@ public class Play implements Screen {
     @Override
     public void show() {
         map = new TmxMapLoader().load("test.tmx");
-
         renderer = new OrthogonalTiledMapRenderer(map);
-
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
-
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
-
-        im = new InputMultiplexer(player);
-        Gdx.input.setInputProcessor(im);
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
-
-           }
+    }
 
     @Override
     public void render(float delta) {
@@ -213,6 +224,7 @@ public class Play implements Screen {
         for(Turret i : turrets){
             i.draw();
         }
+
 
         //renders the enemies
         for(Enemy i : enemies){
@@ -255,6 +267,10 @@ public class Play implements Screen {
                 spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
                 time = System.currentTimeMillis() + 10;
             }
+        }
+
+        if(player.getHealth() <= 0){
+            reset();
         }
     }
 

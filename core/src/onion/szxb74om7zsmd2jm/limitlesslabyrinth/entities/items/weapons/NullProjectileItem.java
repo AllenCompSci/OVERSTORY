@@ -6,13 +6,14 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.NullProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.WizardOrb;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 
 /**
  * Created by chris on 2/12/2017.
  */
 public class NullProjectileItem extends Weapon {
     public NullProjectileItem(){
-        sprite = new Sprite(new Texture("nullItem.png"));
+        sprite = new Sprite(spriteTextures.NullProjectileItemSprite);
         dmg = 0f;
         lvl = 1;
         type = "projectile";

@@ -22,7 +22,7 @@ public class LightningOrb extends Projectile {
 
     public LightningOrb(float x1, float y1, float x2, float y2, float dmg, Array<Enemy> hit, Item fromItem){
         this.fromItem = fromItem;
-        animation = Play.fourFrameAnimationCreator(spriteTextures.LightningOrbSprites, 4,  4, .1f);
+        animation = spriteTextures.LightningOrbAnimation;
         enemiesHit = hit;
         this.dmg = dmg;
         sprite = new Sprite(spriteTextures.LightningOrb);

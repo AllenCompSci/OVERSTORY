@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -12,7 +13,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 public class NullProjectile extends Projectile {
 
-    public NullProjectile(float x, float y, float dmg){
+    public NullProjectile(float x, float y, float dmg, Item fromItem){
+        this.fromItem = fromItem;
         this.dmg = dmg;
         this.x = x;
         this.y = y;

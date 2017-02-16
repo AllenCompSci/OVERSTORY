@@ -3,12 +3,17 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class LimitlessLabyrinth extends Game {
+	public static void setPlay() {
+		resetScreen = true;
+	}
+	private static boolean resetScreen = false;
 	@Override
 	public void create () {
 		setScreen(new Play());
@@ -16,6 +21,12 @@ public class LimitlessLabyrinth extends Game {
 
 	@Override
 	public void render () {
+		if(resetScreen){
+			screen.dispose();
+			System.gc();
+			resetScreen = false;
+			setScreen(new Play());
+		}
 		super.render();
 	}
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -16,7 +17,10 @@ public class Spell extends Projectile {
     int distance;
     int endDist;
     int count;
-    public Spell(float x1, float y1, float x2, float y2, float dmg, int distance){
+
+
+    public Spell(float x1, float y1, float x2, float y2, float dmg, int distance, Item fromItem){
+        this.fromItem = fromItem;
         count = (int)(Math.random() * 4);
         if(count == 0)
         animation = Play.fourFrameAnimationCreator(spriteTextures.magic, 3,  8, .01f);
@@ -59,6 +63,13 @@ public class Spell extends Projectile {
     @Override
     public void contact() {
 
+        fromItem.setItemXP(fromItem.getItemXP() + 1);
+        /** Checks for item Level Up */
+        if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
+            fromItem.LVLup();
+            fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
 
 
         if(count > 40) {
@@ -72,8 +83,8 @@ public class Spell extends Projectile {
 
         if(((int)distance == count)){
            //Need to change x and y to be following the y = m x + b format. 
-            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()+64, x,y+64, dmg, distance));
-            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()-64, x,y-64, dmg, distance));
+            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()+64, x,y+64, dmg, distance, fromItem));
+            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()-64, x,y-64, dmg, distance, fromItem));
         }
         if(distance > endDist){
             remove();

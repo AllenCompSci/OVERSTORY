@@ -1,6 +1,8 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType.*;
@@ -10,6 +12,19 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  */
 public class spriteTextures {
 
+    public static Texture WizardOrbProjectileSprite = new Texture("Frozen_Starlight.png");
+    public static Texture LandMineProjectileSprite = new Texture("LandMine.png");
+    public static Texture ArrowProjectileSprite = new Texture("arrow.png");
+    public static Texture WizardStaffSprite = new Texture("staff.png");
+    public static Texture SwordItemSprite = new Texture("sword.png");
+    public static Texture ShurikenItemSprite = new Texture("shuriken.png");
+    public static Texture NullProjectileItemSprite = new Texture("nullItem.png");
+    public static Texture MagicItemSprite = new Texture("SPELL.png");
+    public static Texture LightningStaffSprite = new Texture("LightningStaff.png");
+    public static Texture FistSprite = new Texture("fists.png");
+    public static Texture BowSprite = new Texture("Bow.png");
+    public static Texture LandMineItemSprite = new Texture("LandMineItem.png");
+    public static Texture guiRefreshBox = new Texture("refreshBox.png");
     public static Texture explosionTexture = new Texture("explosion.png");
     public static Texture explosionSpritesTexture = new Texture("explosionSprites.png");
     public static Texture shurikenProjectileTexture = new Texture("shurikenProjectile.png");
@@ -34,123 +49,168 @@ public class spriteTextures {
     public static Texture holy = new Texture("holy(2x4).png");
     public static Texture ice = new Texture("ice(2x4).png");
     public static Texture earth = new Texture("earth(2x4).png");
+    public static Texture WizardOrbAnimationTexture = new Texture("mage-E-ani.png");
 
-    public static Texture basic32 = new Texture("32 pix\\32x32x.png");
-    public static Texture brittleSkelly = new Texture("32 pix\\BrittleSkeleton(2x4).png");
-    public static Texture bunny = new Texture("32 pix\\Bunny(1x2).png");
-    public static Texture demonSkelly = new Texture("32 pix\\DemonSkeleton(1x2).png");
-    public static Texture eliteOrc = new Texture("32 pix\\EliteOrc(1x2).png");
-    public static Texture ghost = new Texture("32 pix\\Ghost(1x2).png");
-    public static Texture gozz = new Texture("32 pix\\Gozzler(1x2).png");
-    public static Texture orc = new Texture("32 pix\\Orc(2x4).png");
-    public static Texture orcLeader = new Texture("32 pix\\OrcLeader(1x2).png");
-    public static Texture pirateBcaneer = new Texture("32 pix\\PirateBucaneer(1x2).png");
-    public static Texture pirateCut = new Texture("32 pix\\PirateCutthroat(1x2).png");
-    public static Texture priestess = new Texture("32 pix\\Priestess(1x2).png");
-    public static Texture rithFrag = new Texture("32 pix\\riftFrag(2x3).png");
-    public static Texture puddle = new Texture("32 pix\\slickPuddle(1x3).png");
-    public static Texture squirrel = new Texture("32 pix\\squirel(1x2).png");
-    public static Texture vamp = new Texture("32 pix\\Vampire(1x2).png");
-    public static Texture warlock = new Texture("32 pix\\Warlock(1x2).png");
-    public static Texture zab = new Texture("32 pix\\zabWiz(1x2).png");
+    public static Texture basic32 = new Texture("32 pix/32x32x.png");
+    public static Texture brittleSkelly = new Texture("32 pix/BrittleSkeleton(2x4).png");
+    public static Texture bunny = new Texture("32 pix/Bunny(1x2).png");
+    public static Texture demonSkelly = new Texture("32 pix/DemonSkeleton(1x2).png");
+    public static Texture eliteOrc = new Texture("32 pix/EliteOrc(1x2).png");
+    public static Texture ghost = new Texture("32 pix/Ghost(1x2).png");
+    public static Texture gozz = new Texture("32 pix/Gozzler(1x2).png");
+    public static Texture orc = new Texture("32 pix/Orc(2x4).png");
+    public static Texture orcLeader = new Texture("32 pix/OrcLeader(1x2).png");
+    public static Texture pirateBcaneer = new Texture("32 pix/PirateBucaneer(1x2).png");
+    public static Texture pirateCut = new Texture("32 pix/PirateCutthroat(1x2).png");
+    public static Texture priestess = new Texture("32 pix/Priestess(1x2).png");
+    public static Texture rithFrag = new Texture("32 pix/riftFrag(2x3).png");
+    public static Texture puddle = new Texture("32 pix/slickPuddle(1x3).png");
+    public static Texture squirrel = new Texture("32 pix/squirel(1x2).png");
+    public static Texture vamp = new Texture("32 pix/Vampire(1x2).png");
+    public static Texture warlock = new Texture("32 pix/Warlock(1x2).png");
+    public static Texture zab = new Texture("32 pix/zabWiz(1x2).png");
+    public static Texture acolyte = new Texture("32 pix/Acolyte(1x2).png");
+    public static Texture bloodfist = new Texture("32 pix/Blood_Fist(1x2).png");
+    public static Texture bloodhand = new Texture("32 pix/Blood_Hand(1x2).png");
+    public static Texture bloomofdoom = new Texture("32 pix/Bloom_of_Doom(1x2).png");
+    public static Texture darkapprentice = new Texture("32 pix/Dark_Apprentice(1x2).png");
+    public static Texture dawnasura = new Texture("32 pix/Dawn_Asura(2x4).png");
+    public static Texture deathslicer = new Texture("32 pix/Deathslicer(1x3).png");
+    public static Texture doctor = new Texture("32 pix/Doctor(1x2).png");
+    public static Texture doomsday = new Texture("32 pix/Doomsday_Cultist(1x2).png");
+    public static Texture enragedghost = new Texture("32 pix/Enraged_Ghost(1x2).png");
+    public static Texture eyeservant = new Texture("32 pix/Eye(1x2).png");
+    public static Texture firedevit= new Texture("32 pix/Fire_Devil(1x2).png");
+    public static Texture necromancer= new Texture("32 pix/Necromancer(1x2).png");
+    public static Texture orcberserker= new Texture("32 pix/Orc_Berserker(1x2).png");
+    public static Texture orcwarlord= new Texture("32 pix/Orc_Warlord(1x2).png");
+    public static Texture orcwarrior= new Texture("32 pix/Orc_Warrior(1x2).png");
+    public static Texture shadowpupil= new Texture("32 pix/Shadow_Pupil(1x2).png");
+    public static Texture goblinbasic = new Texture("32 pix/Goblin_Basic(2x4).png");
+    public static Texture midnightasura = new Texture("32 pix/Midnight_Asura(2x4).png");
+    public static Texture orcshaman = new Texture("32 pix/Orc_Shaman(2x4).png");
+    public static Texture orcspearman = new Texture("32 pix/Orc_Spearman(2x4).png");
 
-    public static Texture basic64 = new Texture("64 pix\\64x64.png");
-    public static Texture ambassador = new Texture("64 pix\\Ambassador(1x2).png");
-    public static Texture ancientScar = new Texture("64 pix\\AncientScarab(1x2).png");
-    public static Texture barbAx = new Texture("64 pix\\BarbAxe(1x2).png");
-    public static Texture betrayer = new Texture("64 pix\\BetrayedWraith(1x2).png");
-    public static Texture bogRaider = new Texture("64 pix\\BogRaider(1x2).png");
-    public static Texture boneBeast = new Texture("64 pix\\Bonebeast(1x2).png");
-    public static Texture botHat = new Texture("64 pix\\BothiamHat(1x2).png");
-    public static Texture carniphila = new Texture("64 pix\\Carniphila(2x4).png");
-    public static Texture caveBear = new Texture("64 pix\\CaveBear(2x4).png");
-    public static Texture cliffstrider = new Texture("64 pix\\CliffStrider(1x2).png");
-    public static Texture corlerianbarb = new Texture("64 pix\\CorlerianBarb(1x2).png");
-    public static Texture crawler = new Texture("64 pix\\Crawler(1x2).png");
-    public static Texture crushedWalker = new Texture("64 pix\\CrushedWalker(1x2).png");
-    public static Texture crystalWolf = new Texture("64 pix\\CrystalWolf(2x4).png");
-    public static Texture darkstalker = new Texture("64 pix\\DarkStalker(1x2).png");
-    public static Texture deathStrike = new Texture("64 pix\\DeathStrike(1x2).png");
-    public static Texture deepTerror = new Texture("64 pix\\DeepTerror(2x4).png");
-    public static Texture destroyer = new Texture("64 pix\\Destroyer(1x2).png");
-    public static Texture devorga = new Texture("64 pix\\Devovorga(1x2).png");
-    public static Texture diabloicImp = new Texture("64 pix\\DiabloicImp(1x2).png");
-    public static Texture earthElemental = new Texture("64 pix\\EarthElemental(1x2).png");
-    public static Texture empoweredGlooth = new Texture("64 pix\\EmpowerdGlooth(2x4).png");
-    public static Texture energyEle1 = new Texture("64 pix\\EnergyElemental(1x4).png");
-    public static Texture energyEle2 = new Texture("64 pix\\EnergyElemental(1x4).png");
-    public static Texture energyScorp = new Texture("64 pix\\EnergyScorpion(2x4).png");
-    public static Texture enragedCrystalGolem = new Texture("64 pix\\EnragedCrystalGolem(1x2).png");
-    public static Texture enragedGolem = new Texture("64 pix\\EnragedGolem(1x2).png");
-    public static Texture eternalGuard = new Texture("64 pix\\EternalGuard(1x2).png");
-    public static Texture ferm = new Texture("64 pix\\Ferm(1x2).png");
-    public static Texture fireElemental = new Texture("64 pix\\FireElemental(1x2).png");
-    public static Texture gargoyle = new Texture("64 pix\\Gargoyle(1x2).png");
-    public static Texture ghostFerm = new Texture("64 pix\\GhostFerm(2x4).png");
-    public static Texture gloombringer = new Texture("64 pix\\GloomBringer(1x2).png");
-    public static Texture gloothMasher = new Texture("64 pix\\GoolthMasher(1x2).png");
-    public static Texture gorgon = new Texture("64 pix\\Gorgon(1x2).png");
-    public static Texture grim = new Texture("64 pix\\Grim(1x2).png");
-    public static Texture grimLeech = new Texture("64 pix\\Grimleech(2x4).png");
-    public static Texture hellflayer = new Texture("64 pix\\Hellflayer(2x4).png");
-    public static Texture hellhound = new Texture("64 pix\\Hellhound(1x2).png");
-    public static Texture hiveOverseer = new Texture("64 pix\\HiveOverseer(1x2).png");
-    public static Texture infectedWeeper = new Texture("64 pix\\InfectedWeeper(1x2).png");
-    public static Texture infernalist = new Texture("64 pix\\Infernalist(1x2).png");
-    public static Texture jackolatern = new Texture("64 pix\\JackOLantern(1x4).png");
-    public static Texture juggernaut = new Texture("64 pix\\Juggernaut(1x2).png");
-    public static Texture ladybug = new Texture("64 pix\\LadyBug(2x4).png");
-    public static Texture lizardChosen = new Texture("64 pix\\LizardChosen(1x2).png");
-    public static Texture lizardHighGuard = new Texture("64 pix\\LizardHighGuard(1x2).png");
-    public static Texture lizardLegionaire = new Texture("64 pix\\LizardLegionaire(1x2).png");
-    public static Texture lizardPriest = new Texture("64 pix\\LizardPriest(1x2).png");
-    public static Texture lizardZaogun = new Texture("64 pix\\LizardZaogun(1x2).png");
-    public static Texture lostSoul = new Texture("64 pix\\LostSoul(1x2).png");
-    public static Texture madMage = new Texture("64 pix\\MadMage(1x2).png");
-    public static Texture massFireElemental = new Texture("64 pix\\MassiveFireElemental(1x2).png");
-    public static Texture medusa = new Texture("64 pix\\Medusa(1x2).png");
-    public static Texture midnightPanther = new Texture("64 pix\\MidnightPanther(2x4).png");
-    public static Texture nightmaregaz = new Texture("64 pix\\NightmareGazharagot(1x2).png");
-    public static Texture nobelLion = new Texture("64 pix\\NobelLion(2x4).png");
-    public static Texture orcMaurader = new Texture("64 pix\\OrcMaurader(1x2).png");
-    public static Texture orcRider = new Texture("64 pix\\OrcRider(1x2).png");
-    public static Texture oreWalker = new Texture("64 pix\\OreWalker(1x2).png");
-    public static Texture phodomo = new Texture("64 pix\\Phrodomo(1x2).png");
-    public static Texture pinataDragon = new Texture("64 pix\\PinataDragon(2x4).png");
-    public static Texture pirateCorsair = new Texture("64 pix\\PirateCorsair(1x2).png");
-    public static Texture pirateGhost = new Texture("64 pix\\PirateGhost(1x2).png");
-    public static Texture pirateMarauder = new Texture("64 pix\\PirateMarauder(1x2).png");
-    public static Texture pitBat1 = new Texture("64 pix\\PitBattler1(2x4).png");
-    public static Texture pitBat2 = new Texture("64 pix\\PitBattler2(2x4).png");
-    public static Texture plagueSmith = new Texture("64 pix\\PlagueSmith(1x2).png");
-    public static Texture prupleTurt = new Texture("64 pix\\PurpleTurtle(1x2).png");
-    public static Texture realityReaver = new Texture("64 pix\\RealityReaver(2x4).png");
-    public static Texture rift = new Texture("64 pix\\Rift(1x2).png");
-    public static Texture rorc = new Texture("64 pix\\Rorc(1x2).png");
-    public static Texture sandScorp = new Texture("64 pix\\SandScorpion(2x4).png");
-    public static Texture seacrestSerp = new Texture("64 pix\\SeacrestSerpent(2x4).png");
-    public static Texture seaSerp = new Texture("64 pix\\SeaSerpent(1x2).png");
-    public static Texture serpSpawn = new Texture("64 pix\\SerpentSpawn(1x2).png");
-    public static Texture shiversleep = new Texture("64 pix\\Shiversleep(1x2).png"); //IMPLEMENT
-    public static Texture slime = new Texture("64 pix\\Slime(1x3).png");
-    public static Texture snakeGod = new Texture("64 pix\\SnakeGodEssence(1x2).png");
-    public static Texture spectre = new Texture("64 pix\\Spectre(1x2).png");
-    public static Texture sprit = new Texture("64 pix\\SpiritofLight(2x3).png");
-    public static Texture spit = new Texture("64 pix\\Spitter(1x2).png");
-    public static Texture stoneGolem = new Texture("64 pix\\StoneGolem(1x2).png");
-    public static Texture svenBarb = new Texture("64 pix\\SvenBarb(1x2).png");
-    public static Texture thornFire = new Texture("64 pix\\Thornfire_Wolf(1x2).png");
-    public static Texture undeadGlad = new Texture("64 pix\\UndeadGladiator(1x2).png");
-    public static Texture vexclaw = new Texture("64 pix\\Vexclaw(2x4).png");
-    public static Texture valCONG = new Texture("64 pix\\Vulcanocong(1x2).png");
-    public static Texture waspOID = new Texture("64 pix\\Waspoid(1x2).png");
-    public static Texture waterElemental = new Texture("64 pix\\WaterElemental(1x2).png");
-    public static Texture waterSerp = new Texture("64 pix\\WaterSerpent(1x2).png");
-    public static Texture weakDemon = new Texture("64 pix\\Weak(1x2).png");
-    public static Texture werewolf = new Texture("64 pix\\Werewolf(1x2).png");
-    public static Texture wyvern = new Texture("64 pix\\Wyvern(1x2).png");
-    public static Texture yalahar = new Texture("64 pix\\YalaharPriest(1x2).png");
+    public static Texture basic64 = new Texture("64 pix/64x64.png");
+    public static Texture ambassador = new Texture("64 pix/Ambassador(1x2).png");
+    public static Texture ancientScar = new Texture("64 pix/AncientScarab(1x2).png");
+    public static Texture barbAx = new Texture("64 pix/BarbAxe(1x2).png");
+    public static Texture betrayer = new Texture("64 pix/BetrayedWraith(1x2).png");
+    public static Texture bogRaider = new Texture("64 pix/BogRaider(1x2).png");
+    public static Texture boneBeast = new Texture("64 pix/Bonebeast(1x2).png");
+    public static Texture botHat = new Texture("64 pix/BothiamHat(1x2).png");
+    public static Texture carniphila = new Texture("64 pix/Carniphila(2x4).png");
+    public static Texture caveBear = new Texture("64 pix/CaveBear(2x4).png");
+    public static Texture cliffstrider = new Texture("64 pix/CliffStrider(1x2).png");
+    public static Texture corlerianbarb = new Texture("64 pix/CorlerianBarb(1x2).png");
+    public static Texture crawler = new Texture("64 pix/Crawler(1x2).png");
+    public static Texture crushedWalker = new Texture("64 pix/CrushedWalker(1x2).png");
+    public static Texture crystalWolf = new Texture("64 pix/CrystalWolf(2x4).png");
+    public static Texture darkstalker = new Texture("64 pix/DarkStalker(1x2).png");
+    public static Texture deathStrike = new Texture("64 pix/DeathStrike(1x2).png");
+    public static Texture deepTerror = new Texture("64 pix/DeepTerror(2x4).png");
+    public static Texture destroyer = new Texture("64 pix/Destroyer(1x2).png");
+    public static Texture devorga = new Texture("64 pix/Devovorga(1x2).png");
+    public static Texture diabloicImp = new Texture("64 pix/DiabloicImp(1x2).png");
+    public static Texture earthElemental = new Texture("64 pix/EarthElemental(1x2).png");
+    public static Texture empoweredGlooth = new Texture("64 pix/EmpowerdGlooth(2x4).png");
+    public static Texture energyEle1 = new Texture("64 pix/EnergyElemental(1x4).png");
+    public static Texture energyEle2 = new Texture("64 pix/EnergyElemental(1x4).png");
+    public static Texture energyScorp = new Texture("64 pix/EnergyScorpion(2x4).png");
+    public static Texture enragedCrystalGolem = new Texture("64 pix/EnragedCrystalGolem(1x2).png");
+    public static Texture enragedGolem = new Texture("64 pix/EnragedGolem(1x2).png");
+    public static Texture eternalGuard = new Texture("64 pix/EternalGuard(1x2).png");
+    public static Texture ferm = new Texture("64 pix/Ferm(1x2).png");
+    public static Texture fireElemental = new Texture("64 pix/FireElemental(1x2).png");
+    public static Texture gargoyle = new Texture("64 pix/Gargoyle(1x2).png");
+    public static Texture ghostFerm = new Texture("64 pix/GhostFerm(2x4).png");
+    public static Texture gloombringer = new Texture("64 pix/GloomBringer(1x2).png");
+    public static Texture gloothMasher = new Texture("64 pix/GoolthMasher(1x2).png");
+    public static Texture gorgon = new Texture("64 pix/Gorgon(1x2).png");
+    public static Texture grim = new Texture("64 pix/Grim(1x2).png");
+    public static Texture grimLeech = new Texture("64 pix/Grimleech(2x4).png");
+    public static Texture hellflayer = new Texture("64 pix/Hellflayer(2x4).png");
+    public static Texture hellhound = new Texture("64 pix/Hellhound(1x2).png");
+    public static Texture hiveOverseer = new Texture("64 pix/HiveOverseer(1x2).png");
+    public static Texture infectedWeeper = new Texture("64 pix/InfectedWeeper(1x2).png");
+    public static Texture infernalist = new Texture("64 pix/Infernalist(1x2).png");
+    public static Texture jackolatern = new Texture("64 pix/JackOLantern(1x4).png");
+    public static Texture juggernaut = new Texture("64 pix/Juggernaut(1x2).png");
+    public static Texture ladybug = new Texture("64 pix/LadyBug(2x4).png");
+    public static Texture lizardChosen = new Texture("64 pix/LizardChosen(1x2).png");
+    public static Texture lizardHighGuard = new Texture("64 pix/LizardHighGuard(1x2).png");
+    public static Texture lizardLegionaire = new Texture("64 pix/LizardLegionaire(1x2).png");
+    public static Texture lizardPriest = new Texture("64 pix/LizardPriest(1x2).png");
+    public static Texture lizardZaogun = new Texture("64 pix/LizardZaogun(1x2).png");
+    public static Texture lostSoul = new Texture("64 pix/LostSoul(1x2).png");
+    public static Texture madMage = new Texture("64 pix/MadMage(1x2).png");
+    public static Texture massFireElemental = new Texture("64 pix/MassiveFireElemental(1x2).png");
+    public static Texture medusa = new Texture("64 pix/Medusa(1x2).png");
+    public static Texture midnightPanther = new Texture("64 pix/MidnightPanther(2x4).png");
+    public static Texture nightmaregaz = new Texture("64 pix/NightmareGazharagot(1x2).png");
+    public static Texture nobelLion = new Texture("64 pix/NobelLion(2x4).png");
+    public static Texture orcMaurader = new Texture("64 pix/OrcMaurader(1x2).png");
+    public static Texture orcRider = new Texture("64 pix/OrcRider(1x2).png");
+    public static Texture oreWalker = new Texture("64 pix/OreWalker(1x2).png");
+    public static Texture phodomo = new Texture("64 pix/Phrodomo(1x2).png");
+    public static Texture pinataDragon = new Texture("64 pix/PinataDragon(2x4).png");
+    public static Texture pirateCorsair = new Texture("64 pix/PirateCorsair(1x2).png");
+    public static Texture pirateGhost = new Texture("64 pix/PirateGhost(1x2).png");
+    public static Texture pirateMarauder = new Texture("64 pix/PirateMarauder(1x2).png");
+    public static Texture pitBat1 = new Texture("64 pix/PitBattler1(2x4).png");
+    public static Texture pitBat2 = new Texture("64 pix/PitBattler2(2x4).png");
+    public static Texture plagueSmith = new Texture("64 pix/PlagueSmith(1x2).png");
+    public static Texture prupleTurt = new Texture("64 pix/PurpleTurtle(1x2).png");
+    public static Texture realityReaver = new Texture("64 pix/RealityReaver(2x4).png");
+    public static Texture rift = new Texture("64 pix/Rift(1x2).png");
+    public static Texture rorc = new Texture("64 pix/Rorc(1x2).png");
+    public static Texture sandScorp = new Texture("64 pix/SandScorpion(2x4).png");
+    public static Texture seacrestSerp = new Texture("64 pix/SeacrestSerpent(2x4).png");
+    public static Texture seaSerp = new Texture("64 pix/SeaSerpent(1x2).png");
+    public static Texture serpSpawn = new Texture("64 pix/SerpentSpawn(1x2).png");
+    public static Texture slime = new Texture("64 pix/Slime(1x3).png");
+    public static Texture snakeGod = new Texture("64 pix/SnakeGodEssence(1x2).png");
+    public static Texture spectre = new Texture("64 pix/Spectre(1x2).png");
+    public static Texture sprit = new Texture("64 pix/SpiritofLight(2x3).png");
+    public static Texture spit = new Texture("64 pix/Spitter(1x2).png");
+    public static Texture stoneGolem = new Texture("64 pix/StoneGolem(1x2).png");
+    public static Texture svenBarb = new Texture("64 pix/SvenBarb(1x2).png");
+    public static Texture thornFire = new Texture("64 pix/Thornfire_Wolf(1x2).png");
+    public static Texture undeadGlad = new Texture("64 pix/UndeadGladiator(1x2).png");
+    public static Texture vexclaw = new Texture("64 pix/Vexclaw(2x4).png");
+    public static Texture valCONG = new Texture("64 pix/Vulcanocong(1x2).png");
+    public static Texture waspOID = new Texture("64 pix/Waspoid(1x2).png");
+    public static Texture waterElemental = new Texture("64 pix/WaterElemental(1x2).png");
+    public static Texture waterSerp = new Texture("64 pix/WaterSerpent(1x2).png");
+    public static Texture weakDemon = new Texture("64 pix/Weak(1x2).png");
+    public static Texture werewolf = new Texture("64 pix/Werewolf(1x2).png");
+    public static Texture wyvern = new Texture("64 pix/Wyvern(1x2).png");
+    public static Texture yalahar = new Texture("64 pix/YalaharPriest(1x2).png");
+    public static Texture shiversleep = new Texture("64 pix/Shiversleep(1x2).png");
+    public static Texture armadile = new Texture("64 pix/Armadile(1x2).png");
+    public static Texture darakan = new Texture("64 pix/Darakan(1x2).png");
+    public static Texture frostservant = new Texture("64 pix/FrostServant(1x2).png");
+    public static Texture hearldofdoom = new Texture("64 pix/Herald_of_Doom(1x2).png");
+    public static Texture lizardmage = new Texture("64 pix/Lizard_Mage(1x2).png");
+    public static Texture menace = new Texture("64 pix/Menace(1x2).png");
+    public static Texture tiger = new Texture("64 pix/Tiger(1x2).png");
+    public static Texture witch = new Texture("64 pix/Witch(1x2).png");
 
+    public static Texture dryad = new Texture("64 pix/Dryad(2x4).png");
+    public static Texture hypnotoad = new Texture("64 pix/Hypno_Toad(2x4).png");
+    public static Texture ironblight = new Texture("64 pix/IronBlight(2x8).png");
+    public static Texture lion = new Texture("64 pix/Lion(2x4).png");
+    // say 2x8 really 2x4
+    public static Texture orcravanger = new Texture("64 pix/Orc_Ravanger(2x8).png");
+    public static Texture orclops = new Texture("64 pix/Orclops_Doomhauler(2x8).png");
+    public static Texture pitberserker = new Texture("64 pix/Pit_Berserker(2x8).png");
+    public static Texture pitblacking = new Texture("64 pix/Pit_Blackling(2x8).png");
+
+
+
+    /** Save Animations here */
+    public static Animation<TextureRegion> ExplosionAnimation = Play.fourFrameAnimationCreator(spriteTextures.explosionSpritesTexture, 4,  4, .0001f);
+    public static Animation<TextureRegion> LightningOrbAnimation = Play.fourFrameAnimationCreator(spriteTextures.LightningOrbSprites, 4,  4, .1f);
 
     public static Texture sheet(Play.MonsterType monster){
         switch(monster){
@@ -382,7 +442,82 @@ public class spriteTextures {
                 return wyvern;
             case YALAHAR:
                 return yalahar;
-
+            case ACOLYTE:
+                return acolyte;
+            case BLOODFIST:
+                return bloodfist;
+            case BLOODHAND:
+                return bloodhand;
+            case BLOOMOFDOOM:
+                return bloomofdoom;
+            case DARKAPPRENTICE:
+                return darkapprentice;
+            case DOCTOR:
+                return doctor;
+            case DOOMSDAY:
+                return doomsday;
+            case ENRAGEDGHOST:
+                return enragedghost;
+            case EYESERVANT:
+                return eyeservant;
+            case FIREDEVIL:
+                return firedevit;
+            case NECROMANCER:
+                return necromancer;
+            case ORCBERSERKER:
+                return orcberserker;
+            case ORCWARLORD:
+                return orcwarlord;
+            case ORCWARRIOR:
+                return orcwarrior;
+            case SHADOWPUPIL:
+                return shadowpupil;
+            case DAWNASURA:
+                return dawnasura;
+            case GOBLINBASIC:
+                return goblinbasic;
+            case MIDNIGHTASURA:
+                return midnightasura;
+            case ORCSHAMAN:
+                return orcshaman;
+            case ORCSPEARMAN:
+                return orcspearman;
+            case DEATHSLICER:
+                return deathslicer;
+            case ARMADILE:
+                return armadile;
+            case DARAKAN:
+                return darakan;
+            case FROSTSERVANT:
+                return frostservant;
+            case HEARLDOFDOOM:
+                return hearldofdoom;
+            case LIZARDMAGE:
+                return lizardmage;
+            case MENACE:
+                return menace;
+            case TIGER:
+                return tiger;
+            case WITCH:
+                return witch;
+            case SHIVERSLEEP:
+                return shiversleep;
+            case DRYAD:
+                return shiversleep;
+            case HYPNOTOAD:
+                return hypnotoad;
+            case IRONBLIGHT:
+                return ironblight;
+            case LION:
+                return lion;
+            case ORCRAVANGER:
+                return orcravanger;
+            case ORCLOPS:
+                return orclops;
+            case PITBERSERKER:
+                return pitberserker;
+            case PITBLACKLING:
+                return pitblacking;
         }
         return basic32;
     }
@@ -408,6 +543,27 @@ public class spriteTextures {
             case VAMPIRE:
             case WARLOCK:
             case ZABWARLOCK:
+            case ACOLYTE:
+            case BLOODFIST:
+            case BLOODHAND:
+            case BLOOMOFDOOM:
+            case DARKAPPRENTICE:
+            case DOCTOR:
+            case DOOMSDAY:
+            case ENRAGEDGHOST:
+            case EYESERVANT:
+            case FIREDEVIL:
+            case NECROMANCER:
+            case ORCBERSERKER:
+            case ORCWARLORD:
+            case ORCWARRIOR:
+            case SHADOWPUPIL:
+            case DAWNASURA:
+            case GOBLINBASIC:
+            case MIDNIGHTASURA:
+            case ORCSHAMAN:
+            case ORCSPEARMAN:
+            case DEATHSLICER:
                 return basic32;
 
 
@@ -444,11 +600,25 @@ public class spriteTextures {
             case SANDSCORPION:
             case SEACRESTSERPENT:
             case VEXCLAW:
+            case DAWNASURA:
+            case GOBLINBASIC:
+            case MIDNIGHTASURA:
+            case ORCSHAMAN:
+            case ORCSPEARMAN:
+            case DRYAD:
+            case HYPNOTOAD:
+            case IRONBLIGHT:
+            case LION:
+            case ORCRAVANGER:
+            case ORCLOPS:
+            case PITBERSERKER:
+            case PITBLACKLING:
                 return 4;
             case RIFTFRAGMENT:
             case WATERELEMENT:
             case SPIRIT:
             case SLIME:
+            case DEATHSLICER:
                 return 3;
 
         }
@@ -484,7 +654,19 @@ public class spriteTextures {
             case SEACRESTSERPENT:
             case SPIRIT:
             case VEXCLAW:
-
+            case DAWNASURA:
+            case GOBLINBASIC:
+            case MIDNIGHTASURA:
+            case ORCSHAMAN:
+            case ORCSPEARMAN:
+            case DRYAD:
+            case HYPNOTOAD:
+            case IRONBLIGHT:
+            case LION:
+            case ORCRAVANGER:
+            case ORCLOPS:
+            case PITBERSERKER:
+            case PITBLACKLING:
                 return 2;
 
 
@@ -494,7 +676,7 @@ public class spriteTextures {
     }
 
     public static Play.MonsterType makeAMonster(){
-        int VAL = (int)(Math.random() * 116);
+        int VAL = (int)(Math.random() * 153);
 
         switch(VAL) {
             case 0:
@@ -725,7 +907,82 @@ public class spriteTextures {
                 return       WYVERN;
             case 113:
                 return       YALAHAR;
-
+            case 114:
+                return ACOLYTE;
+            case 115:
+                return BLOODFIST;
+            case 116:
+                return BLOODHAND;
+            case 117:
+                return BLOOMOFDOOM;
+            case 118:
+                return DARKAPPRENTICE;
+            case 119:
+                return DOCTOR;
+            case 120:
+                return DOOMSDAY;
+            case 121:
+                return ENRAGEDGHOST;
+            case 122:
+                return EYESERVANT;
+            case 123:
+                return FIREDEVIL;
+            case 124:
+                return NECROMANCER;
+            case 125:
+                return ORCBERSERKER;
+            case 126:
+                return ORCWARLORD;
+            case 127:
+                return ORCWARRIOR;
+            case 128:
+                return SHADOWPUPIL;
+            case 129:
+                return DAWNASURA;
+            case 130:
+                return GOBLINBASIC;
+            case 131:
+                return MIDNIGHTASURA;
+            case 132:
+                return ORCSHAMAN;
+            case 133:
+                return ORCSPEARMAN;
+            case 134:
+                return DEATHSLICER;
+            case 135:
+                return ARMADILE;
+            case 136:
+                return DARAKAN;
+            case 137:
+                return FROSTSERVANT;
+            case 138:
+                return HEARLDOFDOOM;
+            case 139:
+                return LIZARDMAGE;
+            case 140:
+                return MENACE;
+            case 141:
+                return TIGER;
+            case 142:
+                return WITCH;
+            case 143:
+                return SHIVERSLEEP;
+            case 144:
+                return DRYAD;
+            case 145:
+                return HYPNOTOAD;
+            case 146:
+                return IRONBLIGHT;
+            case 147:
+                return LION;
+            case 148:
+                return ORCRAVANGER;
+            case 149:
+                return ORCLOPS;
+            case 150:
+                return PITBERSERKER;
+            case 151:
+                return PITBLACKLING;
         }
         return WEREWOLF;
     }

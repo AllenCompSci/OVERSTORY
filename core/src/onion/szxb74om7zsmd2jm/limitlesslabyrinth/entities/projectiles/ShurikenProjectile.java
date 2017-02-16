@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -13,7 +14,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class ShurikenProjectile extends Projectile {
 
-    public ShurikenProjectile(float x1, float y1, float x2, float y2, float dmg){
+    public ShurikenProjectile(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
+        this.fromItem = fromItem;
         this.dmg = dmg;
         sprite = new Sprite(spriteTextures.shurikenProjectileTexture);
         slope = ((y2 - y1)/(x2 - x1));
@@ -38,6 +40,15 @@ public class ShurikenProjectile extends Projectile {
 
     @Override
     public void contact() {
+
+        fromItem.setItemXP(fromItem.getItemXP() + 1);
+        /** Checks for item Level Up */
+        if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
+            fromItem.LVLup();
+            fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
+
         //Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg));
         remove();
     }

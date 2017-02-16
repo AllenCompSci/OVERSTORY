@@ -5,8 +5,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.RandomEnemySpawn;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullProjectileItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
@@ -18,6 +20,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/12/2017.
  */
 public class Turret extends Entity{
+    public Item getItemHeld() {
+        return itemHeld;
+    }
+
     private Item itemHeld;
     private Item tempItem;
     private double distance = 0;
@@ -31,6 +37,7 @@ public class Turret extends Entity{
         this.itemHeld = itemHeld;
         dmg = itemHeld.getDmg();
         sprite.setPosition(x,y);
+        this.collisionLayer = (TiledMapTileLayer) Play.getMap().getLayers().get(1);
     }
 
     @Override
@@ -61,12 +68,13 @@ public class Turret extends Entity{
                         sprite.setFlip(false, false);
                     }
                     Play.getProjectiles().add(itemHeld.getProjectile(sprite.getX(), sprite.getY(), i.getSprite().getX() + i.getSprite().getWidth() / 2, i.getSprite().getY() + i.getSprite().getHeight() / 2));
-                    AttackTime = System.currentTimeMillis() + 200;
+                    AttackTime = System.currentTimeMillis() + 1000;
                     break;
                 }
                 else if(distance < 500 && itemHeld.getType() == "melee"){
                     i.takeDMG(itemHeld.getDmg());
                     AttackTime = System.currentTimeMillis() + 200;
+                    break;
                 }
 
             }

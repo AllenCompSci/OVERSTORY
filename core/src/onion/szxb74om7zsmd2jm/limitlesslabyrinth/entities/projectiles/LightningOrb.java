@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -19,8 +20,9 @@ public class LightningOrb extends Projectile {
     float stateTime;
     double distance;
 
-    public LightningOrb(float x1, float y1, float x2, float y2, float dmg, Array<Enemy> hit){
-        animation = Play.fourFrameAnimationCreator(spriteTextures.LightningOrbSprites, 4,  4, .1f);
+    public LightningOrb(float x1, float y1, float x2, float y2, float dmg, Array<Enemy> hit, Item fromItem){
+        this.fromItem = fromItem;
+        animation = spriteTextures.LightningOrbAnimation;
         enemiesHit = hit;
         this.dmg = dmg;
         sprite = new Sprite(spriteTextures.LightningOrb);
@@ -53,7 +55,15 @@ public class LightningOrb extends Projectile {
 
     @Override
     public void contact() {
-        Play.getProjectiles().add(new invisProjectile(sprite.getX(), sprite.getY(), dmg, enemiesHit));
+        fromItem.setItemXP(fromItem.getItemXP() + 1);
+        /** Checks for item Level Up */
+        if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
+            fromItem.LVLup();
+            fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
+            System.out.println("ITEM LEVELED UP");
+        }
+
+        Play.getProjectiles().add(new invisProjectile(sprite.getX(), sprite.getY(), dmg, enemiesHit, fromItem));
         remove();
     }
 

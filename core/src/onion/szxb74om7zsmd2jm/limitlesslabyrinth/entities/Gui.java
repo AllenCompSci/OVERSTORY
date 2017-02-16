@@ -38,6 +38,11 @@ public class Gui {
     private Texture LostHealthBar = new Texture("playerredbar.png");
     private Texture ItemBox = new Texture("itemBox.png");
     private Texture SelectedBox = new Texture("selectedBox.png");
+
+    public Backpack getBackpack() {
+        return backpack;
+    }
+
     private Backpack backpack = new Backpack();
     private static float healthBarX = 0;
     private static boolean isBackpackOpen = false;
@@ -89,6 +94,34 @@ public class Gui {
         return refreshItem;
     }
 
+    public void reset(){
+        selected = 0;
+        time1 = 0;
+        time2 = 0;
+        time3 = 0;
+        time4 = 0;
+        healthBarX = 0;
+        isBackpackOpen = false;
+        playerHealthBar = new Sprite(HealthBar);
+        item1 = new LightningStaff();
+        item2 = new Bow();
+        item3 = new WizardStaff();
+        item4 = new Shuriken();
+        refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[3] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[0].setScale(0);
+        refreshItem[1].setScale(0);
+        refreshItem[2].setScale(0);
+        refreshItem[3].setScale(0);
+        isRefreshing[0] = false;
+        isRefreshing[1] = false;
+        isRefreshing[2] = false;
+        isRefreshing[3] = false;
+        Equipped = item1;
+    }
+
     public Gui(){
         playerHealthBar = new Sprite(HealthBar);
         playerLostHealthBar = new Sprite(LostHealthBar);
@@ -100,10 +133,10 @@ public class Gui {
         item2 = new Bow();
         item3 = new WizardStaff();
         item4 = new Shuriken();
-        refreshItem[0] = new Sprite(new Texture("refreshBox.png"));
-        refreshItem[1] = new Sprite(new Texture("refreshBox.png"));
-        refreshItem[2] = new Sprite(new Texture("refreshBox.png"));
-        refreshItem[3] = new Sprite(new Texture("refreshBox.png"));
+        refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);
+        refreshItem[3] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[0].setScale(0);
         refreshItem[1].setScale(0);
         refreshItem[2].setScale(0);
@@ -166,11 +199,11 @@ public class Gui {
 
 
         /** Refer here to know how to remove health from player properly */
-        /*if(Gdx.input.isKeyJustPressed(Input.Keys.N)){
-            pl.getPlayer().setHealth(pl.getPlayer().getHealth() - 10f);
-            healthBarX += ((10f / pl.getPlayer().getFullHealth()) * playerHealthBar.getWidth()) / 2;
-            playerHealthBar.setScale(playerHealthBar.getScaleX() - 10f / pl.getPlayer().getFullHealth(), playerHealthBar.getScaleY());
-        }*/
+        if(Gdx.input.isKeyPressed(Input.Keys.N)){
+            Play.getPlayer().setHealth(Play.getPlayer().getHealth() - 10f);
+            healthBarX += ((10f / Play.getPlayer().getFullHealth()) * playerHealthBar.getWidth()) / 2;
+            playerHealthBar.setScale(playerHealthBar.getScaleX() - 10f / Play.getPlayer().getFullHealth(), playerHealthBar.getScaleY());
+        }
     }
 
     public void update(){

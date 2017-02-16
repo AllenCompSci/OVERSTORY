@@ -36,6 +36,7 @@ public class Player extends Entity {
     public static FACE charFace;
     public static float CharX, CharY;
     public static boolean isWalking = false;
+    public String playerType;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -46,9 +47,33 @@ public class Player extends Entity {
     private Animation playerWalkingRight;
     private Animation playerWalkingUp;
 
+    public void reset(){
+        xp = 0;
+        level = 1;
+        xpToLevel = 10;
+        waveAmount = 200;
+        isWalking = false;
+        this.health = 100f;
+        this.fullHealth = health;
+    }
+
 
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
+        switch((int)(Math.random()*4) ){
+            case 0:
+                playerType = "Conjurer/";
+                break;
+            case 1:
+                playerType = "Evoker/";
+                break;
+            case 2:
+                playerType = "Champion/";
+                break;
+            case 3:
+                playerType = "Chaos Acolyte/";
+                break;
+        }
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
          charFace = FACE.DOWN;
        /*
@@ -57,10 +82,10 @@ public class Player extends Entity {
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
 */
-       front = new Sprite(new Texture("player/frontPurple.png"));
-        back = new Sprite(new Texture("player/backPurple.png"));
-        left = new Sprite(new Texture("player/leftPurple.png"));
-        right = new Sprite(new Texture("player/rightPurple.png"));
+       front = new Sprite(new Texture("player/"+playerType+"front.png"));
+        back = new Sprite(new Texture("player/"+playerType+"back.png"));
+        left = new Sprite(new Texture("player/"+playerType+"left.png"));
+        right = new Sprite(new Texture("player/"+playerType+"right.png"));
         /* UNCOMMENT FOR Mr. Hudson smiles.  */
         this.sprite = front;
 
@@ -70,10 +95,10 @@ public class Player extends Entity {
         this.collisionLayer = collisionLayer;
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
-        playerWalkingDown = Play.fourFrameAnimationCreator("player/front(2x8).png",2,8);
-        playerWalkingLeft = Play.fourFrameAnimationCreator("player/left(2x8).png",2,8);
-        playerWalkingRight = Play.fourFrameAnimationCreator("player/right(2x8).png",2,8);
-        playerWalkingUp = Play.fourFrameAnimationCreator("player/back(2x8).png",2,8);
+        playerWalkingDown = Play.fourFrameAnimationCreator("player/"+playerType+"front(2x8).png",2,8);
+        playerWalkingLeft = Play.fourFrameAnimationCreator("player/"+playerType+"left(2x8).png",2,8);
+        playerWalkingRight = Play.fourFrameAnimationCreator("player/"+playerType+"right(2x8).png",2,8);
+        playerWalkingUp = Play.fourFrameAnimationCreator("player/"+playerType+"back(2x8).png",2,8);
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
 
     }
@@ -150,5 +175,7 @@ public class Player extends Entity {
         CharX = sprite.getX();
         CharY = sprite.getY();
     }
+
+
 }
 

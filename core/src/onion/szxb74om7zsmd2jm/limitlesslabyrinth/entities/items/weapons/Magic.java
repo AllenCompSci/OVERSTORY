@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Spell;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -12,7 +13,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 public class Magic extends Weapon {
     public Magic(){
-        sprite = new Sprite(new Texture("SPELL.png"));
+        sprite = new Sprite(spriteTextures.MagicItemSprite);
         dmg = 100f;
         lvl = 1;
         type = "projectile";
@@ -21,7 +22,7 @@ public class Magic extends Weapon {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
-        return new Spell(x1, y1, x2, y2, dmg*3.9f, 0);
+        return new Spell(x1, y1, x2, y2, dmg*3.9f, 0, this);
     }
 
 

@@ -2,9 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullProjectileItem;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.WizardStaff;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -18,8 +16,8 @@ public class TurretItem extends Trap {
         dmg = 0;
         lvl = 1;
         type = "turret";
-        ammo = 5;
-        cooldown = 20;
+        ammo = 50000000;
+        cooldown = 0;
     }
 
     @Override

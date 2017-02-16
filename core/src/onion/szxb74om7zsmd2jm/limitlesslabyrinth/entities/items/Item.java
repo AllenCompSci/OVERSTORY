@@ -25,6 +25,26 @@ public class Item {
     public float getDmg() {
         return dmg;
     }
+
+    public long getItemXP() {
+        return itemXP;
+    }
+
+    public void setItemXP(long itemXP) {
+        this.itemXP = itemXP;
+    }
+
+    protected long itemXP = 0;
+
+    public long getXPtoLVL() {
+        return XPtoLVL;
+    }
+
+    public void setXPtoLVL(long XPtoLVL) {
+        this.XPtoLVL = XPtoLVL;
+    }
+
+    protected long XPtoLVL = 10;
     public long getCooldown() {
         return cooldown;
     }
@@ -43,4 +63,8 @@ public class Item {
         return new Turret(x,y,new Bow());
     }
 
+    public void LVLup(){
+        lvl++;
+        this.dmg += lvl * 100;
+    }
 }

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -15,8 +16,9 @@ public class Explosion extends Projectile {
     Animation<TextureRegion> animation;
     float stateTime;
 
-    public Explosion(float x, float y, float dmg){
-        animation = Play.fourFrameAnimationCreator(spriteTextures.explosionSpritesTexture, 4,  4, .0001f);
+    public Explosion(float x, float y, float dmg, Item fromItem){
+        this.fromItem = fromItem;
+        animation = spriteTextures.ExplosionAnimation;
         this.dmg = dmg;
         this.x = x;
         this.y = y;

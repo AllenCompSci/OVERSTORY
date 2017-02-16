@@ -20,7 +20,7 @@ public class PlayButton extends Actor{
 
     public PlayButton(){
         sprite = new Sprite(spriteTextures.playButton);
-        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 - sprite.getHeight()/2);
+        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
         setBounds(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());
         setTouchable(Touchable.enabled);
 
@@ -36,14 +36,14 @@ public class PlayButton extends Actor{
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
                 sprite = new Sprite(spriteTextures.playButtonHoverOver);
-                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 - sprite.getHeight()/2);
+                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
                 setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 sprite = new Sprite(spriteTextures.playButton);
-                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 - sprite.getHeight()/2);
+                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
                 setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
             }
         });
@@ -60,7 +60,7 @@ public class PlayButton extends Actor{
     }
 
     public void updateSpritePosition(){
-        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 - sprite.getHeight()/2);
+        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
         setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
     }
 

@@ -185,12 +185,14 @@ public class Play implements Screen {
     @Override
     public void show() {
         map = new TmxMapLoader().load("test.tmx");
+        //LOAD TUTORIAL MAP
+        //map = new TmxMapLoader().load("tutorialmap.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
-        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
     }
 
     @Override

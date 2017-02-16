@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -97,6 +98,14 @@ public class Play implements Screen {
     private static Array<Turret> turrets = new Array<Turret>();
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
+
+    public static int lvlTileWidth; //Width of map in tiles
+    public static int lvlTileHeight; //Height of map in tiles
+    public static int lvlPixelWidth; //Width of map in pixels
+    public static int lvlPixelHeight; //Height of map in pixels
+    public static int tilePixelWidth; //Width of tile in pixels
+    public static int tilePixelHeight; //Height of tile in pixels
+
     private long time = 0;
     public static int waveCount = 0;
     private long count;
@@ -185,6 +194,17 @@ public class Play implements Screen {
     @Override
     public void show() {
         map = new TmxMapLoader().load("test.tmx");
+        MapProperties properties = map.getProperties();
+        lvlTileWidth = properties.get("width", Integer.class);
+        lvlTileHeight = properties.get("height", Integer.class);
+        tilePixelWidth = properties.get("tilewidth", Integer.class);
+        tilePixelHeight = properties.get("tileheight", Integer.class);
+        lvlPixelWidth = lvlTileWidth * tilePixelWidth;
+        lvlPixelHeight = lvlTileHeight * tilePixelHeight;
+
+
+
+
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;

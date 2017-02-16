@@ -204,7 +204,7 @@ public class Enemy extends Entity{
         }
 
     }
-    /** Pathfinding **/
+    /** Pathfindin **/
 
 
 

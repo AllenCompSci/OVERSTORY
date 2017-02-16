@@ -7,6 +7,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class LimitlessLabyrinth extends Game {
@@ -14,9 +15,18 @@ public class LimitlessLabyrinth extends Game {
 		resetScreen = true;
 	}
 	private static boolean resetScreen = false;
+	private static boolean mainMenuScreen = false;
+
+	public static void setMainMenu(){
+		mainMenuScreen = true;
+	}
+
+	private static MainMenu mainMenu = new MainMenu();
+
 	@Override
 	public void create () {
-		setScreen(new Play());
+		setScreen(mainMenu);
+		//setScreen(new Play());
 	}
 
 	@Override
@@ -26,6 +36,12 @@ public class LimitlessLabyrinth extends Game {
 			System.gc();
 			resetScreen = false;
 			setScreen(new Play());
+		}
+		if(mainMenuScreen){
+			screen.dispose();
+			System.gc();
+			mainMenuScreen = false;
+			setScreen(mainMenu);
 		}
 		super.render();
 	}

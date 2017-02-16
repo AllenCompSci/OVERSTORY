@@ -127,7 +127,7 @@ public class Play implements Screen {
         garbageTime = 0;
         waveCount = 0;
 
-        LimitlessLabyrinth.setPlay();
+        LimitlessLabyrinth.setMainMenu();
     }
 
 

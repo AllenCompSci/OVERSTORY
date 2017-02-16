@@ -12,6 +12,9 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  */
 public class spriteTextures {
 
+    public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
+    public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");
+    public static Texture playButton = new Texture("play_button.png");
     public static Texture WizardOrbProjectileSprite = new Texture("Frozen_Starlight.png");
     public static Texture LandMineProjectileSprite = new Texture("LandMine.png");
     public static Texture ArrowProjectileSprite = new Texture("arrow.png");

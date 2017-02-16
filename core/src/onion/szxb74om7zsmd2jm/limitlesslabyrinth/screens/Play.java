@@ -183,9 +183,12 @@ public class Play implements Screen {
         return new Animation(duration, animationFrames);
     }
 
+    public Play(String PathToMap){
+        map = new TmxMapLoader().load(PathToMap);
+    }
+
     @Override
     public void show() {
-        map = new TmxMapLoader().load("test.tmx");
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;

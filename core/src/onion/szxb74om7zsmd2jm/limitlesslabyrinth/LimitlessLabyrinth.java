@@ -11,11 +11,13 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class LimitlessLabyrinth extends Game {
-	public static void setPlay() {
+	public static void setPlay(String PathToMap) {
+		MapPath = PathToMap;
 		resetScreen = true;
 	}
 	private static boolean resetScreen = false;
 	private static boolean mainMenuScreen = false;
+	private static String MapPath;
 
 	public static void setMainMenu(){
 		mainMenuScreen = true;
@@ -34,7 +36,7 @@ public class LimitlessLabyrinth extends Game {
 			screen.dispose();
 			System.gc();
 			resetScreen = false;
-			setScreen(new Play());
+			setScreen(new Play(MapPath));
 		}
 		if(mainMenuScreen){
 			screen.dispose();

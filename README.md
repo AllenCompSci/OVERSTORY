@@ -24,7 +24,9 @@ Added more enemy travel directions to smoothen movement, started working on the 
 https://github.com/libgdx/gdx-ai/wiki/Pathfinding
 LibGDX has a pathfinding system built in based on the tilemaps. You would need to change the sprite associated with each character to 32x32 to fit the map. But the advantage is you simply draw the character at an offset with the animation sprites constantly.
 ## Week 3
-Began working finalizing AStar grid (made it a 64x64 block grid, found player/enemy location, etc) then dropped it to use the LibGDX AStar methods. Worked on fixing missing files in my project and reversing a merge that got committed to master by accident.       
+Began working finalizing AStar grid (made it a 64x64 block grid, found player/enemy location, etc) then dropped it to use the LibGDX AStar methods. Worked on fixing missing files in my project and reversing a merge that got committed to master by accident.
+## Week 4
+Restarted AStar pathfinding in order to use LibGDX's very undocumented system. Watched a tutorial and scoured the Internet for help, which is almost entirely outdated or nonexistent. Started researching nodes and dissecting the IndexedAStar Class because it looks like I'm entirely on my own for this. Not fun.
 
 # Chris DeLaGarza
 ## Week 1

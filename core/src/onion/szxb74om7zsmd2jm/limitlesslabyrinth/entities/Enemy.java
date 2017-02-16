@@ -76,7 +76,7 @@ public class Enemy extends Entity{
         if(detection.isInRadius(this)){
             //Enemy is hit
             if(Play.getGui().getEquipped().getType() == "melee" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) {
-                if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
                     //Enemy loses health and is represented on the health bar
                     health -= Play.getPlayer().getDmg();
                     healthBarX += ((Play.getPlayer().getDmg() / fullHealth) * sprite.getWidth()) / 2;

@@ -191,6 +191,7 @@ public class Play implements Screen {
         camera.setToOrtho(false);
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override

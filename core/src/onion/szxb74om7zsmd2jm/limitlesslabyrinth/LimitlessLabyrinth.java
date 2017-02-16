@@ -26,7 +26,6 @@ public class LimitlessLabyrinth extends Game {
 	@Override
 	public void create () {
 		setScreen(mainMenu);
-		//setScreen(new Play());
 	}
 
 	@Override

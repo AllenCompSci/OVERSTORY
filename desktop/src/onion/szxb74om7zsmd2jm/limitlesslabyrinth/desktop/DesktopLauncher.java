@@ -1,7 +1,9 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.desktop;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.graphics.Cursor;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
 
 public class DesktopLauncher {
@@ -11,6 +13,7 @@ public class DesktopLauncher {
 		config.height = 1080;
 		config.fullscreen = true;
 		config.title = "Limitless Labyrinth";
+
 		new LwjglApplication(new LimitlessLabyrinth(), config);
 	}
 }

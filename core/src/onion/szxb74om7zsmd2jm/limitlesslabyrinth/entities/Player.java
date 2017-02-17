@@ -60,7 +60,7 @@ public class Player extends Entity {
 
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
-        switch((int)(Math.random()*4) ){
+        switch((int)(Math.random()*6) ){
             case 0:
                 playerType = "Conjurer/";
                 break;
@@ -73,6 +73,11 @@ public class Player extends Entity {
             case 3:
                 playerType = "Chaos Acolyte/";
                 break;
+            case 4:
+                playerType = "Beast Tamer/";
+                break;
+            case 5:
+                playerType ="Spirit Caller/";
         }
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
          charFace = FACE.DOWN;

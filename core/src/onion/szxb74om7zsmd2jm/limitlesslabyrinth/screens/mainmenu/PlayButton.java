@@ -35,15 +35,16 @@ public class PlayButton extends Actor{
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                sprite = new Sprite(spriteTextures.playButtonHoverOver);
                 sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
-                setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
+                sprite.setScale(1.1f);
+                setBounds(sprite.getX() - (sprite.getWidth()/2 * (.1f)), sprite.getY() - (sprite.getHeight()/2 * (.1f)), sprite.getWidth() * 1.1f, sprite.getHeight() * 1.1f);
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
                 sprite = new Sprite(spriteTextures.playButton);
                 sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
+                sprite.setScale(1f);
                 setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
             }
         });

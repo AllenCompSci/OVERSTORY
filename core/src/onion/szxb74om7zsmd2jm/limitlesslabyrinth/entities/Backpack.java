@@ -5,10 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Magic;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Sword;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mine;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -34,16 +31,17 @@ public class Backpack {
         }
         itemSlots[1] = new Mine();
         itemSlots[2] = new TurretItem();
-        itemSlots[3] = new Magic();
-        itemSlots[4] = new Magic();
-        itemSlots[5] = new Magic();
-        itemSlots[6] = new Magic();
-        itemSlots[7] = new Magic();
-        itemSlots[8] = new Magic();
-        itemSlots[9] = new Magic();
-        itemSlots[10] = new Magic();
-        itemSlots[11] = new Magic();
-        itemSlots[12] = new Magic();
+        itemSlots[3] = new LightningStaff();
+        itemSlots[4] = new LightningStaff();
+        itemSlots[5] = new LightningStaff();
+        itemSlots[6] = new LightningStaff();
+        itemSlots[7] = new LightningStaff();
+        itemSlots[8] = new LightningStaff();
+        itemSlots[9] = new LightningStaff();
+        itemSlots[10] = new LightningStaff();
+        itemSlots[11] = new LightningStaff();
+        itemSlots[12] = new LightningStaff();
+        itemSlots[13] = new LightningStaff();
     }
 
     public Backpack(){
@@ -55,16 +53,17 @@ public class Backpack {
         }
         itemSlots[1] = new Mine();
         itemSlots[2] = new TurretItem();
-        itemSlots[3] = new Magic();
-        itemSlots[4] = new Magic();
-        itemSlots[5] = new Magic();
-        itemSlots[6] = new Magic();
-        itemSlots[7] = new Magic();
-        itemSlots[8] = new Magic();
-        itemSlots[9] = new Magic();
-        itemSlots[10] = new Magic();
-        itemSlots[11] = new Magic();
-        itemSlots[12] = new Magic();
+        itemSlots[3] = new LightningStaff();
+        itemSlots[4] = new LightningStaff();
+        itemSlots[5] = new LightningStaff();
+        itemSlots[6] = new LightningStaff();
+        itemSlots[7] = new LightningStaff();
+        itemSlots[8] = new LightningStaff();
+        itemSlots[9] = new LightningStaff();
+        itemSlots[10] = new LightningStaff();
+        itemSlots[11] = new LightningStaff();
+        itemSlots[12] = new LightningStaff();
+        itemSlots[13] = new LightningStaff();
     }
 
     public void input(){

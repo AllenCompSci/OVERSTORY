@@ -43,7 +43,7 @@ public class MainMenu implements Screen {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
         }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

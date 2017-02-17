@@ -185,10 +185,6 @@ public class Play implements Screen {
 
     public Play(String PathToMap){
         map = new TmxMapLoader().load(PathToMap);
-    }
-
-    @Override
-    public void show() {
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;
@@ -199,8 +195,13 @@ public class Play implements Screen {
     }
 
     @Override
+    public void show() {
+    }
+
+    @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            //LimitlessLabyrinth.pauseScreen();
             Gdx.app.exit();
         }
 

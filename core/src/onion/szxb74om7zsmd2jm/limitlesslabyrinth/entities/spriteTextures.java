@@ -93,6 +93,8 @@ public class spriteTextures {
     public static Texture midnightasura = new Texture("32 pix/Midnight_Asura(2x4).png");
     public static Texture orcshaman = new Texture("32 pix/Orc_Shaman(2x4).png");
     public static Texture orcspearman = new Texture("32 pix/Orc_Spearman(2x4).png");
+    public static Texture banshee = new Texture("32 pix/Banshee.png");
+    public static Texture mummy = new Texture("32 pix/Mummy.png");
 
     public static Texture basic64 = new Texture("64 pix/64x64.png");
     public static Texture ambassador = new Texture("64 pix/Ambassador(1x2).png");
@@ -198,16 +200,70 @@ public class spriteTextures {
     public static Texture menace = new Texture("64 pix/Menace(1x2).png");
     public static Texture tiger = new Texture("64 pix/Tiger(1x2).png");
     public static Texture witch = new Texture("64 pix/Witch(1x2).png");
+    public static Texture ashmunrah = new Texture("64 pix/Ashmunrah(1x2).png");
+    public static Texture askarakdemon = new Texture("64 pix/AskarakDemon(1x2).png");
+    public static Texture askaraklord = new Texture("64 pix/AskarakLord(1x2).png");
+    public static Texture askarakprince = new Texture("64 pix/AskarakPrince(1x2).png");
+    public static Texture behemoth = new Texture("64 pix/Behemoth(1x2).png");
+    public static Texture blightwalker = new Texture("64 pix/BlightWalker(1x2).png");
+    public static Texture bluedjinn = new Texture("64 pix/BlueDjinn(1x2).png");
+    public static Texture crystalspider = new Texture("64 pix/CrystalSpiders(1x2).png");
+    public static Texture cursedhand = new Texture("64 pix/CursedHand(1x2).png");
+    public static Texture cyclopssmith = new Texture("64 pix/CyclopsSmith(1x2).png");
+    public static Texture damagedworkergolem = new Texture("64 pix/DamagedWorkerGolem(1x2).png");
+    public static Texture diamondservant = new Texture("64 pix/DiamondServant(1x2).png");
+    public static Texture goldenservant = new Texture("64 pix/GoldenServant(1x2).png");
+    public static Texture dragonhatch = new Texture("64 pix/DragonHatch(1x2).png");
+    public static Texture dragonlordhatch = new Texture("64 pix/DragonLordHatchling(1x2).png");
+    public static Texture drakenabomination = new Texture("64 pix/DrakenAbomination(1x2).png");
+    public static Texture drakenelite = new Texture("64 pix/DrakenElite(1x2).png");
+    public static Texture drakenspellweaver = new Texture("64 pix/DrakenSpellweaver(1x2).png");
+    public static Texture drakenwarmaster = new Texture("64 pix/DrakenWarmaster(1x2).png");
+    public static Texture efreet = new Texture("64 pix/Efreet(1x2).png");
+    public static Texture elderwyrm = new Texture("64 pix/ElderWyrm(1x2).png");
+    public static Texture eyeobserver = new Texture("64 pix/EyeObserver(1x2).png");
+    public static Texture frostdragon = new Texture("64 pix/FrostDragon(1x2).png");
+    public static Texture frostgiant = new Texture("64 pix/FrostGiant(1x2).png");
+    public static Texture frostgiantess = new Texture("64 pix/FrostGiantess(1x2).png");
+    public static Texture ghastlydragon = new Texture("64 pix/GhastlyDragon(1x2).png");
+    public static Texture gloothpoweredmino = new Texture("64 pix/GloothPoweredMino(1x2).png");
+    public static Texture gnomeevil = new Texture("64 pix/GnomeEvil(1x2).png");
+    public static Texture greendjinn = new Texture("64 pix/GreenDjinn(1x2).png");
+    public static Texture lich = new Texture("64 pix/Lich(1x2).png");
+    public static Texture minoamazon = new Texture("64 pix/MinoAmazon(1x2).png");
+    public static Texture pharoh = new Texture("64 pix/Pharoh(1x2).png");
+    public static Texture shaburaklord = new Texture("64 pix/ShaburakLord(1x2).png");
+    public static Texture shaburakprince = new Texture("64 pix/ShaburakPrince(1x2).png");
+    public static Texture silencer = new Texture("64 pix/Silencer(1x2).png");
+    public static Texture spidriselite = new Texture("64 pix/SpidrisElite(1x2).png");
+    public static Texture thepalecount = new Texture("64 pix/ThePaleCount(1x2).png");
+    public static Texture tyrn = new Texture("64 pix/Tyrn(1x2).png");
+    public static Texture undeaddragon = new Texture("64 pix/UndeadDragon(1x2).png");
+    public static Texture vampirebride = new Texture("64 pix/VampireBride(1x2).png");
+    public static Texture vampireoverlord = new Texture("64 pix/VampireOverlord(1x2).png");
+    public static Texture vampireviscount = new Texture("64 pix/VampireViscount(1x2).png");
+    public static Texture wargolem = new Texture("64 pix/WarGolem(1x2).png");
+    public static Texture wormpriestess = new Texture("64 pix/WormPriestess(1x2).png");
+    public static Texture wyrm = new Texture("64 pix/Wyrm(1x2).png");
+    public static Texture yeti = new Texture("64 pix/Yeti(1x2).png");
+
 
     public static Texture dryad = new Texture("64 pix/Dryad(2x4).png");
     public static Texture hypnotoad = new Texture("64 pix/Hypno_Toad(2x4).png");
     public static Texture ironblight = new Texture("64 pix/IronBlight(2x8).png");
     public static Texture lion = new Texture("64 pix/Lion(2x4).png");
+    public static Texture cyclops = new Texture("64 pix/Cyclops(2x4).png");
+    public static Texture dragongreen = new Texture("64 pix/DragonGreen(2x4).png");
+    public static Texture dragonling = new Texture("64 pix/Dragonling(2x4).png");
+    public static Texture dragonwarden = new Texture("64 pix/DragonWarden(2x4).png");
+    public static Texture dragonzyrtarch = new Texture("64 pix/DragonZyrtarch(2x4).png");
+    public static Texture draptor = new Texture("64 pix/Draptor(2x4).png");
     // say 2x8 really 2x4
     public static Texture orcravanger = new Texture("64 pix/Orc_Ravanger(2x8).png");
     public static Texture orclops = new Texture("64 pix/Orclops_Doomhauler(2x8).png");
     public static Texture pitberserker = new Texture("64 pix/Pit_Berserker(2x8).png");
     public static Texture pitblacking = new Texture("64 pix/Pit_Blackling(2x8).png");
+
 
 
 
@@ -217,6 +273,111 @@ public class spriteTextures {
 
     public static Texture sheet(Play.MonsterType monster){
         switch(monster){
+            case ASHMUNRAH:
+                return ashmunrah;
+            case CYCLOPS:
+                return cyclops;
+            case DRAGONGREEN:
+                return dragongreen;
+            case DRAGONLING:
+                return dragonling;
+            case DRAGONWARDEN:
+                return dragonwarden;
+            case DRAGONZYRTARCH:
+                return dragonzyrtarch;
+            case DRAPTOR:
+                return draptor;
+            case ASKARADEMON:
+                return askarakdemon;
+            case ASKARALORD:
+                return askaraklord;
+            case ASKARAPRINCE:
+                return askarakprince;
+            case BEHEMOTH:
+                return behemoth;
+            case BLIGHTWALKER:
+                return blightwalker;
+            case BLUEDJINN:
+                return bluedjinn;
+            case CRYSTALSPIDERS:
+                return crystalspider;
+            case CURSEDHAND:
+                return cursedhand;
+            case CYCLOPSSMITH:
+                return cyclopssmith;
+            case DAMAGEDWORKERGOLEM:
+                return damagedworkergolem;
+            case DIAMONDSERVANT:
+                return diamondservant;
+            case DRAGONHATCH:
+                return dragonhatch;
+            case DRAGONLORDHATCH:
+                return dragonlordhatch;
+            case DRAKENABOMINATION:
+                return drakenabomination;
+            case DRAKENELITE:
+                return drakenelite;
+            case DRAKENSPELLWEAVER:
+                return drakenspellweaver;
+            case DRAKENWARMASTER:
+                return drakenwarmaster;
+            case EFREET:
+                return efreet;
+            case ELDERWYRM:
+                return elderwyrm;
+
+            case EYEOBSERVER:
+                return eyeobserver;
+            case FROSTDRAGON:
+                return frostdragon;
+            case FROSTGIANT:
+                return frostgiant;
+            case FROSTGIANTESS:
+                return frostgiantess;
+            case GHASTLYDRAGON:
+                return ghastlydragon;
+            case GLOOTHMINO:
+                return gloothpoweredmino;
+            case GNOMEEVIL:
+                return gnomeevil;
+            case GOLDENSERVANT:
+                return goldenservant;
+            case GREENDJINN:
+                return greendjinn;
+            case LICH:
+                return lich;
+            case MINOAMAZON:
+                return minoamazon;
+            case PHAROH:
+                return pharoh;
+            case SHABURAKLORD:
+                return shaburaklord;
+            case SHABURAKPRINCE:
+                return shaburakprince;
+            case SILENCER:
+                return silencer;
+            case SPIDRISELITE:
+                return spidriselite;
+            case THEPALECOUNT:
+                return thepalecount;
+            case TYRN:
+                return tyrn;
+            case UNDEADDRAGON:
+                return undeaddragon;
+            case VAMPIREBRIDE:
+                return vampirebride;
+            case VAMPIREOVERLORD:
+                return vampireoverlord;
+            case VAMPIREVISCOUNT:
+                return vampireviscount;
+            case WARGOLEM:
+                return wargolem;
+            case WORMPRIESTESS:
+                return wormpriestess;
+            case WYRM:
+                return wyrm;
+            case YETI:
+                return yeti;
             case DEMON:
                 return demonTexture;
             case DRAGON:
@@ -263,6 +424,10 @@ public class spriteTextures {
                 return ancientScar;
             case BARBAXE :
                 return barbAx;
+            case BANSHEE:
+                return banshee;
+            case MUMMY:
+                return mummy;
             case WRAITH:
                 return betrayer;
             case BOGRAIDER:
@@ -506,7 +671,7 @@ public class spriteTextures {
             case SHIVERSLEEP:
                 return shiversleep;
             case DRYAD:
-                return shiversleep;
+                return dryad;
             case HYPNOTOAD:
                 return hypnotoad;
             case IRONBLIGHT:
@@ -567,6 +732,8 @@ public class spriteTextures {
             case ORCSHAMAN:
             case ORCSPEARMAN:
             case DEATHSLICER:
+            case MUMMY:
+            case BANSHEE:
                 return basic32;
 
 
@@ -616,6 +783,12 @@ public class spriteTextures {
             case ORCLOPS:
             case PITBERSERKER:
             case PITBLACKLING:
+            case DRAGONGREEN:
+            case DRAGONLING:
+            case DRAGONWARDEN:
+            case DRAGONZYRTARCH:
+            case CYCLOPS:
+            case DRAPTOR:
                 return 4;
             case RIFTFRAGMENT:
             case WATERELEMENT:
@@ -670,6 +843,12 @@ public class spriteTextures {
             case ORCLOPS:
             case PITBERSERKER:
             case PITBLACKLING:
+            case DRAGONGREEN:
+            case DRAGONLING:
+            case DRAGONWARDEN:
+            case DRAGONZYRTARCH:
+            case CYCLOPS:
+            case DRAPTOR:
                 return 2;
 
 
@@ -679,7 +858,7 @@ public class spriteTextures {
     }
 
     public static Play.MonsterType makeAMonster(){
-        int VAL = (int)(Math.random() * 153);
+        int VAL = (int)(Math.random() * 208);
 
         switch(VAL) {
             case 0:
@@ -986,6 +1165,114 @@ public class spriteTextures {
                 return PITBERSERKER;
             case 151:
                 return PITBLACKLING;
+            case 152:
+                return MUMMY;
+            case 153:
+                return BANSHEE;
+            case 154:
+                return CYCLOPS;
+            case 155:
+                return DRAGONGREEN;
+            case 156:
+                return  DRAGONLING;
+            case 157:
+                return  DRAGONWARDEN;
+            case 158:
+                return  DRAGONZYRTARCH;
+            case 159:
+                return  DRAPTOR;
+            case 160:
+                return ASHMUNRAH;
+            case 161:
+                return ASKARADEMON;
+            case 162:
+                return ASKARALORD;
+            case 163:
+                return ASKARAPRINCE;
+            case 164:
+                return  BEHEMOTH;
+            case 165:
+                return BLIGHTWALKER;
+            case 166:
+                return BLUEDJINN;
+            case 167:
+                return CRYSTALSPIDERS;
+            case 168:
+                return CURSEDHAND;
+            case 169:
+                return CYCLOPSSMITH;
+            case 170:
+                return DAMAGEDWORKERGOLEM;
+            case 171:
+                return DIAMONDSERVANT;
+            case 172:
+                return DRAGONHATCH;
+            case 173:
+                return DRAGONLORDHATCH;
+            case 174:
+                return DRAKENABOMINATION;
+            case 175:
+                return DRAKENELITE;
+            case 176:
+                return DRAKENSPELLWEAVER;
+            case 177:
+                return DRAKENWARMASTER;
+            case 178:
+                return EFREET;
+            case 179:
+                return ELDERWYRM;
+            case 180:
+                return EYEOBSERVER;
+            case 181:
+                return FROSTDRAGON;
+            case 182:
+                return FROSTGIANT;
+            case 183:
+                return FROSTGIANTESS;
+            case 184:
+                return GHASTLYDRAGON;
+            case 185:
+                return GLOOTHMINO;
+            case 186:
+                return GNOMEEVIL;
+            case 187:
+                return GOLDENSERVANT;
+            case 188:
+                return GREENDJINN;
+            case 189:
+                return LICH;
+            case 190:
+                return MINOAMAZON;
+            case 191:
+                return PHAROH;
+            case 192:
+                return SHABURAKLORD;
+            case 193:
+                return SHABURAKPRINCE;
+            case 194:
+                return SILENCER;
+            case 195:
+                return SPIDRISELITE;
+            case 196:
+                return THEPALECOUNT;
+            case 197:
+                return TYRN;
+            case 198:
+                return UNDEADDRAGON;
+            case 199:
+                return VAMPIREBRIDE;
+            case 200:
+                return VAMPIREOVERLORD;
+            case 201:
+                return VAMPIREVISCOUNT;
+            case 202:
+                return WARGOLEM;
+            case 203:
+                return WORMPRIESTESS;
+            case 204:
+                return WYRM;
+            case 205:
+                return YETI;
         }
         return WEREWOLF;
     }

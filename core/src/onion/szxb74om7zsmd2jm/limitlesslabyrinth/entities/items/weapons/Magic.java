@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Spell;
@@ -22,7 +23,7 @@ public class Magic extends Weapon {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
-        return new Spell(x1, y1, x2, y2, dmg*3.9f, 0, this);
+        return new Spell(x1, y1, Player.getCharFace(), dmg*3.9f, 0, this, (int)(Math.random()*4));
     }
 
 

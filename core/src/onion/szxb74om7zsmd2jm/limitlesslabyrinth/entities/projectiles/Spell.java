@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -17,49 +18,61 @@ public class Spell extends Projectile {
     int distance;
     int endDist;
     int count;
+    int count1;
+    Player.FACE dir;
 
-
-    public Spell(float x1, float y1, float x2, float y2, float dmg, int distance, Item fromItem){
+    public Spell(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
         this.fromItem = fromItem;
-        count = (int)(Math.random() * 4);
-        if(count == 0)
+        this.count1 = count1;
+        if(count1 == 0)
         animation = Play.fourFrameAnimationCreator(spriteTextures.magic, 3,  8, .01f);
-        else if(count == 1)
+        else if(count1 == 1)
         animation = Play.fourFrameAnimationCreator(spriteTextures.holy, 2, 4, .2f);
-        else if(count == 2)
+        else if(count1 == 2)
         animation = Play.fourFrameAnimationCreator(spriteTextures.ice, 2, 4, .2f);
-        else if(count == 3)
+        else if(count1 == 3)
         animation = Play.fourFrameAnimationCreator(spriteTextures.earth, 2, 4, .2f);
         this.dmg = dmg;
-
+        this.dir = dir;
         this.distance = distance;
-        count = distance + 8;
-        endDist = 61 - distance;
+        count = distance + 16;
+        endDist = 151 - distance;
         sprite = new Sprite(spriteTextures.basic64);
         stateTime = 0f;
-        slope = ((y2 - y1)/(x2 - x1));
         x = x1;
         y = y1;
-        b = y1 - slope * x1;
-        endX = x2;
-        endY = y2;
-        theta = Math.atan(slope);
-
-        if(endX > x){
-            direction = true;
-        }
-        else{
-            direction = false;
-            theta *= -1;
-        }
-        if(endY < y){
-            theta *= -1;
-        }
 
 
     }
 
-
+    public void updateX(){
+        if(dir == Player.FACE.LEFT){
+            x-=16;
+        }
+        else if(dir == Player.FACE.RIGHT){
+            x+=16;
+        }
+    }
+    public void updateY(){
+        if(dir == Player.FACE.DOWN){
+            y-=16;
+        }
+        else if(dir == Player.FACE.UP){
+            y+=16;
+        }
+    }
+    public float createX(){
+        if(dir == Player.FACE.DOWN || dir == Player.FACE.UP){
+            return 32;
+        }
+        return 0;
+    }
+    public float createY(){
+        if(dir == Player.FACE.LEFT || dir == Player.FACE.RIGHT){
+            return 32;
+        }
+        return 0;
+    }
     @Override
     public void contact() {
 
@@ -82,9 +95,10 @@ public class Spell extends Projectile {
         distance ++;
 
         if(((int)distance == count)){
-           //Need to change x and y to be following the y = m x + b format. 
-            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()+64, x,y+64, dmg, distance, fromItem));
-            Play.getProjectiles().add(new Spell(sprite.getX(), sprite.getY()-64, x,y-64, dmg, distance, fromItem));
+           //Need to change x and y to be following the y = m x + b format.
+
+            Play.getProjectiles().add(new Spell(sprite.getX() + createX(), sprite.getY() + createY(), dir, dmg, distance, fromItem, count1));
+            Play.getProjectiles().add(new Spell(sprite.getX() - createX(), sprite.getY() - createY(), dir, dmg, distance, fromItem, count1));
         }
         if(distance > endDist){
             remove();
@@ -93,14 +107,7 @@ public class Spell extends Projectile {
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
         Play.getRenderer().getBatch().draw(currentFrame, x, y);
         sprite.setPosition(x,y);
-        if(direction){
-            x += Math.cos(theta) * 10;
-        }
-        else{
-            x -= Math.cos(theta) * 10;
-        }
-
-        y = slope * x + b;
-
+        updateX();
+        updateY();
     }
 }

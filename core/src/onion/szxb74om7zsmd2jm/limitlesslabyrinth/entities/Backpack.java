@@ -39,9 +39,9 @@ public class Backpack {
         itemSlots[8] = new LightningStaff();
         itemSlots[9] = new LightningStaff();
         itemSlots[10] = new LightningStaff();
-        itemSlots[11] = new LightningStaff();
-        itemSlots[12] = new LightningStaff();
-        itemSlots[13] = new LightningStaff();
+        itemSlots[11] = new Magic();
+        itemSlots[12] = new Magic();
+        itemSlots[13] = new Magic();
     }
 
     public Backpack(){
@@ -61,9 +61,9 @@ public class Backpack {
         itemSlots[8] = new LightningStaff();
         itemSlots[9] = new LightningStaff();
         itemSlots[10] = new LightningStaff();
-        itemSlots[11] = new LightningStaff();
-        itemSlots[12] = new LightningStaff();
-        itemSlots[13] = new LightningStaff();
+        itemSlots[11] = new Magic();
+        itemSlots[12] = new Magic();
+        itemSlots[13] = new Magic();
     }
 
     public void input(){

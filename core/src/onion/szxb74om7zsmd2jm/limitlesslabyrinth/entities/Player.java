@@ -33,7 +33,8 @@ public class Player extends Entity {
     private static int waveAmount = 200;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
-    public static FACE charFace;
+    public static FACE charFace = FACE.DOWN;
+    public static FACE getCharFace(){ return charFace;}
     public static float CharX, CharY;
     public static boolean isWalking = false;
     public String playerType;

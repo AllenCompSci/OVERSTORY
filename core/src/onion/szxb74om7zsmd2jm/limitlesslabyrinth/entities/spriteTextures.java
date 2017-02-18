@@ -249,6 +249,9 @@ public class spriteTextures {
     public static Texture marid = new Texture("64 pix/Marid(1x2).png");
     public static Texture metalgargoyle = new Texture("64 pix/MetalGargoyle(1x2).png");
     public static Texture moohtant = new Texture("64 pix/Moohtant(1x2).png");
+    public static Texture beholder = new Texture("64 pix/Beholder(1x2).png");
+    public static Texture elderbeholder = new Texture("64 pix/ElderBeholder(1x2).png");
+    public static Texture evileye = new Texture("64 pix/TheEvilEye(1x2).png");
 
     public static Texture dryad = new Texture("64 pix/Dryad(2x4).png");
     public static Texture hypnotoad = new Texture("64 pix/Hypno_Toad(2x4).png");
@@ -291,6 +294,12 @@ public class spriteTextures {
                 return ashmunrah;
             case CYCLOPS:
                 return cyclops;
+            case BEHOLDER:
+                return beholder;
+            case ELDERBEHOLDER:
+                return elderbeholder;
+            case EVILEYE:
+                return evileye;
             case DRAGONGREEN:
                 return dragongreen;
             case DRAGONLING:
@@ -921,7 +930,7 @@ public class spriteTextures {
     }
 
     public static Play.MonsterType makeAMonster(){
-        int VAL = (int)(Math.random() * 220);
+        int VAL = (int)(Math.random() * 224);
 
         switch(VAL) {
             case 0:
@@ -1364,6 +1373,12 @@ public class spriteTextures {
                 return  METALGARGOYLE;
             case 219:
                 return  MOOHTANT;
+            case 220:
+                return ELDERBEHOLDER;
+            case 221:
+                return BEHOLDER;
+            case 222:
+                return EVILEYE;
         }
         return WEREWOLF;
     }

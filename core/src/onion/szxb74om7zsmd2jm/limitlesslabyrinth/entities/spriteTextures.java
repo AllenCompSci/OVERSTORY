@@ -52,8 +52,61 @@ public class spriteTextures {
     public static Texture holy = new Texture("holy(2x4).png");
     public static Texture ice = new Texture("ice(2x4).png");
     public static Texture earth = new Texture("earth(2x4).png");
+    public static Texture death = new Texture("FX/Death(1x8).png");
     public static Texture WizardOrbAnimationTexture = new Texture("mage-E-ani.png");
+    public static Texture blast = new Texture ("FX/Blast(1x5).png");
+    public static Texture blueelectric = new Texture("FX/Blueelectric(1x6).png");
+    public static Texture electric = new Texture("FX/electric(1x6).png");
+    public static Texture stormRAGE = new Texture("FX/Storm.png");//1x6
+    public static Texture yelllowelectric = new Texture("FX/Yellowelectric(1x6).png");
+    public static Texture storm = new Texture("FX/storm(1x6).png");
+    public static Texture goldenergy = new Texture("FX/Goldelectric(1x6).png");
+    public static Texture greenelectric = new Texture("FX/Greenelectric(1x6).png");
+    public static Texture explosion = new Texture ("FX/Explosion(1x8).png");
+    public static Texture fire = new Texture("FX/Fire(1x8).png");
+    public static Texture whitedeath = new Texture("FX/WhiteDeath(1x8).png");
+    public static Texture energy = new Texture("FX/energy(1x8).png");
+    public static Animation<TextureRegion> FX(int count1){
+        switch(count1)
+        {
+            case 0:
+             return Play.fourFrameAnimationCreator(holy, 2, 4, .2f);
+            case 1:
+                return Play.fourFrameAnimationCreator(ice, 2, 4, .2f);
+            case 2:
+                return Play.fourFrameAnimationCreator(earth, 2, 4, .2f);
+            case 3:
+                return Play.fourFrameAnimationCreator(death, 1,8,.2f);
+            case 4:
+                return Play.fourFrameAnimationCreator(greenelectric, 1,6,.2f);
+            case 5:
+                return Play.fourFrameAnimationCreator(greenelectric, 1,6,.2f);
+            case 6:
+                return Play.fourFrameAnimationCreator(blast, 1,5,.2f);
+            case 7:
+                return Play.fourFrameAnimationCreator(goldenergy, 1,6,.2f);
+            case 8:
+                return Play.fourFrameAnimationCreator(fire, 1,8,.2f);
+            case 9:
+                return Play.fourFrameAnimationCreator(electric, 1,6,.2f);
+            case 10:
+                return Play.fourFrameAnimationCreator(blueelectric, 1,6,.2f);
+            case 11:
+                return Play.fourFrameAnimationCreator(yelllowelectric, 1,6,.2f);
+            case 12:
+                return Play.fourFrameAnimationCreator(storm, 1,6,.2f);
+            case 13:
+                return Play.fourFrameAnimationCreator(stormRAGE, 1,6,.2f);
+            case 14:
+                return Play.fourFrameAnimationCreator(whitedeath, 1, 8, .2f);
+            case 15:
+                return Play.fourFrameAnimationCreator(explosion, 1,8, .2f);
+            case 16:
+                return Play.fourFrameAnimationCreator(energy, 1,8,.2f);
+        }
+        return Play.fourFrameAnimationCreator(magic, 3,  8, .01f);
 
+    }
     public static Texture basic32 = new Texture("32 pix/32x32x.png");
     public static Texture brittleSkelly = new Texture("32 pix/BrittleSkeleton(2x4).png");
     public static Texture bunny = new Texture("32 pix/Bunny(1x2).png");

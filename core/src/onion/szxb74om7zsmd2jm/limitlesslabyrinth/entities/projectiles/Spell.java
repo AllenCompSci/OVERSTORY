@@ -24,14 +24,7 @@ public class Spell extends Projectile {
     public Spell(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
         this.fromItem = fromItem;
         this.count1 = count1;
-        if(count1 == 0)
-        animation = Play.fourFrameAnimationCreator(spriteTextures.magic, 3,  8, .01f);
-        else if(count1 == 1)
-        animation = Play.fourFrameAnimationCreator(spriteTextures.holy, 2, 4, .2f);
-        else if(count1 == 2)
-        animation = Play.fourFrameAnimationCreator(spriteTextures.ice, 2, 4, .2f);
-        else if(count1 == 3)
-        animation = Play.fourFrameAnimationCreator(spriteTextures.earth, 2, 4, .2f);
+        animation = spriteTextures.FX(count1);
         this.dmg = dmg;
         this.dir = dir;
         this.distance = distance;
@@ -41,7 +34,8 @@ public class Spell extends Projectile {
         stateTime = 0f;
         x = x1;
         y = y1;
-
+        updateX();
+        updateY();
 
     }
 
@@ -85,9 +79,6 @@ public class Spell extends Projectile {
         }
 
 
-        if(count > 40) {
-            remove();
-        }
     }
 
     @Override

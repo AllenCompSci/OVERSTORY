@@ -60,7 +60,7 @@ public class Backpack {
         itemSlots[7] = new LightningStaff();
         itemSlots[8] = new LightningStaff();
         itemSlots[9] = new LightningStaff();
-        itemSlots[10] = new LightningStaff();
+        itemSlots[10] = new AOE();
         itemSlots[11] = new Magic();
         itemSlots[12] = new Magic();
         itemSlots[13] = new Magic();

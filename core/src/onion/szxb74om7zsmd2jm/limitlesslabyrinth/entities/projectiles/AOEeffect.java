@@ -21,7 +21,7 @@ public class AOEeffect extends Projectile {
     int count;
     int count1;
     Player.FACE dir;
-    final int NUM = 8; // MUST BE EVEN;
+    final int NUM = 23; // MUST BE ODD;
     boolean [][]aoe;
     pos [][]AOE;
     public AOEeffect(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
@@ -37,35 +37,52 @@ public class AOEeffect extends Projectile {
         this.dir = dir;
         this.distance = distance;
         count = 8;
-        endDist = 151 - distance;
+        endDist = 190 - distance;
         sprite = new Sprite(spriteTextures.basic64);
         stateTime = 0f;
-        float left = x - (32 * NUM/2);
-        float top = y - (left - x);
+        x = Player.CharX+16;
+        y = Player.CharY-16;
+        float left = x + (32 * NUM/2);
+        float top = y + (left - x);
         for(int i = 0; i < NUM; i++)
             for(int j = 0; j < NUM; j++)
                 AOE[i][j] = new pos(left - i*32, top - j*32);
 
     }
 
+    private boolean[][] getState(){
+        boolean [][] state;
+        state = new boolean[NUM][NUM];
+        for(int i = 0; i< NUM; i++){
+            for(int j = 0; j <NUM; j++)
+                state[i][j] = aoe[i][j];
+        }
+        return state;
+    }
+
     public void expand(){
-        boolean [][] cpy = aoe.clone();
-        if(!aoe[0][NUM/2])
-        for(int i = 0; i < NUM; i++)
-            for(int j = 0; j < NUM; j++){
-                if( (j < (NUM-1)) && cpy[i][j+1]) { // BELOW
-                    aoe[i][j] = true;
+        boolean [][] cpy = getState();
+        if(!aoe[0][NUM/2]) {
+            for (int i = 0; i < NUM; i++)
+                for (int j = 0; j < NUM; j++) {
+                    if ((j < (NUM - 1)) && cpy[i][j + 1]) { // BELOW
+                        aoe[i][j] = true;
+                    } else if ((i > 0) && cpy[i - 1][j]) { // LEFT
+                        aoe[i][j] = true;
+                    } else if ((i < (NUM - 1)) && cpy[i + 1][j]) { // RIGHT
+                        aoe[i][j] = true;
+                    } else if ((j > 0) && cpy[i][j - 1]) { //ABOVE
+                        aoe[i][j] = true;
+                    }
                 }
-                else if((i > 0) && cpy[i-1][j]) { // LEFT
-                    aoe[i][j] = true;
-                }
-                else if((i < (NUM-1)) && cpy[i+1][j]){ // RIGHT
-                    aoe[i][j] = true;
-                }
-                else if((j > 0) && cpy[i][j-1]){ //ABOVE
-                    aoe[i][j] = true;
-                }
-            }
+        }
+        else if (count == 8){
+            count = 6;
+        }
+        else{
+            count = 4;
+            distance+=35;
+        }
     }
     @Override
     public void contact() {
@@ -85,19 +102,25 @@ public class AOEeffect extends Projectile {
     public void draw() {
         distance ++;
         stateTime += Gdx.graphics.getDeltaTime();
-
+        if(count != 4)
         for(int i = 0; i < NUM; i++){
             for(int j = 0; j < NUM; j++){
-                if(aoe[i][j])
-                Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dir, dmg, distance, fromItem, count1, stateTime));
+                if(aoe[i][j]) {
+                    if(count == 8)
+                    Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 2));
+                    else{
+                        Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 8));
+                    }
+                }
             }
+        }
+        else{
+            remove();
         }
         if(((int)distance % (int)count == 0)){
             expand();
         }
-        if(distance > endDist){
-            remove();
-        }
+
     }
 }
 

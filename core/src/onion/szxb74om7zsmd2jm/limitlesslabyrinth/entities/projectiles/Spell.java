@@ -28,7 +28,7 @@ public class Spell extends Projectile {
         this.dmg = dmg;
         this.dir = dir;
         this.distance = distance;
-        count = distance + 16;
+        count = distance + 8;
         endDist = 151 - distance;
         sprite = new Sprite(spriteTextures.basic64);
         stateTime = 0f;
@@ -85,8 +85,14 @@ public class Spell extends Projectile {
     public void draw() {
         distance ++;
 
+        stateTime += Gdx.graphics.getDeltaTime();
+        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
+        Play.getRenderer().getBatch().draw(currentFrame, x, y);
+        sprite.setPosition(x,y);
+        updateX();
+        updateY();
         if(((int)distance == count)){
-           //Need to change x and y to be following the y = m x + b format.
+            //Need to change x and y to be following the y = m x + b format.
 
             Play.getProjectiles().add(new Spell(sprite.getX() + createX(), sprite.getY() + createY(), dir, dmg, distance, fromItem, count1));
             Play.getProjectiles().add(new Spell(sprite.getX() - createX(), sprite.getY() - createY(), dir, dmg, distance, fromItem, count1));
@@ -94,11 +100,5 @@ public class Spell extends Projectile {
         if(distance > endDist){
             remove();
         }
-        stateTime += Gdx.graphics.getDeltaTime();
-        TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
-        Play.getRenderer().getBatch().draw(currentFrame, x, y);
-        sprite.setPosition(x,y);
-        updateX();
-        updateY();
     }
 }

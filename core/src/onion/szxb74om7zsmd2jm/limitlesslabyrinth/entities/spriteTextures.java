@@ -13,6 +13,7 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
 public class spriteTextures {
 
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
+    public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");
     public static Texture playButton = new Texture("play_button.png");
     public static Texture WizardOrbProjectileSprite = new Texture("Frozen_Starlight.png");
@@ -35,11 +36,8 @@ public class spriteTextures {
     public static Texture goblinTexture = new Texture("thor32.png");
     public static Texture bruteTexture = new Texture("brute.png");
     public static Texture demonTexture = new Texture("demon(64x64)(4col2row)(256x128).png");
-    public static Texture demonStandingTexture = new Texture("demon standing.png");
     public static Texture dragonTexture = new Texture("redDragon(64x64)(4col2row)(256x128).png");
-    public static Texture dragonStandingTexture = new Texture("dragon.png");
     public static Texture hydraTexture = new Texture("hydra 2col1row.png");
-    public static Texture hydraStandingTexture = new Texture("Hydra.png");
     public static Texture healthBar = new Texture("greenbar.png");
     public static Texture lostHealthBar = new Texture("redbar.png");
     public static Texture LightningOrbSprites = new Texture("LightningOrb.png");

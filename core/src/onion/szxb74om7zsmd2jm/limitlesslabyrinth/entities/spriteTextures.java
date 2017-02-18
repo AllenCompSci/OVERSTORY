@@ -246,7 +246,9 @@ public class spriteTextures {
     public static Texture wormpriestess = new Texture("64 pix/WormPriestess(1x2).png");
     public static Texture wyrm = new Texture("64 pix/Wyrm(1x2).png");
     public static Texture yeti = new Texture("64 pix/Yeti(1x2).png");
-
+    public static Texture marid = new Texture("64 pix/Marid(1x2).png");
+    public static Texture metalgargoyle = new Texture("64 pix/MetalGargoyle(1x2).png");
+    public static Texture moohtant = new Texture("64 pix/Moohtant(1x2).png");
 
     public static Texture dryad = new Texture("64 pix/Dryad(2x4).png");
     public static Texture hypnotoad = new Texture("64 pix/Hypno_Toad(2x4).png");
@@ -258,6 +260,18 @@ public class spriteTextures {
     public static Texture dragonwarden = new Texture("64 pix/DragonWarden(2x4).png");
     public static Texture dragonzyrtarch = new Texture("64 pix/DragonZyrtarch(2x4).png");
     public static Texture draptor = new Texture("64 pix/Draptor(2x4).png");
+    public static Texture giantspider = new Texture("64 pix/GiantSpider(2x4).png");
+    public static Texture gravedigger = new Texture("64 pix/Gravedigger(2x4).png");
+    public static Texture ogrebrute = new Texture("64 pix/OgreBrute(2x4).png");
+    public static Texture ogreshaman = new Texture("64 pix/OgreShaman(2x4).png");
+    public static Texture professormaxxen = new Texture("64 pix/ProfessorMaxxen(2x4).png");
+    public static Texture tarantula = new Texture("64 pix/Tarantula(2x4).png");
+    public static Texture tazhadur = new Texture("64 pix/Tazhadur(2x4).png");
+    public static Texture thefirstdragon = new Texture("64 pix/TheFirstDragon(2x4).png");
+    public static Texture wailingwidow = new Texture("64 pix/WailingWidow(2x4).png");
+    public static Texture walker = new Texture("64 pix/Walker(2x4).png");
+    public static Texture zorvorax = new Texture("64 pix/Zorvorax(2x4).png");
+
     // say 2x8 really 2x4
     public static Texture orcravanger = new Texture("64 pix/Orc_Ravanger(2x8).png");
     public static Texture orclops = new Texture("64 pix/Orclops_Doomhauler(2x8).png");
@@ -325,7 +339,34 @@ public class spriteTextures {
                 return efreet;
             case ELDERWYRM:
                 return elderwyrm;
-
+            case MARID:
+                return marid;
+            case METALGARGOYLE:
+                return metalgargoyle;
+            case MOOHTANT:
+                return moohtant;
+            case GIANTSPIDER:
+                return giantspider;
+            case GRAVEDIGGER:
+                return gravedigger;
+            case OGREBRUTE:
+                return ogrebrute;
+            case OGRESHAMAN:
+                return ogreshaman;
+            case PROFESSORMAXXEN:
+                return professormaxxen;
+            case TARANTULA:
+                return tarantula;
+            case TAZHADUR:
+                return tazhadur;
+            case THEFIRSTDRAGON:
+                return thefirstdragon;
+            case WAILINGWIDOW:
+                return wailingwidow;
+            case WALKER:
+                return walker;
+            case ZORVORAX:
+                return zorvorax;
             case EYEOBSERVER:
                 return eyeobserver;
             case FROSTDRAGON:
@@ -789,6 +830,17 @@ public class spriteTextures {
             case DRAGONZYRTARCH:
             case CYCLOPS:
             case DRAPTOR:
+            case ZORVORAX:
+            case WALKER:
+            case WAILINGWIDOW:
+            case THEFIRSTDRAGON:
+            case TAZHADUR:
+            case TARANTULA:
+            case PROFESSORMAXXEN:
+            case OGREBRUTE:
+            case OGRESHAMAN:
+            case GRAVEDIGGER:
+            case GIANTSPIDER:
                 return 4;
             case RIFTFRAGMENT:
             case WATERELEMENT:
@@ -849,7 +901,18 @@ public class spriteTextures {
             case DRAGONZYRTARCH:
             case CYCLOPS:
             case DRAPTOR:
-                return 2;
+            case ZORVORAX:
+            case WALKER:
+            case WAILINGWIDOW:
+            case THEFIRSTDRAGON:
+            case TAZHADUR:
+            case TARANTULA:
+            case PROFESSORMAXXEN:
+            case OGREBRUTE:
+            case OGRESHAMAN:
+            case GRAVEDIGGER:
+            case GIANTSPIDER:
+            return 2;
 
 
         }
@@ -858,7 +921,7 @@ public class spriteTextures {
     }
 
     public static Play.MonsterType makeAMonster(){
-        int VAL = (int)(Math.random() * 208);
+        int VAL = (int)(Math.random() * 220);
 
         switch(VAL) {
             case 0:
@@ -1273,6 +1336,34 @@ public class spriteTextures {
                 return WYRM;
             case 205:
                 return YETI;
+            case 206:
+                return GIANTSPIDER;
+            case 207:
+                return  GRAVEDIGGER;
+            case 208:
+                return  OGREBRUTE;
+            case 209:
+                return  OGRESHAMAN;
+            case 210:
+                return  PROFESSORMAXXEN;
+            case 211:
+                return  TARANTULA;
+            case 212:
+                return  TAZHADUR;
+            case 213:
+                return  THEFIRSTDRAGON;
+            case 214:
+                return WAILINGWIDOW;
+            case 215:
+                return  WALKER;
+            case 216:
+                return  ZORVORAX;
+            case 217:
+                return MARID;
+            case 218:
+                return  METALGARGOYLE;
+            case 219:
+                return  MOOHTANT;
         }
         return WEREWOLF;
     }

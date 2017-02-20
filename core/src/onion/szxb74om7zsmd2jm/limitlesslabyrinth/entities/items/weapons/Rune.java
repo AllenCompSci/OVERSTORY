@@ -21,14 +21,18 @@ public class Rune extends Weapon {
         switchRuneType();
         dmg = 100f;
         lvl = 1;
-        type = "projectile";
+        type = "rune";
         cooldown = 40;
     }
-    private void switchRuneType(){
+    public void switchRuneType(){
         rune = spriteTextures.getRUNETYPE();
         setSprite();
         setEFFECT();
         setNUM();
+    }
+    @Override
+    public void SWAPVAL(){
+        switchRuneType();
     }
     private void setSprite(){
         sprite = new Sprite(spriteTextures.runeSprite(rune));

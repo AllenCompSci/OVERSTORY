@@ -28,8 +28,13 @@ public class Spell extends Projectile {
         this.dmg = dmg;
         this.dir = dir;
         this.distance = distance;
-        count = distance + 8;
-        endDist = 151 - distance;
+        if(distance < 50) {
+            count = distance + 8;
+            endDist = 151 - distance;
+        }
+        else{
+            endDist = 120 - distance;
+        }
         sprite = new Sprite(spriteTextures.basic64);
         stateTime = 0f;
         x = x1;

@@ -14,7 +14,7 @@ public class spriteTextures {
     public enum RUNE{AVALANCHE, EXPLOSION, GREATFIREBALL, HEAVYMAGICMISSILE, HOLYMISSILE, ICICLE, MAGICWALL, STONESHOWER, SUDDENDEATH, THUNDERSTORM};
 
     public static RUNE getRUNETYPE(){
-        switch((int)Math.random()*10){
+        switch((int)(Math.random()*10)){
             case 0:
                 return RUNE.AVALANCHE;
             case 1:
@@ -81,21 +81,52 @@ public class spriteTextures {
                 return Play.fourFrameAnimationCreator(physical, 1,3, .2f);
             case GREATFIREBALL:
                 return Play.fourFrameAnimationCreator(explosion, 1,8, .2f);
-            case HEAVYMAGICMISSILE:
-                return hmm;
             case HOLYMISSILE:
                 return Play.fourFrameAnimationCreator(holy, 2, 4, .2f);
             case MAGICWALL:
-                return mw;
+                return Play.fourFrameAnimationCreator(magicWall, 1, 9, .2f);
             case STONESHOWER:
                 return Play.fourFrameAnimationCreator(stone,1,4,.2f);
             case SUDDENDEATH:
                 return Play.fourFrameAnimationCreator(death, 1,8,.2f);
         }
-        return Play.fourFrameAnimationCreator(electric, 1,6,.2f);
+        return Play.fourFrameAnimationCreator(electric, 1,6,.01f);
     }
 
+    public static boolean wide[][] =
+    {
+        {false, false, true, true, true, false, false},
+        {false,  true, true, true, true,  true, false},
+        {true,   true, true, true, true,  true, true },
+        {true,   true, true, false, true,  true, true },
+        {true,   true, true, true, true,  true, true },
+        {false,  true, true, true, true,  true, false},
+        {false, false, true, true, true, false, false},
 
+    };
+    public static boolean cross[][] =
+            {
+                    {false, true, false},
+                    { true, false, true},
+                    {false, true, false}
+            };
+    public static boolean target[][] =
+            {
+                    {true}
+            };
+    public static boolean[][] getARRAY(RUNE rune){
+            switch(rune){
+                case AVALANCHE:
+                case GREATFIREBALL:
+                case THUNDERSTORM:
+                case STONESHOWER:
+                    return wide;
+                case EXPLOSION:
+                case HOLYMISSILE:
+                    return cross;
+            }
+            return target;
+    }
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
     public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");
@@ -151,6 +182,8 @@ public class spriteTextures {
     public static Texture icicle = new Texture("FX/ICE(1x3).png");
     public static Texture stone = new Texture("FX/STONE(1x4).png");
     public static Texture physical = new Texture("FX/PHYl(1x3).png");
+    public static Texture magicWall = new Texture("FX/MagicWallCreation(1x9).png");
+    public static Texture magicwall = new Texture("FX/MagicWall(1x3).png");
     
     public static Animation<TextureRegion> FX(int count1){
         switch(count1)

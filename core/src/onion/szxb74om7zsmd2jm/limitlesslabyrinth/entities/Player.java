@@ -38,6 +38,10 @@ public class Player extends Entity {
     public static float CharX, CharY;
     public static boolean isWalking = false;
     public String playerType;
+    int selection;
+    int NUMOUTFITS = 8;
+    boolean RUNE = true;
+    boolean OUTFIT = true;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -59,6 +63,7 @@ public class Player extends Entity {
     }
 
     public void selectOutfit(int selection){
+        this.selection = selection;
         switch(selection){
             case 0:
                 playerType = "Conjurer/";
@@ -97,10 +102,11 @@ public class Player extends Entity {
         playerWalkingUp = Play.fourFrameAnimationCreator("player/"+playerType+"back(2x8).png",2,8);
     }
     public void changeOutfit(){
-        selectOutfit((int)(Math.random()*8));
+        selectOutfit((int)(Math.random()*NUMOUTFITS));
         setOutfit();
     }
     public void changeOutfit(int selection){
+        selection = (selection+1) % NUMOUTFITS;
         selectOutfit(selection);
         setOutfit();
     }
@@ -183,8 +189,20 @@ public class Player extends Entity {
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
         }
         /** PRESS R to ROTATE RUNE **/
-        if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()])){
+        if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) && RUNE){
             Play.getGui().getEquipped().SWAPVAL();
+            RUNE = false;
+        }
+        /** PRESS O to CYCLE THRU OUTFITS **/
+        if(Gdx.input.isKeyPressed(Input.Keys.O) && OUTFIT){
+            changeOutfit(selection);
+            OUTFIT = false;
+        }
+        if(!OUTFIT && !Gdx.input.isKeyPressed(Input.Keys.O)){
+            OUTFIT = true;
+        }
+        if(!RUNE && !Gdx.input.isKeyPressed(Input.Keys.R)){
+            RUNE = true;
         }
     }
     

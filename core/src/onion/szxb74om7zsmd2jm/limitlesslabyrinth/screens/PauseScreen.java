@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.BackGround;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.ExitButton;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.PlayButton;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.pausescreen.MainMenuButton;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.pausescreen.PauseBackGround;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.pausescreen.ResumeButton;
 
@@ -20,6 +21,7 @@ public class PauseScreen implements Screen {
     private static ResumeButton resumeButton;
     private static PauseBackGround pauseBackGround;
     private static ExitButton exitButton;
+    private static MainMenuButton mainMenuButton;
 
     public static ScreenViewport getViewport() {
         return viewport;
@@ -36,17 +38,16 @@ public class PauseScreen implements Screen {
         pauseBackGround = new PauseBackGround();
         resumeButton = new ResumeButton();
         exitButton = new ExitButton();
+        mainMenuButton = new MainMenuButton();
 
         stage.addActor(pauseBackGround);
         stage.addActor(resumeButton);
         stage.addActor(exitButton);
+        stage.addActor(mainMenuButton);
     }
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-        }
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();

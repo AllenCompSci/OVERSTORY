@@ -141,6 +141,7 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
+    private static int CollisionLayerNum = 1;
 
     public void reset(){
         player.reset();
@@ -226,7 +227,7 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
-        player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
+        player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
         Gdx.input.setInputProcessor(null);
@@ -317,7 +318,7 @@ public class Play implements Screen {
                 else
                     monster = MonsterType.HYDRA;
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), monster);
                 time = System.currentTimeMillis() + 10;
             }
         }

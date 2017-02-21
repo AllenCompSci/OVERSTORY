@@ -138,6 +138,8 @@ public class spriteTextures {
             return target;
     }
 
+    public static Texture MainMenuButtonSprite = new Texture("MainMenuButton.png");
+    public static Texture NewGameButtonSprite = new Texture("ButtonNewGame.png");
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
     public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");

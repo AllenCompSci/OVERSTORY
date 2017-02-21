@@ -1,6 +1,5 @@
-package onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu;
+package onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.pausescreen;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -13,14 +12,15 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
 
 /**
- * Created by chris on 2/16/2017.
+ * Created by 226812 on 2/21/2017.
  */
-public class PlayButton extends Actor{
+public class MainMenuButton extends Actor {
+
     private static Sprite sprite;
 
-    public PlayButton(){
-        sprite = new Sprite(spriteTextures.playButton);
-        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
+    public MainMenuButton(){
+        sprite = new Sprite(spriteTextures.MainMenuButtonSprite);
+        sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 - sprite.getHeight());
         setBounds(this.sprite.getX(), this.sprite.getY(), this.sprite.getWidth(), this.sprite.getHeight());
         setTouchable(Touchable.enabled);
 
@@ -28,21 +28,19 @@ public class PlayButton extends Actor{
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(button == Input.Buttons.LEFT){
-                    LimitlessLabyrinth.setPlay();
+                    LimitlessLabyrinth.setMainMenu();
                 }
                 return true;
             }
 
             @Override
             public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
                 sprite.setScale(1.1f);
                 setBounds(sprite.getX() - (sprite.getWidth()/2 * (.1f)), sprite.getY() - (sprite.getHeight()/2 * (.1f)), sprite.getWidth() * 1.1f, sprite.getHeight() * 1.1f);
             }
 
             @Override
             public void exit(InputEvent event, float x, float y, int pointer, Actor toActor) {
-                sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
                 sprite.setScale(1f);
                 setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
             }
@@ -63,5 +61,4 @@ public class PlayButton extends Actor{
         sprite.setPosition(MainMenu.getViewport().getScreenWidth()/2 - sprite.getWidth()/2, MainMenu.getViewport().getScreenHeight()/2 + sprite.getHeight()/2);
         setBounds(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight());
     }
-
 }

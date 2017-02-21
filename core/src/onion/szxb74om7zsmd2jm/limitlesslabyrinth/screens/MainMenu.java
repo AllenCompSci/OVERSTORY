@@ -14,6 +14,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.BackGround;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.ExitButton;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.NewGameButton;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.PlayButton;
 
 /**
@@ -24,6 +25,7 @@ public class MainMenu implements Screen {
     private static PlayButton playButton;
     private static BackGround backGround;
     private static ExitButton exitButton;
+    private static NewGameButton newGameButton;
 
     public static ScreenViewport getViewport() {
         return viewport;
@@ -40,10 +42,12 @@ public class MainMenu implements Screen {
         backGround = new BackGround();
         playButton = new PlayButton();
         exitButton = new ExitButton();
+        newGameButton = new NewGameButton();
 
         stage.addActor(backGround);
         stage.addActor(playButton);
         stage.addActor(exitButton);
+        stage.addActor(newGameButton);
     }
 
     @Override

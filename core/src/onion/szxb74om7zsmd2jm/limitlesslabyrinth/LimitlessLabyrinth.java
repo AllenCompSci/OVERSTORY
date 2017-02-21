@@ -33,7 +33,7 @@ public class LimitlessLabyrinth extends Game {
 
 	@Override
 	public void create () {
-		play = new Play("test.tmx");
+		play = new Play("tutorialmap.tmx");
 		setScreen(mainMenu);
 	}
 

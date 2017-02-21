@@ -112,6 +112,7 @@ public class Play implements Screen {
     private static Array<Turret> turrets = new Array<Turret>();
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
+    private int[][] spawnableTiles;
     private long time = 0;
     public static int waveCount = 0;
     private long count;
@@ -130,6 +131,7 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
+    public static int mainlayer = 2;
 
     public void reset(){
         player.reset();
@@ -206,8 +208,10 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
-        player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
-        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(mainlayer));
+        spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
+        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
+
         Gdx.input.setInputProcessor(null);
     }
 
@@ -296,7 +300,7 @@ public class Play implements Screen {
                 else
                     monster = MonsterType.HYDRA;
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(1), monster);
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(mainlayer), monster);
                 time = System.currentTimeMillis() + 10;
             }
         }

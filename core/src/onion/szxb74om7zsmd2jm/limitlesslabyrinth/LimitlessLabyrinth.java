@@ -47,6 +47,7 @@ public class LimitlessLabyrinth extends Game {
 			//screen.dispose();
 			System.gc();
 			resetScreen = false;
+			Play.reset();
 			play = new Play(MapPath);
 			setScreen(play);
 		}

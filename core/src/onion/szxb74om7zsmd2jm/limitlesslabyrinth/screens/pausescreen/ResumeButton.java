@@ -28,7 +28,7 @@ public class ResumeButton extends Actor {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(button == Input.Buttons.LEFT){
-                    LimitlessLabyrinth.setPlay("test.tmx");
+                    LimitlessLabyrinth.setPlay();
                 }
                 return true;
             }

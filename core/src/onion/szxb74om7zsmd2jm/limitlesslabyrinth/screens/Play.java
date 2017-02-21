@@ -106,6 +106,7 @@ public class Play implements Screen {
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
     private static Array<Wall> walls = new Array<Wall>();
+    private static Array<Wall> wallsEmpty = new Array<Wall>();
     public static Array<Wall> getWalls(){return walls;}
     public static Array<Turret> getTurrets() {
         return turrets;
@@ -133,21 +134,20 @@ public class Play implements Screen {
     private static Gui gui = new Gui();
     private static int CollisionLayerNum = 1;
 
-    public void reset(){
-        player.reset();
-        gui.reset();
-        gui.getBackpack().reset();
+    public static void reset(){
+        Play.player.reset();
+        Play.gui.reset();
+        Play.gui.getBackpack().reset();
 
         /** Reset the Play static variables */
-        enemies = enemiesEmpty;
-        projectiles = projectilesEmpty;
-        turrets = turretsEmpty;
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.turrets = Play.turretsEmpty;
+        Play.walls = Play.wallsEmpty;
         System.gc();
-        spawnCount = 0;
-        garbageTime = 0;
-        waveCount = 0;
-
-        LimitlessLabyrinth.setMainMenu();
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+        Play.waveCount = 0;
     }
 
 
@@ -305,6 +305,7 @@ public class Play implements Screen {
 
         if(player.getHealth() <= 0){
             reset();
+            LimitlessLabyrinth.setMainMenu();
         }
     }
 

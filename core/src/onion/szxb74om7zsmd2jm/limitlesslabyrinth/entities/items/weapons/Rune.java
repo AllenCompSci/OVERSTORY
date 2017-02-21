@@ -1,6 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Wall;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.pos;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
@@ -63,7 +64,7 @@ public class Rune extends Weapon {
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
         if(rune == spriteTextures.RUNE.MAGICWALL){
-
+            Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.magicwall,1,3,.2f), 30));
         }
         else if(rune != spriteTextures.RUNE.SUDDENDEATH || rune != spriteTextures.RUNE.ICICLE) {
             setAOE(x2, y2);

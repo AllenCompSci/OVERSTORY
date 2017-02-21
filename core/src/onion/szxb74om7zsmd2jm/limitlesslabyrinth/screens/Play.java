@@ -18,15 +18,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Gui;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
@@ -108,6 +105,7 @@ public class Play implements Screen {
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
+    private static Array<Wall> walls = new Array<Wall>();
     public static Array<Turret> getTurrets() {
         return turrets;
     }
@@ -123,6 +121,9 @@ public class Play implements Screen {
     public static void setSpawnCount(int spawnCount) {
         waveCount++;
         Play.spawnCount = spawnCount;
+    }
+    public static void addWall(Wall wallType){
+        walls.add(wallType);
     }
     private static int spawnCount = 0;
     public static Gui getGui() {
@@ -235,7 +236,13 @@ public class Play implements Screen {
 
         camera.zoom = zoom;
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
-
+        for(Wall e : walls){
+            e.draw(renderer.getBatch());
+            if(e.getRemoveState()){
+                e.remove();
+                walls.removeIndex(walls.indexOf(e, true));
+            }
+        }
         for(Projectile i : projectiles){
             i.draw();
             if(System.currentTimeMillis() > i.getTime()){

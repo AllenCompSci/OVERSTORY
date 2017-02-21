@@ -10,6 +10,8 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
+import java.util.Iterator;
+
 /**
  * Created by chris on 1/22/2017.
  */
@@ -56,6 +58,7 @@ public class Entity implements InputProcessor {
     public Entity(float x, float y){
 
     }
+
 //checks three points in front of the character
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
 

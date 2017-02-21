@@ -48,10 +48,14 @@ public class Entity implements InputProcessor {
     }
     protected float health;
     protected TiledMapTileLayer collisionLayer;
+    public static float collisionWidth;
+    public static float collisionHeight;
     protected int level;
 
     public Entity(float x, float y, int level, TiledMapTileLayer collisionLayer){
         this.collisionLayer = collisionLayer;
+        collisionWidth = collisionLayer.getTileWidth();
+        collisionWidth = collisionLayer.getTileHeight();
         this.level = level;
     }
 
@@ -61,17 +65,33 @@ public class Entity implements InputProcessor {
 
 //checks three points in front of the character
     public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
+        int COLx1 = (int)((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth());
+        int COLy1 = (int)((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight());
+        int COLx2 = (int)((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth());
+        int COLy2 = (int)((sprite.getY() + sprite.getHeight()/2 + height/2 + sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight());
+        int COLx3 = (int)((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth());
+        int COLy3 = (int)((sprite.getY() + sprite.getHeight()/2 + height/2 - sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight());
 
-        if(height == 0f) return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 - sprite.getHeight()/3 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+        if(Play.getWalls().size > 0){
+           for(Wall e : Play.getWalls()){
+               if(e != null)
+                if(e.getCollision(COLx1, COLy1, COLx2, COLy2, COLx3, COLy3)){
+                    return false;
+                }
+           }
+        }
+        if(height == 0f) return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
         );
-        return (!collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + speed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 + sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell((int) ((sprite.getX() + sprite.getWidth()/2 + width/2 - sprite.getWidth()/3 + Xspeed) / collisionLayer.getTileWidth()), (int) ((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("blocked")
+        return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
+                && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
         );
 
     }
+
+
 
     public void draw(Batch batch) {
         sprite.draw(batch);

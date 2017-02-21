@@ -66,6 +66,9 @@ public class Rune extends Weapon {
         if(rune == spriteTextures.RUNE.MAGICWALL){
             Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.magicwall,1,3,.2f), 30));
         }
+        else if(rune == spriteTextures.RUNE.WILDGROWTH){
+            Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.wildgrowth,1,3,.2f), 30));
+        }
         else if(rune != spriteTextures.RUNE.SUDDENDEATH || rune != spriteTextures.RUNE.ICICLE) {
             setAOE(x2, y2);
             RUNEBLAST();

@@ -106,6 +106,7 @@ public class Play implements Screen {
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
     private static Array<Wall> walls = new Array<Wall>();
+    public static Array<Wall> getWalls(){return walls;}
     public static Array<Turret> getTurrets() {
         return turrets;
     }
@@ -239,9 +240,8 @@ public class Play implements Screen {
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
         for(Wall e : walls){
             e.draw(renderer.getBatch());
-            if(e.getRemoveState()){
-                e.remove();
-                walls.removeIndex(walls.indexOf(e, true));
+            if(walls.indexOf(null, true) != -1) {
+                walls.removeIndex(walls.indexOf(null, true));
             }
         }
         for(Projectile i : projectiles){

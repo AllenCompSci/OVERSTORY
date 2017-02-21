@@ -92,6 +92,7 @@ public class Player extends Entity {
         }
     }
     public void setOutfit(){
+        // This is bad...aa
         front = new Sprite(new Texture("player/"+playerType+"front.png"));
         back = new Sprite(new Texture("player/"+playerType+"back.png"));
         left = new Sprite(new Texture("player/"+playerType+"left.png"));

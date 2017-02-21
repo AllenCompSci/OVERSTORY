@@ -12,6 +12,9 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  */
 public class spriteTextures {
 
+    public static Texture ExitButton = new Texture("ExitButton.png");
+    public static Texture ResumeButton = new Texture("resume_button.png");
+    public static Texture PauseScreenBackground = new Texture("PauseScreen.png");
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
     public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");

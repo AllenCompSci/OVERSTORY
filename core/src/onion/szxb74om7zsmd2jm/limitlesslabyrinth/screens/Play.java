@@ -217,8 +217,8 @@ public class Play implements Screen {
     @Override
     public void render(float delta) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
-            //LimitlessLabyrinth.pauseScreen();
-            Gdx.app.exit();
+            LimitlessLabyrinth.pauseScreen();
+            //Gdx.app.exit();
         }
 
         if(System.currentTimeMillis() > garbageTime){

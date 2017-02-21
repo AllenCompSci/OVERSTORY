@@ -33,6 +33,22 @@ public class singleMagicStrike extends Projectile {
         y = y1;
 
     }
+	 public singleMagicStrike(float x1, float y1,float dmg, Item fromItem, int lifetime, Animation<TextureRegion> animation){
+
+        this.fromItem = fromItem;
+        this.animation = animation;
+        this.dmg = dmg;
+        this.distance = 0;
+        this.count = lifetime;
+        sprite = new Sprite(spriteTextures.basic64);
+        this.stateTime = 0f;
+        x1 -= 16;
+        y += 16;
+        x = x1;
+        y = y1;
+
+    }
+   
 
     @Override
     public void contact() {

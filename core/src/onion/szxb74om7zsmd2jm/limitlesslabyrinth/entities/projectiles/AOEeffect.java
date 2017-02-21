@@ -1,11 +1,10 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.pos;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -21,9 +20,9 @@ public class AOEeffect extends Projectile {
     int count;
     int count1;
     Player.FACE dir;
-    final int NUM = 23; // MUST BE ODD;
+    final int NUM = 19; // MUST BE ODD;
     boolean [][]aoe;
-    pos [][]AOE;
+    pos[][]AOE;
     public AOEeffect(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
         aoe = new boolean[NUM][NUM];
         for(int i = 0; i < NUM; i++)
@@ -109,7 +108,7 @@ public class AOEeffect extends Projectile {
                     if(count == 8)
                     Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 2));
                     else{
-                        Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 8));
+                        Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 3));
                     }
                 }
             }
@@ -124,17 +123,4 @@ public class AOEeffect extends Projectile {
     }
 }
 
-class pos{
-    float X;
-    float Y;
-    public pos(float x, float y){
-        X = x;
-        Y = y;
-    }
-    public float getPOSX(){
-        return X;
-    }
-    public float getPOSY(){
-        return Y;
-    }
-}
+

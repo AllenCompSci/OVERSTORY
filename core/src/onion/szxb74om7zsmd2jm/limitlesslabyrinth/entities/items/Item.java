@@ -63,6 +63,10 @@ public class Item {
         return new Turret(x,y,new Bow());
     }
 
+    public void SWAPVAL(){
+
+    }
+
     public void LVLup(){
         lvl++;
         this.dmg += lvl * 100;

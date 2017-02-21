@@ -11,10 +11,127 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  * Created by chris on 2/8/2017.
  */
 public class spriteTextures {
+    public enum RUNE{AVALANCHE, EXPLOSION, GREATFIREBALL, HEAVYMAGICMISSILE, HOLYMISSILE, ICICLE, MAGICWALL, STONESHOWER, SUDDENDEATH, THUNDERSTORM};
 
     public static Texture ExitButton = new Texture("ExitButton.png");
     public static Texture ResumeButton = new Texture("resume_button.png");
     public static Texture PauseScreenBackground = new Texture("PauseScreen.png");
+
+    public static RUNE getRUNETYPE(){
+        switch((int)(Math.random()*10)){
+            case 0:
+                return RUNE.AVALANCHE;
+            case 1:
+                return RUNE.EXPLOSION;
+            case 2:
+                return RUNE.GREATFIREBALL;
+            case 3:
+                return RUNE.HEAVYMAGICMISSILE;
+            case 4:
+                return RUNE.HOLYMISSILE;
+            case 5:
+                return RUNE.ICICLE;
+            case 6:
+                return RUNE.MAGICWALL;
+            case 7:
+                return RUNE.STONESHOWER;
+            case 8:
+                return RUNE.SUDDENDEATH;
+        }
+        return RUNE.THUNDERSTORM;
+    }
+
+    public static Texture ava = new Texture("RUNE/Avalanche.png");
+    public static Texture exp = new Texture("RUNE/Explosion.png");
+    public static Texture gfb = new Texture("RUNE/Great_Fireball.png");
+    public static Texture hmm = new Texture("RUNE/Heavy_Magic_Missile.png");
+    public static Texture hm = new Texture("RUNE/Holy_Missile.png");
+    public static Texture icl = new Texture("RUNE/Icicle.png");
+    public static Texture mw = new Texture("RUNE/Magic_Wall.png");
+    public static Texture ss = new Texture("RUNE/Stone_Shower.png");
+    public static Texture sd = new Texture("RUNE/Sudden_Death.png");
+    public static Texture ts = new Texture("RUNE/Thunderstorm.png");
+
+    public static Texture runeSprite(RUNE rune){
+        switch(rune){
+            case AVALANCHE:
+                return ava;
+            case EXPLOSION:
+                return exp;
+            case GREATFIREBALL:
+                return gfb;
+            case HEAVYMAGICMISSILE:
+                return hmm;
+            case HOLYMISSILE:
+                return hm;
+            case ICICLE:
+                return icl;
+            case MAGICWALL:
+                return mw;
+            case STONESHOWER:
+                return ss;
+            case SUDDENDEATH:
+                return sd;
+        }
+        return ts;
+    }
+
+    public static Animation<TextureRegion> RuneFX(RUNE rune){
+        switch(rune){
+            case ICICLE:
+            case AVALANCHE:
+                return Play.fourFrameAnimationCreator(icicle, 1, 3, .2f);
+            case EXPLOSION:
+                return Play.fourFrameAnimationCreator(physical, 1,3, .2f);
+            case GREATFIREBALL:
+                return Play.fourFrameAnimationCreator(explosion, 1,8, .2f);
+            case HOLYMISSILE:
+                return Play.fourFrameAnimationCreator(holy, 2, 4, .2f);
+            case MAGICWALL:
+                return Play.fourFrameAnimationCreator(magicWall, 1, 9, .2f);
+            case STONESHOWER:
+                return Play.fourFrameAnimationCreator(stone,1,4,.2f);
+            case SUDDENDEATH:
+                return Play.fourFrameAnimationCreator(death, 1,8,.2f);
+        }
+        return Play.fourFrameAnimationCreator(electric, 1,6,.01f);
+    }
+
+    public static boolean wide[][] =
+    {
+        {false, false, true, true, true, false, false},
+        {false,  true, true, true, true,  true, false},
+        {true,   true, true, true, true,  true, true },
+        {true,   true, true, false, true,  true, true },
+        {true,   true, true, true, true,  true, true },
+        {false,  true, true, true, true,  true, false},
+        {false, false, true, true, true, false, false},
+
+    };
+    public static boolean cross[][] =
+            {
+                    {false, true, false},
+                    { true, false, true},
+                    {false, true, false}
+            };
+    public static boolean target[][] =
+            {
+                    {true}
+            };
+    public static boolean[][] getARRAY(RUNE rune){
+            switch(rune){
+                case AVALANCHE:
+                case GREATFIREBALL:
+                case THUNDERSTORM:
+                case STONESHOWER:
+                    return wide;
+                case EXPLOSION:
+                case HOLYMISSILE:
+                    return cross;
+            }
+            return target;
+    }
+
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
     public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");
@@ -67,6 +184,12 @@ public class spriteTextures {
     public static Texture fire = new Texture("FX/Fire(1x8).png");
     public static Texture whitedeath = new Texture("FX/WhiteDeath(1x8).png");
     public static Texture energy = new Texture("FX/energy(1x8).png");
+    public static Texture icicle = new Texture("FX/ICE(1x3).png");
+    public static Texture stone = new Texture("FX/STONE(1x4).png");
+    public static Texture physical = new Texture("FX/PHYl(1x3).png");
+    public static Texture magicWall = new Texture("FX/MagicWallCreation(1x9).png");
+    public static Texture magicwall = new Texture("FX/MagicWall(1x3).png");
+    
     public static Animation<TextureRegion> FX(int count1){
         switch(count1)
         {

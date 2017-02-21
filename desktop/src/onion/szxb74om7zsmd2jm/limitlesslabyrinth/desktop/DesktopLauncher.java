@@ -1,9 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.desktop;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.graphics.Cursor;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
 
 public class DesktopLauncher {

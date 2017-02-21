@@ -38,6 +38,10 @@ public class Player extends Entity {
     public static float CharX, CharY;
     public static boolean isWalking = false;
     public String playerType;
+    int selection;
+    int NUMOUTFITS = 8;
+    boolean RUNE = true;
+    boolean OUTFIT = true;
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -58,10 +62,9 @@ public class Player extends Entity {
         this.fullHealth = health;
     }
 
-
-    public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
-        super(x, y, level, collisionLayer);
-        switch((int)(Math.random()*6) ){
+    public void selectOutfit(int selection){
+        this.selection = selection;
+        switch(selection){
             case 0:
                 playerType = "Conjurer/";
                 break;
@@ -79,19 +82,46 @@ public class Player extends Entity {
                 break;
             case 5:
                 playerType ="Spirit Caller/";
+                break;
+            case 6:
+                playerType = "Puppeteer/";
+                break;
+            default :
+                playerType = "Death Hearld/";
+                break;
         }
+    }
+    public void setOutfit(){
+        front = new Sprite(new Texture("player/"+playerType+"front.png"));
+        back = new Sprite(new Texture("player/"+playerType+"back.png"));
+        left = new Sprite(new Texture("player/"+playerType+"left.png"));
+        right = new Sprite(new Texture("player/"+playerType+"right.png"));
+        playerWalkingDown = Play.fourFrameAnimationCreator("player/"+playerType+"front(2x8).png",2,8);
+        playerWalkingLeft = Play.fourFrameAnimationCreator("player/"+playerType+"left(2x8).png",2,8);
+        playerWalkingRight = Play.fourFrameAnimationCreator("player/"+playerType+"right(2x8).png",2,8);
+        playerWalkingUp = Play.fourFrameAnimationCreator("player/"+playerType+"back(2x8).png",2,8);
+    }
+    public void changeOutfit(){
+        selectOutfit((int)(Math.random()*NUMOUTFITS));
+        setOutfit();
+    }
+    public void changeOutfit(int selection){
+        selection = (selection+1) % NUMOUTFITS;
+        selectOutfit(selection);
+        setOutfit();
+    }
+    public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
+        super(x, y, level, collisionLayer);
+
         this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
-         charFace = FACE.DOWN;
+        charFace = FACE.DOWN;
+        changeOutfit();
        /*
         front = new Sprite(new Texture("front.png"));
         back = new Sprite(new Texture("back.png"));
         left = new Sprite(new Texture("left.png"));
         right = new Sprite(new Texture("right.png"));
 */
-       front = new Sprite(new Texture("player/"+playerType+"front.png"));
-        back = new Sprite(new Texture("player/"+playerType+"back.png"));
-        left = new Sprite(new Texture("player/"+playerType+"left.png"));
-        right = new Sprite(new Texture("player/"+playerType+"right.png"));
         /* UNCOMMENT FOR Mr. Hudson smiles.  */
         this.sprite = front;
 
@@ -101,10 +131,7 @@ public class Player extends Entity {
         this.collisionLayer = collisionLayer;
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
-        playerWalkingDown = Play.fourFrameAnimationCreator("player/"+playerType+"front(2x8).png",2,8);
-        playerWalkingLeft = Play.fourFrameAnimationCreator("player/"+playerType+"left(2x8).png",2,8);
-        playerWalkingRight = Play.fourFrameAnimationCreator("player/"+playerType+"right(2x8).png",2,8);
-        playerWalkingUp = Play.fourFrameAnimationCreator("player/"+playerType+"back(2x8).png",2,8);
+
         sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
 
     }
@@ -149,7 +176,7 @@ public class Player extends Entity {
         }
 
         /** Fire projectile */
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "trap") && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "rune"  || Play.getGui().getEquipped().getType() == "trap") && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
             Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
@@ -160,6 +187,22 @@ public class Player extends Entity {
             Play.getTurrets().add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
+        }
+        /** PRESS R to ROTATE RUNE **/
+        if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) && RUNE){
+            Play.getGui().getEquipped().SWAPVAL();
+            RUNE = false;
+        }
+        /** PRESS O to CYCLE THRU OUTFITS **/
+        if(Gdx.input.isKeyPressed(Input.Keys.O) && OUTFIT){
+            changeOutfit(selection);
+            OUTFIT = false;
+        }
+        if(!OUTFIT && !Gdx.input.isKeyPressed(Input.Keys.O)){
+            OUTFIT = true;
+        }
+        if(!RUNE && !Gdx.input.isKeyPressed(Input.Keys.R)){
+            RUNE = true;
         }
     }
     

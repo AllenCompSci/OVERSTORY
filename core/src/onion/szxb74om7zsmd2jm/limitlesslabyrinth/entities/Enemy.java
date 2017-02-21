@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.StringJoiner;
 
+import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.AStar.test;
+
 
 /**
  * Created by chris on 1/21/2017.
@@ -123,6 +125,7 @@ public class Enemy extends Entity{
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
              //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
+                test(3, 7, 7, 2, 1, 5, 4, new int[][]{{4,1},{4,3},{5,3},{2,3}});
             }
 
         if(!detection.isInSmallRadius(this)) {

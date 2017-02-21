@@ -18,7 +18,7 @@ public class spriteTextures {
     public static Texture PauseScreenBackground = new Texture("PauseScreen.png");
 
     public static RUNE getRUNETYPE(){
-        switch((int)(Math.random()*10)){
+        switch((int)(Math.random()*11)){
             case 0:
                 return RUNE.AVALANCHE;
             case 1:
@@ -37,6 +37,8 @@ public class spriteTextures {
                 return RUNE.STONESHOWER;
             case 8:
                 return RUNE.SUDDENDEATH;
+            case 9:
+                return RUNE.WILDGROWTH;
         }
         return RUNE.THUNDERSTORM;
     }

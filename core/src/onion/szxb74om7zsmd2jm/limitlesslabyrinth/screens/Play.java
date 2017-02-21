@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -70,6 +71,14 @@ public class Play implements Screen {
          WAILINGWIDOW, WALKER, ZORVORAX
 
          }
+
+
+    public static int lvlTileWidth; //Width of map in tiles
+    public static int lvlTileHeight; //Height of map in tiles
+    public static int lvlPixelWidth; //Width of map in pixels
+    public static int lvlPixelHeight; //Height of map in pixels
+    public static int tilePixelWidth; //Width of tile in pixels
+    public static int tilePixelHeight; //Height of tile in pixels
 
     private static long garbageTime = 0;
     public static TiledMap getMap() {
@@ -202,13 +211,13 @@ public class Play implements Screen {
 
     public Play(String PathToMap){
         map = new TmxMapLoader().load(PathToMap);
-        //MapProperties properties = map.getProperties();
-        //lvlTileWidth = properties.get("width", Integer.class);
-        //lvlTileHeight = properties.get("height", Integer.class);
-        //tilePixelWidth = properties.get("tilewidth", Integer.class);
-        //tilePixelHeight = properties.get("tileheight", Integer.class);
-        //lvlPixelWidth = lvlTileWidth * tilePixelWidth;
-        // lvlPixelHeight = lvlTileHeight * tilePixelHeight;
+        MapProperties properties = map.getProperties();
+        lvlTileWidth = properties.get("width", Integer.class);
+        lvlTileHeight = properties.get("height", Integer.class);
+        tilePixelWidth = properties.get("tilewidth", Integer.class);
+        tilePixelHeight = properties.get("tileheight", Integer.class);
+        lvlPixelWidth = lvlTileWidth * tilePixelWidth;
+        lvlPixelHeight = lvlTileHeight * tilePixelHeight;
 
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();

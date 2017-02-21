@@ -125,7 +125,12 @@ public class Enemy extends Entity{
             else{
                 num = canmove.get(rand.nextInt(canmove.size()));
              //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
-                test(3, 7, 7, 2, 1, 5, 4, new int[][]{{4,1},{4,3},{5,3},{2,3}});
+             //   Gdx.app.log("", String.valueOf((int) ((sprite.getX() + sprite.getWidth()/2) / Play.tilePixelWidth)));
+             //   Gdx.app.log("", String.valueOf((int) ((sprite.getY() + sprite.getHeight()/2) / Play.tilePixelHeight)));
+             //   Gdx.app.log("", String.valueOf((int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/ Play.tilePixelWidth)));
+            //    Gdx.app.log("", String.valueOf( (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/Play.tilePixelHeight)));
+
+                test(Play.lvlTileWidth, Play.lvlTileHeight, (int) ((sprite.getX() + sprite.getWidth()/2) / Play.tilePixelWidth), (int) ((sprite.getY() + sprite.getHeight()/2) / Play.tilePixelHeight),(int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/ Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/Play.tilePixelHeight), Play.collisionTiles);
             }
 
         if(!detection.isInSmallRadius(this)) {

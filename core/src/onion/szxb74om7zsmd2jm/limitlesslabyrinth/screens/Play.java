@@ -122,6 +122,7 @@ public class Play implements Screen {
     private static Array<Turret> turrets = new Array<Turret>();
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
+    public static int[][] collisionTiles;
     private long time = 0;
     public static int waveCount = 0;
     private long count;
@@ -212,6 +213,7 @@ public class Play implements Screen {
 
     public Play(String PathToMap){
         map = new TmxMapLoader().load(PathToMap);
+
         MapProperties properties = map.getProperties();
         lvlTileWidth = properties.get("width", Integer.class);
         lvlTileHeight = properties.get("height", Integer.class);
@@ -226,6 +228,7 @@ public class Play implements Screen {
         camera.setToOrtho(false);
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(1));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
         Gdx.input.setInputProcessor(null);
     }
 

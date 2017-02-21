@@ -122,14 +122,14 @@ public class AStar {
 
     /*
     Params :
-    tCase = test case No.
+    tCase = test case No. REMOVED FOR NOW
     x, y = Board's dimensions
     si, sj = start location's x and y coordinates
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static void test(int tCase, int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
-        System.out.println("\n\nTest Case #"+tCase);
+    public static void test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
+     //   System.out.println("\n\nTest Case #"+tCase);
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -165,7 +165,7 @@ public class AStar {
         }
 
         //Display initial map
-        System.out.println("Grid: ");
+      /**  System.out.println("Grid: ");
         for(int i=0;i<x;++i){
             for(int j=0;j<y;++j){
                 if(i==si&&j==sj)System.out.print("SO  "); //Source
@@ -175,10 +175,10 @@ public class AStar {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println();**/
 
         AStar();
-        System.out.println("\nScores for cells: ");
+      /**  System.out.println("\nScores for cells: ");
         for(int i=0;i<x;++i){
             for(int j=0;j<x;++j){
                 if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
@@ -186,7 +186,7 @@ public class AStar {
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println();**/
 
         if(closed[endI][endJ]){
             //Trace back the path
@@ -202,8 +202,8 @@ public class AStar {
     }
 
     public static void main(String[] args) throws Exception{
-        test(1, 5, 5, 0, 0, 3, 2, new int[][]{{0,4},{2,2},{3,1},{3,3}});
-        test(2, 5, 5, 0, 0, 4, 4, new int[][]{{0,4},{2,2},{3,1},{3,3}});
+      //  test(5, 5, 0, 0, 3, 2, new int[][]{{0,4},{2,2},{3,1},{3,3}});
+      //  test(5, 5, 0, 0, 4, 4, new int[][]{{0,4},{2,2},{3,1},{3,3}});
 
 
 

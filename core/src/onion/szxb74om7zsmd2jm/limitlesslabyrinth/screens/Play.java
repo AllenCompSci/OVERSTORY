@@ -202,6 +202,14 @@ public class Play implements Screen {
 
     public Play(String PathToMap){
         map = new TmxMapLoader().load(PathToMap);
+        //MapProperties properties = map.getProperties();
+        //lvlTileWidth = properties.get("width", Integer.class);
+        //lvlTileHeight = properties.get("height", Integer.class);
+        //tilePixelWidth = properties.get("tilewidth", Integer.class);
+        //tilePixelHeight = properties.get("tileheight", Integer.class);
+        //lvlPixelWidth = lvlTileWidth * tilePixelWidth;
+        // lvlPixelHeight = lvlTileHeight * tilePixelHeight;
+
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;

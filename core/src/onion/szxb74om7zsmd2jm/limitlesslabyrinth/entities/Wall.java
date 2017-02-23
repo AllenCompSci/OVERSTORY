@@ -27,11 +27,14 @@ public class Wall extends Entity{
         stateTime = 0f;
         this.lifeTime = lifeTime + (int)Gdx.graphics.getDeltaTime();
         collisionLayer = (TiledMapTileLayer) Play.getMap().getLayers().get(1);
-        this.sprite = new Sprite(spriteTextures.basic32);
+        this.sprite = new Sprite(spriteTextures.basic64);
 
         removeState = setCollisionLayer(x, y, "blocked");
         SETX = (int)(x/ collisionLayer.getTileWidth());
-        SETY = (int) (y/collisionLayer.getTileHeight());
+        SETY = (int) (y/collisionLayer.getTileHeight()) ;
+        /// Needs to look better with cursor. This looks like a wall and acts correctly. 
+        x = SETX * collisionLayer.getTileWidth()-32;
+        y = SETY * collisionLayer.getTileHeight()-32;
         sprite.setPosition(x, y);
 
     }
@@ -42,9 +45,14 @@ public class Wall extends Entity{
     }
     private boolean COLIDE(int x1, int y1){
 
-        return (SETX+1 == x1 || x1 == (SETX -1) || SETX == x1)&& (SETY+1 == y1 || y1 == (SETY -1) || SETY == y1);
+        return (SETX+1 == x1 || x1 == (SETX -1) || SETX == x1)&& (y1 == (SETY -1) || SETY == y1);
     }
-
+    public int getSETX(){
+        return SETX;
+    }
+    public int getSETY(){
+        return SETY;
+    }
     @Override
     public void draw(Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();
@@ -72,7 +80,7 @@ public class Wall extends Entity{
         collisionLayer.getCell((int)(x/ collisionLayer.getTileWidth()) ,(int)(y/collisionLayer.getTileHeight())).getTile().getProperties().remove("blocked");
     }
     public void wallDespawn(){
-        System.out.println("DESPAWN WALL");
+
         Play.getWalls().set(Play.getWalls().indexOf(this, true), null);
         Play.getWalls().removeIndex(Play.getWalls().indexOf(null, true));
     }

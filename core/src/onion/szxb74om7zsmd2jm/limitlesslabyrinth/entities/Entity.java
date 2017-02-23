@@ -48,6 +48,12 @@ public class Entity implements InputProcessor {
     }
     protected float health;
     protected TiledMapTileLayer collisionLayer;
+    public int getHEIGHT(){
+        return (int)collisionLayer.getTileHeight();
+    }
+    public int getWIDTH(){
+        return (int)collisionLayer.getTileWidth();
+    }
     public static float collisionWidth;
     public static float collisionHeight;
     protected int level;
@@ -55,7 +61,7 @@ public class Entity implements InputProcessor {
     public Entity(float x, float y, int level, TiledMapTileLayer collisionLayer){
         this.collisionLayer = collisionLayer;
         collisionWidth = collisionLayer.getTileWidth();
-        collisionWidth = collisionLayer.getTileHeight();
+        collisionHeight = collisionLayer.getTileHeight();
         this.level = level;
     }
 

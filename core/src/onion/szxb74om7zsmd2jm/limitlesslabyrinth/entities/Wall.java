@@ -47,7 +47,12 @@ public class Wall extends Entity{
 
         return (SETX+1 == x1 || x1 == (SETX -1) || SETX == x1)&& (y1 == (SETY -1) || SETY == y1);
     }
-
+    public int getSETX(){
+        return SETX;
+    }
+    public int getSETY(){
+        return SETY;
+    }
     @Override
     public void draw(Batch batch) {
         stateTime += Gdx.graphics.getDeltaTime();

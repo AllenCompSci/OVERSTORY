@@ -2,17 +2,11 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g3d.model.*;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -188,6 +182,7 @@ public class Player extends Entity {
             Play.getTurrets().add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
+           // (new Pathfinding()).print();// TEST ASTAR
         }
         /** PRESS R to ROTATE RUNE **/
         if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) && RUNE){

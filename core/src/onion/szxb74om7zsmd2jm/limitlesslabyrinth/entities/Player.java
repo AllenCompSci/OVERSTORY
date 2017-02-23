@@ -160,6 +160,7 @@ public class Player extends Entity {
         if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && Play.getEnemies().size == 0){
             Play.setSpawnCount(waveAmount);
             waveAmount *= 2;
+            Play.setSpawnGroupStart(Play.getSpawnGroupStart() + 10);
         }
 
         //checks whether xp is enough to level up

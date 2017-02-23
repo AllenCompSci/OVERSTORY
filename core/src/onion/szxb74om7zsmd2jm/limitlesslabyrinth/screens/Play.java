@@ -133,6 +133,21 @@ public class Play implements Screen {
     }
     private static Gui gui = new Gui();
     private static int CollisionLayerNum = 1;
+    public static int getSpawnLimit() {
+        return spawnLimit;
+    }
+    private static int spawnLimit = 350;
+    public static int getSpawnGroupRange() {
+        return spawnGroupRange;
+    }
+    private static int spawnGroupRange;
+    public static int getSpawnGroupStart() {
+        return spawnGroupStart;
+    }
+    public static void setSpawnGroupStart(int spawnGroupStart) {
+        Play.spawnGroupStart = spawnGroupStart;
+    }
+    private static int spawnGroupStart;
 
     public static void reset(){
         Play.player.reset();
@@ -202,7 +217,10 @@ public class Play implements Screen {
         return new Animation(duration, animationFrames);
     }
 
-    public Play(String PathToMap){
+    public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
+        Play.spawnLimit = spawnLimit;
+        Play.spawnGroupRange = spawnGroupRange;
+        Play.spawnGroupStart = spawnGroupStart;
         map = new TmxMapLoader().load(PathToMap);
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
@@ -278,7 +296,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < 350) {
+        if(spawnCount > 0 && getEnemies().size < spawnLimit) {
             MonsterType monster;
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
@@ -288,17 +306,8 @@ public class Play implements Screen {
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
-                int gen = rand.nextInt(4);
-                 if(gen == 0)
-                    monster = MonsterType.DEMON;
-                else if(gen == 1)
-                    monster = MonsterType.DRAGON;
-                else if(gen ==2)
-                    monster = MonsterType.BRUTE;
-                else
-                    monster = MonsterType.HYDRA;
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), monster);
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum));
                 time = System.currentTimeMillis() + 10;
             }
         }
@@ -340,32 +349,9 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
         count++;
         enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster()));
-        switch (monster){
-            case ASH:
-                enemies.add(new ash(x, y, level, collisionLayer));
-                break;
-            case BRUTE:
-                enemies.add(new Brute(x, y, level, collisionLayer));
-                break;
-            case GOBLIN:
-                enemies.add(new Goblin(x, y, level, collisionLayer));
-                break;
-            case ORC:
-                enemies.add(new Orc(x, y, level, collisionLayer));
-                break;
-            case DEMON:
-                enemies.add(new Demon(x,y,level, collisionLayer));
-                break;
-            case DRAGON:
-                enemies.add(new Dragon(x,y,level,collisionLayer));
-                break;
-            case HYDRA:
-                enemies.add(new Hydra(x,y,level,collisionLayer));
-                break;
-        }
 
         spawnCount--;
 

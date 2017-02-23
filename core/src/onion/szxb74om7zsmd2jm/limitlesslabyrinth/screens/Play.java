@@ -11,9 +11,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -27,6 +32,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -210,7 +216,7 @@ public class Play implements Screen {
         camera.setToOrtho(false);
         player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(mainlayer));
         spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
-        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
+        //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
 
         Gdx.input.setInputProcessor(null);
     }
@@ -393,5 +399,20 @@ public class Play implements Screen {
             }
         }
         return tiles;
+    }
+
+    public ArrayList<Object> checkObjectFor(MapLayer layer, String property){
+        ArrayList<Object> o = new ArrayList<Object>();
+        MapObjects objects = layer.getObjects();
+        for(MapObject object : objects)
+        {
+            if(object.getProperties().containsKey(property))
+            {
+                o.add(object);
+            }
+
+        }
+        return o;
+
     }
 }

@@ -218,8 +218,9 @@ public class Play implements Screen {
         camera.zoom = zoom;
         camera.setToOrtho(false);
 
-        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(mainlayer));
-        spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
+        player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(2));
+        //
+        // spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
         //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
 
 

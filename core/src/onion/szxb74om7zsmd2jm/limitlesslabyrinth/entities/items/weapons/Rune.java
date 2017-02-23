@@ -18,6 +18,16 @@ public class Rune extends Weapon {
     pos [][] AOE;
     pos CENTER;
     int NUM;
+    public Rune(int i){
+        rune = spriteTextures.RUNE.WILDGROWTH;
+        setSprite();
+        setEFFECT();
+        setNUM();
+        dmg = 100f;
+        lvl = 1;
+        type = "rune";
+        cooldown = 40;
+    }
     public Rune(){
         switchRuneType();
         dmg = 100f;
@@ -65,6 +75,9 @@ public class Rune extends Weapon {
     public Projectile getProjectile(float x1, float y1, float x2, float y2){
         if(rune == spriteTextures.RUNE.MAGICWALL){
             Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.magicwall,1,3,.2f), 30));
+        }
+        else if(rune == spriteTextures.RUNE.WILDGROWTH){
+            Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.wildgrowth,1,3,.2f), 30));
         }
         else if(rune != spriteTextures.RUNE.SUDDENDEATH || rune != spriteTextures.RUNE.ICICLE) {
             setAOE(x2, y2);

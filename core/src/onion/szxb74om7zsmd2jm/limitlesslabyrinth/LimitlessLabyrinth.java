@@ -17,11 +17,15 @@ public class LimitlessLabyrinth extends Game {
 		MapPath = PathToMap;
 		resetScreen = true;
 	}
+	public static void setPlay(){
+		loadCurrentGame = true;
+	}
 	public static void pauseScreen(){
 		isPauseScreen = true;
 	}
 	private static boolean isPauseScreen = false;
 	private static boolean resetScreen = false;
+	private static boolean loadCurrentGame = false;
 	private static boolean mainMenuScreen = false;
 	private static String MapPath;
 	public static void setMainMenu(){
@@ -43,13 +47,14 @@ public class LimitlessLabyrinth extends Game {
 			//screen.dispose();
 			System.gc();
 			resetScreen = false;
+			Play.reset();
+			play = new Play(MapPath);
 			setScreen(play);
 		}
 		if(mainMenuScreen){
 			//screen.dispose();
 			System.gc();
 			mainMenuScreen = false;
-			play = new Play(MapPath);
 			setScreen(mainMenu);
 		}
 		if(isPauseScreen){
@@ -57,6 +62,11 @@ public class LimitlessLabyrinth extends Game {
 			System.gc();
 			isPauseScreen = false;
 			setScreen(pauseScreen);
+		}
+		if(loadCurrentGame){
+			System.gc();
+			loadCurrentGame = false;
+			setScreen(play);
 		}
 		super.render();
 	}

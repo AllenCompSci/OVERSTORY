@@ -215,10 +215,10 @@ public class Gui {
         playerHealthBar.draw(Play.getRenderer().getBatch());
 
         /** itemBox update */
-        itemBox1.setPosition(Play.getCamera().position.x - 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
-        itemBox2.setPosition(Play.getCamera().position.x - 50, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
-        itemBox3.setPosition(Play.getCamera().position.x + 50, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
-        itemBox4.setPosition(Play.getCamera().position.x + 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox1.setPosition(Play.getCamera().position.x - 150 - itemBox1.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox2.setPosition(Play.getCamera().position.x - 50 - itemBox2.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox3.setPosition(Play.getCamera().position.x + 50 - itemBox3.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
+        itemBox4.setPosition(Play.getCamera().position.x + 150 - itemBox4.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);
         itemBox1.draw(Play.getRenderer().getBatch());
         itemBox2.draw(Play.getRenderer().getBatch());
         itemBox3.draw(Play.getRenderer().getBatch());

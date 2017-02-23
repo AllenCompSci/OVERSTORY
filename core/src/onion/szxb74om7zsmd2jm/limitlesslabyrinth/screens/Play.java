@@ -112,6 +112,8 @@ public class Play implements Screen {
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
     private static Array<Wall> walls = new Array<Wall>();
+    private static Array<Wall> wallsEmpty = new Array<Wall>();
+    public static Array<Wall> getWalls(){return walls;}
     public static Array<Turret> getTurrets() {
         return turrets;
     }
@@ -137,23 +139,24 @@ public class Play implements Screen {
         return gui;
     }
     private static Gui gui = new Gui();
-    public static int mainlayer = 2;
 
-    public void reset(){
-        player.reset();
-        gui.reset();
-        gui.getBackpack().reset();
+    private static int CollisionLayerNum = 1;
+
+
+    public static void reset(){
+        Play.player.reset();
+        Play.gui.reset();
+        Play.gui.getBackpack().reset();
 
         /** Reset the Play static variables */
-        enemies = enemiesEmpty;
-        projectiles = projectilesEmpty;
-        turrets = turretsEmpty;
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.turrets = Play.turretsEmpty;
+        Play.walls = Play.wallsEmpty;
         System.gc();
-        spawnCount = 0;
-        garbageTime = 0;
-        waveCount = 0;
-
-        LimitlessLabyrinth.setMainMenu();
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+        Play.waveCount = 0;
     }
 
 
@@ -214,15 +217,18 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
+
         player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(mainlayer));
         spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
         //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
+
 
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void show() {
+        Gdx.input.setInputProcessor(null);
     }
 
     @Override
@@ -248,9 +254,8 @@ public class Play implements Screen {
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
         for(Wall e : walls){
             e.draw(renderer.getBatch());
-            if(e.getRemoveState()){
-                e.remove();
-                walls.removeIndex(walls.indexOf(e, true));
+            if(walls.indexOf(null, true) != -1) {
+                walls.removeIndex(walls.indexOf(null, true));
             }
         }
         for(Projectile i : projectiles){
@@ -306,13 +311,16 @@ public class Play implements Screen {
                 else
                     monster = MonsterType.HYDRA;
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(mainlayer), monster);
+
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), monster);
+
                 time = System.currentTimeMillis() + 10;
             }
         }
 
         if(player.getHealth() <= 0){
             reset();
+            LimitlessLabyrinth.setMainMenu();
         }
     }
 

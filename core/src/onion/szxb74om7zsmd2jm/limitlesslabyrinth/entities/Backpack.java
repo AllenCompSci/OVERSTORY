@@ -14,8 +14,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/1/2017.
  */
 public class Backpack {
-    private Sprite[] slots = new Sprite[16];
-    private Item[] itemSlots = new Item[16];
+    private int pages = 3;
+    private Sprite[] slots = new Sprite[16 * pages];
+    private static int pageOn = 1;
+    private Item[] itemSlots = new Item[16 * pages];
     private Item tempItem;
     private Texture ItemBox = new Texture("itemBox.png");
     private Texture SelectedBox = new Texture("selectedBox.png");
@@ -36,9 +38,9 @@ public class Backpack {
         itemSlots[5] = new LightningStaff();
         itemSlots[6] = new LightningStaff();
         itemSlots[7] = new LightningStaff();
-        itemSlots[8] = new LightningStaff();
-        itemSlots[9] = new LightningStaff();
-        itemSlots[10] = new LightningStaff();
+        itemSlots[8] = new Rune(1);
+        itemSlots[9] = new Rune();
+        itemSlots[10] = new AOE();
         itemSlots[11] = new Magic();
         itemSlots[12] = new Magic();
         itemSlots[13] = new Magic();
@@ -58,19 +60,53 @@ public class Backpack {
         itemSlots[5] = new LightningStaff();
         itemSlots[6] = new LightningStaff();
         itemSlots[7] = new LightningStaff();
-        itemSlots[8] = new Rune();
+        itemSlots[8] = new Rune(1);
         itemSlots[9] = new Rune();
         itemSlots[10] = new AOE();
         itemSlots[11] = new Magic();
         itemSlots[12] = new Magic();
         itemSlots[13] = new Magic();
+        itemSlots[14] = new Magic();
+        itemSlots[15] = new Magic();
+        itemSlots[16] = new Magic();
+        itemSlots[17] = new Magic();
+        itemSlots[18] = new Magic();
+        itemSlots[19] = new Magic();
+        itemSlots[20] = new Magic();
+        itemSlots[21] = new Magic();
+        itemSlots[22] = new Magic();
+        itemSlots[23] = new Rune(1);
+        itemSlots[24] = new Rune(1);
+        itemSlots[25] = new Rune(1);
+        itemSlots[26] = new Rune(1);
+        itemSlots[27] = new Rune(1);
+        itemSlots[28] = new LightningStaff();
+        itemSlots[29] = new LightningStaff();
+        itemSlots[30] = new LightningStaff();
+        itemSlots[31] = new LightningStaff();
+        itemSlots[32] = new LightningStaff();
+        itemSlots[33] = new LightningStaff();
+        itemSlots[34] = new LightningStaff();
+        itemSlots[35] = new LightningStaff();
+        itemSlots[36] = new LightningStaff();
+        itemSlots[37] = new WizardStaff();
+        itemSlots[38] = new WizardStaff();
+        itemSlots[39] = new WizardStaff();
+        itemSlots[40] = new WizardStaff();
+        itemSlots[41] = new WizardStaff();
+        itemSlots[42] = new WizardStaff();
+        itemSlots[43] = new WizardStaff();
+        itemSlots[44] = new WizardStaff();
+        itemSlots[45] = new WizardStaff();
+        itemSlots[46] = new WizardStaff();
+        itemSlots[47] = new WizardStaff();
     }
 
     public void input(){
         /** Changes which slot is selected */
         if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
             selectedSlot += 2;
-            if(selectedSlot > 15) selectedSlot -= 16;
+            if(selectedSlot > slots.length - 1) selectedSlot -= slots.length;
             for(int i = 0; i < slots.length; i++){
                 slots[i] = new Sprite(ItemBox);
             }
@@ -78,7 +114,7 @@ public class Backpack {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
             selectedSlot -= 2;
-            if(selectedSlot < 0) selectedSlot += 16;
+            if(selectedSlot < 0) selectedSlot += slots.length;
             for(int i = 0; i < slots.length; i++){
                 slots[i] = new Sprite(ItemBox);
             }
@@ -137,12 +173,18 @@ public class Backpack {
     }
 
     public void draw(){
+
+        if(selectedSlot >= slots.length / pages * pageOn) pageOn++;
+        if(selectedSlot < 0 + slots.length / pages * pageOn - slots.length / pages) pageOn--;
+
         /** Draws the backpack item slots */
-        slots[0].setPosition(Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/4);
-        slots[0].draw(Play.getRenderer().getBatch());
-        itemSlots[0].getSprite().setPosition(slots[0].getX(), slots[0].getY());
-        itemSlots[0].getSprite().draw(Play.getRenderer().getBatch());
-        for(int i = 1; i < slots.length; i++) {
+        slots[0 + (pageOn * slots.length / pages - slots.length/pages)].setPosition(Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/4);
+        slots[0 + (pageOn * slots.length / pages - slots.length/pages)].draw(Play.getRenderer().getBatch());
+        itemSlots[0 + (pageOn * slots.length / pages - slots.length/pages)].getSprite().setPosition(slots[0 + (pageOn * slots.length / pages - slots.length/pages)].getX(), slots[0 + (pageOn * slots.length / pages - slots.length/pages)].getY());
+        itemSlots[0 + (pageOn * slots.length / pages - slots.length/pages)].getSprite().draw(Play.getRenderer().getBatch());
+
+
+        for(int i = 1 + (1 * slots.length / pages * pageOn - slots.length / pages); i < slots.length / pages * pageOn; i++) {
             if (i % 2 == 1) {
                 slots[i].setPosition(slots[i - 1].getX() + 51, slots[i - 1].getY());
                 slots[i].draw(Play.getRenderer().getBatch());

@@ -11,14 +11,14 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType
  * Created by chris on 2/8/2017.
  */
 public class spriteTextures {
-    public enum RUNE{AVALANCHE, EXPLOSION, GREATFIREBALL, HEAVYMAGICMISSILE, HOLYMISSILE, ICICLE, MAGICWALL, STONESHOWER, SUDDENDEATH, THUNDERSTORM};
+    public enum RUNE{AVALANCHE, EXPLOSION, GREATFIREBALL, HEAVYMAGICMISSILE, HOLYMISSILE, ICICLE, MAGICWALL, STONESHOWER, SUDDENDEATH, THUNDERSTORM, WILDGROWTH};
 
     public static Texture ExitButton = new Texture("ExitButton.png");
     public static Texture ResumeButton = new Texture("resume_button.png");
     public static Texture PauseScreenBackground = new Texture("PauseScreen.png");
 
     public static RUNE getRUNETYPE(){
-        switch((int)(Math.random()*10)){
+        switch((int)(Math.random()*11)){
             case 0:
                 return RUNE.AVALANCHE;
             case 1:
@@ -37,6 +37,8 @@ public class spriteTextures {
                 return RUNE.STONESHOWER;
             case 8:
                 return RUNE.SUDDENDEATH;
+            case 9:
+                return RUNE.WILDGROWTH;
         }
         return RUNE.THUNDERSTORM;
     }
@@ -51,7 +53,9 @@ public class spriteTextures {
     public static Texture ss = new Texture("RUNE/Stone_Shower.png");
     public static Texture sd = new Texture("RUNE/Sudden_Death.png");
     public static Texture ts = new Texture("RUNE/Thunderstorm.png");
-
+    public static Texture wg = new Texture("RUNE/Wild_Growth.png");
+    public static Texture circl = new Texture("FX/CIRCLE(1x4).png");
+    public static Texture wildgrowth = new Texture("FX/WildGrowth(1x3).png");
     public static Texture runeSprite(RUNE rune){
         switch(rune){
             case AVALANCHE:
@@ -72,6 +76,8 @@ public class spriteTextures {
                 return ss;
             case SUDDENDEATH:
                 return sd;
+            case WILDGROWTH:
+                return wg;
         }
         return ts;
     }
@@ -89,6 +95,8 @@ public class spriteTextures {
                 return Play.fourFrameAnimationCreator(holy, 2, 4, .2f);
             case MAGICWALL:
                 return Play.fourFrameAnimationCreator(magicWall, 1, 9, .2f);
+            case WILDGROWTH:
+                return Play.fourFrameAnimationCreator(circl,1,4,.2f);
             case STONESHOWER:
                 return Play.fourFrameAnimationCreator(stone,1,4,.2f);
             case SUDDENDEATH:
@@ -132,6 +140,8 @@ public class spriteTextures {
             return target;
     }
 
+    public static Texture MainMenuButtonSprite = new Texture("MainMenuButton.png");
+    public static Texture NewGameButtonSprite = new Texture("ButtonNewGame.png");
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");
     public static Texture spellbook = new Texture("Spellbook.png");
     public static Texture playButtonHoverOver = new Texture("play_button_hoverover.png");

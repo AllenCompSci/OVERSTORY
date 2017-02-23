@@ -8,21 +8,21 @@ import java.util.ArrayList;
  * Created by taylor hudson on 2/23/2017.
  */
 public class Dijkstra {
-    static public ArrayList<ArrayList<Node>> AllPaths;
-    static public ArrayList<Node> Pathway;
-    static public ArrayList<Node> EndNodes;
-    static Pathfinding.CellState[][] TILELAYOUT;
+    public ArrayList<ArrayList<Node>> AllPaths;
+    public ArrayList<Node> Pathway;
+    public ArrayList<Node> EndNodes;
+    public static Pathfinding.CellState[][] TILELAYOUT;
     static boolean update = false;
     static int LoopBeginIndex;
     static int LoopEndIndex;
-    public static void set() {
+    public Dijkstra() {
         TILELAYOUT = Pathfinding.getCellState();
         Pathway = new ArrayList<Node>();
         AllPaths = new ArrayList<ArrayList<Node>>();
         EndNodes = new ArrayList<Node>();
         update = true;
     }
-    public static void PathGen(int startI, int startJ){
+    public void PathGen(int startI, int startJ, ArrayList<Node> AllNodes ){
         /*
         int same;
         int count = same = 0;
@@ -37,15 +37,15 @@ public class Dijkstra {
         System.out.println("COUNT : " + count + " SAME : " + same);
         */ // Test to make sure that when Pathfinding TileLayout changes it also changes in Dijstra's
 
-
+        System.out.println(startI + " : " + startJ);
         Pathway.clear();
         AllPaths.clear();
-
+        EndNodes.clear();
         boolean allNodesTraversed = false;
-        Node start = new Node();
-        for(Node n : Pathfinding.AllNodes){
-            if(n.equals(startI, startJ)){
-                start = Pathfinding.AllNodes.get(Pathfinding.AllNodes.indexOf(n));
+        Node start = new Node(startI, startJ);
+        for(Node n : AllNodes){
+            if(n.equals(start)){
+                start = AllNodes.get(AllNodes.indexOf(n));
             }
         }
         start.moveTo();
@@ -54,34 +54,47 @@ public class Dijkstra {
         EndNodes.add(start);
         LoopBeginIndex = 0;
         LoopEndIndex = 0;
+        System.out.println(start);
         while(!allNodesTraversed){
 
             LoopEndIndex = AllPaths.size();
             for(int i = LoopBeginIndex; i < LoopEndIndex; i++){
-                Node ENDNODE = AllPaths.get(i).get(AllPaths.get(i).size()-1);
+                Node ENDNODE = EndNodes.get(i);
+                    boolean CHANGE = false;
                     for(int conn = 0; conn < 8; conn++){
-                        if(ENDNODE.ConnectedNodes.get(conn) != null && ENDNODE.getWeight() != 10000){
-                            if(ENDNODE.ConnectedNodes.get(conn).isTraversed() && (ENDNODE.TraverseDistance.get(conn).intValue()+ ENDNODE.getHeuristic()) < ENDNODE.ConnectedNodes.get(conn).getWeight()  ){
-                                ArrayList<Node> create = updatedPath(AllPaths.get(i), ENDNODE.ConnectedNodes.get(conn));
-                                RemoveFromAllPaths(ENDNODE.ConnectedNodes.get(conn));
+                        // This should make the start node connect to all other nodes.
+                        if(ENDNODE.getConnectedNodes().get(conn) != null && ENDNODE.getWeight() != 10000){
+                            if(ENDNODE.getConnectedNodes().get(conn).isTraversed() && (ENDNODE.TraverseDistance.get(conn).intValue()+ ENDNODE.getHeuristic()) < ENDNODE.getConnectedNodes().get(conn).getWeight()  ){
+                                ArrayList<Node> create = updatedPath(AllPaths.get(i), ENDNODE.getConnectedNodes().get(conn), conn);
+                                RemoveFromAllPaths(ENDNODE.getConnectedNodes().get(conn));
                                 AllPaths.add(create);
-                                EndNodes.add(ENDNODE.ConnectedNodes.get(conn));
-                                ENDNODE.ConnectedNodes.get(conn).setHeuristic(ENDNODE.getHeuristic() + ENDNODE.TraverseDistance.get(conn));
+                                EndNodes.add(ENDNODE.getConnectedNodes().get(conn));
+                                ENDNODE.getConnectedNodes().get(conn).setHeuristic(ENDNODE.getHeuristic() + ENDNODE.TraverseDistance.get(conn));
+                                CHANGE = true;
                             }
-                            else if(!ENDNODE.ConnectedNodes.get(conn).isTraversed()){
-                                AllPaths.add(updatedPath(AllPaths.get(i), ENDNODE.ConnectedNodes.get(conn)));
-                                EndNodes.add(ENDNODE.ConnectedNodes.get(conn));
+                            else if(!ENDNODE.getConnectedNodes().get(conn).isTraversed()){
+                                AllPaths.add(updatedPath(AllPaths.get(i), ENDNODE.getConnectedNodes().get(conn), conn));
+                                EndNodes.add(ENDNODE.getConnectedNodes().get(conn));
+                                CHANGE = true;
                             }
                         }
+
                     }
+                    if(CHANGE){
+                    AllPaths.remove(i);
+                    EndNodes.remove(i);
+                    LoopBeginIndex --;
+                    LoopEndIndex--;
+                    i--;
+                }
 
             }
-            LoopBeginIndex = LoopEndIndex;
+            LoopBeginIndex = 0;
 
-            System.out.println(AllPaths.size());
+
             allNodesTraversed = true;
-            for(int k = 0; allNodesTraversed && k < Pathfinding.AllNodes.size(); k++){
-                allNodesTraversed = Pathfinding.AllNodes.get(k).isTraversed();
+            for(int k = 0; allNodesTraversed && k < AllNodes.size(); k++){
+                allNodesTraversed = AllNodes.get(k).isTraversed();
 
             }
 
@@ -89,17 +102,24 @@ public class Dijkstra {
 
     }
 
-    public static ArrayList<Node> updatedPath(ArrayList<Node> current, Node newEnd){
+    public static ArrayList<Node> affixNewNode (ArrayList<Node> current, Node newEnd){
+        for(int i = 0; i < current.size(); i++)
+        {
+
+        }
+            return new ArrayList<Node>();
+    }
+    public ArrayList<Node> updatedPath(ArrayList<Node> current, Node newEnd, int index){
         ArrayList<Node> create = new ArrayList<Node>();
         for(Node n : current){
             create.add(n);
         }
-        newEnd.setTraversed(true);
+        newEnd.moveTo(current.get(current.size()-1), 7-index);
         create.add(newEnd);
-
+        //print(create,newEnd);
         return create;
     }
-    public static void RemoveFromAllPaths(Node updated){
+    public void RemoveFromAllPaths(Node updated){
         for(int i = 0; i < AllPaths.size(); i++){
 
             if(AllPaths.get(i).contains(updated)){
@@ -118,12 +138,12 @@ public class Dijkstra {
             }
         }
     }
-    public static void print(ArrayList<Node> Path, Node END){
+    public void print(ArrayList<Node> Path, Node END){
         System.out.print(END);
         System.out.println(Path);
     }
 
-    public static boolean AllPathContains(Node n){
+    public boolean AllPathContains(Node n){
         for(int i = 0; i < AllPaths.size(); i++){
             if(AllPaths.get(i).contains(n)){
                 return true;

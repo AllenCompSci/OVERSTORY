@@ -25,6 +25,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
 import java.util.Random;
@@ -133,12 +134,14 @@ public class Play implements Screen {
     }
     private static Gui gui = new Gui();
     private static int CollisionLayerNum = 1;
-
+    public static Pathfinding path;
+    private static int movePaths;
     public static void reset(){
         Play.player.reset();
         Play.gui.reset();
         Play.gui.getBackpack().reset();
-
+        movePaths = 0;
+        path.update();
         /** Reset the Play static variables */
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
@@ -211,6 +214,8 @@ public class Play implements Screen {
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         Gdx.input.setInputProcessor(null);
+        path = new Pathfinding();
+        movePaths = 0;
     }
 
     @Override
@@ -272,6 +277,11 @@ public class Play implements Screen {
             }
         }
         player.draw(renderer.getBatch());
+        if(movePaths++ == 9){
+            movePaths = 0;
+            path.update();
+        }
+
         gui.input();
         gui.update();
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);

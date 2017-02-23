@@ -182,7 +182,7 @@ public class Player extends Entity {
             Play.getTurrets().add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
-          // new Pathfinding();// TEST ASTAR Not ready yet
+            //new Pathfinding();// TEST ASTAR Not ready yet
         }
         /** PRESS R to ROTATE RUNE **/
         if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) && RUNE){

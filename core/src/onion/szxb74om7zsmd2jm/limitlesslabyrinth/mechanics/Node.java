@@ -1,5 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
 
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+
 import java.util.ArrayList;
 
 /**
@@ -9,8 +11,8 @@ public class Node {
 
     // Private Instance Variables
     POINT point;
-    ArrayList<Node> ConnectedNodes;
-    ArrayList<Integer> TraverseDistance;
+    public static ArrayList<Node> ConnectedNodes;
+    public static ArrayList<Integer> TraverseDistance;
     int Weight;
     int Heuristic;
     boolean Traversed;
@@ -18,7 +20,9 @@ public class Node {
     public Node(int i, int j){
         point = new POINT(i, j);
     }
+    public Node(){
 
+    }
     public boolean equals(int i, int j){
         return point.equals(i, j);
     }
@@ -37,7 +41,23 @@ public class Node {
     private int getJ(){
         return point.getJ();
     }
+    public int getWeight(){
+        return Weight;
+    }
+    public int getHeuristic(){
+        return Heuristic;
+    }
+    public void setHeuristic(Integer value){
+        Heuristic = value.intValue() + Weight;
+    }
+    public boolean isTraversed(){
+        return Traversed;
+    }
+    public void setTraversed(boolean t){Traversed = t;}
+    public void moveTo(){ Traversed = true; }
     public void setConnectedNodes(ArrayList<Node> AllNodes){
+        ConnectedNodes = new ArrayList<Node>();
+        TraverseDistance = new ArrayList<Integer>();
         Weight = 1;
         Traversed = false;
         Heuristic = 0;
@@ -73,7 +93,8 @@ public class Node {
                         }
                     }
                 }
-                if (ConnectedNodes.size() != k + 1) {
+
+                if ( (k < 4 && ConnectedNodes.size() != (k + 1)) || (k > 4 && ConnectedNodes.size() != k)){
                     ConnectedNodes.add(null);
                     TraverseDistance.add(null);
                 }
@@ -90,5 +111,28 @@ public class Node {
     }
     public void isWall(){
         Weight = 10000;
+    }
+    public static Enemy.DIRECTION moveState(Node Moveto){
+        int index = ConnectedNodes.indexOf(Moveto);
+        switch(index){
+            case 0:
+                return Enemy.DIRECTION.NORTHWEST;
+            case 1:
+                return Enemy.DIRECTION.NORTH;
+            case 2:
+                return Enemy.DIRECTION.NORTHEAST;
+            case 3:
+                return Enemy.DIRECTION.WEST;
+            case 4:
+                return Enemy.DIRECTION.EAST;
+            case 5:
+                return Enemy.DIRECTION.SOUTHWEST;
+            case 6:
+                return Enemy.DIRECTION.SOUTH;
+        }
+        return Enemy.DIRECTION.SOUTHEAST;
+    }
+    public String toString(){
+        return "(" + getI() + ", " + getJ() + ")";
     }
 }

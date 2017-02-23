@@ -22,10 +22,13 @@ public class Pathfinding {
         return TILELAYOUT;
     }
     private boolean [][] Path;
+    private int PlayerX, PlayerY;
+
     TiledMapTileLayer collisionLayer;
     int numNODES;
     public static Array<POINT> malleable;
     public static ArrayList<Node> AllNodes;
+
     public Pathfinding(){
         collisionLayer = (TiledMapTileLayer) Play.getMap().getLayers().get(1);
         HEIGHT = collisionLayer.getHeight();
@@ -33,18 +36,20 @@ public class Pathfinding {
         TILELAYOUT = new CellState[HEIGHT][WIDTH];
         Path = new boolean[HEIGHT][WIDTH];
         malleable = new Array<POINT>();
-
+        AllNodes = new ArrayList<Node>();
         init();
         update();
     }
     public enum CellState{BLOCKED, WALL, ENEMY, PLAYER, START, FINISH, PATH}
     public void init(){
+
         numNODES = 0; // Setup for Dikstras
         for(int i =  0; i < HEIGHT; i++){
             for(int j = 0; j < WIDTH; j++){
                 TILELAYOUT[i][j] = PATH;
                 Path[i][j] = true;
                 numNODES++;
+
                 if(collisionLayer.getCell(i,j).getTile().getProperties().containsKey("blocked")){
                     TILELAYOUT [i][j] = BLOCKED;
                     numNODES --;
@@ -57,6 +62,7 @@ public class Pathfinding {
         }
         Dijkstra.TILELAYOUT = TILELAYOUT;
         // Connect Nodes
+        Dijkstra.set();
         for(Node node:AllNodes){
             node.setConnectedNodes(AllNodes);
         }
@@ -140,8 +146,9 @@ public class Pathfinding {
         }
     }
     public void getPlayer(){
-        TILELAYOUT[(int)(Play.getPlayer().getSprite().getX()/SQR)][(int)(Play.getPlayer().getSprite().getY()/SQR)] = PLAYER;
-        malleable.add(new POINT((int)(Play.getPlayer().getSprite().getX()/SQR), (int)(Play.getPlayer().getSprite().getY()/SQR)));
+        PlayerX = (int)(Play.getPlayer().getSprite().getX()/SQR);
+        PlayerY = (int)(Play.getPlayer().getSprite().getY()/SQR);
+        TILELAYOUT[PlayerX][PlayerY] = PLAYER;
     }
     public void update(){
         removeMalleable();
@@ -150,10 +157,16 @@ public class Pathfinding {
         getPlayer();
         for(Node node : AllNodes)
             node.reset();
-        Dijkstra.PathGen();
+
+        Dijkstra.PathGen(PlayerX, PlayerY);
+
+
+
+
 
     }
     public void removeMalleable(){
+        TILELAYOUT[PlayerX][PlayerY] = PATH;
         for(POINT p : malleable) {
             TILELAYOUT[p.getI()][p.getJ()] = collisionLayer.getCell(p.getI(), p.getJ()).getTile().getProperties().containsKey("blocked") ? BLOCKED : PATH;
             Path[p.getI()][p.getJ()] = (TILELAYOUT[p.getI()][p.getJ()] == PATH) ? true : false;

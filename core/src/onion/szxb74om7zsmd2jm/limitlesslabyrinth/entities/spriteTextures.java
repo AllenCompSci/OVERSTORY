@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
+import javax.xml.soap.Text;
+
 import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType.*;
 
 /**
@@ -140,6 +142,7 @@ public class spriteTextures {
             return target;
     }
 
+    public static Texture swordProjectileSprite = new Texture("swordProjectile.png");
     public static Texture MainMenuButtonSprite = new Texture("MainMenuButton.png");
     public static Texture NewGameButtonSprite = new Texture("ButtonNewGame.png");
     public static Texture MainMenuBackground = new Texture("MainMenuBackground.png");

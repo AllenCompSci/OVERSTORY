@@ -21,12 +21,13 @@ public class Spell extends Projectile {
     int count1;
     Player.FACE dir;
 
-    public Spell(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
+    public Spell(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1, long time){
         this.fromItem = fromItem;
         this.count1 = count1;
         animation = spriteTextures.FX(count1);
         this.dmg = dmg;
         this.dir = dir;
+        this.time = time;
         this.distance = distance;
         if(distance < 50) {
             count = distance + 8;
@@ -83,12 +84,11 @@ public class Spell extends Projectile {
             System.out.println("ITEM LEVELED UP");
         }
 
-
     }
 
     @Override
     public void draw() {
-        distance ++;
+        distance++;
 
         stateTime += Gdx.graphics.getDeltaTime();
         TextureRegion currentFrame = animation.getKeyFrame(stateTime, true);
@@ -96,14 +96,14 @@ public class Spell extends Projectile {
         sprite.setPosition(x,y);
         updateX();
         updateY();
-        if(((int)distance == count)){
+        if(distance > endDist){
+            time = System.currentTimeMillis();
+        }
+        if(((int)distance == count && !(distance > endDist))){
             //Need to change x and y to be following the y = m x + b format.
 
-            Play.getProjectiles().add(new Spell(sprite.getX() + createX(), sprite.getY() + createY(), dir, dmg, distance, fromItem, count1));
-            Play.getProjectiles().add(new Spell(sprite.getX() - createX(), sprite.getY() - createY(), dir, dmg, distance, fromItem, count1));
-        }
-        if(distance > endDist){
-            remove();
+            Play.getProjectiles().add(new Spell(sprite.getX() + createX(), sprite.getY() + createY(), dir, dmg, distance, fromItem, count1, time));
+            Play.getProjectiles().add(new Spell(sprite.getX() - createX(), sprite.getY() - createY(), dir, dmg, distance, fromItem, count1, time));
         }
     }
 }

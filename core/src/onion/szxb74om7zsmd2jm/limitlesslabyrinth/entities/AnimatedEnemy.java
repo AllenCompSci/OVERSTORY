@@ -17,6 +17,7 @@ public class AnimatedEnemy extends Enemy {
         private Animation<TextureRegion> animation;
         float stateTime;
         public static DIRECTION ENEMYFACING;
+        private int Ecnt = 0;
 
 
         private boolean flipLEFT;
@@ -60,7 +61,13 @@ public class AnimatedEnemy extends Enemy {
             lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
             lostHealthBar.draw(batch);
             healthBar.draw(batch);
-            move();
+            Ecnt++;
+            if(Ecnt % 10 == 0)move();
+            /** try{
+             Thread.sleep(100);
+             }catch (Exception e){
+
+             }**/
             //Enemy checking for player
             setDir();
             DMGDETECT();

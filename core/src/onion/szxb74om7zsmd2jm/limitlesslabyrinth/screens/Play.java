@@ -291,6 +291,7 @@ public class Play implements Screen {
                 enemies.removeIndex(enemies.indexOf(null, true));
             }
         }
+
         player.draw(renderer.getBatch());
         gui.input();
         gui.update();

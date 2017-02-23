@@ -86,15 +86,18 @@ public class Entity implements InputProcessor {
                 }
            }
         }
-        if(height == 0f) return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
-        );
-        return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
-                && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
-        );
-
+        if(sprite.getX() == Player.CharX && sprite.getY() == Player.CharY) {
+            if (height == 0f)
+                return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
+                        && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
+                        && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
+                );
+            return (!collisionLayer.getCell(COLx1, COLy1).getTile().getProperties().containsKey("blocked")
+                    && !collisionLayer.getCell(COLx2, COLy2).getTile().getProperties().containsKey("blocked")
+                    && !collisionLayer.getCell(COLx3, COLy3).getTile().getProperties().containsKey("blocked")
+            );
+        }
+        return true;
     }
 
 

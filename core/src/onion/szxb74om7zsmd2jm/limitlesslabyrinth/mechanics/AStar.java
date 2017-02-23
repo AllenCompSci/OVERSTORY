@@ -20,6 +20,14 @@ public class AStar {
             this.j = j;
         }
 
+        public int getX(){
+            return i;
+        }
+
+        public int getY(){
+            return j;
+        }
+
         @Override
         public String toString(){
             return "["+this.i+", "+this.j+"]";
@@ -34,6 +42,7 @@ public class AStar {
     static boolean closed[][];
     static int startI, startJ;
     static int endI, endJ;
+    public static int[] noPath = {-1,-1};
 
     public static void setBlocked(int i, int j){
         grid[i][j] = null;
@@ -128,7 +137,7 @@ public class AStar {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static void test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
+    public static int[] test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
      //   System.out.println("\n\nTest Case #"+tCase);
         //Reset
         grid = new Cell[x][y];
@@ -190,15 +199,21 @@ public class AStar {
 
         if(closed[endI][endJ]){
             //Trace back the path
-            System.out.println("Path: ");
+            /**System.out.println("Path: ");
             Cell current = grid[endI][endJ];
             System.out.print(current);
             while(current.parent!=null){
-                System.out.print(" -> "+current.parent);
+               System.out.print(" -> "+ String.valueOf(current.getX()) + " " + String.valueOf(current.getY()));
                 current = current.parent;
             }
-            System.out.println();
-        }else System.out.println("No possible path");
+            System.out.println();**/
+            Cell current = grid[endI][endJ];
+            if(current.parent!=null){
+                current = current.parent;
+                return new int[] {current.getX(), current.getY()};
+            }
+        }else return noPath;
+        return noPath;
     }
 
     public static void main(String[] args) throws Exception{

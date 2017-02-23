@@ -24,9 +24,9 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.AStar.test;
  */
 
 public class Enemy extends Entity{
-    public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST};
-    private ArrayList<Integer> canmove = new ArrayList<Integer>(); //Specifies which directions an enemy can move
-    private boolean isNavigating = false; //Checks if the enemy needs to move around an object
+    public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, NONE};
+    private DIRECTION move = DIRECTION.NONE;
+    private boolean keepMoving = false; //Checks if the enemy needs to move around an object
     public int getXpDrop() {
         return xpDrop;
     }
@@ -52,7 +52,9 @@ public class Enemy extends Entity{
     }
 
     protected float y;
-
+    private int TileX;
+    private int TileY;
+    private int Ecnt = 0;
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -65,7 +67,9 @@ public class Enemy extends Entity{
         lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
         lostHealthBar.draw(batch);
         healthBar.draw(batch);
-        move();
+
+        Ecnt++;
+        if(Ecnt % 10 == 0)move();
 
         DMGDETECT();
 
@@ -115,99 +119,109 @@ public class Enemy extends Entity{
 
     @Override
     public void move() {
-       setDirection();
-        int num;
-        Random rand = new Random();
-
-            if(canmove.size() == 0){ //If out of range
-                num = 9;// rand.nextInt(8 + 1);
+        if(!keepMoving) {
+            TileX = (int) ((sprite.getX() + sprite.getWidth() / 2) / Play.tilePixelWidth);
+            TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);
+            int[] nextCell = test(Play.lvlTileWidth, Play.lvlTileHeight, TileX, TileY, (int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) / Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) / Play.tilePixelHeight), Play.collisionTiles);
+            if (nextCell[0] != TileX) {
+                if (nextCell[0] > TileX) {
+                    if (nextCell[1] > TileY) {
+                        move = DIRECTION.NORTHEAST;
+                    } else if (nextCell[1] < TileY) {
+                        move = DIRECTION.SOUTHEAST;
+                    } else {
+                        move = DIRECTION.EAST;
+                    }
+                } else {
+                    if (nextCell[1] > TileY) {
+                        move = DIRECTION.NORTHWEST;
+                    } else if (nextCell[1] < TileY) {
+                        move = DIRECTION.SOUTHWEST;
+                    } else {
+                        move = DIRECTION.WEST;
+                    }
+                }
+            } else if (nextCell[1] != TileY) {
+                if (nextCell[1] > TileY) {
+                    move = DIRECTION.NORTH;
+                } else {
+                    move = DIRECTION.SOUTH;
+                }
+            } else if (nextCell[0] ==- 1){
+                move = DIRECTION.NONE;
             }
-            else{
-                num = canmove.get(rand.nextInt(canmove.size()));
-             //  Gdx.app.log("", String.valueOf(String.valueOf(collideLocations.length)));
-             //   Gdx.app.log("", String.valueOf((int) ((sprite.getX() + sprite.getWidth()/2) / Play.tilePixelWidth)));
-             //   Gdx.app.log("", String.valueOf((int) ((sprite.getY() + sprite.getHeight()/2) / Play.tilePixelHeight)));
-             //   Gdx.app.log("", String.valueOf((int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/ Play.tilePixelWidth)));
-            //    Gdx.app.log("", String.valueOf( (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/Play.tilePixelHeight)));
 
-                test(Play.lvlTileWidth, Play.lvlTileHeight, (int) ((sprite.getX() + sprite.getWidth()/2) / Play.tilePixelWidth), (int) ((sprite.getY() + sprite.getHeight()/2) / Play.tilePixelHeight),(int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/ Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/Play.tilePixelHeight), Play.collisionTiles);
+
+            if (!detection.isInSmallRadius(this)) {
+                moveEnemy(move);
             }
 
-        if(!detection.isInSmallRadius(this)) {
-           moveEnemy(num);
         }
-        canmove.clear();
+        else{
+            moveEnemyCont(move);
+            keepMoving = false;
+        }
     }
 
-    private void setDirection(){
-        //Checks which direction enemy should go
-        //Up
-        if (sprite.getY() + sprite.getHeight() / 2 < Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
-            canmove.add(4);
+    private void moveEnemyCont(DIRECTION move){
+        if(move == DIRECTION.SOUTHWEST){ //Down & Left
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight));
+            keepMoving = true;
         }
-        //Down
-        if (sprite.getY() + sprite.getHeight() / 2 > Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) {
-            canmove.add(3);
+        if(move == DIRECTION.SOUTHEAST){ //Down & Right
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight ));
+            keepMoving = true;
         }
-        //Left
-        if(sprite.getX() + sprite.getWidth()/2 > Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
-            canmove.add(2);
-
+        if(move == DIRECTION.NORTHWEST){ //Up & Left
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight));
+            keepMoving = true;
         }
-        //Right
-        if(sprite.getX() + sprite.getWidth()/2 < Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2){
-            canmove.add(1);
+        if(move == DIRECTION.NORTHEAST){ //Up & Right
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth) , (float) (TileY * Play.tilePixelHeight));
+            keepMoving = true;
         }
-        if(canmove.contains(1) && canmove.contains(4)) canmove.add(5); //Up & Right
-        if(canmove.contains(2) && canmove.contains(4)) canmove.add(6); //Up & Left
-        if(canmove.contains(1) && canmove.contains(3)) canmove.add(7); //Down & Right
-        if(canmove.contains(2) && canmove.contains(3)) canmove.add(8); //Down & Left
     }
 
-    private void moveEnemy(int num){
-        if(num == 8){ //Down & Left
-            if (checkCollision(-sprite.getWidth(), -sprite.getHeight(), -speed/2, -speed/2)) {
-                sprite.setY(sprite.getY() - speed/2);
-                sprite.setX(sprite.getX() - speed/2);
-            }
+    private void moveEnemy(DIRECTION move){
+        if(move == DIRECTION.SOUTHWEST){ //Down & Left
+            TileX--;
+            TileY--;
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelHeight/2));
+            keepMoving = true;
         }
-        if(num == 7){ //Down & Right
-            if (checkCollision(sprite.getWidth(), -sprite.getHeight(), speed/2, -speed/2)) {
-                sprite.setY(sprite.getY() - speed/2);
-                sprite.setX(sprite.getX() + speed/2);
-            }
+        if(move == DIRECTION.SOUTHEAST){ //Down & Right
+            TileX++;
+            TileY--;
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelHeight/2));
+            keepMoving = true;
         }
-        if(num == 6){ //Up & Left
-            if (checkCollision(-sprite.getWidth(), sprite.getHeight(), -speed/2, speed/2)) {
-                sprite.setY(sprite.getY() + speed/2);
-                sprite.setX(sprite.getX() - speed/2);
-            }
+        if(move == DIRECTION.NORTHWEST){ //Up & Left
+            TileX--;
+            TileY++;
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelHeight/2));
+            keepMoving = true;
         }
-        if(num == 5){ //Up & Right
-            if (checkCollision(sprite.getWidth(), sprite.getHeight(), speed/2, speed/2)) {
-                sprite.setY(sprite.getY() + speed/2);
-                sprite.setX(sprite.getX() + speed/2);
-            }
+        if(move == DIRECTION.NORTHEAST){ //Up & Right
+            TileX++;
+            TileY++;
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2) , (float) (TileY * Play.tilePixelHeight - Play.tilePixelHeight/2));
+            keepMoving = true;
         }
-        if (num == 4) { //Up
-            if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
-                sprite.setY(sprite.getY() + speed);
-            }
+        if (move == DIRECTION.NORTH) { //Up
+            TileY++;
+            sprite.setY((float) (TileY * Play.tilePixelHeight));
         }
-        if (num == 3) { //Down
-            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
-                sprite.setY(sprite.getY() + -speed);
-            }
+        if (move == DIRECTION.SOUTH) { //Down
+            TileY--;
+            sprite.setY((float) (TileY * Play.tilePixelHeight));
         }
-        if (num == 2) { //Left
-            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
-                sprite.setX(sprite.getX() + -speed);
-            }
+        if (move == DIRECTION.WEST) { //Left
+            TileX--;
+            sprite.setX((float) (TileX * Play.tilePixelWidth));
         }
-        if (num == 1) { //Right
-            if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
-                sprite.setX(sprite.getX() + speed);
-            }
+        if (move == DIRECTION.EAST) { //Right
+            TileX++;
+            sprite.setX((float) (TileX * Play.tilePixelWidth));
         }
 
     }

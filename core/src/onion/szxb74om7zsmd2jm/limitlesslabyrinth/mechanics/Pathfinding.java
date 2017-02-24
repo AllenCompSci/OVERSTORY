@@ -54,7 +54,7 @@ public class Pathfinding {
                 if(collisionLayer.getCell(i,j).getTile().getProperties().containsKey("blocked")){
                     TILELAYOUT [i][j] = BLOCKED;
                     Path[i][j] = false;
-                    AllNodes.add(new Node(i,j));
+                    numNODES--;
                 }
                 else{
                     AllNodes.add(new Node(i,j));
@@ -146,8 +146,8 @@ public class Pathfinding {
         }
     }
     public void getPlayer(){
-        PlayerX = (int)(Play.getPlayer().getSprite().getX()/SQR);
-        PlayerY = (int)(Play.getPlayer().getSprite().getY()/SQR);
+        PlayerX = (int)((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/SQR);
+        PlayerY = (int)((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/SQR);
         TILELAYOUT[PlayerX][PlayerY] = PLAYER;
     }
     public void update(){

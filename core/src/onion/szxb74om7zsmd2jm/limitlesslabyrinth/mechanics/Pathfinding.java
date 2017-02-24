@@ -53,8 +53,8 @@ public class Pathfinding {
 
                 if(collisionLayer.getCell(i,j).getTile().getProperties().containsKey("blocked")){
                     TILELAYOUT [i][j] = BLOCKED;
-                    numNODES --;
                     Path[i][j] = false;
+                    AllNodes.add(new Node(i,j));
                 }
                 else{
                     AllNodes.add(new Node(i,j));
@@ -158,8 +158,8 @@ public class Pathfinding {
         for(Node node : AllNodes)
             node.reset();
 
-        method.PathGen(PlayerX, PlayerY, AllNodes);
 
+        method.PathGen(PlayerX, PlayerY, AllNodes);
 
 
 

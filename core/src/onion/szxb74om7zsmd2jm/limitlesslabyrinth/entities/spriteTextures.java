@@ -1121,10 +1121,10 @@ public class spriteTextures {
         return 1;
     }
 
-    public static Play.MonsterType makeAMonster(){
+    public static Play.MonsterType makeAMonster(int spawnRange, int spawnStart){
         Random rand = new Random();
         int VAL;
-        VAL = rand.nextInt(Play.getSpawnGroupRange()) + Play.getSpawnGroupStart();
+        VAL = rand.nextInt(spawnRange) + spawnStart;
 
         switch(VAL) {
             case 0:

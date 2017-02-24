@@ -152,7 +152,7 @@ public class Pathfinding {
     }
     public void update(){
         removeMalleable();
-        getWall();
+//        getWall();
         getEnemies();
         getPlayer();
         for(Node node : AllNodes)

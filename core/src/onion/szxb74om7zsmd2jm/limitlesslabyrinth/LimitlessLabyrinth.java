@@ -37,7 +37,7 @@ public class LimitlessLabyrinth extends Game {
 
 	@Override
 	public void create () {
-		play = new Play("test.tmx", 350, 10, 0);
+		play = new Play("test.tmx", 350, 10, -10);
 		setScreen(mainMenu);
 	}
 
@@ -48,7 +48,7 @@ public class LimitlessLabyrinth extends Game {
 			System.gc();
 			resetScreen = false;
 			Play.reset();
-			play = new Play(MapPath, 350, 4, 0);
+			play = new Play(MapPath, 350, 10, -10);
 			setScreen(play);
 		}
 		if(mainMenuScreen){

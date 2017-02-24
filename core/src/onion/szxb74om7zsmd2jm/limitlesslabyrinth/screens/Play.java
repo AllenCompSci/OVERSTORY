@@ -12,8 +12,10 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -151,6 +153,7 @@ public class Play implements Screen {
         Play.spawnGroupStart = spawnGroupStart;
     }
     private static int spawnGroupStart;
+    private static Array<TiledMapTile> SpawnTiles;
 
 
     public static void reset(){
@@ -233,6 +236,7 @@ public class Play implements Screen {
         camera.setToOrtho(false);
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         Gdx.input.setInputProcessor(null);
         path = new Pathfinding();
         movePaths = 0;
@@ -318,7 +322,8 @@ public class Play implements Screen {
             int num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum));
+
+                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
                 time = System.currentTimeMillis() + 10;
             }
         }
@@ -360,9 +365,9 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer){
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart){
         count++;
-        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster()));
+        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart)));
 
         spawnCount--;
 
@@ -389,5 +394,15 @@ public class Play implements Screen {
             }
         }
         return tiles;
+    }
+
+    public Array<TiledMapTile> checkMapLayerForArray(TiledMapTileLayer layer, String string){
+        Array<TiledMapTile> tiledMapTiles = new Array<TiledMapTile>();
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string)) tiledMapTiles.add(layer.getCell(x,y).getTile());
+            }
+        }
+        return tiledMapTiles;
     }
 }

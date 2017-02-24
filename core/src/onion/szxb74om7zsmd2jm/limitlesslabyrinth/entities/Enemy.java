@@ -158,46 +158,46 @@ public class Enemy extends Entity{
 
     private void moveEnemy(int num){
         if(num == 8){ //Down & Left
-            if (checkCollision(-sprite.getWidth(), -sprite.getHeight(), -speed/2, -speed/2)) {
+            if (checkCollision(-sprite.getWidth(), -sprite.getHeight(), -speed/2, -speed/2, collisionLayer)) {
                 sprite.setY(sprite.getY() - speed/2);
                 sprite.setX(sprite.getX() - speed/2);
             }
         }
         if(num == 7){ //Down & Right
-            if (checkCollision(sprite.getWidth(), -sprite.getHeight(), speed/2, -speed/2)) {
+            if (checkCollision(sprite.getWidth(), -sprite.getHeight(), speed/2, -speed/2, collisionLayer)) {
                 sprite.setY(sprite.getY() - speed/2);
                 sprite.setX(sprite.getX() + speed/2);
             }
         }
         if(num == 6){ //Up & Left
-            if (checkCollision(-sprite.getWidth(), sprite.getHeight(), -speed/2, speed/2)) {
+            if (checkCollision(-sprite.getWidth(), sprite.getHeight(), -speed/2, speed/2, collisionLayer)) {
                 sprite.setY(sprite.getY() + speed/2);
                 sprite.setX(sprite.getX() - speed/2);
             }
         }
         if(num == 5){ //Up & Right
-            if (checkCollision(sprite.getWidth(), sprite.getHeight(), speed/2, speed/2)) {
+            if (checkCollision(sprite.getWidth(), sprite.getHeight(), speed/2, speed/2, collisionLayer)) {
                 sprite.setY(sprite.getY() + speed/2);
                 sprite.setX(sprite.getX() + speed/2);
             }
         }
         if (num == 4) { //Up
-            if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
+            if (checkCollision(0f, sprite.getHeight(), 0f, speed, collisionLayer)) {
                 sprite.setY(sprite.getY() + speed);
             }
         }
         if (num == 3) { //Down
-            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
+            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed, collisionLayer)) {
                 sprite.setY(sprite.getY() + -speed);
             }
         }
         if (num == 2) { //Left
-            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
+            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f, collisionLayer)) {
                 sprite.setX(sprite.getX() + -speed);
             }
         }
         if (num == 1) { //Right
-            if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
+            if (checkCollision(sprite.getWidth(), 0f, speed, 0f, collisionLayer)) {
                 sprite.setX(sprite.getX() + speed);
             }
         }

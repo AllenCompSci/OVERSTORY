@@ -37,7 +37,7 @@ public class Dijkstra {
         System.out.println("COUNT : " + count + " SAME : " + same);
         */ // Test to make sure that when Pathfinding TileLayout changes it also changes in Dijstra's
 
-        System.out.println(startI + " : " + startJ);
+        //System.out.println(startI + " : " + startJ);
         Pathway.clear();
         AllPaths.clear();
         EndNodes.clear();
@@ -54,7 +54,7 @@ public class Dijkstra {
         EndNodes.add(start);
         LoopBeginIndex = 0;
         LoopEndIndex = 0;
-        System.out.println(start);
+       // System.out.println(start);
         while(!allNodesTraversed){
 
             LoopEndIndex = AllPaths.size();

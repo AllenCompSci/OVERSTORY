@@ -478,7 +478,7 @@ public class Play implements Screen {
 
     public void checkForPortal(TiledMapTileLayer collisionLayer) {
         if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("portal")) {
-            LimitlessLabyrinth.ChangeMap((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
+            LimitlessLabyrinth.LoadingScreen((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
         }
     }
 }

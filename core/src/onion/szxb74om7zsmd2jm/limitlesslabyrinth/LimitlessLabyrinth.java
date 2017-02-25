@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.LoadingScreen;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.PauseScreen;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -27,6 +28,11 @@ public class LimitlessLabyrinth extends Game {
 		MapPath = PathToMap;
 		changeMap = true;
 	}
+	public static void LoadingScreen(String PathToMap){
+		MapPath = PathToMap;
+		loadScreen = true;
+	}
+	private static boolean loadScreen = false;
 	private static boolean changeMap = false;
 	private static boolean isPauseScreen = false;
 	private static boolean resetScreen = false;
@@ -54,6 +60,12 @@ public class LimitlessLabyrinth extends Game {
 
 	@Override
 	public void render () {
+		if(loadScreen){
+			//screen.dispose();
+			System.gc();
+			loadScreen = false;
+			setScreen(new LoadingScreen(MapPath));
+		}
 		if(resetScreen){
 			//screen.dispose();
 			System.gc();

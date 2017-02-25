@@ -44,7 +44,7 @@ public class Item {
         this.XPtoLVL = XPtoLVL;
     }
 
-    protected long XPtoLVL = 10;
+    protected long XPtoLVL = 100;
     public long getCooldown() {
         return cooldown;
     }

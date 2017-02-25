@@ -56,6 +56,11 @@ public class Entity implements InputProcessor {
     }
     public static float collisionWidth;
     public static float collisionHeight;
+
+    public int getLevel() {
+        return level;
+    }
+
     protected int level;
 
     public Entity(float x, float y, int level, TiledMapTileLayer collisionLayer){

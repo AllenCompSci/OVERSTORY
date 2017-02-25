@@ -30,7 +30,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
-import java.util.Random;
+import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Created by chris on 1/19/2017.
@@ -108,25 +109,11 @@ public class Play implements Screen {
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
-    private static Array<Wall> walls = new Array<Wall>();
-    private static Array<Wall> wallsEmpty = new Array<Wall>();
     public static Array<Wall> getWalls(){return walls;}
-    public static Array<Turret> getTurrets() {
-        return turrets;
-    }
-    private static Array<Turret> turrets = new Array<Turret>();
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
     private long time = 0;
-    public static int waveCount = 0;
     private long count;
-    public static int getSpawnCount() {
-        return spawnCount;
-    }
-    public static void setSpawnCount(int spawnCount) {
-        waveCount++;
-        Play.spawnCount = spawnCount;
-    }
     public static void addWall(Wall wallType){
         walls.add(wallType);
     }
@@ -154,35 +141,28 @@ public class Play implements Screen {
     }
     private static int spawnGroupStart;
     private static Array<TiledMapTile> SpawnTiles;
-
     public static String getSpawnArea() {
         return spawnArea;
     }
-
     public static void setSpawnArea(String spawnArea) {
         Play.spawnArea = spawnArea;
     }
-
-    private static String spawnArea = "Area1";
-
-
-    public static void reset(){
-        Play.player.reset();
-        Play.gui.reset();
-        Play.gui.getBackpack().reset();
-        movePaths = 0;
-        path.update();
-        /** Reset the Play static variables */
-        spawnArea = "Area1";
-        Play.enemies = Play.enemiesEmpty;
-        Play.projectiles = Play.projectilesEmpty;
-        Play.turrets = Play.turretsEmpty;
-        Play.walls = Play.wallsEmpty;
-        System.gc();
-        Play.spawnCount = 0;
-        Play.garbageTime = 0;
-        Play.waveCount = 0;
+    public static int[][] getPlayerPOS() {
+        return playerPOS;
     }
+    private static int[][] playerPOS;
+    private static String spawnArea = "Area1";
+    private static Array<Wall> wallsEmpty = new Array<Wall>();
+    private static Array<Wall> walls = new Array<Wall>();
+    public static String getMapPath() {
+        return mapPath;
+    }
+    private static String mapPath;
+    public static Map<String, Array<Turret>> getTurrets() {
+        return turrets;
+    }
+    private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
+    private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
@@ -236,7 +216,39 @@ public class Play implements Screen {
         return new Animation(duration, animationFrames);
     }
 
+    public static void reset(){
+        Play.player.reset();
+        Play.gui.reset();
+        Play.gui.getBackpack().reset();
+        movePaths = 0;
+        path.update();
+        /** Reset the Play static variables */
+        spawnArea = "Area1";
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.walls = Play.wallsEmpty;
+        turrets = new HashMap<String, Array<Turret>>();
+        KillCount = new HashMap<String, Integer>();
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+    }
+
+    public static void changeMap(){
+        movePaths = 0;
+        path.update();
+        spawnArea = "Area1";
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.walls = Play.wallsEmpty;
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+    }
+
     public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
+        enemiesEmpty = new Array<>();
+        projectilesEmpty = new Array<>();
+        turretsEmpty = new Array<Turret>();
+        wallsEmpty = new Array<>();
         Play.spawnLimit = spawnLimit;
         Play.spawnGroupRange = spawnGroupRange;
         Play.spawnGroupStart = spawnGroupStart;
@@ -245,6 +257,7 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
+        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "StartPosition"));
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
         spawnArea = "Area1";
         spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
@@ -252,6 +265,13 @@ public class Play implements Screen {
         Gdx.input.setInputProcessor(null);
         path = new Pathfinding();
         movePaths = 0;
+        mapPath = LimitlessLabyrinth.getMapPath();
+
+        turrets.putIfAbsent(mapPath, turretsEmpty);
+        KillCount.putIfAbsent(mapPath, 1);
+
+
+
     }
 
     @Override
@@ -264,6 +284,9 @@ public class Play implements Screen {
 
         /** Check for change in spawnArea */
         checkSpawnArea((TiledMapTileLayer) map.getLayers().get(2));
+
+        /** Check for portal to other realm */
+        checkForPortal((TiledMapTileLayer) map.getLayers().get(1));
 
         /** Open the pauseMenu */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
@@ -301,7 +324,7 @@ public class Play implements Screen {
             }
         }
 
-        for(Turret i : turrets){
+        for(Turret i : turrets.get(mapPath)){
             i.draw();
         }
 
@@ -311,7 +334,13 @@ public class Play implements Screen {
             i.draw(renderer.getBatch());
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
+                spawnCount++;
+                if(spawnCount >= 100){
+                    KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);
+                    spawnCount = 0;
+                }
                 i.onDeath();
+
             }
             if(enemies.indexOf(null, true) != -1) {
                 enemies.removeIndex(enemies.indexOf(null, true));
@@ -329,18 +358,18 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < spawnLimit) {
+        if(getEnemies().size < spawnLimit) {
             MonsterType monster;
-            monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
 
             int num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
-                    spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
+                    spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
                 }
-                time = System.currentTimeMillis() + 10;
+                time = System.currentTimeMillis() + 100;
+
             }
         }
 
@@ -384,8 +413,6 @@ public class Play implements Screen {
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart){
         count++;
         enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart)));
-
-        spawnCount--;
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
     }
@@ -446,6 +473,12 @@ public class Play implements Screen {
             spawnArea = (String) collisionLayer.getCell((int)((player.getSprite().getX() + player.getSprite().getWidth()/2)/collisionLayer.getTileWidth()), (int)((player.getSprite().getY() + player.getSprite().getHeight()/2)/collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger");
             spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
             SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        }
+    }
+
+    public void checkForPortal(TiledMapTileLayer collisionLayer) {
+        if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("portal")) {
+            LimitlessLabyrinth.ChangeMap((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
         }
     }
 }

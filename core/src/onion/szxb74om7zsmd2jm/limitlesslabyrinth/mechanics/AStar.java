@@ -196,7 +196,7 @@ public class AStar {
         }
         System.out.println();**/
         AStar();
-
+        //TO DO - take si/sj and check for similarity with current.parent and take the one before
         if(closed[endI][endJ]){
             //Trace back the path
             System.out.println("Path: ");

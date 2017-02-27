@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Touchable;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
  * Created by 226812 on 2/21/2017.
@@ -27,7 +28,8 @@ public class NewGameButton extends Actor {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 if(button == Input.Buttons.LEFT){
-                    LimitlessLabyrinth.setPlay("test.tmx");
+                    LimitlessLabyrinth.setPlayerDeath(false);
+                    LimitlessLabyrinth.LoadingScreen("reset");
                 }
                 return true;
             }

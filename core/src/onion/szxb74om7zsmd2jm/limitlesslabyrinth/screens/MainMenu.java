@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.LimitlessLabyrinth;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.BackGround;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.mainmenu.ExitButton;
@@ -40,12 +41,16 @@ public class MainMenu implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         backGround = new BackGround();
-        playButton = new PlayButton();
+        if(!LimitlessLabyrinth.isPlayerDeath()) {
+            playButton = new PlayButton();
+        }
         exitButton = new ExitButton();
         newGameButton = new NewGameButton();
 
         stage.addActor(backGround);
-        stage.addActor(playButton);
+        if(!LimitlessLabyrinth.isPlayerDeath()) {
+            stage.addActor(playButton);
+        }
         stage.addActor(exitButton);
         stage.addActor(newGameButton);
     }
@@ -59,8 +64,6 @@ public class MainMenu implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width,height,true);
-        playButton.updateSpritePosition();
     }
 
     @Override

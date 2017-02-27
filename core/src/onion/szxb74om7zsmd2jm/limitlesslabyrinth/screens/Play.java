@@ -374,7 +374,7 @@ public class Play implements Screen {
         }
 
         if(player.getHealth() <= 0){
-            reset();
+            LimitlessLabyrinth.setPlayerDeath(true);
             LimitlessLabyrinth.setMainMenu();
         }
     }

@@ -58,7 +58,7 @@ public class Player extends Entity {
 
     public void selectOutfit(int selection){
         this.selection = selection;
-        switch(selection){
+        switch(3){
             case 0:
                 playerType = "Conjurer/";
                 break;

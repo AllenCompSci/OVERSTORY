@@ -138,7 +138,7 @@ public class Play implements Screen {
     public static int getSpawnLimit() {
         return spawnLimit;
     }
-    private static int spawnLimit = 350;
+    private static int spawnLimit = 3;
     public static int getSpawnGroupRange() {
         return spawnGroupRange;
     }

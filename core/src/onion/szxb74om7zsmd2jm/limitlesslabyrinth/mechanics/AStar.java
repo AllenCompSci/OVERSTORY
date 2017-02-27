@@ -131,14 +131,13 @@ public class AStar {
 
     /*
     Params :
-    tCase = test case No. REMOVED FOR NOW
+    tCase = test case No.
     x, y = Board's dimensions
     si, sj = start location's x and y coordinates
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static int[] test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
-     //   System.out.println("\n\nTest Case #"+tCase);
+    public static void test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -184,10 +183,10 @@ public class AStar {
             }
             System.out.println();
         }
-        System.out.println();**/
+        System.out.println();
 
         AStar();
-      /**  System.out.println("\nScores for cells: ");
+        System.out.println("\nScores for cells: ");
         for(int i=0;i<x;++i){
             for(int j=0;j<x;++j){
                 if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
@@ -196,25 +195,22 @@ public class AStar {
             System.out.println();
         }
         System.out.println();**/
+        AStar();
 
         if(closed[endI][endJ]){
             //Trace back the path
-            /**System.out.println("Path: ");
+            System.out.println("Path: ");
             Cell current = grid[endI][endJ];
             System.out.print(current);
+
             while(current.parent!=null){
-               System.out.print(" -> "+ String.valueOf(current.getX()) + " " + String.valueOf(current.getY()));
+                System.out.print(" -> "+current.parent);
                 current = current.parent;
             }
-            System.out.println();**/
-            Cell current = grid[endI][endJ];
-            if(current.parent!=null){
-                current = current.parent;
-                return new int[] {current.getX(), current.getY()};
-            }
-        }else return noPath;
-        return noPath;
+            System.out.println();
+        }else System.out.println("No possible path");
     }
+
 
     public static void main(String[] args) throws Exception{
       //  test(5, 5, 0, 0, 3, 2, new int[][]{{0,4},{2,2},{3,1},{3,3}});

@@ -41,6 +41,11 @@ public class Enemy extends Entity{
     protected Sprite healthBar = new Sprite(spriteTextures.healthBar);
     protected Sprite lostHealthBar = new Sprite(spriteTextures.lostHealthBar);
     protected float healthBarX = 0;
+    private int[] nextCell = new int[2];
+    public void setNextCell(int ix, int jy){
+        nextCell[0] = ix;
+        nextCell[1] = jy;
+    }
     public float getX() {
         return x;
     }
@@ -120,9 +125,14 @@ public class Enemy extends Entity{
     @Override
     public void move() {
         if(!keepMoving) {
+
             TileX = (int) ((sprite.getX() + sprite.getWidth() / 2) / Play.tilePixelWidth);
-            TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);
-            int[] nextCell = test(Play.lvlTileWidth, Play.lvlTileHeight, TileX, TileY, (int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) / Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) / Play.tilePixelHeight), Play.collisionTiles);
+            TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);;
+            test(Play.lvlTileWidth, Play.lvlTileHeight, TileX, TileY, (int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) / Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) / Play.tilePixelHeight), Play.collisionTiles);
+
+            System.out.println(String.valueOf(nextCell[0]) + " " + String.valueOf(nextCell[1]));
+        System.out.println(String.valueOf(TileX) + " " + String.valueOf(TileY));
+
             if (nextCell[0] != TileX) {
                 if (nextCell[0] > TileX) {
                     if (nextCell[1] > TileY) {
@@ -150,7 +160,7 @@ public class Enemy extends Entity{
             } else if (nextCell[0] ==- 1){
                 move = DIRECTION.NONE;
             }
-
+            //System.out.println(String.valueOf(move));
 
             if (!detection.isInSmallRadius(this)) {
                 moveEnemy(move);

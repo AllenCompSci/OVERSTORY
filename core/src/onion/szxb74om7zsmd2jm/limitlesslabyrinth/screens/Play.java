@@ -358,7 +358,7 @@ public class Play implements Screen {
         camera.update();
 
         renderer.getBatch().end();
-        if(getEnemies().size < spawnLimit) {
+        if(getEnemies().size < spawnLimit && spawnTiles.length > 0) {
             MonsterType monster;
             //Spawning in enemies every n seconds
             Random rand = new Random();

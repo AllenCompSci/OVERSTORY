@@ -127,7 +127,7 @@ public class Player extends Entity {
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
 
-        sprite.setPosition(sprite.getWidth() * x, sprite.getHeight() * y);
+        sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0] - collisionLayer.getTileWidth(), collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
 
     }
 
@@ -155,12 +155,6 @@ public class Player extends Entity {
         {
             sprite.draw(batch);
         }
-       /*  */
-        //Starts a new wave of enemies only when all the enemies of the last wave have been killed
-        if(Gdx.input.isKeyPressed(Input.Keys.ENTER) && Play.getEnemies().size == 0){
-            Play.setSpawnCount(waveAmount);
-            waveAmount *= 2;
-        }
 
         //checks whether xp is enough to level up
         if(xpToLevel - xp <= 0){
@@ -179,10 +173,10 @@ public class Player extends Entity {
 
         /** Places Turret */
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Play.getGui().getEquipped().getType() == "turret" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
-            Play.getTurrets().add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
+            Play.getTurrets().get(Play.getMapPath()).add(Play.getGui().getEquipped().placeTurret(sprite.getX() + sprite.getWidth()/2,sprite.getY()));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
-          // new Pathfinding();// TEST ASTAR Not ready yet
+            //new Pathfinding();// TEST ASTAR Not ready yet
         }
         /** PRESS R to ROTATE RUNE **/
         if(Gdx.input.isKeyPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "rune" && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]) && RUNE){

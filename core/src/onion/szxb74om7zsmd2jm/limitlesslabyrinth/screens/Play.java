@@ -13,8 +13,10 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapProperties;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -26,16 +28,18 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
-import java.util.Random;
+import java.util.*;
+import java.util.function.BiFunction;
 
 /**
  * Created by chris on 1/19/2017.
  */
 public class Play implements Screen {
 
-     public enum MonsterType {
+    public enum MonsterType {
         ASH, BRUTE, GOBLIN, ORC, DEMON, DRAGON, HYDRA, BRITTLESKELETON, BUNNY, DEMONSKELETON, ELITEORC, GHOST, GOZZLER, ORCBASE, ORCLEADER, PIRATEBUCANEER, PIRATECUTTHROAT, PRIESTESS, RIFTFRAGMENT, WATERELEMENT, SQUIRREL, VAMPIRE, WARLOCK, ZABWARLOCK,
         AMBASSADOR, ANCIENTSCARAB, BARBAXE, WRAITH, BOGRAIDER, BONEBEAST, TOPHATNOBLE, CARNIPHILA, UNDEADCAVEBEAR, CLIFFSTRIDER, CORLERIANBARB, CRAWLER, CRUSHEDWALKER,
         CRYSTALWOLF, DARKSTALKER, DEATHSTRIKE, DEEPTERROR, DESTROYER, DEVORGA, DIABOLICIMP, EARTHELMENTAL, GLOOTH, ENERGYELEMENTAL, OLDENERGYELEMENTAL, ENERGYSCORPION, ENRAGEDCRYSTALGOLEM, ENRAGEDGOLEM,
@@ -43,34 +47,34 @@ public class Play implements Screen {
         LIZARDHIGHGUARD, LIZARDLEGIONAIRE, LIZARDPRIEST, LIZARDZAOGUN, LOSTSOUL, MADMAGE, MASSIVERFIREELEMENTAL, MEDUSA, MIDNIGHTPANTHER, NIGHTMAREGAZ, NOBELLION, ORCMAURADER, ORCRIDER, OREWALKER, PHRODOMO, PINATADRAGON, PIRATECORSAIR, PIRATEGHOST,
         PIRATEMARAUDER, PITBATTLER1, PITBATTLER2, PLAGUESMITH, PURPLETURTLE, REALITYREAVER, RIFT, RORC, SANDSCORPION, SEACRESTSERPENT, SEASERPENT, SERPENTSPAWN, SLIME, SNAKEGOD, SPECTRE, SPIRIT, SPITTER, STONEGOLEM, SVENBARB, THORNFIREWOLF, UNDEADGLADIATOR,
         VEXCLAW, VULCONGRA, WASPOID, WATERELEMENTAL, WATERSERPENT, WEAKDEMON, WEREWOLF, WYVERN, YALAHAR,
-         /* 32x32 (1x2) */
-         ACOLYTE, BLOODFIST, BLOODHAND, BLOOMOFDOOM, DARKAPPRENTICE,  DOCTOR, DOOMSDAY, ENRAGEDGHOST, EYESERVANT, FIREDEVIL,
-         NECROMANCER, ORCBERSERKER,  ORCWARLORD, ORCWARRIOR, SHADOWPUPIL, BANSHEE, MUMMY,
-         /*32x32 (2x4)*/
-         DAWNASURA, GOBLINBASIC, MIDNIGHTASURA,ORCSHAMAN,ORCSPEARMAN,
-         /*32x32(1x3) */
-         DEATHSLICER,
-         /* 64  (1x2)*/
-         ARMADILE, DARAKAN, FROSTSERVANT, HEARLDOFDOOM, LIZARDMAGE, MENACE, TIGER, WITCH, SHIVERSLEEP,
+        /* 32x32 (1x2) */
+        ACOLYTE, BLOODFIST, BLOODHAND, BLOOMOFDOOM, DARKAPPRENTICE,  DOCTOR, DOOMSDAY, ENRAGEDGHOST, EYESERVANT, FIREDEVIL,
+        NECROMANCER, ORCBERSERKER,  ORCWARLORD, ORCWARRIOR, SHADOWPUPIL, BANSHEE, MUMMY,
+        /*32x32 (2x4)*/
+        DAWNASURA, GOBLINBASIC, MIDNIGHTASURA,ORCSHAMAN,ORCSPEARMAN,
+        /*32x32(1x3) */
+        DEATHSLICER,
+        /* 64  (1x2)*/
+        ARMADILE, DARAKAN, FROSTSERVANT, HEARLDOFDOOM, LIZARDMAGE, MENACE, TIGER, WITCH, SHIVERSLEEP,
 
-         ASHMUNRAH, ASKARADEMON, ASKARALORD, ASKARAPRINCE, BEHEMOTH, BLIGHTWALKER, BLUEDJINN, CRYSTALSPIDERS, CURSEDHAND,
-         CYCLOPSSMITH, DAMAGEDWORKERGOLEM, DIAMONDSERVANT, DRAGONHATCH, DRAGONLORDHATCH, DRAKENABOMINATION, DRAKENELITE,
-         DRAKENSPELLWEAVER, DRAKENWARMASTER, EFREET, ELDERWYRM, EYEOBSERVER, FROSTDRAGON, FROSTGIANT, FROSTGIANTESS,
-         GHASTLYDRAGON, GLOOTHMINO, GNOMEEVIL, GOLDENSERVANT, GREENDJINN, LICH, MINOAMAZON, PHAROH, SHABURAKLORD,
-         SHABURAKPRINCE, SILENCER, SPIDRISELITE, THEPALECOUNT, TYRN, UNDEADDRAGON, VAMPIREBRIDE, VAMPIREOVERLORD,
-         VAMPIREVISCOUNT, WARGOLEM, WORMPRIESTESS, WYRM, YETI,
-         MARID, METALGARGOYLE, MOOHTANT,
-         BEHOLDER, ELDERBEHOLDER, EVILEYE,
+        ASHMUNRAH, ASKARADEMON, ASKARALORD, ASKARAPRINCE, BEHEMOTH, BLIGHTWALKER, BLUEDJINN, CRYSTALSPIDERS, CURSEDHAND,
+        CYCLOPSSMITH, DAMAGEDWORKERGOLEM, DIAMONDSERVANT, DRAGONHATCH, DRAGONLORDHATCH, DRAKENABOMINATION, DRAKENELITE,
+        DRAKENSPELLWEAVER, DRAKENWARMASTER, EFREET, ELDERWYRM, EYEOBSERVER, FROSTDRAGON, FROSTGIANT, FROSTGIANTESS,
+        GHASTLYDRAGON, GLOOTHMINO, GNOMEEVIL, GOLDENSERVANT, GREENDJINN, LICH, MINOAMAZON, PHAROH, SHABURAKLORD,
+        SHABURAKPRINCE, SILENCER, SPIDRISELITE, THEPALECOUNT, TYRN, UNDEADDRAGON, VAMPIREBRIDE, VAMPIREOVERLORD,
+        VAMPIREVISCOUNT, WARGOLEM, WORMPRIESTESS, WYRM, YETI,
+        MARID, METALGARGOYLE, MOOHTANT,
+        BEHOLDER, ELDERBEHOLDER, EVILEYE,
 
-         /* 64 (2x4) */
-         DRYAD, HYPNOTOAD, IRONBLIGHT, LION, ORCRAVANGER, ORCLOPS, PITBERSERKER, PITBLACKLING,
-         CYCLOPS, DRAGONGREEN, DRAGONLING, DRAGONWARDEN, DRAGONZYRTARCH, DRAPTOR,
+        /* 64 (2x4) */
+        DRYAD, HYPNOTOAD, IRONBLIGHT, LION, ORCRAVANGER, ORCLOPS, PITBERSERKER, PITBLACKLING,
+        CYCLOPS, DRAGONGREEN, DRAGONLING, DRAGONWARDEN, DRAGONZYRTARCH, DRAPTOR,
 
 
-         GIANTSPIDER, GRAVEDIGGER, OGREBRUTE, OGRESHAMAN, PROFESSORMAXXEN, TARANTULA, TAZHADUR, THEFIRSTDRAGON,
-         WAILINGWIDOW, WALKER, ZORVORAX
+        GIANTSPIDER, GRAVEDIGGER, OGREBRUTE, OGRESHAMAN, PROFESSORMAXXEN, TARANTULA, TAZHADUR, THEFIRSTDRAGON,
+        WAILINGWIDOW, WALKER, ZORVORAX
 
-         }
+    }
 
 
     public static int lvlTileWidth; //Width of map in tiles
@@ -114,26 +118,12 @@ public class Play implements Screen {
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
-    private static Array<Wall> walls = new Array<Wall>();
-    private static Array<Wall> wallsEmpty = new Array<Wall>();
     public static Array<Wall> getWalls(){return walls;}
-    public static Array<Turret> getTurrets() {
-        return turrets;
-    }
-    private static Array<Turret> turrets = new Array<Turret>();
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
     public static int[][] collisionTiles;
     private long time = 0;
-    public static int waveCount = 0;
     private long count;
-    public static int getSpawnCount() {
-        return spawnCount;
-    }
-    public static void setSpawnCount(int spawnCount) {
-        waveCount++;
-        Play.spawnCount = spawnCount;
-    }
     public static void addWall(Wall wallType){
         walls.add(wallType);
     }
@@ -143,22 +133,46 @@ public class Play implements Screen {
     }
     private static Gui gui = new Gui();
     private static int CollisionLayerNum = 1;
-
-    public static void reset(){
-        Play.player.reset();
-        Play.gui.reset();
-        Play.gui.getBackpack().reset();
-
-        /** Reset the Play static variables */
-        Play.enemies = Play.enemiesEmpty;
-        Play.projectiles = Play.projectilesEmpty;
-        Play.turrets = Play.turretsEmpty;
-        Play.walls = Play.wallsEmpty;
-        System.gc();
-        Play.spawnCount = 0;
-        Play.garbageTime = 0;
-        Play.waveCount = 0;
+    public static Pathfinding path;
+    private static int movePaths;
+    public static int getSpawnLimit() {
+        return spawnLimit;
     }
+    private static int spawnLimit = 350;
+    public static int getSpawnGroupRange() {
+        return spawnGroupRange;
+    }
+    private static int spawnGroupRange;
+    public static int getSpawnGroupStart() {
+        return spawnGroupStart;
+    }
+    public static void setSpawnGroupStart(int spawnGroupStart) {
+        Play.spawnGroupStart = spawnGroupStart;
+    }
+    private static int spawnGroupStart;
+    private static Array<TiledMapTile> SpawnTiles;
+    public static String getSpawnArea() {
+        return spawnArea;
+    }
+    public static void setSpawnArea(String spawnArea) {
+        Play.spawnArea = spawnArea;
+    }
+    public static int[][] getPlayerPOS() {
+        return playerPOS;
+    }
+    private static int[][] playerPOS;
+    private static String spawnArea = "Area1";
+    private static Array<Wall> wallsEmpty = new Array<Wall>();
+    private static Array<Wall> walls = new Array<Wall>();
+    public static String getMapPath() {
+        return mapPath;
+    }
+    private static String mapPath;
+    public static Map<String, Array<Turret>> getTurrets() {
+        return turrets;
+    }
+    private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
+    private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
 
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
@@ -179,7 +193,7 @@ public class Play implements Screen {
         {
             for(int j = 0; j < col; j++)
             {
-               // System.out.println("i: " + i + ", j:" + j);
+                // System.out.println("i: " + i + ", j:" + j);
                 animationFrames[index++] = tmpFrames[i][j];
             }
         }
@@ -212,7 +226,42 @@ public class Play implements Screen {
         return new Animation(duration, animationFrames);
     }
 
-    public Play(String PathToMap){
+    public static void reset(){
+        Play.player.reset();
+        Play.gui.reset();
+        Play.gui.getBackpack().reset();
+        movePaths = 0;
+        path.update();
+        /** Reset the Play static variables */
+        spawnArea = "Area1";
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.walls = Play.wallsEmpty;
+        turrets = new HashMap<String, Array<Turret>>();
+        KillCount = new HashMap<String, Integer>();
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+    }
+
+    public static void changeMap(){
+        movePaths = 0;
+        path.update();
+        spawnArea = "Area1";
+        Play.enemies = Play.enemiesEmpty;
+        Play.projectiles = Play.projectilesEmpty;
+        Play.walls = Play.wallsEmpty;
+        Play.spawnCount = 0;
+        Play.garbageTime = 0;
+    }
+
+    public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
+        enemiesEmpty = new Array<>();
+        projectilesEmpty = new Array<>();
+        turretsEmpty = new Array<Turret>();
+        wallsEmpty = new Array<>();
+        Play.spawnLimit = spawnLimit;
+        Play.spawnGroupRange = spawnGroupRange;
+        Play.spawnGroupStart = spawnGroupStart;
         map = new TmxMapLoader().load(PathToMap);
 
         MapProperties properties = map.getProperties();
@@ -227,10 +276,26 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
+        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "StartPosition"));
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
+
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
+
+        spawnArea = "Area1";
+        spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+
         Gdx.input.setInputProcessor(null);
+        path = new Pathfinding();
+        movePaths = 0;
+        mapPath = LimitlessLabyrinth.getMapPath();
+
+        turrets.putIfAbsent(mapPath, turretsEmpty);
+        KillCount.putIfAbsent(mapPath, 1);
+
+
+
     }
 
     @Override
@@ -240,6 +305,14 @@ public class Play implements Screen {
 
     @Override
     public void render(float delta) {
+
+        /** Check for change in spawnArea */
+        checkSpawnArea((TiledMapTileLayer) map.getLayers().get(2));
+
+        /** Check for portal to other realm */
+        checkForPortal((TiledMapTileLayer) map.getLayers().get(1));
+
+        /** Open the pauseMenu */
         if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             LimitlessLabyrinth.pauseScreen();
             //Gdx.app.exit();
@@ -275,7 +348,7 @@ public class Play implements Screen {
             }
         }
 
-        for(Turret i : turrets){
+        for(Turret i : turrets.get(mapPath)){
             i.draw();
         }
 
@@ -285,7 +358,13 @@ public class Play implements Screen {
             i.draw(renderer.getBatch());
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
+                spawnCount++;
+                if(spawnCount >= 100){
+                    KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);
+                    spawnCount = 0;
+                }
                 i.onDeath();
+
             }
             if(enemies.indexOf(null, true) != -1) {
                 enemies.removeIndex(enemies.indexOf(null, true));
@@ -293,34 +372,29 @@ public class Play implements Screen {
         }
 
         player.draw(renderer.getBatch());
+        if(movePaths++ == 9){
+            movePaths = 0;
+            path.update();
+        }
+
         gui.input();
         gui.update();
         camera.position.set(player.getSprite().getX() + player.getSprite().getWidth()/2, player.getSprite().getY() + player.getSprite().getHeight()/2, 0);
         camera.update();
 
         renderer.getBatch().end();
-        if(spawnCount > 0 && getEnemies().size < 350) {
+        if(getEnemies().size < spawnLimit && spawnTiles.length > 0) {
             MonsterType monster;
-            monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
-            
-            
-            int num = 0;
-            num = rand.nextInt(spawnTiles.length);
-            if (System.currentTimeMillis() > time) {
-                int gen = rand.nextInt(4);
-                 if(gen == 0)
-                    monster = MonsterType.DEMON;
-                else if(gen == 1)
-                    monster = MonsterType.DRAGON;
-                else if(gen ==2)
-                    monster = MonsterType.BRUTE;
-                else
-                    monster = MonsterType.HYDRA;
 
-                spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], waveCount, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), monster);
-                time = System.currentTimeMillis() + 10;
+            int num = rand.nextInt(spawnTiles.length);
+            if (System.currentTimeMillis() > time) {
+                if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
+                    spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
+                }
+                time = System.currentTimeMillis() + 100;
+
             }
         }
 
@@ -361,34 +435,9 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, MonsterType monster){
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart){
         count++;
-        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster()));
-        switch (monster){
-            case ASH:
-                enemies.add(new ash(x, y, level, collisionLayer));
-                break;
-            case BRUTE:
-                enemies.add(new Brute(x, y, level, collisionLayer));
-                break;
-            case GOBLIN:
-                enemies.add(new Goblin(x, y, level, collisionLayer));
-                break;
-            case ORC:
-                enemies.add(new Orc(x, y, level, collisionLayer));
-                break;
-            case DEMON:
-                enemies.add(new Demon(x,y,level, collisionLayer));
-                break;
-            case DRAGON:
-                enemies.add(new Dragon(x,y,level,collisionLayer));
-                break;
-            case HYDRA:
-                enemies.add(new Hydra(x,y,level,collisionLayer));
-                break;
-        }
-
-        spawnCount--;
+        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart)));
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
     }
@@ -402,7 +451,6 @@ public class Play implements Screen {
             }
         }
         int[][] tiles = new int[count][2];
-        Gdx.app.log(String.valueOf(layer.getHeight()), string.valueOf(layer.getWidth()));
         count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
@@ -413,5 +461,49 @@ public class Play implements Screen {
             }
         }
         return tiles;
+    }
+
+    public int[][] checkMapLayerForSpawnArea(TiledMapTileLayer layer, String string){
+        int count = 0;
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) count++;
+            }
+        }
+        int[][] tiles = new int[count][2];
+        count = 0;
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) {
+                    tiles[count][0] = x;
+                    tiles[count++][1] = y;
+                }
+            }
+        }
+        return tiles;
+    }
+
+    public Array<TiledMapTile> checkMapLayerForArray(TiledMapTileLayer layer, String string){
+        Array<TiledMapTile> tiledMapTiles = new Array<TiledMapTile>();
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) tiledMapTiles.add(layer.getCell(x,y).getTile());
+            }
+        }
+        return tiledMapTiles;
+    }
+
+    public void checkSpawnArea(TiledMapTileLayer collisionLayer){
+        if(collisionLayer.getCell((int)((player.getSprite().getX() + player.getSprite().getWidth()/2)/collisionLayer.getTileWidth()), (int)((player.getSprite().getY() + player.getSprite().getHeight()/2)/collisionLayer.getTileHeight())).getTile().getProperties().containsKey("SpawnTrigger")){
+            spawnArea = (String) collisionLayer.getCell((int)((player.getSprite().getX() + player.getSprite().getWidth()/2)/collisionLayer.getTileWidth()), (int)((player.getSprite().getY() + player.getSprite().getHeight()/2)/collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger");
+            spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+            SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        }
+    }
+
+    public void checkForPortal(TiledMapTileLayer collisionLayer) {
+        if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("portal")) {
+            LimitlessLabyrinth.LoadingScreen((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
+        }
     }
 }

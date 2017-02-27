@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.LoadingScreen;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.MainMenu;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.PauseScreen;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -23,10 +24,25 @@ public class LimitlessLabyrinth extends Game {
 	public static void pauseScreen(){
 		isPauseScreen = true;
 	}
+	public static void ChangeMap(String PathToMap) {
+		MapPath = PathToMap;
+		changeMap = true;
+	}
+	public static void LoadingScreen(String PathToMap){
+		MapPath = PathToMap;
+		loadScreen = true;
+	}
+	private static boolean loadScreen = false;
+	private static boolean changeMap = false;
 	private static boolean isPauseScreen = false;
 	private static boolean resetScreen = false;
 	private static boolean loadCurrentGame = false;
 	private static boolean mainMenuScreen = false;
+
+	public static String getMapPath() {
+		return MapPath;
+	}
+
 	private static String MapPath;
 	public static void setMainMenu(){
 		mainMenuScreen = true;
@@ -37,18 +53,33 @@ public class LimitlessLabyrinth extends Game {
 
 	@Override
 	public void create () {
-		play = new Play("test.tmx");
+		MapPath = "test.tmx";
+		play = new Play("test.tmx", 100, 10, -10);
 		setScreen(mainMenu);
 	}
 
 	@Override
 	public void render () {
+		if(loadScreen){
+			//screen.dispose();
+			System.gc();
+			loadScreen = false;
+			setScreen(new LoadingScreen(MapPath));
+		}
 		if(resetScreen){
 			//screen.dispose();
 			System.gc();
 			resetScreen = false;
 			Play.reset();
-			play = new Play(MapPath);
+			play = new Play(MapPath, 100, 10, -10);
+			setScreen(play);
+		}
+		if(changeMap){
+			//screen.dispose();
+			System.gc();
+			changeMap = false;
+			Play.changeMap();
+			play = new Play(MapPath, 100, 10, -10);
 			setScreen(play);
 		}
 		if(mainMenuScreen){

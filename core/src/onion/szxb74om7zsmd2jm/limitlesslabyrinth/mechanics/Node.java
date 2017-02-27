@@ -4,6 +4,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by taylor hudson on 2/23/2017.
  */
@@ -11,17 +12,23 @@ public class Node {
 
     // Private Instance Variables
     POINT point;
-    public static ArrayList<Node> ConnectedNodes;
-    public static ArrayList<Integer> TraverseDistance;
+    public ArrayList<Node> ConnectedNodes;
+    public ArrayList<Node> getConnectedNodes(){return ConnectedNodes;}
+    public ArrayList<Integer> TraverseDistance;
+    public ArrayList<Integer> getTraverseDistance(){return TraverseDistance;}
     int Weight;
     int Heuristic;
     boolean Traversed;
 
     public Node(int i, int j){
         point = new POINT(i, j);
+        ConnectedNodes = new ArrayList<Node>();
+        TraverseDistance = new ArrayList<Integer>();
     }
     public Node(){
-
+        point = null;
+        ConnectedNodes = new ArrayList<Node>();
+        TraverseDistance = new ArrayList<Integer>();
     }
     public boolean equals(int i, int j){
         return point.equals(i, j);
@@ -50,21 +57,33 @@ public class Node {
     public void setHeuristic(Integer value){
         Heuristic = value.intValue() + Weight;
     }
+    public void decrementHeuristic(int value){
+        Heuristic -= value;
+    }
     public boolean isTraversed(){
         return Traversed;
     }
     public void setTraversed(boolean t){Traversed = t;}
-    public void moveTo(){ Traversed = true; }
+    public void moveTo(Node from, int index){
+        Traversed = true;
+        int h = from.getHeuristic();
+        Heuristic = Weight + h + TraverseDistance.get(index);
+    }
+    public void moveTo(){
+        Traversed = true;
+        Heuristic = 0;
+    }
     public void setConnectedNodes(ArrayList<Node> AllNodes){
-        ConnectedNodes = new ArrayList<Node>();
-        TraverseDistance = new ArrayList<Integer>();
+
         Weight = 1;
         Traversed = false;
         Heuristic = 0;
         for(int k = 0; k < 9; k++) {
             int i = getI();
             int j = getJ();
-            switch(k/3){
+            int cpy = k;
+            cpy = k/3;
+            switch(cpy){
                 case 0:
                     i+=1;
                     break;
@@ -72,7 +91,8 @@ public class Node {
                     i-=1;
                     break;
             }
-            switch(k%3){
+            cpy = k%3;
+            switch(cpy){
                 case 0:
                     j-=1;
                     break;
@@ -111,9 +131,10 @@ public class Node {
     }
     public void isWall(){
         Weight = 10000;
+        Traversed = true;
     }
-    public static Enemy.DIRECTION moveState(Node Moveto){
-        int index = ConnectedNodes.indexOf(Moveto);
+    public Enemy.DIRECTION moveState(Node Moveto){
+        int index = getConnectedNodes().indexOf(Moveto);
         switch(index){
             case 0:
                 return Enemy.DIRECTION.NORTHWEST;
@@ -132,7 +153,11 @@ public class Node {
         }
         return Enemy.DIRECTION.SOUTHEAST;
     }
+    @Override
     public String toString(){
-        return "(" + getI() + ", " + getJ() + ")";
+        if(point == null){
+            return "null";
+        }
+        return "(" + point.getI() + ", " + point.getJ() + ")";
     }
 }

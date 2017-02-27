@@ -56,6 +56,11 @@ public class Entity implements InputProcessor {
     }
     public static float collisionWidth;
     public static float collisionHeight;
+
+    public int getLevel() {
+        return level;
+    }
+
     protected int level;
 
     public Entity(float x, float y, int level, TiledMapTileLayer collisionLayer){
@@ -70,7 +75,7 @@ public class Entity implements InputProcessor {
     }
 
 //checks three points in front of the character
-    public boolean checkCollision(float width, float height, float Xspeed, float Yspeed){
+    public boolean checkCollision(float width, float height, float Xspeed, float Yspeed, TiledMapTileLayer collisionLayer){
         int COLx1 = (int)((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth());
         int COLy1 = (int)((sprite.getY() + sprite.getHeight()/2 + height/2 + Yspeed) / collisionLayer.getTileHeight());
         int COLx2 = (int)((sprite.getX() + sprite.getWidth()/2 + width/2 + Xspeed) / collisionLayer.getTileWidth());
@@ -111,14 +116,14 @@ public class Entity implements InputProcessor {
     public void move(){
         Player.isWalking = false;
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            if (checkCollision(0f, sprite.getHeight(), 0f, speed)) {
+            if (checkCollision(0f, sprite.getHeight(), 0f, speed, collisionLayer)) {
                 sprite.setY(sprite.getY() + speed);
             }
              Player.charFace = Player.FACE.UP;
             Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed)) {
+            if (checkCollision(0f, -sprite.getHeight(), 0f, -speed, collisionLayer)) {
                 sprite.setY(sprite.getY() + -speed);
                 state = "down";
             }
@@ -126,14 +131,14 @@ public class Entity implements InputProcessor {
             Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f)) {
+            if (checkCollision(-sprite.getWidth(), 0f, -speed, 0f, collisionLayer)) {
                 sprite.setX(sprite.getX() + -speed);
             }
              Player.charFace = Player.FACE.LEFT;
             Player.isWalking = true;
         }
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            if (checkCollision(sprite.getWidth(), 0f, speed, 0f)) {
+            if (checkCollision(sprite.getWidth(), 0f, speed, 0f, collisionLayer)) {
                 sprite.setX(sprite.getX() + speed);
             }
              Player.charFace = Player.FACE.RIGHT;
@@ -184,4 +189,6 @@ public class Entity implements InputProcessor {
     public void onDeath(){
 
     }
+
+
 }

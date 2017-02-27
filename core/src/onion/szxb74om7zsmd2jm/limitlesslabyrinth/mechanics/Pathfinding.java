@@ -23,11 +23,11 @@ public class Pathfinding {
     }
     private boolean [][] Path;
     private int PlayerX, PlayerY;
-
+    public Dijkstra method;
     TiledMapTileLayer collisionLayer;
     int numNODES;
     public static Array<POINT> malleable;
-    public static ArrayList<Node> AllNodes;
+    public ArrayList<Node> AllNodes;
 
     public Pathfinding(){
         collisionLayer = (TiledMapTileLayer) Play.getMap().getLayers().get(1);
@@ -37,6 +37,7 @@ public class Pathfinding {
         Path = new boolean[HEIGHT][WIDTH];
         malleable = new Array<POINT>();
         AllNodes = new ArrayList<Node>();
+        method = new Dijkstra();
         init();
         update();
     }
@@ -52,8 +53,8 @@ public class Pathfinding {
 
                 if(collisionLayer.getCell(i,j).getTile().getProperties().containsKey("blocked")){
                     TILELAYOUT [i][j] = BLOCKED;
-                    numNODES --;
                     Path[i][j] = false;
+                    numNODES--;
                 }
                 else{
                     AllNodes.add(new Node(i,j));
@@ -62,9 +63,8 @@ public class Pathfinding {
         }
         Dijkstra.TILELAYOUT = TILELAYOUT;
         // Connect Nodes
-        Dijkstra.set();
-        for(Node node:AllNodes){
-            node.setConnectedNodes(AllNodes);
+        for(int i = 0; i < AllNodes.size(); i++) {
+            AllNodes.get(i).setConnectedNodes(AllNodes);
         }
 
     }
@@ -146,20 +146,20 @@ public class Pathfinding {
         }
     }
     public void getPlayer(){
-        PlayerX = (int)(Play.getPlayer().getSprite().getX()/SQR);
-        PlayerY = (int)(Play.getPlayer().getSprite().getY()/SQR);
+        PlayerX = (int)((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2)/SQR);
+        PlayerY = (int)((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2)/SQR);
         TILELAYOUT[PlayerX][PlayerY] = PLAYER;
     }
     public void update(){
         removeMalleable();
-        getWall();
+//        getWall();
         getEnemies();
         getPlayer();
         for(Node node : AllNodes)
             node.reset();
 
-        Dijkstra.PathGen(PlayerX, PlayerY);
 
+        method.PathGen(PlayerX, PlayerY, AllNodes);
 
 
 
@@ -193,23 +193,21 @@ public class Pathfinding {
 }
 
 class POINT {
-    float i;
-    float j;
+    int i;
+    int j;
     public POINT(int i, int j){
         this.i = i;
-        this.j = i;
+        this.j = j;
     }
     public int getI() {
-        return (int)i;
+        return i;
     }
     public int getJ() {
-        return (int)j;
+        return j;
     }
-    public boolean equals(POINT pt){
-        return i == pt.getI() && j == pt.getJ();
-    }
+    public boolean equals(POINT pt){ return ((getI() == pt.getI()) && (getJ() == pt.getJ())); }
     public boolean equals(int i, int j){
-        return this.i == i && this.j == j;
+        return (i == getI()) && (getJ() == j);
     }
     public void remove(){
         Pathfinding.malleable.set(Pathfinding.malleable.indexOf(this, true), null);

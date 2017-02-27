@@ -7,6 +7,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import javax.xml.soap.Text;
 
+import java.util.Random;
+
 import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType.*;
 
 /**
@@ -142,6 +144,7 @@ public class spriteTextures {
             return target;
     }
 
+    public static Texture LoadingScreenSprite = new Texture("LoadingScreen.jpeg");
     public static Texture swordProjectileSprite = new Texture("swordProjectile.png");
     public static Texture MainMenuButtonSprite = new Texture("MainMenuButton.png");
     public static Texture NewGameButtonSprite = new Texture("ButtonNewGame.png");
@@ -1119,8 +1122,10 @@ public class spriteTextures {
         return 1;
     }
 
-    public static Play.MonsterType makeAMonster(){
-        int VAL = (int)(Math.random() * 224);
+    public static Play.MonsterType makeAMonster(int spawnRange, int spawnStart){
+        Random rand = new Random();
+        int VAL;
+        VAL = rand.nextInt(spawnRange) + spawnStart;
 
         switch(VAL) {
             case 0:
@@ -1142,9 +1147,9 @@ public class spriteTextures {
             case 8:
                    return GOZZLER;
             case 9:
-                return ORCBASE;
+                return VAMPIRE;
             case 10:
-                return ORCLEADER;
+                return CLIFFSTRIDER;
             case 11:
                 return PIRATEBUCANEER;
             case 12:
@@ -1158,7 +1163,7 @@ public class spriteTextures {
             case 16:
                 return SQUIRREL;
             case 17:
-                return VAMPIRE;
+                return ORCBASE;
             case 18:
                 return WARLOCK;
             case 19:
@@ -1182,7 +1187,7 @@ public class spriteTextures {
             case 28:
                 return UNDEADCAVEBEAR;
             case 29:
-                return CLIFFSTRIDER;
+                return ORCLEADER;
             case 30:
                 return CORLERIANBARB;
             case 31:

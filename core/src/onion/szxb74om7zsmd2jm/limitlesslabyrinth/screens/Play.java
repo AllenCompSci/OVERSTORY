@@ -221,7 +221,6 @@ public class Play implements Screen {
         Play.gui.reset();
         Play.gui.getBackpack().reset();
         movePaths = 0;
-        path.update();
         /** Reset the Play static variables */
         spawnArea = "Area1";
         Play.enemies = Play.enemiesEmpty;
@@ -368,7 +367,7 @@ public class Play implements Screen {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
                     spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
                 }
-                time = System.currentTimeMillis() + 100;
+                time = System.currentTimeMillis() + 500;
 
             }
         }

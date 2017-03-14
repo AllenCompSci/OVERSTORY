@@ -219,6 +219,7 @@ public class Play implements Screen {
         camera.setToOrtho(false);
 
         player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(2));
+        ArrayList<MapObject> SpawnTriggers = checkObjectFor( map.getLayers().get(3), "spawnable");
         //
         // spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
         //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
@@ -410,8 +411,8 @@ public class Play implements Screen {
         return tiles;
     }
 
-    public ArrayList<Object> checkObjectFor(MapLayer layer, String property){
-        ArrayList<Object> o = new ArrayList<Object>();
+    public ArrayList<MapObject> checkObjectFor(MapLayer layer, String property){
+        ArrayList<MapObject> o = new ArrayList<MapObject>();
         MapObjects objects = layer.getObjects();
         for(MapObject object : objects)
         {
@@ -423,5 +424,11 @@ public class Play implements Screen {
         }
         return o;
 
+    }
+
+    public ArrayList<ArrayList<Integer>> convertObjectToTiles(MapObject o)
+    {
+        ArrayList<ArrayList<Integer>> tiles = new ArrayList<ArrayList<Integer>>();
+        return null;
     }
 }

@@ -429,6 +429,13 @@ public class Play implements Screen {
     public ArrayList<ArrayList<Integer>> convertObjectToTiles(MapObject o)
     {
         ArrayList<ArrayList<Integer>> tiles = new ArrayList<ArrayList<Integer>>();
-        return null;
+        int x = o.getProperties().get("X", Integer.class);
+        int y = o.getProperties().get("Y", Integer.class);
+        int width = o.getProperties().get("Width", Integer.class);
+        int height = o.getProperties().get("Height", Integer.class);
+        int maxwidth = x + width;
+        int maxheight = y + height;
+
+        
     }
 }

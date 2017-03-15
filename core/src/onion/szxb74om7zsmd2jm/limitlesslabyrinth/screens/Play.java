@@ -252,7 +252,7 @@ public class Play implements Screen {
     public static void changeMap(){
         movePaths = 0;
         path.update();
-        spawnArea = "Area1";
+        spawnArea = "Area0";
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
         Play.walls = Play.wallsEmpty;

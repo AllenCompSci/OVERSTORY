@@ -42,7 +42,8 @@ public class AStar {
     static boolean closed[][];
     static int startI, startJ;
     static int endI, endJ;
-    public static int[] noPath = {-1,-1};
+    private static int[] noPath = {-1,-1};
+    private static int[] nextSpot;
 
     public static void setBlocked(int i, int j){
         grid[i][j] = null;
@@ -137,7 +138,7 @@ public class AStar {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static void test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
+    public static int[] test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -199,16 +200,21 @@ public class AStar {
         //TO DO - take si/sj and check for similarity with current.parent and take the one before
         if(closed[endI][endJ]){
             //Trace back the path
-            System.out.println("Path: ");
+           // System.out.println("Path: ");
             Cell current = grid[endI][endJ];
-            System.out.print(current);
+           // System.out.print(current);
 
             while(current.parent!=null){
-                System.out.print(" -> "+current.parent);
+                //System.out.print(" -> "+current.parent);
+                nextSpot = new int[]{current.getX(), current.getY()};
                 current = current.parent;
             }
-            System.out.println();
-        }else System.out.println("No possible path");
+           // System.out.println();
+            return nextSpot;
+        }else {
+            System.out.println("No possible path");
+            return noPath;
+        }
     }
 
 

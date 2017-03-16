@@ -17,23 +17,28 @@ public class AnimatedEnemy extends Enemy {
         private Animation<TextureRegion> animation;
         float stateTime;
         public static DIRECTION ENEMYFACING;
-
+        private int Ecnt = 0;
+        boolean is64;
 
         private boolean flipLEFT;
         public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster)
         {
             super(x, y, level, collisionLayer);
-
+            is64 = false;
             ENEMYFACING = DIRECTION.SOUTH;
             flipLEFT = false;
             this.xpDrop = determineXP(level);
             animation = createAnimation(spriteTextures.sheet(monster), col, row, speed);
             stateTime = 0f;
             this.sprite = new Sprite(spriteTextures.stand(monster));
+            if(sprite.getWidth() == 64){
+                is64 = true;
+                sprite = new Sprite(spriteTextures.basic32);
+            }
             this.health = determineHealth(level);
             this.fullHealth = health;
             this.dmg = 10f;
-            sprite.setPosition(collisionLayer.getTileWidth() * x, collisionLayer.getTileHeight() * y);
+            sprite.setPosition(collisionLayer.getTileWidth() * x-1, collisionLayer.getTileHeight() * y+1);
             detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
             this.x = sprite.getX();
             this.y = sprite.getY();
@@ -60,7 +65,8 @@ public class AnimatedEnemy extends Enemy {
             lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
             lostHealthBar.draw(batch);
             healthBar.draw(batch);
-            move();
+            Ecnt++;
+            if(Ecnt % 8 == 0)move();
             //Enemy checking for player
             setDir();
             DMGDETECT();
@@ -87,7 +93,7 @@ public class AnimatedEnemy extends Enemy {
             else{
 
            }
-            Play.getRenderer().getBatch().draw(currentFrame, x,y);
+            Play.getRenderer().getBatch().draw(currentFrame, x-1,y+1);
 
 
         }

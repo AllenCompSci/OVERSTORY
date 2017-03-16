@@ -11,9 +11,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import com.badlogic.gdx.maps.MapProperties;
+
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -79,6 +83,14 @@ public class Play implements Screen {
 
     }
 
+
+    public static int lvlTileWidth; //Width of map in tiles
+    public static int lvlTileHeight; //Height of map in tiles
+    public static int lvlPixelWidth; //Width of map in pixels
+    public static int lvlPixelHeight; //Height of map in pixels
+    public static int tilePixelWidth; //Width of tile in pixels
+    public static int tilePixelHeight; //Height of tile in pixels
+
     private static long garbageTime = 0;
     public static TiledMap getMap() {
         return map;
@@ -116,6 +128,7 @@ public class Play implements Screen {
     public static Array<Wall> getWalls(){return walls;}
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
+    public static int[][] collisionTiles;
     private long time = 0;
     private long count;
     public static void addWall(Wall wallType){
@@ -256,15 +269,29 @@ public class Play implements Screen {
         Play.spawnGroupRange = spawnGroupRange;
         Play.spawnGroupStart = spawnGroupStart;
         map = new TmxMapLoader().load(PathToMap);
+
+        MapProperties properties = map.getProperties();
+        lvlTileWidth = properties.get("width", Integer.class);
+        lvlTileHeight = properties.get("height", Integer.class);
+        tilePixelWidth = properties.get("tilewidth", Integer.class);
+        tilePixelHeight = properties.get("tileheight", Integer.class);
+        lvlPixelWidth = lvlTileWidth * tilePixelWidth;
+        lvlPixelHeight = lvlTileHeight * tilePixelHeight;
+
         renderer = new OrthogonalTiledMapRenderer(map);
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
         playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "StartPosition"));
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
+
+        spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
+
         spawnArea = "Area1";
         spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+
         Gdx.input.setInputProcessor(null);
         path = new Pathfinding();
         movePaths = 0;
@@ -349,6 +376,7 @@ public class Play implements Screen {
                 enemies.removeIndex(enemies.indexOf(null, true));
             }
         }
+
         player.draw(renderer.getBatch());
         if(movePaths++ == 9){
             movePaths = 0;

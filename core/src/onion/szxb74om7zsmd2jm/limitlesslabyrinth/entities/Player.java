@@ -24,7 +24,7 @@ public class Player extends Entity {
     private static int xpToLevel = 10;
     //private String state = "still";
     private float elapsedTime;
-    private static int waveAmount = 200;
+    private static int waveAmount = 2;
     public enum FACE{UP, DOWN, LEFT, RIGHT};
     public Sprite front, back, left, right;
     public static FACE charFace = FACE.DOWN;

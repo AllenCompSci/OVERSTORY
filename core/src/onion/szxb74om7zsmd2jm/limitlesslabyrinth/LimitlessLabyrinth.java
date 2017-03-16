@@ -39,6 +39,16 @@ public class LimitlessLabyrinth extends Game {
 	private static boolean loadCurrentGame = false;
 	private static boolean mainMenuScreen = false;
 
+	public static boolean isPlayerDeath() {
+		return PlayerDeath;
+	}
+
+	public static void setPlayerDeath(boolean playerDeath) {
+		PlayerDeath = playerDeath;
+	}
+
+	private static boolean PlayerDeath = true;
+
 	public static String getMapPath() {
 		return MapPath;
 	}
@@ -49,6 +59,11 @@ public class LimitlessLabyrinth extends Game {
 	}
 	private static MainMenu mainMenu = new MainMenu();
 	private static PauseScreen pauseScreen = new PauseScreen();
+
+	public static void setPlayTo(Play play) {
+		LimitlessLabyrinth.play = play;
+	}
+
 	private static Play play;
 
 	@Override

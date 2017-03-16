@@ -43,7 +43,13 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-        LimitlessLabyrinth.ChangeMap(mapPath);
+        if(mapPath.equals("reset")){
+            Play.reset();
+            LimitlessLabyrinth.ChangeMap("test.tmx");
+        }
+        else {
+            LimitlessLabyrinth.ChangeMap(mapPath);
+        }
     }
 
     @Override

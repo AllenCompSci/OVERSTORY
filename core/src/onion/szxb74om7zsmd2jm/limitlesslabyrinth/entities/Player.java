@@ -32,6 +32,7 @@ public class Player extends Entity {
     public static float CharX, CharY;
     public static boolean isWalking = false;
     public String playerType;
+    private Sprite outfit;
     int selection;
     int NUMOUTFITS = 8;
     boolean RUNE = true;
@@ -58,7 +59,7 @@ public class Player extends Entity {
 
     public void selectOutfit(int selection){
         this.selection = selection;
-        switch(selection){
+        switch(3){
             case 0:
                 playerType = "Conjurer/";
                 break;
@@ -118,7 +119,8 @@ public class Player extends Entity {
         right = new Sprite(new Texture("right.png"));
 */
         /* UNCOMMENT FOR Mr. Hudson smiles.  */
-        this.sprite = front;
+        this.outfit = front;
+        this.sprite = new Sprite(spriteTextures.basic32);
 
         this.health = 100f;
         this.fullHealth = health;
@@ -127,7 +129,7 @@ public class Player extends Entity {
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
 
-        sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0] - collisionLayer.getTileWidth(), collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
+        sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0], collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
 
     }
 
@@ -142,18 +144,18 @@ public class Player extends Entity {
 
         if(isWalking) {
             if (charFace == FACE.DOWN) {
-                batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+                batch.draw((TextureRegion) playerWalkingDown.getKeyFrame(elapsedTime, true), sprite.getX() - collisionLayer.getTileWidth(), sprite.getY());
             } else if (charFace == FACE.UP) {
-                batch.draw((TextureRegion) playerWalkingUp.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+                batch.draw((TextureRegion) playerWalkingUp.getKeyFrame(elapsedTime, true), sprite.getX() - collisionLayer.getTileWidth(), sprite.getY());
             } else if (charFace == FACE.LEFT) {
-                batch.draw((TextureRegion) playerWalkingLeft.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+                batch.draw((TextureRegion) playerWalkingLeft.getKeyFrame(elapsedTime, true), sprite.getX() - collisionLayer.getTileWidth(), sprite.getY());
             } else if (charFace == FACE.RIGHT) {
-                batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX(), sprite.getY());
+                batch.draw((TextureRegion) playerWalkingRight.getKeyFrame(elapsedTime, true), sprite.getX() - collisionLayer.getTileWidth(), sprite.getY());
             }
         }
         else
         {
-            sprite.draw(batch);
+            outfit.draw(batch);
         }
 
         //checks whether xp is enough to level up
@@ -200,15 +202,16 @@ public class Player extends Entity {
 
         if(charFace == FACE.LEFT)
         {
-            this.sprite = left;
+            this.outfit = left;
         }
         else if(charFace == FACE.RIGHT)
-            this.sprite = right;
+            this.outfit = right;
         else if(charFace == FACE.UP)
-            this.sprite = back;
+            this.outfit = back;
         else
-            this.sprite = front;
+            this.outfit = front;
         sprite.setPosition(CharX, CharY);
+         outfit.setPosition(CharX - collisionLayer.getTileWidth(), CharY);
     }
     private void updatePOS(){
         CharX = sprite.getX();

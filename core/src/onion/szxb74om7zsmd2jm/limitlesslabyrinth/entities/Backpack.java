@@ -44,6 +44,40 @@ public class Backpack {
         itemSlots[11] = new Magic();
         itemSlots[12] = new Magic();
         itemSlots[13] = new Magic();
+        itemSlots[14] = new Magic();
+        itemSlots[15] = new Magic();
+        itemSlots[16] = new Magic();
+        itemSlots[17] = new Magic();
+        itemSlots[18] = new Magic();
+        itemSlots[19] = new Magic();
+        itemSlots[20] = new Magic();
+        itemSlots[21] = new Magic();
+        itemSlots[22] = new Magic();
+        itemSlots[23] = new Rune(1);
+        itemSlots[24] = new Rune(1);
+        itemSlots[25] = new Rune(1);
+        itemSlots[26] = new Rune(1);
+        itemSlots[27] = new Rune(1);
+        itemSlots[28] = new LightningStaff();
+        itemSlots[29] = new LightningStaff();
+        itemSlots[30] = new LightningStaff();
+        itemSlots[31] = new LightningStaff();
+        itemSlots[32] = new LightningStaff();
+        itemSlots[33] = new LightningStaff();
+        itemSlots[34] = new LightningStaff();
+        itemSlots[35] = new LightningStaff();
+        itemSlots[36] = new LightningStaff();
+        itemSlots[37] = new WizardStaff();
+        itemSlots[38] = new WizardStaff();
+        itemSlots[39] = new WizardStaff();
+        itemSlots[40] = new WizardStaff();
+        itemSlots[41] = new WizardStaff();
+        itemSlots[42] = new WizardStaff();
+        itemSlots[43] = new WizardStaff();
+        itemSlots[44] = new WizardStaff();
+        itemSlots[45] = new WizardStaff();
+        itemSlots[46] = new WizardStaff();
+        itemSlots[47] = new WizardStaff();
     }
 
     public Backpack(){

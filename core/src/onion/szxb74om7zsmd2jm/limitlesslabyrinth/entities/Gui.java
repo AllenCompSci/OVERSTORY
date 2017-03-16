@@ -96,6 +96,10 @@ public class Gui {
 
     public void reset(){
         selected = 0;
+        itemBox1 = new Sprite(SelectedBox);
+        itemBox2 = new Sprite(ItemBox);
+        itemBox3 = new Sprite(ItemBox);
+        itemBox4 = new Sprite(ItemBox);
         time1 = 0;
         time2 = 0;
         time3 = 0;

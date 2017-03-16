@@ -32,7 +32,9 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -220,6 +222,7 @@ public class Play implements Screen {
 
         player = new Player(10, 20, 1, (TiledMapTileLayer) map.getLayers().get(2));
         ArrayList<MapObject> SpawnTriggers = checkObjectFor( map.getLayers().get(3), "spawnable");
+
         //
         // spawnableTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnable"));
         //spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(3), "spawnbox"));
@@ -298,8 +301,8 @@ public class Play implements Screen {
             monster = MonsterType.BRUTE;
             //Spawning in enemies every n seconds
             Random rand = new Random();
-            
-            
+
+
             int num = 0;
             num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
@@ -426,16 +429,23 @@ public class Play implements Screen {
 
     }
 
-    public ArrayList<ArrayList<Integer>> convertObjectToTiles(MapObject o)
+    public List<Point2D> convertObjectToTiles(MapObject o, TiledMapTileLayer l)
     {
-        ArrayList<ArrayList<Integer>> tiles = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Point2D> tiles = new ArrayList<Point2D>();
         int x = o.getProperties().get("X", Integer.class);
         int y = o.getProperties().get("Y", Integer.class);
         int width = o.getProperties().get("Width", Integer.class);
         int height = o.getProperties().get("Height", Integer.class);
         int maxwidth = x + width;
         int maxheight = y + height;
+        for(int i = x/l.getWidth(); i <= maxwidth/l.getWidth(); i++ )
+        {
+            for(int j = y/l.getHeight(); i <= maxheight/l.getHeight(); j++)
+            {
+                tiles.add(new Point2D.Double(x, y));
+            }
+        }
 
-        
+        return tiles;
     }
 }

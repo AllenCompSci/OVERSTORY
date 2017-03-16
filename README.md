@@ -29,6 +29,8 @@ LibGDX has a pathfinding system built in based on the tilemaps. You would need t
 Began working finalizing AStar grid (made it a 64x64 block grid, found player/enemy location, etc) then dropped it to use the LibGDX AStar methods. Worked on fixing missing files in my project and reversing a merge that got committed to master by accident.
 ## Week 4
 Restarted AStar pathfinding in order to use LibGDX's very undocumented system. Watched a tutorial and scoured the Internet for help, which is almost entirely outdated or nonexistent. Started researching nodes and dissecting the IndexedAStar Class because it looks like I'm entirely on my own for this. Not fun.
+## Week 5
+Finally finished AStar Pathfinding, which works for both enemy types (although the larger ones will clip things at the moment). Working on smoothing things out so transitions look better. 
 
 # Chris DeLaGarza
 ## Week 1

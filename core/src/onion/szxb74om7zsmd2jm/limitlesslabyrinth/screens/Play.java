@@ -11,6 +11,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -30,6 +33,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
+import java.awt.geom.Point2D;
 import java.util.*;
 import java.util.function.BiFunction;
 
@@ -246,7 +250,7 @@ public class Play implements Screen {
     public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
         enemiesEmpty = new Array<>();
         projectilesEmpty = new Array<>();
-        turretsEmpty = new Array<Turret>();
+        turretsEmpty = new Array<>();
         wallsEmpty = new Array<>();
         Play.spawnLimit = spawnLimit;
         Play.spawnGroupRange = spawnGroupRange;
@@ -480,4 +484,41 @@ public class Play implements Screen {
             LimitlessLabyrinth.LoadingScreen((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
         }
     }
+
+    public ArrayList<MapObject> checkObjectFor(MapLayer layer, String property){
+        ArrayList<MapObject> o = new ArrayList<MapObject>();
+        MapObjects objects = layer.getObjects();
+        for(MapObject object : objects)
+        {
+            if(object.getProperties().containsKey(property))
+            {
+                o.add(object);
+            }
+
+        }
+        return o;
+
+    }
+
+    public List<Point2D> convertObjectToTiles(MapObject o, TiledMapTileLayer l)
+    {
+        ArrayList<Point2D> tiles = new ArrayList<Point2D>();
+        int x = o.getProperties().get("X", Integer.class);
+        int y = o.getProperties().get("Y", Integer.class);
+        int width = o.getProperties().get("Width", Integer.class);
+        int height = o.getProperties().get("Height", Integer.class);
+        int maxwidth = x + width;
+        int maxheight = y + height;
+        for(int i = x/l.getWidth(); i <= maxwidth/l.getWidth(); i++ )
+        {
+            for(int j = y/l.getHeight(); i <= maxheight/l.getHeight(); j++)
+            {
+                tiles.add(new Point2D.Double(x, y));
+            }
+        }
+
+        return tiles;
+    }
+
+
 }

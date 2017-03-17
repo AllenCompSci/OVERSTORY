@@ -42,7 +42,7 @@ public class Detection {
     public boolean isInBigRadius(Enemy enemy){
         distance = Math.sqrt(Math.pow((enemy.getSprite().getX() + enemy.getSprite().getWidth()/2) - (Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((enemy.getSprite().getY() + enemy.getSprite().getHeight()/2) - (Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2), 2));
         //if(radius >= distance)Gdx.app.log("IN RANGE", "SUCCESS");
-        return (radius*10) <= distance;
+        return (radius*9) >= distance;
     }
 
     public boolean isProjectileInRadius(Enemy enemy, Projectile i){

@@ -74,7 +74,7 @@ public class Enemy extends Entity{
         healthBar.draw(batch);
 
         Ecnt++;
-        if(Ecnt % 10 == 0)move();
+        if(Ecnt % 10 == 0 && detection.isInBigRadius(this))move();
 
         DMGDETECT();
 
@@ -124,48 +124,41 @@ public class Enemy extends Entity{
 
     @Override
     public void move() {
-        if(!keepMoving) {
+        if (!keepMoving) {
 
             TileX = (int) ((sprite.getX() + sprite.getWidth() / 2) / Play.tilePixelWidth);
-            TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);;
+            TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);
+            ;
             nextCell = test(Play.lvlTileWidth, Play.lvlTileHeight, TileX, TileY, (int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) / Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) / Play.tilePixelHeight), Play.collisionTiles);
 
             //System.out.println(String.valueOf(nextCell[0]) + " " + String.valueOf(nextCell[1]));
             //System.out.println(String.valueOf(TileX) + " " + String.valueOf(TileY));
 
-            if(nextCell[0] != TileX){
-                if(nextCell[0] > TileX){
-                    if(nextCell[1] > TileY){
+            if (nextCell[0] != TileX) {
+                if (nextCell[0] > TileX) {
+                    if (nextCell[1] > TileY) {
                         move = DIRECTION.NORTHEAST;
-                    }
-                    else if(nextCell[1] < TileY){
+                    } else if (nextCell[1] < TileY) {
                         move = DIRECTION.SOUTHEAST;
-                    }
-                    else{
+                    } else {
                         move = DIRECTION.EAST;
                     }
-                }
-                else{
-                    if(nextCell[1] > TileY){
+                } else {
+                    if (nextCell[1] > TileY) {
                         move = DIRECTION.NORTHWEST;
-                    }
-                    else if(nextCell[1] < TileY){
+                    } else if (nextCell[1] < TileY) {
                         move = DIRECTION.SOUTHWEST;
-                    }
-                    else{
+                    } else {
                         move = DIRECTION.WEST;
                     }
                 }
-            }
-            else if(nextCell[1] != TileY){
-                if(nextCell[1] > TileY){
+            } else if (nextCell[1] != TileY) {
+                if (nextCell[1] > TileY) {
                     move = DIRECTION.NORTH;
-                }
-                else{
+                } else {
                     move = DIRECTION.SOUTH;
                 }
-            }
-            else{
+            } else {
                 move = DIRECTION.NONE;
             }
 
@@ -175,8 +168,7 @@ public class Enemy extends Entity{
                 moveEnemy(move);
             }
 
-        }
-        else{
+        } else {
             moveEnemyCont(move);
             keepMoving = false;
         }
@@ -201,29 +193,29 @@ public class Enemy extends Entity{
         }
     }
 
-    private void moveEnemy(DIRECTION move){
-        if(move == DIRECTION.SOUTHWEST){ //Down & Left
+    private void moveEnemy(DIRECTION move) {
+        if (move == DIRECTION.SOUTHWEST) { //Down & Left
             TileX--;
             TileY--;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight+ Play.tilePixelWidth/2));
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight + Play.tilePixelWidth / 2));
             keepMoving = true;
         }
-        if(move == DIRECTION.SOUTHEAST){ //Down & Right
+        if (move == DIRECTION.SOUTHEAST) { //Down & Right
             TileX++;
             TileY--;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight + Play.tilePixelWidth/2));
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight + Play.tilePixelWidth / 2));
             keepMoving = true;
         }
-        if(move == DIRECTION.NORTHWEST){ //Up & Left
+        if (move == DIRECTION.NORTHWEST) { //Up & Left
             TileX--;
             TileY++;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth/2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth/2));
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth / 2));
             keepMoving = true;
         }
-        if(move == DIRECTION.NORTHEAST){ //Up & Right
+        if (move == DIRECTION.NORTHEAST) { //Up & Right
             TileX++;
             TileY++;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth/2) , (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth/2));
+            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth / 2));
             keepMoving = true;
         }
         if (move == DIRECTION.NORTH) { //Up
@@ -242,7 +234,6 @@ public class Enemy extends Entity{
             TileX++;
             sprite.setX((float) (TileX * Play.tilePixelWidth));
         }
-
     }
 
     // Default method for xp drop - gives no xp. should override in other classes

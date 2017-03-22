@@ -26,7 +26,7 @@ public class Entity implements InputProcessor {
 
     protected Sprite sprite;
     protected long time = 0;
-    protected float speed = 4f;
+    protected float speed = 5f;
     protected Detection detection;
     protected String state = "still";
     public float getFullHealth() {

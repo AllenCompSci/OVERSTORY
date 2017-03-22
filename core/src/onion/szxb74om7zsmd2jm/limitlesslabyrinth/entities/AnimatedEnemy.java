@@ -17,9 +17,7 @@ public class AnimatedEnemy extends Enemy {
         private Animation<TextureRegion> animation;
         float stateTime;
         public static DIRECTION ENEMYFACING;
-        private int Ecnt = 0;
         boolean is64;
-
         private boolean flipLEFT;
         public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster)
         {
@@ -65,8 +63,7 @@ public class AnimatedEnemy extends Enemy {
             lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
             lostHealthBar.draw(batch);
             healthBar.draw(batch);
-            Ecnt++;
-            if(Ecnt % 8 == 0 && detection.isInBigRadius(this))move();
+            if(detection.isInBigRadius(this))move();
             //Enemy checking for player
             setDir();
             DMGDETECT();

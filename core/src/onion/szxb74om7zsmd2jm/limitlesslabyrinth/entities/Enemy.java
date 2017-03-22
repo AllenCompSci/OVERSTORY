@@ -26,7 +26,8 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.AStar.test;
 public class Enemy extends Entity{
     public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, NONE};
     private DIRECTION move = DIRECTION.NONE;
-    private boolean keepMoving = false; //Checks if the enemy needs to move around an object
+    private boolean keepMoving = false;
+    private int mvct = 0;
     public int getXpDrop() {
         return xpDrop;
     }
@@ -59,7 +60,10 @@ public class Enemy extends Entity{
     protected float y;
     private int TileX;
     private int TileY;
-    private int Ecnt = 0;
+    private int Tilesmoothnessx;
+    private int Tilesmoothnessy;
+
+    private int smoothness = 4;
 
     public Enemy(float x, float y, int level, TiledMapTileLayer collisionLayer) {
         super(x, y, level, collisionLayer);
@@ -73,8 +77,7 @@ public class Enemy extends Entity{
         lostHealthBar.draw(batch);
         healthBar.draw(batch);
 
-        Ecnt++;
-        if(Ecnt % 10 == 0 && detection.isInBigRadius(this))move();
+        if(detection.isInBigRadius(this))move();
 
         DMGDETECT();
 
@@ -128,13 +131,17 @@ public class Enemy extends Entity{
 
             TileX = (int) ((sprite.getX() + sprite.getWidth() / 2) / Play.tilePixelWidth);
             TileY = (int) ((sprite.getY() + sprite.getHeight() / 2) / Play.tilePixelHeight);
-            ;
+            Tilesmoothnessx = TileX * (32/smoothness);
+            Tilesmoothnessy = TileY * (32/smoothness);
+
             nextCell = test(Play.lvlTileWidth, Play.lvlTileHeight, TileX, TileY, (int) ((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) / Play.tilePixelWidth), (int) ((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) / Play.tilePixelHeight), Play.collisionTiles);
 
             //System.out.println(String.valueOf(nextCell[0]) + " " + String.valueOf(nextCell[1]));
             //System.out.println(String.valueOf(TileX) + " " + String.valueOf(TileY));
-
-            if (nextCell[0] != TileX) {
+            if(nextCell[0] == -1){
+              move = DIRECTION.NONE;
+            }
+            else if (nextCell[0] != TileX) {
                 if (nextCell[0] > TileX) {
                     if (nextCell[1] > TileY) {
                         move = DIRECTION.NORTHEAST;
@@ -166,73 +173,113 @@ public class Enemy extends Entity{
 
             if (!detection.isInSmallRadius(this)) {
                 moveEnemy(move);
+                System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
             }
 
         } else {
             moveEnemyCont(move);
-            keepMoving = false;
+            mvct++;
+            if(mvct == (32/smoothness)-1){
+                keepMoving = false;
+            }
+            System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
         }
     }
 
     private void moveEnemyCont(DIRECTION move){
         if(move == DIRECTION.SOUTHWEST){ //Down & Left
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight));
-            keepMoving = true;
+            Tilesmoothnessx--;
+            Tilesmoothnessy--;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
+
         }
         if(move == DIRECTION.SOUTHEAST){ //Down & Right
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight ));
-            keepMoving = true;
+            Tilesmoothnessx++;
+            Tilesmoothnessy--;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
+
         }
         if(move == DIRECTION.NORTHWEST){ //Up & Left
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth), (float) (TileY * Play.tilePixelHeight));
-            keepMoving = true;
+            Tilesmoothnessx--;
+            Tilesmoothnessy++;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
+
         }
         if(move == DIRECTION.NORTHEAST){ //Up & Right
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth) , (float) (TileY * Play.tilePixelHeight));
-            keepMoving = true;
+            Tilesmoothnessx++;
+            Tilesmoothnessy++;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness) , (float) (Tilesmoothnessy * smoothness));
+
+        }
+        if (move == DIRECTION.NORTH) { //Up
+            Tilesmoothnessy++;
+            sprite.setY((float) (Tilesmoothnessy * smoothness));
+        }
+        if (move == DIRECTION.SOUTH) { //Down
+            Tilesmoothnessy--;
+            sprite.setY((float) (Tilesmoothnessy * smoothness));
+        }
+        if (move == DIRECTION.WEST) { //Left
+            Tilesmoothnessx--;
+            sprite.setX((float) (Tilesmoothnessx * smoothness));
+        }
+        if (move == DIRECTION.EAST) { //Right
+            Tilesmoothnessx++;
+            sprite.setX((float) (Tilesmoothnessx * smoothness));
         }
     }
 
     private void moveEnemy(DIRECTION move) {
+        keepMoving = true;
+        mvct = 0;
         if (move == DIRECTION.SOUTHWEST) { //Down & Left
             TileX--;
             TileY--;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight + Play.tilePixelWidth / 2));
-            keepMoving = true;
+            Tilesmoothnessx--;
+            Tilesmoothnessy--;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.SOUTHEAST) { //Down & Right
             TileX++;
             TileY--;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight + Play.tilePixelWidth / 2));
-            keepMoving = true;
+            Tilesmoothnessx++;
+            Tilesmoothnessy--;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.NORTHWEST) { //Up & Left
             TileX--;
             TileY++;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth + Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth / 2));
-            keepMoving = true;
+            Tilesmoothnessx--;
+            Tilesmoothnessy++;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.NORTHEAST) { //Up & Right
             TileX++;
             TileY++;
-            sprite.setPosition((float) (TileX * Play.tilePixelWidth - Play.tilePixelWidth / 2), (float) (TileY * Play.tilePixelHeight - Play.tilePixelWidth / 2));
-            keepMoving = true;
+            Tilesmoothnessx++;
+            Tilesmoothnessy++;
+            sprite.setPosition((float) (Tilesmoothnessx * smoothness), (float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.NORTH) { //Up
             TileY++;
-            sprite.setY((float) (TileY * Play.tilePixelHeight));
+            Tilesmoothnessy++;
+            sprite.setY((float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.SOUTH) { //Down
             TileY--;
-            sprite.setY((float) (TileY * Play.tilePixelHeight));
+            Tilesmoothnessy--;
+            sprite.setY((float) (Tilesmoothnessy * smoothness));
         }
         if (move == DIRECTION.WEST) { //Left
             TileX--;
-            sprite.setX((float) (TileX * Play.tilePixelWidth));
+            Tilesmoothnessx--;
+            sprite.setX((float) (Tilesmoothnessx * smoothness));
         }
         if (move == DIRECTION.EAST) { //Right
             TileX++;
-            sprite.setX((float) (TileX * Play.tilePixelWidth));
+            Tilesmoothnessx++;
+            sprite.setX((float) (Tilesmoothnessx * smoothness));
+
         }
     }
 

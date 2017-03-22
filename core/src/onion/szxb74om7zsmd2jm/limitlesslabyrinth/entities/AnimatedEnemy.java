@@ -63,6 +63,7 @@ public class AnimatedEnemy extends Enemy {
             lostHealthBar.setPosition(sprite.getX(), sprite.getY() + sprite.getHeight());
             lostHealthBar.draw(batch);
             healthBar.draw(batch);
+
             if(detection.isInBigRadius(this))move();
             //Enemy checking for player
             setDir();

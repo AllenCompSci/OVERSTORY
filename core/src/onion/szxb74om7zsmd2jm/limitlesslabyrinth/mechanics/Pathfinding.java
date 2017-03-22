@@ -151,7 +151,7 @@ public class Pathfinding {
         TILELAYOUT[PlayerX][PlayerY] = PLAYER;
     }
     public void update(){
-        removeMalleable();
+        //removeMalleable();
 //        getWall();
         getEnemies();
         getPlayer();

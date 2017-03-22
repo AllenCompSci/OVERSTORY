@@ -134,7 +134,7 @@ public class Play implements Screen {
     public static void addWall(Wall wallType){
         walls.add(wallType);
     }
-    private static int spawnCount = 0;
+    private static int spawnCount = 100;
     public static Gui getGui() {
         return gui;
     }
@@ -145,7 +145,7 @@ public class Play implements Screen {
     public static int getSpawnLimit() {
         return spawnLimit;
     }
-    private static int spawnLimit = 350;
+    private static int spawnLimit = 0;
     public static int getSpawnGroupRange() {
         return spawnGroupRange;
     }
@@ -251,7 +251,7 @@ public class Play implements Screen {
 
     public static void changeMap(){
         movePaths = 0;
-        path.update();
+        //path.update();
         spawnArea = "Area0";
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
@@ -293,7 +293,7 @@ public class Play implements Screen {
         SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
         Gdx.input.setInputProcessor(null);
-        path = new Pathfinding();
+        //path = new Pathfinding();
         movePaths = 0;
         mapPath = LimitlessLabyrinth.getMapPath();
 
@@ -378,10 +378,10 @@ public class Play implements Screen {
         }
 
         player.draw(renderer.getBatch());
-        if(movePaths++ == 9){
+        /**if(movePaths++ == 9 && getEnemies().size < 10){
             movePaths = 0;
             path.update();
-        }
+        }*/
 
         gui.input();
         gui.update();

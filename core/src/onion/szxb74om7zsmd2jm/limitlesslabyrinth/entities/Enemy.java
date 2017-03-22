@@ -74,7 +74,7 @@ public class Enemy extends Entity{
         healthBar.draw(batch);
 
         Ecnt++;
-        if(Ecnt % 10 == 0 && detection.isInBigRadius(this))move();
+        if(Ecnt % 10 == 0)move();
 
         DMGDETECT();
 
@@ -133,8 +133,10 @@ public class Enemy extends Entity{
 
             //System.out.println(String.valueOf(nextCell[0]) + " " + String.valueOf(nextCell[1]));
             //System.out.println(String.valueOf(TileX) + " " + String.valueOf(TileY));
-
-            if (nextCell[0] != TileX) {
+            if(nextCell[0] == -1){
+                move = DIRECTION.NONE;
+            }
+            else if (nextCell[0] != TileX) {
                 if (nextCell[0] > TileX) {
                     if (nextCell[1] > TileY) {
                         move = DIRECTION.NORTHEAST;

@@ -77,9 +77,7 @@ public class Enemy extends Entity{
         lostHealthBar.draw(batch);
         healthBar.draw(batch);
 
-
-        if(detection.isInBigRadius(this))move();
-
+        move();
 
         DMGDETECT();
 

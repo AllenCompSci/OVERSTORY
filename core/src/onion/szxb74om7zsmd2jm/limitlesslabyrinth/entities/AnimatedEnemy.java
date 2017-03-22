@@ -64,7 +64,7 @@ public class AnimatedEnemy extends Enemy {
             lostHealthBar.draw(batch);
             healthBar.draw(batch);
 
-            if(detection.isInBigRadius(this))move();
+            move();
             //Enemy checking for player
             setDir();
             DMGDETECT();

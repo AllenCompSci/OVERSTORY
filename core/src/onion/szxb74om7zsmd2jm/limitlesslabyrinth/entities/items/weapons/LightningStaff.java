@@ -24,7 +24,7 @@ public class LightningStaff extends Weapon{
     }
 
     @Override
-    public Projectile getProjectile(float x1, float y1, float x2, float y2){
-        return new LightningOrb(x1, y1, x2, y2, dmg, new Array<Enemy>(), this);
+    public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
+        return new LightningOrb(x1, y1, x2, y2, dmg, new Array<Enemy>(), this, Origin);
     }
 }

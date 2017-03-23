@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -15,6 +16,10 @@ public class Projectile {
         return enemiesHit;
     }
     protected Array<Enemy> enemiesHit = new Array<Enemy>();
+    public Array<Player> getPlayersHit() {
+        return playersHit;
+    }
+    protected Array<Player> playersHit = new Array<Player>();
     public Sprite getSprite() {
         return sprite;
     }
@@ -66,8 +71,14 @@ public class Projectile {
         remove();
     }
 
-    public void remove(){
-        Play.getProjectiles().set(Play.getProjectiles().indexOf(this, true), null);
-        Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
+    public void remove() {
+        if (Play.getProjectiles().contains(this, true)) {
+            Play.getProjectiles().set(Play.getProjectiles().indexOf(this, true), null);
+            Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
+        }
+        else if(Play.getEnemyProjectiles().contains(this, true)){
+            Play.getEnemyProjectiles().set(Play.getEnemyProjectiles().indexOf(this, true), null);
+            Play.getEnemyProjectiles().removeIndex(Play.getEnemyProjectiles().indexOf(null, true));
+        }
     }
 }

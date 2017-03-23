@@ -19,9 +19,11 @@ public class LightningOrb extends Projectile {
     Animation<TextureRegion> animation;
     float stateTime;
     double distance;
+    private String origin;
 
-    public LightningOrb(float x1, float y1, float x2, float y2, float dmg, Array<Enemy> hit, Item fromItem){
+    public LightningOrb(float x1, float y1, float x2, float y2, float dmg, Array<Enemy> hit, Item fromItem, String Origin){
         this.fromItem = fromItem;
+        origin = Origin;
         animation = spriteTextures.LightningOrbAnimation;
         enemiesHit = hit;
         this.dmg = dmg;
@@ -63,7 +65,7 @@ public class LightningOrb extends Projectile {
             System.out.println("ITEM LEVELED UP");
         }
 
-        Play.getProjectiles().add(new invisProjectile(sprite.getX(), sprite.getY(), dmg, enemiesHit, fromItem));
+        if(origin != "Enemy") Play.getProjectiles().add(new invisProjectile(sprite.getX(), sprite.getY(), dmg, enemiesHit, fromItem, origin));
         remove();
     }
 

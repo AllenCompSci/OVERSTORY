@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -33,6 +34,8 @@ public class Enemy extends Entity{
     }
     protected int xpDrop;
     protected float dmgTaken;
+    protected Item weapon;
+    protected long reloadTime = 0;
     public float getDmgTaken() {
         return dmgTaken;
     }

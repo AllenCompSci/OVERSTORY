@@ -21,7 +21,7 @@ public class NullProjectileItem extends Weapon {
     }
 
     @Override
-    public Projectile getProjectile(float x1, float y1, float x2, float y2){
+    public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
         return new NullProjectile(x1, y1, dmg, this);
     }
 }

@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -15,9 +17,11 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  */
 public class invisProjectile extends Projectile {
     float projectileDmg;
+    private String origin;
 
-    public invisProjectile(float x, float y, float dmg, Array<Enemy> hit, Item fromItem){
+    public invisProjectile(float x, float y, float dmg, Array<Enemy> hit, Item fromItem, String Origin){
         this.fromItem = fromItem;
+        origin = Origin;
         enemiesHit = hit;
         this.dmg = 0;
         this.projectileDmg = dmg;
@@ -34,9 +38,9 @@ public class invisProjectile extends Projectile {
     public void draw() {
     }
 
-    public void contact(Enemy enemy) {
+    public void contact(Entity enemy) {
 
-        Play.getProjectiles().add(new LightningOrb(x,y, enemy.getSprite().getX(), enemy.getSprite().getY(), projectileDmg, enemiesHit, fromItem));
+        Play.getProjectiles().add(new LightningOrb(x,y, enemy.getSprite().getX(), enemy.getSprite().getY(), projectileDmg, enemiesHit, fromItem, origin));
         remove();
     }
 }

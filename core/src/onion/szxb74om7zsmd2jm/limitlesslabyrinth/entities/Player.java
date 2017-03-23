@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -37,6 +40,8 @@ public class Player extends Entity {
     int NUMOUTFITS = 8;
     boolean RUNE = true;
     boolean OUTFIT = true;
+    protected float dmgTaken;
+
     @Override
     public void setDmg(float dmg) {
         super.setDmg(dmg * (1 + ((10 * level) - 10)));
@@ -122,7 +127,7 @@ public class Player extends Entity {
         this.outfit = front;
         this.sprite = new Sprite(spriteTextures.basic32);
 
-        this.health = 100f;
+        this.health = 100000f;
         this.fullHealth = health;
         this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
@@ -131,6 +136,7 @@ public class Player extends Entity {
 
         sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0], collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
 
+        detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 
     @Override
@@ -168,7 +174,7 @@ public class Player extends Entity {
 
         /** Fire projectile */
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "rune"  || Play.getGui().getEquipped().getType() == "trap") && !Play.getGui().getIsRefreshing()[Play.getGui().getSelected()]){
-            Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2)));
+            Play.getProjectiles().add(Play.getGui().getEquipped().getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX() + (Gdx.input.getX() - Gdx.graphics.getWidth()/2), Play.getPlayer().getSprite().getY() - (Gdx.input.getY() - Gdx.graphics.getHeight()/2), "Player"));
             Play.getGui().getRefreshItem()[Play.getGui().getSelected()].setScale(1f);
             Play.getGui().setIsRefreshing(true, Play.getGui().getSelected());
         }
@@ -186,15 +192,36 @@ public class Player extends Entity {
             RUNE = false;
         }
         /** PRESS O to CYCLE THRU OUTFITS **/
-        if(Gdx.input.isKeyPressed(Input.Keys.O) && OUTFIT){
+        if(Gdx.input.isKeyJustPressed(Input.Keys.O)){
             changeOutfit(selection);
-            OUTFIT = false;
-        }
-        if(!OUTFIT && !Gdx.input.isKeyPressed(Input.Keys.O)){
-            OUTFIT = true;
         }
         if(!RUNE && !Gdx.input.isKeyPressed(Input.Keys.R)){
             RUNE = true;
+        }
+
+        /** Checking if hit by projectile */
+
+        dmgTaken = detection.projectileInRadiusDmg(this);
+
+        for(Projectile i : Play.getEnemyProjectiles()){
+            if(i.getName() == "invis"){
+                if (!i.getPlayersHit().contains(this, true)) {
+                    if (detection.isInvisProjectileInRadius(this, (invisProjectile) i)) {
+                        i.getPlayersHit().add(this);
+                        health -= dmgTaken;
+                        Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() + ((dmgTaken / fullHealth) * sprite.getWidth()) / 2);
+                        Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() - dmgTaken / fullHealth, Play.getGui().getPlayerHealthBar().getScaleY());
+                    }
+                }
+            }
+            else {
+                if (!i.getPlayersHit().contains(this, true)) {
+                    if (detection.isProjectileInRadius(this, i)) {
+                        i.getPlayersHit().add(this);
+                        takeDMG(dmgTaken);
+                    }
+                }
+            }
         }
     }
     
@@ -218,6 +245,10 @@ public class Player extends Entity {
         CharY = sprite.getY();
     }
 
-
+    public void takeDMG(float dmg){
+        Play.getPlayer().setHealth(Play.getPlayer().getHealth() - dmg);
+        Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() + ((dmg / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
+        Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() - dmg / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
+    }
 }
 

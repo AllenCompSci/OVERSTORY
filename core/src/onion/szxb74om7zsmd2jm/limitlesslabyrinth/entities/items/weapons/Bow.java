@@ -20,7 +20,7 @@ public class Bow extends Weapon {
     }
 
     @Override
-    public Projectile getProjectile(float x1, float y1, float x2, float y2){
+    public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
         return new Arrow(x1, y1, x2, y2, dmg, this);
     }
 }

@@ -125,6 +125,11 @@ public class Play implements Screen {
     }
     private static Array<Projectile> projectiles = new Array<Projectile>();
     private static Array<Projectile> projectilesEmpty = new Array<Projectile>();
+    public static Array<Projectile> getEnemyProjectiles() {
+        return enemyProjectiles;
+    }
+    private static Array<Projectile> enemyProjectiles = new Array<Projectile>();
+    private static Array<Projectile> enemyProjectilesEmpty = new Array<Projectile>();
     public static Array<Wall> getWalls(){return walls;}
     private static Array<Turret> turretsEmpty = new Array<Turret>();
     private int[][] spawnTiles;
@@ -242,6 +247,7 @@ public class Play implements Screen {
         spawnArea = "Area1";
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
+        Play.enemyProjectiles = Play.enemyProjectilesEmpty;
         Play.walls = Play.wallsEmpty;
         turrets = new HashMap<String, Array<Turret>>();
         KillCount = new HashMap<String, Integer>();
@@ -255,6 +261,7 @@ public class Play implements Screen {
         spawnArea = "Area0";
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
+        Play.enemyProjectiles = Play.enemyProjectilesEmpty;
         Play.walls = Play.wallsEmpty;
         Play.spawnCount = 0;
         Play.garbageTime = 0;
@@ -263,6 +270,7 @@ public class Play implements Screen {
     public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
         enemiesEmpty = new Array<>();
         projectilesEmpty = new Array<>();
+        enemyProjectilesEmpty = new Array<>();
         turretsEmpty = new Array<>();
         wallsEmpty = new Array<>();
         Play.spawnLimit = spawnLimit;
@@ -299,7 +307,6 @@ public class Play implements Screen {
 
         turrets.putIfAbsent(mapPath, turretsEmpty);
         KillCount.putIfAbsent(mapPath, 1);
-
 
 
     }
@@ -351,6 +358,15 @@ public class Play implements Screen {
             }
             if(projectiles.indexOf(null, true) != -1){
                 Play.getProjectiles().removeIndex(Play.getProjectiles().indexOf(null, true));
+            }
+        }
+        for(Projectile i : enemyProjectiles){
+            i.draw();
+            if(System.currentTimeMillis() > i.getTime()){
+                i.remove();
+            }
+            if(enemyProjectiles.indexOf(null, true) != -1){
+                Play.getEnemyProjectiles().removeIndex(Play.getEnemyProjectiles().indexOf(null, true));
             }
         }
 

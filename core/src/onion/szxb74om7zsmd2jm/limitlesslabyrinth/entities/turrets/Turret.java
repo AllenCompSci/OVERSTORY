@@ -68,7 +68,7 @@ public class Turret extends Entity{
                     if (i.getSprite().getX() > sprite.getX()) {
                         sprite.setFlip(false, false);
                     }
-                    Play.getProjectiles().add(itemHeld.getProjectile(sprite.getX(), sprite.getY(), i.getSprite().getX() + i.getSprite().getWidth() / 2, i.getSprite().getY() + i.getSprite().getHeight() / 2));
+                    Play.getProjectiles().add(itemHeld.getProjectile(sprite.getX(), sprite.getY(), i.getSprite().getX() + i.getSprite().getWidth() / 2, i.getSprite().getY() + i.getSprite().getHeight() / 2, "Turret"));
                     AttackTime = System.currentTimeMillis() + 1000;
                     break;
                 }

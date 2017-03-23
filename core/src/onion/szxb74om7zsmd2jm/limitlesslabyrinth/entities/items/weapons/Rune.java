@@ -72,7 +72,7 @@ public class Rune extends Weapon {
         }
     }
     @Override
-    public Projectile getProjectile(float x1, float y1, float x2, float y2){
+    public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
         if(rune == spriteTextures.RUNE.MAGICWALL){
             Play.addWall(new Wall(x2, y2, Play.fourFrameAnimationCreator(spriteTextures.magicwall,1,3,.2f), 30));
         }

@@ -21,7 +21,7 @@ public class AOE extends Weapon {
     }
 
     @Override
-    public Projectile getProjectile(float x1, float y1, float x2, float y2){
+    public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
         return new AOEeffect(x1, y1, Player.getCharFace(), dmg*1.5f, 0, this, (int)(Math.random()*17));
     }
 

@@ -2,6 +2,8 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
 
 import com.badlogic.gdx.Gdx;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.LightningOrb;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
@@ -45,7 +47,7 @@ public class Detection {
         return (radius*9) >= distance;
     }
 
-    public boolean isProjectileInRadius(Enemy enemy, Projectile i){
+    public boolean isProjectileInRadius(Entity enemy, Projectile i){
             distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth()/2) - (enemy.getSprite().getX() + enemy.getSprite().getWidth()/2), 2) +
                     Math.pow((i.getSprite().getY() + i.getSprite().getHeight()/2) - (enemy.getSprite().getY() + enemy.getSprite().getHeight()/2), 2));
             if (radius/3 >= distance - i.getSprite().getHeight()/2){
@@ -67,7 +69,18 @@ public class Detection {
         return 0;
     }
 
-    public boolean isInvisProjectileInRadius(Enemy enemy, invisProjectile i){
+    public float projectileInRadiusDmg(Player enemy){
+        for(Projectile i : Play.getEnemyProjectiles()){
+            distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth()/2) - (enemy.getSprite().getX() + enemy.getSprite().getWidth()/2), 2) +
+                    Math.pow((i.getSprite().getY() + i.getSprite().getHeight()/2) - (enemy.getSprite().getY() + enemy.getSprite().getHeight()/2), 2));
+            if (radius/3 >= distance - i.getSprite().getHeight()/2){
+                return i.getDmg();
+            }
+        }
+        return 0;
+    }
+
+    public boolean isInvisProjectileInRadius(Entity enemy, invisProjectile i){
         distance = Math.sqrt(Math.pow((i.getSprite().getX() + i.getSprite().getWidth()/2) - (enemy.getSprite().getX() + enemy.getSprite().getWidth()/2), 2) +
                 Math.pow((i.getSprite().getY() + i.getSprite().getHeight()/2) - (enemy.getSprite().getY() + enemy.getSprite().getHeight()/2), 2));
         if (radius * 3 >= distance - i.getSprite().getHeight()/2){
@@ -77,4 +90,5 @@ public class Detection {
         }
         return false;
     }
+
 }

@@ -22,7 +22,12 @@ public class Gui {
     private long time2 = 0;
     private long time3 = 0;
     private long time4 = 0;
-    private Sprite playerHealthBar;
+
+    public static Sprite getPlayerHealthBar() {
+        return playerHealthBar;
+    }
+
+    private static Sprite playerHealthBar;
     private Sprite playerLostHealthBar;
     private Sprite itemBox1;
     private Sprite itemBox2;
@@ -34,6 +39,7 @@ public class Gui {
     private static Item item3;
     private static Item item4;
     private static Item Equipped;
+
     private Texture HealthBar = new Texture("playerhealthbar.png");
     private Texture LostHealthBar = new Texture("playerredbar.png");
     private Texture ItemBox = new Texture("itemBox.png");
@@ -44,6 +50,15 @@ public class Gui {
     }
 
     private Backpack backpack = new Backpack();
+
+    public static float getHealthBarX() {
+        return healthBarX;
+    }
+
+    public static void setHealthBarX(float healthBarX) {
+        Gui.healthBarX = healthBarX;
+    }
+
     private static float healthBarX = 0;
     private static boolean isBackpackOpen = false;
     private static boolean[] isRefreshing = new boolean[4];

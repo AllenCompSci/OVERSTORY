@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Bow;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Shuriken;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -22,6 +24,9 @@ public class AnimatedEnemy extends Enemy {
         public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster)
         {
             super(x, y, level, collisionLayer);
+
+            weapon = new Bow();
+
             is64 = false;
             ENEMYFACING = DIRECTION.SOUTH;
             flipLEFT = false;
@@ -69,6 +74,10 @@ public class AnimatedEnemy extends Enemy {
             setDir();
             DMGDETECT();
 
+            if(reloadTime < System.currentTimeMillis() && detection.isInBigRadius(this)){
+                Play.getEnemyProjectiles().add(weapon.getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX(), Play.getPlayer().getSprite().getY(), "Enemy"));
+                reloadTime = System.currentTimeMillis() + 2000;
+            }
 
 
         }

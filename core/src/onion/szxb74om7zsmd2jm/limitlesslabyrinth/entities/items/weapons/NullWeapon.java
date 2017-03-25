@@ -13,7 +13,7 @@ public class NullWeapon extends Weapon {
         sprite = new Sprite(spriteTextures.NullProjectileItemSprite);
         type = "melee";
         dmg = 0f;
-        lvl = 1;
+        lvl = 0;
         cooldown = 40;
     }
 }

@@ -85,27 +85,27 @@ public class Pathfinding {
 
     public void print(){
         for(int i = HEIGHT-1; i >= 0; i--){
-            System.out.print("[ ");
+            //System.out.print("[ ");
             for(int j = 0; j < WIDTH; j++ ){
                 if(j != 0){
                     System.out.print(", ");
                 }
-                if(TILELAYOUT[i][j] == PATH)
-                    System.out.print("P*");
+                if(TILELAYOUT[i][j] == PATH){}
+
                 else if(TILELAYOUT[i][j] == BLOCKED){
-                    System.out.print("BL");
+                   // System.out.print("BL");
                 }
                 else if(TILELAYOUT[i][j] ==WALL){
-                    System.out.print("WL");
+                    //System.out.print("WL");
                 }
                 else if(TILELAYOUT[i][j] == ENEMY){
-                    System.out.print("EN");
+                    //System.out.print("EN");
                 }
                 else if(TILELAYOUT[i][j] == PLAYER){
-                    System.out.print("PL");
+                    //System.out.print("PL");
                 }
             }
-            System.out.println(" ]");
+           // System.out.println(" ]");
         }
     }
     public void getWall(){

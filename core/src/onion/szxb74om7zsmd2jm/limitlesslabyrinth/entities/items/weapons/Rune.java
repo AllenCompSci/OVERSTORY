@@ -18,20 +18,13 @@ public class Rune extends Weapon {
     pos [][] AOE;
     pos CENTER;
     int NUM;
-    public Rune(int i){
+    public Rune(int level){
         rune = spriteTextures.RUNE.WILDGROWTH;
         setSprite();
         setEFFECT();
         setNUM();
         dmg = 100f;
-        lvl = 1;
-        type = "rune";
-        cooldown = 40;
-    }
-    public Rune(){
-        switchRuneType();
-        dmg = 100f;
-        lvl = 1;
+        lvl = level;
         type = "rune";
         cooldown = 40;
     }

@@ -212,7 +212,7 @@ public class AStar {
            // System.out.println();
             return nextSpot;
         }else {
-            System.out.println("No possible path");
+            //System.out.println("No possible path");
             return noPath;
         }
     }

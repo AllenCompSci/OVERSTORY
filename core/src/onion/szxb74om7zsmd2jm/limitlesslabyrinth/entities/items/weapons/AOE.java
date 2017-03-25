@@ -12,10 +12,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
  * Created by Taylor on 2/18/2017.
  */
 public class AOE extends Weapon {
-    public AOE(){
+    public AOE(int level){
         sprite = new Sprite(spriteTextures.spellbook);
         dmg = 100f;
-        lvl = 1;
+        lvl = level;
         type = "projectile";
         cooldown = 80;
     }

@@ -25,6 +25,17 @@ import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.AStar.test;
  */
 
 public class Enemy extends Entity{
+    public float getFullHealth() {
+        return fullHealth;
+    }
+    protected float fullHealth;
+    public float getHealth() {
+        return health;
+    }
+    public void setHealth(float health) {
+        this.health = health;
+    }
+    protected float health;
     public enum DIRECTION{ NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST, NONE};
     private DIRECTION move = DIRECTION.NONE;
     private boolean keepMoving = false;
@@ -177,7 +188,7 @@ public class Enemy extends Entity{
 
             if (!detection.isInSmallRadius(this)) {
                 moveEnemy(move);
-                System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
+                //System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
             }
 
         } else {
@@ -186,7 +197,7 @@ public class Enemy extends Entity{
             if(mvct == (32/smoothness)-1){
                 keepMoving = false;
             }
-            System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
+            //System.out.println(String.valueOf(Tilesmoothnessx) + " " + String.valueOf(Tilesmoothnessy));
         }
     }
 

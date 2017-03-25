@@ -69,7 +69,7 @@ public class LimitlessLabyrinth extends Game {
 	@Override
 	public void create () {
 		MapPath = "test.tmx";
-		play = new Play("test.tmx", 100, 10, -10);
+		play = new Play("test.tmx", 100, 10, -10, true);
 		setScreen(mainMenu);
 	}
 
@@ -86,7 +86,7 @@ public class LimitlessLabyrinth extends Game {
 			System.gc();
 			resetScreen = false;
 			Play.reset();
-			play = new Play(MapPath, 100, 10, -10);
+			play = new Play(MapPath, 100, 10, -10, true);
 			setScreen(play);
 		}
 		if(changeMap){
@@ -94,7 +94,7 @@ public class LimitlessLabyrinth extends Game {
 			System.gc();
 			changeMap = false;
 			Play.changeMap();
-			play = new Play(MapPath, 100, 10, -10);
+			play = new Play(MapPath, 100, 10, -10, false);
 			setScreen(play);
 		}
 		if(mainMenuScreen){

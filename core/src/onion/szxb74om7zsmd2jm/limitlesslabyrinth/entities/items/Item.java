@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Bow;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
@@ -60,7 +61,7 @@ public class Item {
     }
 
     public Turret placeTurret(float x, float y){
-        return new Turret(x,y,new Bow());
+        return new Turret(x,y,new NullWeapon());
     }
 
     public void SWAPVAL(){

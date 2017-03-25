@@ -267,7 +267,7 @@ public class Play implements Screen {
         Play.garbageTime = 0;
     }
 
-    public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart){
+    public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart, boolean isFirstSpawnIn){
         enemiesEmpty = new Array<>();
         projectilesEmpty = new Array<>();
         enemyProjectilesEmpty = new Array<>();
@@ -292,6 +292,9 @@ public class Play implements Screen {
         camera.setToOrtho(false);
         playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "StartPosition"));
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
+        if(isFirstSpawnIn) {
+            player.establishHealth();
+        }
 
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
@@ -310,6 +313,8 @@ public class Play implements Screen {
 
 
     }
+
+
 
     @Override
     public void show() {
@@ -381,7 +386,7 @@ public class Play implements Screen {
             //checks if enemy is dead
             if(i.getHealth() <= 0) {
                 spawnCount++;
-                if(spawnCount >= 100){
+                if(spawnCount >= 10){
                     KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);
                     spawnCount = 0;
                 }
@@ -420,10 +425,13 @@ public class Play implements Screen {
             }
         }
 
-        if(player.getHealth() <= 0){
+        if(Player.getHealth() <= 0){
+            reset();
             LimitlessLabyrinth.setPlayerDeath(true);
             LimitlessLabyrinth.setMainMenu();
         }
+
+
     }
 
     @Override

@@ -29,10 +29,6 @@ public class Entity implements InputProcessor {
     protected float speed = 5f;
     protected Detection detection;
     protected String state = "still";
-    public float getFullHealth() {
-        return fullHealth;
-    }
-    protected float fullHealth;
     public float getDmg() {
         return dmg;
     }
@@ -40,13 +36,11 @@ public class Entity implements InputProcessor {
         this.dmg = dmg;
     }
     protected float dmg;
-    public float getHealth() {
-        return health;
+
+    public TiledMapTileLayer getCollisionLayer() {
+        return collisionLayer;
     }
-    public void setHealth(float health) {
-        this.health = health;
-    }
-    protected float health;
+
     protected TiledMapTileLayer collisionLayer;
     public int getHEIGHT(){
         return (int)collisionLayer.getTileHeight();

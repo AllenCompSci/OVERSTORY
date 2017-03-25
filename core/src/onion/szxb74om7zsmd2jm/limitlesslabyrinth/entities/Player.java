@@ -25,6 +25,22 @@ public class Player extends Entity {
     private static int xp = 0;
     private static int level = 1;
     private static int xpToLevel = 10;
+    private static float regenRate = 1;
+
+
+    public static float getFullHealth() {
+        return fullHealth;
+    }
+    protected static float fullHealth;
+    public static float getHealth() {
+        return health;
+    }
+    public static void setHealth(float health) {
+        Player.health = health;
+    }
+    protected static float health;
+
+
     //private String state = "still";
     private float elapsedTime;
     private static int waveAmount = 2;
@@ -57,9 +73,8 @@ public class Player extends Entity {
         level = 1;
         xpToLevel = 10;
         waveAmount = 200;
+        establishHealth();
         isWalking = false;
-        this.health = 100f;
-        this.fullHealth = health;
     }
 
     public void selectOutfit(int selection){
@@ -127,8 +142,6 @@ public class Player extends Entity {
         this.outfit = front;
         this.sprite = new Sprite(spriteTextures.basic32);
 
-        this.health = 100000f;
-        this.fullHealth = health;
         this.dmg = Play.getGui().getEquipped().getDmg();
         this.collisionLayer = collisionLayer;
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
@@ -139,8 +152,17 @@ public class Player extends Entity {
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 
+    public void establishHealth(){
+        this.health = 1000f;
+        this.fullHealth = health;
+    }
+
     @Override
     public void draw(Batch batch) {
+        if(health + regenRate < fullHealth){
+            giveHealth(regenRate);
+        }
+
         elapsedTime += Gdx.graphics.getDeltaTime();
         //sprite.draw(batch);
         //charFace = FACE.DOWN;
@@ -249,6 +271,12 @@ public class Player extends Entity {
         Play.getPlayer().setHealth(Play.getPlayer().getHealth() - dmg);
         Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() + ((dmg / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
         Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() - dmg / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
+    }
+
+    public void giveHealth(float health){
+        Play.getPlayer().setHealth(Play.getPlayer().getHealth() + health);
+        Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() - ((health / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
+        Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() + health / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
     }
 }
 

@@ -25,7 +25,7 @@ public class AnimatedEnemy extends Enemy {
         {
             super(x, y, level, collisionLayer);
 
-            weapon = new Bow();
+            weapon = new Bow(level);
 
             is64 = false;
             ENEMYFACING = DIRECTION.SOUTH;

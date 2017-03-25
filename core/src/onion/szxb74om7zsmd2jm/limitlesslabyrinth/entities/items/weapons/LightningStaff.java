@@ -15,10 +15,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/11/2017.
  */
 public class LightningStaff extends Weapon{
-    public LightningStaff(){
+    public LightningStaff(int level){
         sprite = new Sprite(spriteTextures.LightningStaffSprite);
         dmg = 100f;
-        lvl = 1;
+        lvl = level;
         type = "projectile";
         cooldown = 40;
     }

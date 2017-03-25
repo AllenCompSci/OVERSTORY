@@ -15,7 +15,7 @@ public class NullProjectileItem extends Weapon {
     public NullProjectileItem(){
         sprite = new Sprite(spriteTextures.NullProjectileItemSprite);
         dmg = 0f;
-        lvl = 1;
+        lvl = 0;
         type = "projectile";
         cooldown = 40;
     }

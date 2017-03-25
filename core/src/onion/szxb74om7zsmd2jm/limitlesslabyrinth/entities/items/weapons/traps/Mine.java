@@ -13,10 +13,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/6/2017.
  */
 public class Mine extends Trap {
-    public Mine(){
+    public Mine(int level){
         sprite = new Sprite(spriteTextures.LandMineItemSprite);
         dmg = 1000f;
-        lvl = 1;
+        lvl = level;
         ammo = 90;
         type = "trap";
 

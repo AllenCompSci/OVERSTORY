@@ -16,10 +16,12 @@ public class WizardOrb extends Projectile {
     Animation<TextureRegion> animation;
     Texture spriteSheet;
     float stateTime;
+    private String origin;
 
-    public WizardOrb(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
+    public WizardOrb(float x1, float y1, float x2, float y2, float dmg, String Origin, Item fromItem){
         this.fromItem = fromItem;
         this.dmg = dmg;
+        origin = Origin;
         sprite = new Sprite(spriteTextures.WizardOrbProjectileSprite);
         spriteSheet = spriteTextures.WizardOrbAnimationTexture;
         TextureRegion[][] tmp = TextureRegion.split(spriteSheet, spriteSheet.getWidth() / 4, spriteSheet.getHeight() / 3);
@@ -68,8 +70,12 @@ public class WizardOrb extends Projectile {
             System.out.println("ITEM LEVELED UP");
         }
 
-
-        Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
+        if(origin != "Enemy") {
+            Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
+        }
+        else{
+            Play.getEnemyProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
+        }
         remove();
     }
 

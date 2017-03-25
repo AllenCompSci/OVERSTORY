@@ -25,7 +25,7 @@ public class Player extends Entity {
     private static int xp = 0;
     private static int level = 1;
     private static int xpToLevel = 10;
-    private static float regenRate = 1;
+    private static float regenRate = 100;
 
 
     public static float getFullHealth() {
@@ -159,8 +159,11 @@ public class Player extends Entity {
 
     @Override
     public void draw(Batch batch) {
-        if(health + regenRate < fullHealth){
+        if(health < fullHealth){
             giveHealth(regenRate);
+        }
+        if(health > fullHealth){
+            takeDMG(health - fullHealth);
         }
 
         elapsedTime += Gdx.graphics.getDeltaTime();

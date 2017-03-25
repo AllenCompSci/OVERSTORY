@@ -3,6 +3,8 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import javax.xml.soap.Text;
@@ -1120,6 +1122,26 @@ public class spriteTextures {
         }
 
         return 1;
+    }
+
+    public static Item giveAWeapon(int level){
+        Random rand = new Random();
+        int VAL;
+        VAL = rand.nextInt(5);
+
+        switch (VAL){
+            case 0:
+                return new Bow(level);
+            case 1:
+                return new LightningStaff(level);
+            case 2:
+                return new Shuriken(level);
+            case 3:
+                return new Sword(level);
+            case 4:
+                return new WizardStaff(level);
+        }
+        return new Bow(level);
     }
 
     public static Play.MonsterType makeAMonster(int spawnRange, int spawnStart){

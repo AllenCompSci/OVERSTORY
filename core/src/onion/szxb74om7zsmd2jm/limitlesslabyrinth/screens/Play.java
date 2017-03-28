@@ -187,8 +187,8 @@ public class Play implements Screen {
     }
     private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
     private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
-    MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
-    static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/undertale.mp3"));
+    MusicDirector dj = new MusicDirector(MusicDirector.SongName.ONEONESEVEN);
+    static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {

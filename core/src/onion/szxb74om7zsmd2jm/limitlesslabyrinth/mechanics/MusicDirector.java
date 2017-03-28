@@ -11,7 +11,7 @@ public class MusicDirector {
         currentSong = s;
     }
     public static enum SongName {
-            MEGALOVANIA
+            MEGALOVANIA, SONIC06
     }
     static Music megalovania = Gdx.audio.newMusic(Gdx.files.internal("megalovania/undertale.mp3"));
     SongName currentSong;
@@ -24,7 +24,25 @@ public class MusicDirector {
 
     public void play()
     {
+        switch (currentSong)
+        {
+            case MEGALOVANIA:
+                nowPlaying = megalovania;
+                break;
+        }
         nowPlaying.play();
+    }
+
+    public void stop()
+    {
+        nowPlaying.stop();
+    }
+
+    public void switchSong(SongName s)
+    {
+        setNowPlaying(s);
+        stop();
+        play();
     }
 
 

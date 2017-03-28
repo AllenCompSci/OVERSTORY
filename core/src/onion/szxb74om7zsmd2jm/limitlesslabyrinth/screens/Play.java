@@ -322,6 +322,8 @@ public class Play implements Screen {
         music.play();
     */
 
+        dj.play();
+
 
 
 

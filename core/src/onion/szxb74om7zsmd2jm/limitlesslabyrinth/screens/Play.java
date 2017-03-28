@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -34,6 +35,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
 
@@ -185,7 +187,8 @@ public class Play implements Screen {
     }
     private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
     private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
-
+    MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
+    static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/undertale.mp3"));
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
@@ -253,6 +256,7 @@ public class Play implements Screen {
         KillCount = new HashMap<String, Integer>();
         Play.spawnCount = 0;
         Play.garbageTime = 0;
+
     }
 
     public static void changeMap(){
@@ -310,6 +314,15 @@ public class Play implements Screen {
 
         turrets.putIfAbsent(mapPath, turretsEmpty);
         KillCount.putIfAbsent(mapPath, 1);
+
+        /*
+        if(music.isPlaying()){
+            music.stop();
+        }
+        music.play();
+    */
+
+
 
 
     }

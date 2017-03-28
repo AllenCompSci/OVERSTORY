@@ -71,6 +71,7 @@ public class LimitlessLabyrinth extends Game {
 		MapPath = "test.tmx";
 		play = new Play("test.tmx", 100, 10, -10, true);
 		setScreen(mainMenu);
+
 	}
 
 	@Override

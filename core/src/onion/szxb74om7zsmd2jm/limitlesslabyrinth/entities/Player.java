@@ -25,7 +25,7 @@ public class Player extends Entity {
     private static int xp = 0;
     private static int level = 1;
     private static int xpToLevel = 10;
-    private static float regenRate = 100;
+    private static float regenRate = 10;
 
 
     public static float getFullHealth() {

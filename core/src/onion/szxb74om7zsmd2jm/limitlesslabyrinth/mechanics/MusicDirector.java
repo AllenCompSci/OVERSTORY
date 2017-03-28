@@ -14,6 +14,7 @@ public class MusicDirector {
             MEGALOVANIA, SONIC06
     }
     static Music megalovania = Gdx.audio.newMusic(Gdx.files.internal("megalovania/undertale.mp3"));
+    static Music sanic = Gdx.audio.newMusic(Gdx.files.internal("megalovania/sanic.mp3"));
     SongName currentSong;
     Music nowPlaying;
 
@@ -29,6 +30,8 @@ public class MusicDirector {
             case MEGALOVANIA:
                 nowPlaying = megalovania;
                 break;
+            case SONIC06:
+                nowPlaying = sanic;
         }
         nowPlaying.play();
     }
@@ -41,7 +44,9 @@ public class MusicDirector {
     public void switchSong(SongName s)
     {
         setNowPlaying(s);
-        stop();
+        if(nowPlaying.isPlaying()) {
+            stop();
+        }
         play();
     }
 

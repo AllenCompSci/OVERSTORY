@@ -40,7 +40,8 @@ public class MusicDirector {
 
     public void playSound(SoundName sn)
     {
-        setSoundNowPlaying(sn);
+
+        this.setSoundNowPlaying(sn);
         switch (currentSound)
         {
             case PLAYERHIT:

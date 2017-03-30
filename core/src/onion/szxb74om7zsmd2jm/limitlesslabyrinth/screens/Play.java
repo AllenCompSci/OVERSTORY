@@ -323,7 +323,7 @@ public class Play implements Screen {
     */
 
         dj.play();
-        dj.switchSong(MusicDirector.SongName.SONIC06);
+        dj.switchSong(MusicDirector.SongName.ONEONESEVEN);
 
 
 

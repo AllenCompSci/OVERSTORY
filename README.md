@@ -13,6 +13,12 @@ Worked on determining a system for which enemies spawn in per wave. Changed XP, 
 ## Week 4
 Began work on campaign maps
 https://github.com/libgdx/libgdx/wiki/Tile-maps
+## Week 5 
+Continued work on map creation and various bug fixes
+## Week 6
+Continued work on map creation and various bug fixes
+## Week 7
+Implemented a music director that can play music and sounds
 # Justin Carter
 ## Week 1
 Art

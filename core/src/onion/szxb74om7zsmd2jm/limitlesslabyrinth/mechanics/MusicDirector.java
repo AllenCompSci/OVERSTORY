@@ -27,6 +27,8 @@ public class MusicDirector {
     static Music megalovania = Gdx.audio.newMusic(Gdx.files.internal("megalovania/undertale.mp3"));
     static Music sanic = Gdx.audio.newMusic(Gdx.files.internal("megalovania/sanic.mp3"));
     static Music UnoUnoSiete = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
+    static Music supersanic = Gdx.audio.newMusic(Gdx.files.internal("megalovania/gottagofest.mp3"));
+    static Sound weaponFire = Gdx.audio.newSound(Gdx.files.internal("megalovania/memes.mp3"));
     static Sound playerhit;
     SongName currentSong;
     Music nowPlaying;

@@ -276,6 +276,7 @@ public class Player extends Entity {
         Play.getPlayer().setHealth(Play.getPlayer().getHealth() - dmg);
         Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() + ((dmg / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
         Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() - dmg / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
+        //playerSounds.playSound(MusicDirector.SoundName.PLAYERHIT);
     }
 
     public void giveHealth(float health){

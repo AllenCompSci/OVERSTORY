@@ -17,7 +17,7 @@ public class MusicDirector {
         currentSong = s;
     }
     public static enum SongName {
-            MEGALOVANIA, SONIC06, ONEONESEVEN
+            MEGALOVANIA, SONIC06, ONEONESEVEN, SUPERSANIC
     }
 
     public static enum SoundName {
@@ -52,7 +52,7 @@ public class MusicDirector {
         switch (currentSound)
         {
             case PLAYERHIT:
-                soundPlaying = playerhit;
+                soundPlaying = weaponFire;
         }
 
         soundPlaying.play();
@@ -70,6 +70,10 @@ public class MusicDirector {
                 break;
             case ONEONESEVEN:
                 nowPlaying = UnoUnoSiete;
+                break;
+            case SUPERSANIC:
+                nowPlaying = supersanic;
+                break;
         }
         nowPlaying.play();
         nowPlaying.setLooping(true);

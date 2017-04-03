@@ -8,6 +8,11 @@ import com.badlogic.gdx.audio.Sound;
  * Created by 226864 on 3/28/2017.
  */
 public class MusicDirector {
+    public MusicDirector(SoundName sn)
+    {
+        currentSound = sn;
+    }
+
     public MusicDirector(SongName s) {
         currentSong = s;
     }

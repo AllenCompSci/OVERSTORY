@@ -11,6 +11,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProje
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
 
 /**
  * Created by chris on 1/19/2017.
@@ -57,6 +58,7 @@ public class Player extends Entity {
     boolean RUNE = true;
     boolean OUTFIT = true;
     protected float dmgTaken;
+    static MusicDirector playerSounds = new MusicDirector(MusicDirector.SoundName.PLAYERHIT);
 
     @Override
     public void setDmg(float dmg) {

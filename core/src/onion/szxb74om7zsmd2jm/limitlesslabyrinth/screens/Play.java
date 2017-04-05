@@ -189,6 +189,7 @@ public class Play implements Screen {
     private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
+    private int spawnInterval = 2000;
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
@@ -323,7 +324,7 @@ public class Play implements Screen {
     */
 
         dj.play();
-        dj.switchSong(MusicDirector.SongName.ONEONESEVEN);
+        dj.switchSong(MusicDirector.SongName.MEGALOVANIA);
 
 
 
@@ -436,7 +437,7 @@ public class Play implements Screen {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
                     spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
                 }
-                time = System.currentTimeMillis() + 500;
+                time = System.currentTimeMillis() + spawnInterval;
 
             }
         }

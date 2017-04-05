@@ -101,6 +101,7 @@
   </tile>
   <tile id="63">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
@@ -126,11 +127,13 @@
   </tile>
   <tile id="78">
    <properties>
+    <property name="goto" value="position1"/>
     <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="79">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>

@@ -103,6 +103,7 @@
   </tile>
   <tile id="63">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>

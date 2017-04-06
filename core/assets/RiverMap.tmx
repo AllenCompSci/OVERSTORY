@@ -804,12 +804,14 @@
   <image source="TileSets/Outside_A2.png" width="512" height="384"/>
   <tile id="0">
    <properties>
+    <property name="SpawnLimit" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
     <property name="StartPosition" value=""/>
    </properties>
   </tile>
   <tile id="1">
    <properties>
+    <property name="SpawnLimit" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
    </properties>
   </tile>
@@ -829,6 +831,7 @@
   </tile>
   <tile id="4">
    <properties>
+    <property name="SpawnLimit" type="int" value="100"/>
     <property name="SpawnTrigger" value="Area1"/>
     <property name="position1" value=""/>
    </properties>
@@ -845,11 +848,13 @@
   </tile>
   <tile id="16">
    <properties>
+    <property name="SpawnLimit" type="int" value="100"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
   <tile id="17">
    <properties>
+    <property name="SpawnLimit" type="int" value="100"/>
     <property name="SpawnTrigger" value="Area2"/>
    </properties>
   </tile>
@@ -1293,22 +1298,26 @@
   </tile>
   <tile id="556">
    <properties>
-    <property name="blocked" value=""/>
+    <property name="goto" value="StartPosition"/>
+    <property name="portal" value="secretWell.tmx"/>
    </properties>
   </tile>
   <tile id="557">
    <properties>
-    <property name="blocked" value=""/>
+    <property name="goto" value="StartPosition"/>
+    <property name="portal" value="secretWell.tmx"/>
    </properties>
   </tile>
   <tile id="564">
    <properties>
-    <property name="blocked" value=""/>
+    <property name="goto" value="StartPosition"/>
+    <property name="portal" value="secretWell.tmx"/>
    </properties>
   </tile>
   <tile id="565">
    <properties>
-    <property name="blocked" value=""/>
+    <property name="goto" value="StartPosition"/>
+    <property name="portal" value="secretWell.tmx"/>
    </properties>
   </tile>
   <tile id="568">
@@ -2878,6 +2887,7 @@
   <image source="TileSets/Dungeon_B.png" width="512" height="512"/>
   <tile id="93">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>
@@ -2889,6 +2899,7 @@
   </tile>
   <tile id="95">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>
@@ -2934,16 +2945,19 @@
   </tile>
   <tile id="109">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>
   <tile id="110">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>
   <tile id="111">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="test.tmx"/>
    </properties>
   </tile>
@@ -3232,6 +3246,7 @@
   <image source="TileSets/Dungeon_B.png" width="512" height="512"/>
   <tile id="93">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
@@ -3243,21 +3258,25 @@
   </tile>
   <tile id="95">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="109">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="110">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="111">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>

@@ -76,11 +76,11 @@ public class Item {
     public void LVLup(String weaponname){
         switch(weaponname){
             case "wizardstaff":
-                this.dmg = (float) ((31.907) * Math.log(lvl) + 5);
+                this.dmg = (float) ((14.719) * Math.log(this.lvl) + 5);
                 System.out.println("New: " + this.dmg);
                 break;
         }
         lvl++;
-        this.dmg += lvl * 100;
+       // this.dmg += lvl * 100;
     }
 }

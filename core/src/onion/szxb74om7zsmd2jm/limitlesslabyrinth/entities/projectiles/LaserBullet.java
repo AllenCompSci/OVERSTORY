@@ -31,11 +31,9 @@ public class LaserBullet extends Projectile {
         }
         else{
             direction = false;
-            theta *= -1;
             sprite.flip(true, false);
         }
         if(endY < y){
-            theta *= -1;
             sprite.flip(false, true);
         }
 
@@ -59,10 +57,12 @@ public class LaserBullet extends Projectile {
 
         if(origin != "Enemy") {
             Play.getProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
+            Play.getProjectiles().add(new invisProjectile(sprite.getX(), sprite.getY(), dmg, enemiesHit, fromItem, origin));
         }
         else{
             Play.getEnemyProjectiles().add(new Explosion(sprite.getX(), sprite.getY(), dmg, fromItem));
         }
+
         //remove();
     }
 

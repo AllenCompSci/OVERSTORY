@@ -15,8 +15,10 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 public class Explosion extends Projectile {
     Animation<TextureRegion> animation;
     float stateTime;
+    String weaponOrigin;
 
     public Explosion(float x, float y, float dmg, Item fromItem){
+
         this.fromItem = fromItem;
         animation = spriteTextures.ExplosionAnimation;
         this.dmg = dmg;
@@ -28,6 +30,9 @@ public class Explosion extends Projectile {
         sprite.setPosition(x - sprite.getWidth()/2 ,y - sprite.getHeight()/2);
         time = System.currentTimeMillis() + 200;
     }
+
+
+
 
     @Override
     public void draw() {

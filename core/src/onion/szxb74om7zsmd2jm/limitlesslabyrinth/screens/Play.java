@@ -324,7 +324,7 @@ public class Play implements Screen {
     */
 
         dj.play();
-        dj.switchSong(MusicDirector.SongName.ONEONESEVEN);
+        dj.switchSong(MusicDirector.SongName.MEGALOVANIA);
 
 
 

@@ -175,7 +175,7 @@ public class Play implements Screen {
         return playerPOS;
     }
     private static int[][] playerPOS;
-    private static String spawnArea = "Area1";
+    private static String spawnArea = "Area0";
     private static Array<Wall> wallsEmpty = new Array<Wall>();
     private static Array<Wall> walls = new Array<Wall>();
     public static String getMapPath() {
@@ -187,6 +187,7 @@ public class Play implements Screen {
     }
     private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
     private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
+    private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
     private int spawnInterval = 2000;
@@ -248,7 +249,7 @@ public class Play implements Screen {
         Play.gui.getBackpack().reset();
         movePaths = 0;
         /** Reset the Play static variables */
-        spawnArea = "Area1";
+        spawnArea = "Area0";
         Play.enemies = Play.enemiesEmpty;
         Play.projectiles = Play.projectilesEmpty;
         Play.enemyProjectiles = Play.enemyProjectilesEmpty;
@@ -295,7 +296,7 @@ public class Play implements Screen {
         camera = new OrthographicCamera();
         camera.zoom = zoom;
         camera.setToOrtho(false);
-        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "StartPosition"));
+        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), goTo));
         player = new Player(20, 20, 1, (TiledMapTileLayer) map.getLayers().get(CollisionLayerNum));
         if(isFirstSpawnIn) {
             player.establishHealth();
@@ -304,8 +305,7 @@ public class Play implements Screen {
         spawnTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
         collisionTiles = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "blocked"));
 
-        spawnArea = "Area1";
-        spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+        spawnArea = "Area0";
         SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
         Gdx.input.setInputProcessor(null);
@@ -494,14 +494,34 @@ public class Play implements Screen {
         int count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string)) count++;
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) count++;
             }
         }
         int[][] tiles = new int[count][2];
         count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string)) {
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) {
+                    tiles[count][0] = x;
+                    tiles[count++][1] = y;
+                }
+            }
+        }
+        return tiles;
+    }
+
+    public int[][] checkMapLayerForImmediateSpawns(TiledMapTileLayer layer, String string){
+        int count = 0;
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) count++;
+            }
+        }
+        int[][] tiles = new int[count][2];
+        count = 0;
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) {
                     tiles[count][0] = x;
                     tiles[count++][1] = y;
                 }
@@ -514,14 +534,14 @@ public class Play implements Screen {
         int count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) count++;
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) count++;
             }
         }
         int[][] tiles = new int[count][2];
         count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) {
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) {
                     tiles[count][0] = x;
                     tiles[count++][1] = y;
                 }
@@ -534,22 +554,44 @@ public class Play implements Screen {
         Array<TiledMapTile> tiledMapTiles = new Array<TiledMapTile>();
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea)) tiledMapTiles.add(layer.getCell(x,y).getTile());
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) tiledMapTiles.add(layer.getCell(x,y).getTile());
             }
         }
         return tiledMapTiles;
     }
 
-    public void checkSpawnArea(TiledMapTileLayer collisionLayer){
-        if(collisionLayer.getCell((int)((player.getSprite().getX() + player.getSprite().getWidth()/2)/collisionLayer.getTileWidth()), (int)((player.getSprite().getY() + player.getSprite().getHeight()/2)/collisionLayer.getTileHeight())).getTile().getProperties().containsKey("SpawnTrigger")){
-            spawnArea = (String) collisionLayer.getCell((int)((player.getSprite().getX() + player.getSprite().getWidth()/2)/collisionLayer.getTileWidth()), (int)((player.getSprite().getY() + player.getSprite().getHeight()/2)/collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger");
+    public Array<TiledMapTile> checkMapLayerForArraySpawnImmediately(TiledMapTileLayer layer, String string){
+        Array<TiledMapTile> tiledMapTiles = new Array<TiledMapTile>();
+        for(int x = 0; x < layer.getWidth(); x++){
+            for(int y = 0; y < layer.getHeight(); y++){
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && (layer.getCell(x, y).getTile().getProperties().get(string)).equals(spawnArea) && (layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) tiledMapTiles.add(layer.getCell(x,y).getTile());
+            }
+        }
+        return tiledMapTiles;
+    }
+
+    public void checkSpawnArea(TiledMapTileLayer collisionLayer) {
+
+        if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("SpawnTrigger")) {
+            spawnArea = (String) collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger");
             spawnTiles = (checkMapLayerForSpawnArea((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
             SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
+            spawnLimit = (int) collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnLimit");
+
+            if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger") == spawnArea) {
+                for (int i = 0; i < (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).length; i++) {
+                    if (collisionLayer.getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).getTile().getProperties().containsKey("SpawnImmediately")) {
+                        spawnEnemy((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnRange"), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnStart"));
+                        collisionLayer.getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).setTile(map.getTileSets().getTile(150));
+                    }
+                }
+            }
         }
     }
 
     public void checkForPortal(TiledMapTileLayer collisionLayer) {
         if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().containsKey("portal")) {
+            goTo = (String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("goto"));
             LimitlessLabyrinth.LoadingScreen((String)(collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("portal")));
         }
     }

@@ -160,6 +160,8 @@ public class spriteTextures {
     public static Texture WizardStaffSprite = new Texture("staff.png");
     public static Texture SwordItemSprite = new Texture("sword.png");
     public static Texture ShurikenItemSprite = new Texture("shuriken.png");
+    public static Texture LaserGunSprite = new Texture("laserGun.png");
+    public static Texture LaserBulletSprite = new Texture("LaserBullet.png");
     public static Texture NullProjectileItemSprite = new Texture("nullItem.png");
     public static Texture MagicItemSprite = new Texture("SPELL.png");
     public static Texture LightningStaffSprite = new Texture("LightningStaff.png");

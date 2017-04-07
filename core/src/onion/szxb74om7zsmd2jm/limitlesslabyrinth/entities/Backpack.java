@@ -41,7 +41,7 @@ public class Backpack {
         itemSlots[8] = new Rune(1);
         itemSlots[9] = new Rune(1);
         itemSlots[10] = new AOE(1);
-        itemSlots[11] = new Magic(1);
+        itemSlots[11] = new LaserGun(1);
         itemSlots[12] = new Magic(1);
         itemSlots[13] = new Magic(1);
         itemSlots[14] = new Magic(1);
@@ -97,7 +97,7 @@ public class Backpack {
         itemSlots[8] = new Rune(1);
         itemSlots[9] = new Rune(1);
         itemSlots[10] = new AOE(1);
-        itemSlots[11] = new Magic(1);
+        itemSlots[11] = new LaserGun(1);
         itemSlots[12] = new Magic(1);
         itemSlots[13] = new Magic(1);
         itemSlots[14] = new Magic(1);

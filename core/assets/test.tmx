@@ -14,11 +14,13 @@
   </tile>
   <tile id="12">
    <properties>
+    <property name="SpawnLimit" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
+    <property name="SpawnLimit" type="int" value="100"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
@@ -101,6 +103,7 @@
   </tile>
   <tile id="63">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
@@ -126,11 +129,13 @@
   </tile>
   <tile id="78">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="79">
    <properties>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
@@ -218,6 +223,7 @@
   </tile>
   <tile id="175">
    <properties>
+    <property name="SpawnLimit" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
     <property name="StartPosition" value=""/>
    </properties>

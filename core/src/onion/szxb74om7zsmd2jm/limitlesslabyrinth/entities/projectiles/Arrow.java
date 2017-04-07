@@ -53,7 +53,7 @@ public class Arrow extends Projectile {
             fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
             System.out.println("ITEM LEVELED UP");
         }
-        //remove();
+        remove();
     }
 
     @Override

@@ -17,6 +17,7 @@ public class WizardOrb extends Projectile {
     Texture spriteSheet;
     float stateTime;
     private String origin;
+    String weaponOrigin = "wizardstaff";
 
     public WizardOrb(float x1, float y1, float x2, float y2, float dmg, String Origin, Item fromItem){
         this.fromItem = fromItem;
@@ -65,7 +66,7 @@ public class WizardOrb extends Projectile {
         fromItem.setItemXP(fromItem.getItemXP() + 1);
         /** Checks for item Level Up */
         if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
-            fromItem.LVLup();
+            fromItem.LVLup(this.weaponOrigin);
             fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
             System.out.println("ITEM LEVELED UP");
         }

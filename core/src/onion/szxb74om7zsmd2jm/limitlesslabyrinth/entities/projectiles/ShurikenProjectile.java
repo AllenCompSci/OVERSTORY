@@ -13,6 +13,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 
 public class ShurikenProjectile extends Projectile {
+    String weaponOrigin = "wizardstaff";
 
     public ShurikenProjectile(float x1, float y1, float x2, float y2, float dmg, Item fromItem){
         this.fromItem = fromItem;
@@ -44,7 +45,7 @@ public class ShurikenProjectile extends Projectile {
         fromItem.setItemXP(fromItem.getItemXP() + 1);
         /** Checks for item Level Up */
         if(fromItem.getItemXP() >= fromItem.getXPtoLVL()){
-            fromItem.LVLup();
+            fromItem.LVLup(weaponOrigin);
             fromItem.setXPtoLVL(fromItem.getXPtoLVL() * 2);
             System.out.println("ITEM LEVELED UP");
         }

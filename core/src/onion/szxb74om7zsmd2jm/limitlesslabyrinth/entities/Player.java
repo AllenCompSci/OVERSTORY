@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
@@ -193,10 +195,13 @@ public class Player extends Entity {
 
         //checks whether xp is enough to level up
         if(xpToLevel - xp <= 0){
+            Skin s = new Skin();
+            s.ad
             level++;
             dmg += level;
             xpToLevel *= 2;
             Gdx.app.log("Level", String.valueOf(level));
+            Dialog d = new Dialog("Level", )
         }
 
         /** Fire projectile */

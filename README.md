@@ -19,6 +19,10 @@ Continued work on map creation and various bug fixes
 Continued work on map creation and various bug fixes
 ## Week 7
 Implemented a music director that can play music and sounds
+## Week 8
+Began to balance various enemies and weapons
+## Week 9
+Continued to balance, and began to plan for implementation of features allowing for a campaign(dialog, weapon drops, quests)
 # Justin Carter
 ## Week 1
 Art

@@ -196,12 +196,12 @@ public class Player extends Entity {
         //checks whether xp is enough to level up
         if(xpToLevel - xp <= 0){
             Skin s = new Skin();
-            s.ad
+            //s.ad
             level++;
             dmg += level;
             xpToLevel *= 2;
             Gdx.app.log("Level", String.valueOf(level));
-            Dialog d = new Dialog("Level", )
+           // Dialog d = new Dialog("Level", )
         }
 
         /** Fire projectile */

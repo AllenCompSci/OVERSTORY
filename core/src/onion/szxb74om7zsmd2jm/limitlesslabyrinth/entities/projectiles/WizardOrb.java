@@ -35,7 +35,6 @@ public class WizardOrb extends Projectile {
         }
         animation = new Animation<TextureRegion>(0.025f, spriteFrames);
         stateTime = 0f;
-
         slope = ((y2 - y1)/(x2 - x1));
         x = x1;
         y = y1;

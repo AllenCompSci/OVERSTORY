@@ -1,4 +1,11 @@
-package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
+/*
+Dialog classes used/adapted from patrickhoey's BludBourne
+Title: BludBourne
+Author: patrickhoey
+Source: https://github.com/patrickhoey/BludBourne
+ */
+
+package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dialog;
 
 import com.badlogic.gdx.utils.Array;
 

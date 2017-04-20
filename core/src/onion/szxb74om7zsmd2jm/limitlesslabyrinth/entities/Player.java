@@ -11,9 +11,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dialog.Conversation;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dialog.ConversationChoice;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dialog.ConversationGraph;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Scanner;
 
 /**
  * Created by chris on 1/19/2017.
@@ -61,6 +68,11 @@ public class Player extends Entity {
     boolean OUTFIT = true;
     protected float dmgTaken;
     static MusicDirector playerSounds = new MusicDirector(MusicDirector.SoundName.PLAYERHIT);
+
+    static Hashtable<String, Conversation> _conversations;
+    static ConversationGraph _graph;
+    static String quit = "q";
+    static String _input = "";
 
     @Override
     public void setDmg(float dmg) {
@@ -231,6 +243,11 @@ public class Player extends Entity {
             RUNE = true;
         }
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.I))
+        {
+            testConversation();
+        }
+
         /** Checking if hit by projectile */
 
         dmgTaken = detection.projectileInRadiusDmg(this);
@@ -256,7 +273,93 @@ public class Player extends Entity {
             }
         }
     }
-    
+
+    public void testConversation()
+    {
+
+
+        _conversations = new Hashtable<String, Conversation>();
+
+        Conversation start = new Conversation();
+        start.setId("500");
+        start.setDialog("Are memes cool yet?");
+
+        Conversation yesAnswer = new Conversation();
+        yesAnswer.setId("501");
+        yesAnswer.setDialog("Awesome! :D");
+
+        Conversation noAnswer = new Conversation();
+        noAnswer.setId("502");
+        noAnswer.setDialog("That's too bad. :(");
+
+        _conversations.put(start.getId(), start);
+        _conversations.put(yesAnswer.getId(), yesAnswer);
+        _conversations.put(noAnswer.getId(), noAnswer);
+
+        _graph = new ConversationGraph(_conversations, start.getId());
+
+        ConversationChoice yesChoice = new ConversationChoice();
+        yesChoice.setSourceId(start.getId());
+        yesChoice.setDestinationId(yesAnswer.getId());
+        yesChoice.setChoicePhrase("Y");
+
+        ConversationChoice noChoice = new ConversationChoice();
+        yesChoice.setSourceId(start.getId());
+        yesChoice.setDestinationId(noAnswer.getId());
+        yesChoice.setChoicePhrase("N");
+
+        ConversationChoice startChoice01 = new ConversationChoice();
+        startChoice01.setSourceId(yesAnswer.getId());
+        startChoice01.setDestinationId(start.getId());
+        startChoice01.setChoicePhrase("Go to beginning!");
+
+        ConversationChoice startChoice02 = new ConversationChoice();
+        startChoice02.setSourceId(noAnswer.getId());
+        startChoice02.setDestinationId(start.getId());
+        startChoice02.setChoicePhrase("Go to beginning!");
+
+        System.out.println(_graph.toString());
+        System.out.println(_graph.displayCurrentConversation());
+        System.out.println(_graph.toJson());
+
+        while(!_input.equalsIgnoreCase(quit))
+        {
+            Conversation conversation = getNextChoice();
+            if(conversation == null)
+            {
+                continue;
+            }
+            _graph.setCurrentConversation(conversation.getId());
+            System.out.println(_graph.displayCurrentConversation());
+
+        }
+
+
+
+
+    }
+
+    public static Conversation getNextChoice() {
+        ArrayList<ConversationChoice> choices = _graph.getCurrentChoices();
+        for (ConversationChoice choice : choices) {
+            System.out.println(choice.getDestinationId() + " " + choice.getChoicePhrase());
+        }
+        System.out.println("Input: ");
+        //_input = System.console().readLine();
+        Scanner scanner = new Scanner(System.in);
+        _input = scanner.next();
+
+        Conversation choice = null;
+        try {
+            choice = _graph.getConversationByID(_input);
+        } catch (NumberFormatException nfe) {
+            return null;
+        }
+        return choice;
+    }
+
+
+
      public void spriteFace(){
 
         if(charFace == FACE.LEFT)

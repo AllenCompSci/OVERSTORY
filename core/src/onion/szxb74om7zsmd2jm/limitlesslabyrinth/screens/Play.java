@@ -33,6 +33,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Brute;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Goblin;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.Orc;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.EnemyTraps;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
@@ -117,6 +118,7 @@ public class Play implements Screen {
         return player;
     }
     private static Player player;
+    private static Array<EnemyTraps> SuperTrapsEmpty = new Array<EnemyTraps>();
     public static Array<Enemy> getEnemies() {
         return enemies;
     }
@@ -186,6 +188,10 @@ public class Play implements Screen {
         return turrets;
     }
     private static Map<String, Array<Turret>> turrets = new HashMap<String, Array<Turret>>();
+    public static Map<String, Array<EnemyTraps>> getsuperTraps() {
+        return superTraps;
+    }
+    private static Map<String, Array<EnemyTraps>> superTraps = new HashMap<String, Array<EnemyTraps>>();
     private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
     private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
@@ -256,6 +262,7 @@ public class Play implements Screen {
         Play.walls = Play.wallsEmpty;
         turrets = new HashMap<String, Array<Turret>>();
         KillCount = new HashMap<String, Integer>();
+        superTraps = new HashMap<String, Array<EnemyTraps>>();
         Play.spawnCount = 0;
         Play.garbageTime = 0;
 
@@ -278,6 +285,7 @@ public class Play implements Screen {
         projectilesEmpty = new Array<>();
         enemyProjectilesEmpty = new Array<>();
         turretsEmpty = new Array<>();
+        SuperTrapsEmpty = new Array<>();
         wallsEmpty = new Array<>();
         Play.spawnLimit = spawnLimit;
         Play.spawnGroupRange = spawnGroupRange;
@@ -315,6 +323,7 @@ public class Play implements Screen {
 
         turrets.putIfAbsent(mapPath, turretsEmpty);
         KillCount.putIfAbsent(mapPath, 1);
+        superTraps.putIfAbsent(mapPath, SuperTrapsEmpty);
 
         /*
         if(music.isPlaying()){
@@ -324,9 +333,11 @@ public class Play implements Screen {
     */
 
         dj.play();
-        dj.switchSong(MusicDirector.SongName.MEGALOVANIA);
+        dj.switchSong(MusicDirector.SongName.ONEONESEVEN);
 
-
+        if(superTraps.get(mapPath).size == 0) {
+            AddInSuperTraps((TiledMapTileLayer) map.getLayers().get(2));
+        }
 
 
     }
@@ -394,6 +405,10 @@ public class Play implements Screen {
 
         for(Turret i : turrets.get(mapPath)){
             i.draw();
+        }
+
+        for(EnemyTraps i : superTraps.get(mapPath)){
+            i.update();
         }
 
 
@@ -609,6 +624,24 @@ public class Play implements Screen {
         }
         return o;
 
+    }
+
+    public void AddInSuperTraps(TiledMapTileLayer collisionLayer){
+
+        for(int x = 0; x < collisionLayer.getWidth(); x++) {
+            for (int y = 0; y < collisionLayer.getHeight(); y++) {
+                if (collisionLayer.getCell(x, y).getTile().getProperties().containsKey("SuperTrap")) {
+                    superTraps.get(mapPath).add(new EnemyTraps((float) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("direction"))
+                            , (String) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("projectile"))
+                            , (int) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("RateOfFire"))
+                            , (float) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("detectionRadius"))
+                            , (int) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("level"))
+                            , (float) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("spinRate"))
+                            , x
+                            , y));
+                }
+            }
+        }
     }
 
     public List<Point2D> convertObjectToTiles(MapObject o, TiledMapTileLayer l)

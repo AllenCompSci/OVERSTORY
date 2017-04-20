@@ -14,9 +14,9 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 public class WizardStaff extends Weapon{
     public WizardStaff(int level){
         sprite = new Sprite(spriteTextures.WizardStaffSprite);
-        dmg = 15f;
         lvl = level;
         type = "projectile";
+        dmg = 15f;
         cooldown = 40;
         XPtoLVL = 10 * lvl;
     }

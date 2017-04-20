@@ -333,9 +333,11 @@ public class Play implements Screen {
     */
 
         dj.play();
-        dj.switchSong(MusicDirector.SongName.MEGALOVANIA);
+        dj.switchSong(MusicDirector.SongName.ONEONESEVEN);
 
-        AddInSuperTraps((TiledMapTileLayer) map.getLayers().get(2));
+        if(superTraps.get(mapPath).size == 0) {
+            AddInSuperTraps((TiledMapTileLayer) map.getLayers().get(2));
+        }
 
 
     }
@@ -634,6 +636,7 @@ public class Play implements Screen {
                             , (int) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("RateOfFire"))
                             , (float) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("detectionRadius"))
                             , (int) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("level"))
+                            , (float) ((collisionLayer.getCell(x, y).getTile().getProperties()).get("spinRate"))
                             , x
                             , y));
                 }

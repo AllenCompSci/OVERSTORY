@@ -245,7 +245,7 @@ public class Player extends Entity {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.I))
         {
-            testConversation();
+            //testConversation();
         }
 
         /** Checking if hit by projectile */
@@ -319,17 +319,18 @@ public class Player extends Entity {
         startChoice02.setChoicePhrase("Go to beginning!");
 
         System.out.println(_graph.toString());
-        System.out.println(_graph.displayCurrentConversation());
-        System.out.println(_graph.toJson());
+        //System.out.println(_graph.displayCurrentConversation());
+        //System.out.println(_graph.toJson());
 
         while(!_input.equalsIgnoreCase(quit))
         {
-            Conversation conversation = getNextChoice();
+            Conversation conversation = getNextChoice(_graph);
             if(conversation == null)
             {
                 continue;
             }
             _graph.setCurrentConversation(conversation.getId());
+            System.out.println("Something happened");
             System.out.println(_graph.displayCurrentConversation());
 
         }
@@ -339,10 +340,10 @@ public class Player extends Entity {
 
     }
 
-    public static Conversation getNextChoice() {
-        ArrayList<ConversationChoice> choices = _graph.getCurrentChoices();
+    public static Conversation getNextChoice(ConversationGraph g) {
+        ArrayList<ConversationChoice> choices = g.getCurrentChoices();
         for (ConversationChoice choice : choices) {
-            System.out.println(choice.getDestinationId() + " " + choice.getChoicePhrase());
+            //System.out.println(choice.getDestinationId() + " " + choice.getChoicePhrase());
         }
         System.out.println("Input: ");
         //_input = System.console().readLine();
@@ -351,7 +352,7 @@ public class Player extends Entity {
 
         Conversation choice = null;
         try {
-            choice = _graph.getConversationByID(_input);
+            choice = g.getConversationByID(_input);
         } catch (NumberFormatException nfe) {
             return null;
         }

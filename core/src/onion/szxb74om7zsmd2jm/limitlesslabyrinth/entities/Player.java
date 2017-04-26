@@ -145,7 +145,6 @@ public class Player extends Entity {
     public Player(float x, float y, int level, TiledMapTileLayer collisionLayer){
         super(x, y, level, collisionLayer);
 
-        this.sprite = new Sprite(new Texture("knight/knightstanding.png"));
         charFace = FACE.DOWN;
         changeOutfit();
        /*
@@ -205,13 +204,16 @@ public class Player extends Entity {
             outfit.draw(batch);
         }
 
-        //checks whether xp is enough to level up
+        /**checks whether xp is enough to level up*/
         if(xpToLevel - xp <= 0){
             Skin s = new Skin();
             //s.ad
             level++;
             dmg += level;
             xpToLevel *= 2;
+            fullHealth *= 1.5;
+            health = fullHealth;
+            Play.getGui().refillHealth();
             Gdx.app.log("Level", String.valueOf(level));
            // Dialog d = new Dialog("Level", )
         }

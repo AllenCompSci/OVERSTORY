@@ -226,6 +226,11 @@ public class Gui {
         }
     }
 
+    public void refillHealth(){
+        healthBarX = 0;
+        playerHealthBar.setScale(1,1);
+    }
+
     public void update(){
 
         /** Health Bar Update */

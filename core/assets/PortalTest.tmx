@@ -15,12 +15,14 @@
   <tile id="12">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area0"/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
     <property name="SpawnLimit" type="int" value="10"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
@@ -43,12 +45,14 @@
   <tile id="28">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area2"/>
    </properties>
   </tile>
   <tile id="29">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area3"/>
    </properties>
   </tile>
@@ -65,12 +69,14 @@
   <tile id="44">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area4"/>
    </properties>
   </tile>
   <tile id="45">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area5"/>
    </properties>
   </tile>
@@ -101,12 +107,14 @@
   <tile id="60">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area6"/>
    </properties>
   </tile>
   <tile id="61">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area7"/>
    </properties>
   </tile>
@@ -143,12 +151,14 @@
   <tile id="76">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area8"/>
    </properties>
   </tile>
   <tile id="77">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area9"/>
    </properties>
   </tile>
@@ -185,12 +195,14 @@
   <tile id="92">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area10"/>
    </properties>
   </tile>
   <tile id="93">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area11"/>
    </properties>
   </tile>
@@ -211,12 +223,14 @@
   <tile id="108">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area12"/>
    </properties>
   </tile>
   <tile id="109">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area13"/>
    </properties>
   </tile>
@@ -237,12 +251,14 @@
   <tile id="124">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area14"/>
    </properties>
   </tile>
   <tile id="125">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area15"/>
    </properties>
   </tile>
@@ -291,6 +307,7 @@
   <tile id="175">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
     <property name="StartPosition" value=""/>
    </properties>

@@ -413,12 +413,14 @@
   <tile id="12">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
    </properties>
   </tile>
   <tile id="13">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
@@ -432,12 +434,14 @@
   <tile id="28">
    <properties>
     <property name="SpawnLimit" type="int" value="70"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area2"/>
    </properties>
   </tile>
   <tile id="29">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area3"/>
    </properties>
   </tile>
@@ -450,6 +454,7 @@
   <tile id="175">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area1"/>
     <property name="StartPosition" value=""/>
    </properties>

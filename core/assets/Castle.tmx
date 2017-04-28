@@ -28,12 +28,14 @@
   <tile id="8">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="400"/>
     <property name="SpawnTrigger" value="Area2"/>
    </properties>
   </tile>
   <tile id="56">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
@@ -58,6 +60,7 @@
   <tile id="23">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area1"/>
     <property name="position1" value=""/>
    </properties>
@@ -70,6 +73,7 @@
   <tile id="68">
    <properties>
     <property name="SpawnLimit" type="int" value="100"/>
+    <property name="SpawnRate" type="int" value="300"/>
     <property name="SpawnTrigger" value="Area1"/>
     <property name="StartPosition" value=""/>
    </properties>
@@ -486,7 +490,7 @@
 959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959,959
 </data>
  </layer>
- <layer name="Spawn Layer" width="150" height="150" visible="0" opacity="0">
+ <layer name="Spawn Layer" width="150" height="150" visible="0" opacity="0.37">
   <properties>
    <property name="StartPosition" value=""/>
   </properties>

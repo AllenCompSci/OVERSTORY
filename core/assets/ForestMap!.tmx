@@ -7878,6 +7878,7 @@
   <tile id="0">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
     <property name="StartPosition" value=""/>
    </properties>
@@ -7891,6 +7892,7 @@
   <tile id="22">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="400"/>
     <property name="SpawnTrigger" value="Area11"/>
     <property name="position1" value=""/>
    </properties>
@@ -7898,114 +7900,133 @@
   <tile id="96">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area0"/>
    </properties>
   </tile>
   <tile id="97">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area1"/>
    </properties>
   </tile>
   <tile id="98">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area2"/>
    </properties>
   </tile>
   <tile id="99">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area3"/>
    </properties>
   </tile>
   <tile id="100">
    <properties>
     <property name="SpawnLimit" type="int" value="50"/>
+    <property name="SpawnRate" type="int" value="200"/>
     <property name="SpawnTrigger" value="Area4"/>
    </properties>
   </tile>
   <tile id="101">
    <properties>
     <property name="SpawnLimit" type="int" value="30"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value="Area5"/>
    </properties>
   </tile>
   <tile id="112">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area6"/>
    </properties>
   </tile>
   <tile id="113">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="400"/>
     <property name="SpawnTrigger" value="Area7"/>
    </properties>
   </tile>
   <tile id="114">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area8"/>
    </properties>
   </tile>
   <tile id="115">
    <properties>
     <property name="SpawnLimit" type="int" value="60"/>
+    <property name="SpawnRate" type="int" value="200"/>
     <property name="SpawnTrigger" value="Area9"/>
    </properties>
   </tile>
   <tile id="116">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area10"/>
    </properties>
   </tile>
   <tile id="117">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="400"/>
     <property name="SpawnTrigger" value="Area11"/>
    </properties>
   </tile>
   <tile id="128">
    <properties>
     <property name="SpawnLimit" type="int" value="20"/>
+    <property name="SpawnRate" type="int" value="500"/>
     <property name="SpawnTrigger" value="Area12"/>
    </properties>
   </tile>
   <tile id="129">
    <properties>
     <property name="SpawnLimit" type="int" value="30"/>
+    <property name="SpawnRate" type="int" value="400"/>
     <property name="SpawnTrigger" value="Area13"/>
    </properties>
   </tile>
   <tile id="130">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value=""/>
    </properties>
   </tile>
   <tile id="131">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value=""/>
    </properties>
   </tile>
   <tile id="132">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value=""/>
    </properties>
   </tile>
   <tile id="133">
    <properties>
     <property name="SpawnLimit" type="int" value="0"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnTrigger" value=""/>
    </properties>
   </tile>
   <tile id="144">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value="Area1"/>
    </properties>
@@ -8013,6 +8034,7 @@
   <tile id="145">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="5"/>
     <property name="spawnEnemy" value="Area2"/>
    </properties>
@@ -8020,6 +8042,7 @@
   <tile id="146">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="10"/>
     <property name="spawnEnemy" value="Area3"/>
    </properties>
@@ -8027,6 +8050,7 @@
   <tile id="147">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="15"/>
     <property name="spawnEnemy" value="Area4"/>
    </properties>
@@ -8034,6 +8058,7 @@
   <tile id="148">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="20"/>
     <property name="spawnEnemy" value="Area5"/>
    </properties>
@@ -8041,6 +8066,7 @@
   <tile id="149">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="25"/>
     <property name="spawnEnemy" value="Area6"/>
    </properties>
@@ -8048,6 +8074,7 @@
   <tile id="160">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="30"/>
     <property name="spawnEnemy" value="Area7"/>
    </properties>
@@ -8055,6 +8082,7 @@
   <tile id="161">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="35"/>
     <property name="spawnEnemy" value="Area8"/>
    </properties>
@@ -8062,6 +8090,7 @@
   <tile id="162">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="40"/>
     <property name="spawnEnemy" value="Area9"/>
    </properties>
@@ -8069,6 +8098,7 @@
   <tile id="163">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="45"/>
     <property name="spawnEnemy" value="Area10"/>
    </properties>
@@ -8076,6 +8106,7 @@
   <tile id="164">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="50"/>
     <property name="spawnEnemy" value="Area11"/>
    </properties>
@@ -8083,6 +8114,7 @@
   <tile id="165">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="55"/>
     <property name="spawnEnemy" value="Area12"/>
    </properties>
@@ -8090,6 +8122,7 @@
   <tile id="176">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="60"/>
     <property name="spawnEnemy" value="Area13"/>
    </properties>
@@ -8097,6 +8130,7 @@
   <tile id="177">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value=""/>
    </properties>
@@ -8104,6 +8138,7 @@
   <tile id="178">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value=""/>
    </properties>
@@ -8111,6 +8146,7 @@
   <tile id="179">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value=""/>
    </properties>
@@ -8118,6 +8154,7 @@
   <tile id="180">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value=""/>
    </properties>
@@ -8125,6 +8162,7 @@
   <tile id="181">
    <properties>
     <property name="SpawnRange" type="int" value="5"/>
+    <property name="SpawnRate" type="int" value="0"/>
     <property name="SpawnStart" type="int" value="0"/>
     <property name="spawnEnemy" value=""/>
    </properties>

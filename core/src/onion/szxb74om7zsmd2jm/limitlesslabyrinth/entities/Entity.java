@@ -137,6 +137,13 @@ public class Entity implements InputProcessor {
              Player.charFace = Player.FACE.RIGHT;
             Player.isWalking = true;
         }
+        if(Player.isWalking && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)){
+            speed = 8f;
+            Player.takeDMG(Player.getRegenRate() + (int)Math.pow((double)Player.getpLevel(), 2));
+        }
+        else{
+            speed = 5f;
+        }
     }
 
     @Override

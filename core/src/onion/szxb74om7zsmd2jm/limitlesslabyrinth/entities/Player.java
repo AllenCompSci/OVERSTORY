@@ -34,8 +34,15 @@ public class Player extends Entity {
     }
     private static int xp = 0;
     private static int level = 1;
+    public static int getpLevel(){
+        return level;
+    }
+
     private static int xpToLevel = 10;
     private static float regenRate = 100;
+    public static float getRegenRate(){
+        return regenRate;
+    }
 
 
     public static float getFullHealth() {
@@ -383,14 +390,14 @@ public class Player extends Entity {
         CharY = sprite.getY();
     }
 
-    public void takeDMG(float dmg){
+    public static void takeDMG(float dmg){
         Play.getPlayer().setHealth(Play.getPlayer().getHealth() - dmg);
         Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() + ((dmg / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
         Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() - dmg / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
         //playerSounds.playSound(MusicDirector.SoundName.PLAYERHIT);
     }
 
-    public void giveHealth(float health){
+    public static void giveHealth(float health){
         Play.getPlayer().setHealth(Play.getPlayer().getHealth() + health);
         Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() - ((health / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
         Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() + health / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());

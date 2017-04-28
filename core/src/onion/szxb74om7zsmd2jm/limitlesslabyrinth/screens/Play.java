@@ -196,7 +196,7 @@ public class Play implements Screen {
     private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
-    private int spawnInterval = 2000;
+    private int spawnInterval = 200;
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {

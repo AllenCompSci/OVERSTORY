@@ -123,7 +123,7 @@ public class Gui {
         healthBarX = 0;
         isBackpackOpen = false;
         playerHealthBar = new Sprite(HealthBar);
-        item1 = new LightningStaff(1);
+        item1 = new LaserGun(1);
         item2 = new Bow(1);
         item3 = new WizardStaff(1);
         item4 = new Shuriken(1);
@@ -149,7 +149,7 @@ public class Gui {
         itemBox2 = new Sprite(ItemBox);
         itemBox3 = new Sprite(ItemBox);
         itemBox4 = new Sprite(ItemBox);
-        item1 = new LightningStaff(1);
+        item1 = new LaserGun(1);
         item2 = new Bow(1);
         item3 = new WizardStaff(1);
         item4 = new Shuriken(1);

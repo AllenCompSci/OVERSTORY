@@ -27,7 +27,7 @@ public class EnemyTraps {
         this.direction = (float) (direction * (Math.PI/180));
         this.RateOfFire = RateOfFire;
         this.DetectionRadius = DetectionRadius;
-        this.spinRate = spinRate;
+        this.spinRate = (float) (spinRate * (Math.PI/180));
         this.x = x * 32;
         this.y = y * 32 + 13;
 
@@ -51,7 +51,7 @@ public class EnemyTraps {
         if(System.currentTimeMillis() > time && distanceFromPlayer <= DetectionRadius){
             fire();
             if(spinRate != 0)
-                direction += Math.PI/spinRate;
+                direction += spinRate;
 
             time = System.currentTimeMillis() + RateOfFire;
         }

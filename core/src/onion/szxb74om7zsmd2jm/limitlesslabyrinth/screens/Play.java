@@ -322,7 +322,7 @@ public class Play implements Screen {
         mapPath = LimitlessLabyrinth.getMapPath();
 
         turrets.putIfAbsent(mapPath, turretsEmpty);
-        KillCount.putIfAbsent(mapPath, 1);
+        KillCount.putIfAbsent(mapPath, 0);
         superTraps.putIfAbsent(mapPath, SuperTrapsEmpty);
 
         /*
@@ -337,6 +337,10 @@ public class Play implements Screen {
 
         if(superTraps.get(mapPath).size == 0) {
             AddInSuperTraps((TiledMapTileLayer) map.getLayers().get(2));
+        }
+
+        if(KillCount.get(mapPath) < (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel")){
+            KillCount.put(mapPath, (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel"));
         }
 
 

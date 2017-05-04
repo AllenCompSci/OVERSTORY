@@ -14,7 +14,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/1/2017.
  */
 public class Backpack {
-    private int pages = 10;
+    private int pages = 3;
     private Sprite[] slots = new Sprite[16 * pages];
     private static int pageOn = 1;
     private Item[] itemSlots = new Item[16 * pages];
@@ -22,6 +22,7 @@ public class Backpack {
     private Texture ItemBox = new Texture("itemBox.png");
     private Texture SelectedBox = new Texture("selectedBox.png");
     private static int selectedSlot = 0;
+    private boolean worked;
 
     public void reset(){
         selectedSlot = 0;
@@ -33,51 +34,6 @@ public class Backpack {
         }
         itemSlots[1] = new Mine(1);
         itemSlots[2] = new TurretItem();
-        itemSlots[3] = new LightningStaff(1);
-        itemSlots[4] = new LightningStaff(1);
-        itemSlots[5] = new LightningStaff(1);
-        itemSlots[6] = new LightningStaff(1);
-        itemSlots[7] = new LightningStaff(1);
-        itemSlots[8] = new Rune(1);
-        itemSlots[9] = new Rune(1);
-        itemSlots[10] = new AOE(1);
-        itemSlots[11] = new LaserGun(1);
-        itemSlots[12] = new LaserGun(1);
-        itemSlots[13] = new LaserGun(1);
-        itemSlots[14] = new LaserGun(1);
-        itemSlots[15] = new LaserGun(1);
-        itemSlots[16] = new LaserGun(1);
-        itemSlots[17] = new LaserGun(1);
-        itemSlots[18] = new LaserGun(1);
-        itemSlots[19] = new LaserGun(1);
-        itemSlots[20] = new LaserGun(1);
-        itemSlots[21] = new LaserGun(1);
-        itemSlots[22] = new Magic(1);
-        itemSlots[23] = new Rune(1);
-        itemSlots[24] = new Rune(1);
-        itemSlots[25] = new Rune(1);
-        itemSlots[26] = new Rune(1);
-        itemSlots[27] = new Rune(1);
-        itemSlots[28] = new LightningStaff(1);
-        itemSlots[29] = new LightningStaff(1);
-        itemSlots[30] = new LightningStaff(1);
-        itemSlots[31] = new LightningStaff(1);
-        itemSlots[32] = new LightningStaff(1);
-        itemSlots[33] = new LightningStaff(1);
-        itemSlots[34] = new LightningStaff(1);
-        itemSlots[35] = new LightningStaff(1);
-        itemSlots[36] = new LightningStaff(1);
-        itemSlots[37] = new WizardStaff(1);
-        itemSlots[38] = new WizardStaff(1);
-        itemSlots[39] = new WizardStaff(1);
-        itemSlots[40] = new WizardStaff(1);
-        itemSlots[41] = new WizardStaff(1);
-        itemSlots[42] = new WizardStaff(1);
-        itemSlots[43] = new WizardStaff(1);
-        itemSlots[44] = new WizardStaff(1);
-        itemSlots[45] = new WizardStaff(1);
-        itemSlots[46] = new WizardStaff(1);
-        itemSlots[47] = new WizardStaff(1);
     }
 
     public Backpack(){
@@ -89,51 +45,7 @@ public class Backpack {
         }
         itemSlots[1] = new Mine(1);
         itemSlots[2] = new TurretItem();
-        itemSlots[3] = new LightningStaff(1);
-        itemSlots[4] = new LightningStaff(1);
-        itemSlots[5] = new LightningStaff(1);
-        itemSlots[6] = new LightningStaff(1);
-        itemSlots[7] = new LightningStaff(1);
-        itemSlots[8] = new Rune(1);
-        itemSlots[9] = new Rune(1);
-        itemSlots[10] = new AOE(1);
-        itemSlots[11] = new LaserGun(1);
-        itemSlots[12] = new Magic(1);
-        itemSlots[13] = new Magic(1);
-        itemSlots[14] = new Magic(1);
-        itemSlots[15] = new Magic(1);
-        itemSlots[16] = new Magic(1);
-        itemSlots[17] = new Magic(1);
-        itemSlots[18] = new Magic(1);
-        itemSlots[19] = new Magic(1);
-        itemSlots[20] = new Magic(1);
-        itemSlots[21] = new Magic(1);
-        itemSlots[22] = new Magic(1);
-        itemSlots[23] = new Rune(1);
-        itemSlots[24] = new Rune(1);
-        itemSlots[25] = new Rune(1);
-        itemSlots[26] = new Rune(1);
-        itemSlots[27] = new Rune(1);
-        itemSlots[28] = new LightningStaff(1);
-        itemSlots[29] = new LightningStaff(1);
-        itemSlots[30] = new LightningStaff(1);
-        itemSlots[31] = new LightningStaff(1);
-        itemSlots[32] = new LightningStaff(1);
-        itemSlots[33] = new LightningStaff(1);
-        itemSlots[34] = new LightningStaff(1);
-        itemSlots[35] = new LightningStaff(1);
-        itemSlots[36] = new LightningStaff(1);
-        itemSlots[37] = new WizardStaff(1);
-        itemSlots[38] = new WizardStaff(1);
-        itemSlots[39] = new WizardStaff(1);
-        itemSlots[40] = new WizardStaff(1);
-        itemSlots[41] = new WizardStaff(1);
-        itemSlots[42] = new WizardStaff(1);
-        itemSlots[43] = new WizardStaff(1);
-        itemSlots[44] = new WizardStaff(1);
-        itemSlots[45] = new WizardStaff(1);
-        itemSlots[46] = new WizardStaff(1);
-        itemSlots[47] = new WizardStaff(1);
+
     }
 
     public void input(){
@@ -231,6 +143,35 @@ public class Backpack {
                 itemSlots[i].getSprite().draw(Play.getRenderer().getBatch());
             }
         }
+    }
+
+    public void addToBackpack(Item weapon){
+        worked = false;
+        for(int i = 0; i < itemSlots.length; i++){
+            if(itemSlots[i].getType().equals("melee")){
+                itemSlots[i] = weapon;
+                worked = true;
+                break;
+            }
+        }
+        if(!worked){
+            expand();
+            itemSlots[itemSlots.length - 16] = weapon;
+        }
+    }
+
+    public void expand(){
+        pages++;
+        Sprite[] tempSprite = new Sprite[slots.length + 16];
+        Item[] tempItems = new Item[itemSlots.length + 16];
+        System.arraycopy(slots,0,tempSprite,0,slots.length);
+        System.arraycopy(itemSlots,0,tempItems,0,itemSlots.length);
+        for(int i = slots.length; i < tempSprite.length; i++){
+            tempSprite[i] = new Sprite(ItemBox);
+            tempItems[i] = new NullWeapon();
+        }
+        slots = tempSprite;
+        itemSlots = tempItems;
     }
 
 }

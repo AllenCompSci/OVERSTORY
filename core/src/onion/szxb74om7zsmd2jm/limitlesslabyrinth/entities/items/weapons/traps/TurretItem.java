@@ -16,7 +16,7 @@ public class TurretItem extends Trap {
         dmg = 0;
         lvl = 1;
         type = "turret";
-        ammo = 50000000;
+        ammo = 1;
         cooldown = 0;
     }
 

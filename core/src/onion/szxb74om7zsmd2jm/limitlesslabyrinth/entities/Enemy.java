@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
@@ -315,6 +316,18 @@ public class Enemy extends Entity{
 
     @Override
     public void onDeath() {
+        /** Random chance of dropping weapon, Puts weapon into the player's inventory */
+        Random rand = new Random();
+        int VAL;
+        VAL = rand.nextInt(1000);
+
+        if(VAL == 999){
+            Play.getGui().getBackpack().addToBackpack(new TurretItem());
+        }
+        if(VAL % 2 == 0){
+            Play.getGui().getBackpack().addToBackpack(weapon);
+        }
+
         Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
         Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
         Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));

@@ -19,11 +19,13 @@ public class AOEeffect extends Projectile {
     int endDist;
     int count;
     int count1;
+    private String origin;
     Player.FACE dir;
     final int NUM = 19; // MUST BE ODD;
     boolean [][]aoe;
     pos[][]AOE;
-    public AOEeffect(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1){
+    public AOEeffect(float x1, float y1, Player.FACE dir, float dmg, int distance, Item fromItem, int count1, String Origin){
+        origin = Origin;
         aoe = new boolean[NUM][NUM];
         for(int i = 0; i < NUM; i++)
             Arrays.fill(aoe[i], false);
@@ -105,10 +107,19 @@ public class AOEeffect extends Projectile {
         for(int i = 0; i < NUM; i++){
             for(int j = 0; j < NUM; j++){
                 if(aoe[i][j]) {
-                    if(count == 8)
-                    Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 2));
+                    if(origin != "Enemy") {
+                        if (count == 8)
+                            Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 2));
+                        else {
+                            Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 3));
+                        }
+                    }
                     else{
-                        Play.getProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 3));
+                        if (count == 8)
+                            Play.getEnemyProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 2));
+                        else {
+                            Play.getEnemyProjectiles().add(new singleMagicStrike(AOE[i][j].getPOSX(), AOE[i][j].getPOSY(), dmg, fromItem, count1, stateTime, 3));
+                        }
                     }
                 }
             }

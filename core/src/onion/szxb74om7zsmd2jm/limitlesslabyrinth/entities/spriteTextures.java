@@ -1126,24 +1126,51 @@ public class spriteTextures {
         return 1;
     }
 
-    public static Item giveAWeapon(int level){
-        Random rand = new Random();
-        int VAL;
-        VAL = rand.nextInt(5);
+    public static Item giveAWeapon(int level, String weapon){
 
-        switch (VAL){
-            case 0:
-                return new Bow(level);
-            case 1:
-                return new LightningStaff(level);
-            case 2:
-                return new Shuriken(level);
-            case 3:
-                return new Sword(level);
-            case 4:
-                return new WizardStaff(level);
+        Random rand = new Random();
+        int lvl;
+        lvl = rand.nextInt(4) + level;
+        if(weapon.equals("random")) {
+            int VAL;
+            VAL = rand.nextInt(4);
+
+
+            switch (VAL) {
+                case 0:
+                    return new Bow(lvl);
+                case 1:
+                    return new LightningStaff(lvl);
+                case 2:
+                    return new Shuriken(lvl);
+                case 3:
+                    return new WizardStaff(lvl);
+            }
+            return new Bow(lvl);
         }
-        return new Bow(level);
+        else{
+            switch (weapon){
+                case "Bow":
+                    return new Bow(lvl);
+                case "AOE":
+                    return new AOE(lvl);
+                case "LaserGun":
+                    return new LaserGun(lvl);
+                case "LightningStaff":
+                    return new LightningStaff(lvl);
+                case "Magic":
+                    return new Magic(lvl);
+                case "Rune":
+                    return new Rune(lvl);
+                case "Shuriken":
+                    return new Shuriken(lvl);
+                case "Sword":
+                    return new Sword(lvl);
+                case "WizardStaff":
+                    return new WizardStaff(lvl);
+            }
+            return new Bow(lvl);
+        }
     }
 
     public static Play.MonsterType makeAMonster(int spawnRange, int spawnStart){

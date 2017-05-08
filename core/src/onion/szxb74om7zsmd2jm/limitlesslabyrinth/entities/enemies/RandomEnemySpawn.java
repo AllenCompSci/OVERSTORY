@@ -12,8 +12,8 @@ public class RandomEnemySpawn extends AnimatedEnemy
 {
 
 
-    public RandomEnemySpawn(float x, float y, int level, TiledMapTileLayer collisionLayer, float speed, Play.MonsterType monster) {
+    public RandomEnemySpawn(float x, float y, int level, TiledMapTileLayer collisionLayer, float speed, Play.MonsterType monster, String weapon) {
 
-        super(x, y, level, collisionLayer, spriteTextures.ROW(monster), spriteTextures.COL(monster), speed, monster);
+        super(x, y, level, collisionLayer, spriteTextures.ROW(monster), spriteTextures.COL(monster), speed, monster, weapon);
     }
 }

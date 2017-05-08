@@ -14,7 +14,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/1/2017.
  */
 public class Backpack {
-    private int pages = 3;
+    private int pages = 1;
     private Sprite[] slots = new Sprite[16 * pages];
     private static int pageOn = 1;
     private Item[] itemSlots = new Item[16 * pages];

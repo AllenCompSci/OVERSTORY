@@ -489,7 +489,15 @@ public class Play implements Screen {
             int num = rand.nextInt(spawnTiles.length);
             if (System.currentTimeMillis() > time) {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
-                    spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"));
+                    if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("Boss")) {
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                    }
+                    else if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weapon")) {
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                    }
+                    else {
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), "random");
+                    }
                 }
                 time = System.currentTimeMillis() + spawnInterval;
 
@@ -536,9 +544,9 @@ public class Play implements Screen {
     }
 
     //spawns in an enemy
-    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart){
+    public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart, String weapon){
         count++;
-        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart)));
+        enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart), weapon));
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
     }
@@ -636,7 +644,12 @@ public class Play implements Screen {
             if (collisionLayer.getCell((int) ((player.getSprite().getX() + player.getSprite().getWidth() / 2) / collisionLayer.getTileWidth()), (int) ((player.getSprite().getY() + player.getSprite().getHeight() / 2) / collisionLayer.getTileHeight())).getTile().getProperties().get("SpawnTrigger") == spawnArea) {
                 for (int i = 0; i < (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).length; i++) {
                     if (collisionLayer.getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).getTile().getProperties().containsKey("SpawnImmediately")) {
-                        spawnEnemy((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnRange"), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnStart"));
+                        if (((TiledMapTileLayer) map.getLayers().get(2)).getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).getTile().getProperties().containsKey("weapon")) {
+                            spawnEnemy((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnRange"), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).getTile().getProperties().get("weapon"));
+                        }
+                        else {
+                            spawnEnemy((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnRange"), (int) (checkMapLayerForArraySpawnImmediately((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy")).get(i).getProperties().get("SpawnStart"), "random");
+                        }
                         collisionLayer.getCell((checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][0], (checkMapLayerForImmediateSpawns((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"))[i][1]).setTile(map.getTileSets().getTile(150));
                     }
                 }

@@ -1,6 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.AOEeffect;
@@ -22,7 +23,7 @@ public class AOE extends Weapon {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
-        return new AOEeffect(x1, y1, Player.getCharFace(), dmg*1.5f, 0, this, (int)(Math.random()*17));
+        return new AOEeffect(x1, y1, Player.getCharFace(), dmg*1.5f, 0, this, (int)(Math.random()*17), Origin);
     }
 
 

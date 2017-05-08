@@ -8233,7 +8233,7 @@
     <property name="RateOfFire" type="int" value="10"/>
     <property name="SuperTrap" value=""/>
     <property name="detectionRadius" type="float" value="1000"/>
-    <property name="direction" type="float" value="0"/>
+    <property name="direction" type="float" value="180"/>
     <property name="level" type="int" value="10"/>
     <property name="projectile" value="laser"/>
     <property name="spinRate" type="float" value="3"/>

@@ -11,7 +11,7 @@ public class Demon extends AnimatedEnemy {
 
     public Demon(float x, float y, int level, TiledMapTileLayer collisionLayer)
     {
-        super(x, y, level, collisionLayer, 2, 4, .2f, Play.MonsterType.DEMON);
+        super(x, y, level, collisionLayer, 2, 4, .2f, Play.MonsterType.DEMON, "random");
     }
 
     @Override

@@ -321,10 +321,10 @@ public class Enemy extends Entity{
         int VAL;
         VAL = rand.nextInt(1000);
 
-        if(VAL == 999){
+        if(VAL == 4 || VAL == 44 || VAL == 444){
             Play.getGui().getBackpack().addToBackpack(new TurretItem());
         }
-        if(VAL % 2 == 0){
+        if(VAL > 400 && VAL < 444){
             Play.getGui().getBackpack().addToBackpack(weapon);
         }
 

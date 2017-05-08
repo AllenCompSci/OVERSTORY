@@ -21,11 +21,11 @@ public class AnimatedEnemy extends Enemy {
         public static DIRECTION ENEMYFACING;
         boolean is64;
         private boolean flipLEFT;
-        public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster)
+        public AnimatedEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int row, int col, float speed, Play.MonsterType monster, String Weapon)
         {
             super(x, y, level, collisionLayer);
 
-            weapon = spriteTextures.giveAWeapon(level);
+            weapon = spriteTextures.giveAWeapon(level, Weapon);
 
             is64 = false;
             ENEMYFACING = DIRECTION.SOUTH;

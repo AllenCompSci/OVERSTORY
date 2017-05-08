@@ -12,7 +12,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 public class Hydra extends AnimatedEnemy {
     public Hydra(float x, float y, int level, TiledMapTileLayer collisionLayer)
     {
-        super(x, y, level, collisionLayer, 1, 2, .2f, Play.MonsterType.HYDRA);
+        super(x, y, level, collisionLayer, 1, 2, .2f, Play.MonsterType.HYDRA, "random");
     }
 
     @Override

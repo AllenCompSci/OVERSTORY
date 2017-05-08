@@ -17,6 +17,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dialog.ConversationGr
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
+import java.util.logging.Logger;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -168,9 +169,12 @@ public class Player extends Entity {
         this.collisionLayer = collisionLayer;
         //playerWalkingDown = Play.fourFrameAnimationCreator("knight/KnightWalking.png",2,2);
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
-
-    sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0], collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
-
+    try {
+        sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0], collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
+    } catch(IndexOutOfBoundsException ex){
+        System.out.println(ex.getMessage());
+        throw ex;
+    }
         detection = new Detection(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), 100);
     }
 

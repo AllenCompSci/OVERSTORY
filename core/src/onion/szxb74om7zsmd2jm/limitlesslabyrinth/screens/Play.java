@@ -342,7 +342,7 @@ public class Play implements Screen {
         if(KillCount.get(mapPath) < (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel")){
             KillCount.put(mapPath, (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel"));
         }
-
+    
 
     }
 

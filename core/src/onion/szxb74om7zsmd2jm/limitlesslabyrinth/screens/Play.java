@@ -265,6 +265,7 @@ public class Play implements Screen {
         superTraps = new HashMap<String, Array<EnemyTraps>>();
         Play.spawnCount = 0;
         Play.garbageTime = 0;
+        goTo = "StartPosition";
         playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), goTo));
 
     }

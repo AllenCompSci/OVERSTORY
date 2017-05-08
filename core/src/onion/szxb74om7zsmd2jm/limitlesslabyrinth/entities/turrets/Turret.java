@@ -85,7 +85,7 @@ public class Turret extends Entity{
     private void checkWeaponSwap(){
         distance = Math.sqrt(Math.pow((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) - (sprite.getX() + sprite.getWidth() / 2), 2) +
                 Math.pow((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) - (sprite.getY() + sprite.getHeight() / 2), 2));
-        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.P) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "melee"|| Play.getGui().getEquipped().getType() == "rune")){
+        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "melee"|| Play.getGui().getEquipped().getType() == "rune")){
             tempItem = itemHeld;
             if(Play.getGui().getSelected() == 0){
                 itemHeld = Play.getGui().getItem1();

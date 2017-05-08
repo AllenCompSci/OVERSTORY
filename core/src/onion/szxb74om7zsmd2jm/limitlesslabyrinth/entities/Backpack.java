@@ -50,7 +50,7 @@ public class Backpack {
 
     public void input(){
         /** Changes which slot is selected */
-        if(Gdx.input.isKeyJustPressed(Input.Keys.UP)){
+        if(Play.backpackdn){
             selectedSlot += 2;
             if(selectedSlot > slots.length - 1) selectedSlot -= slots.length;
             for(int i = 0; i < slots.length; i++){
@@ -58,7 +58,7 @@ public class Backpack {
             }
             slots[selectedSlot] = new Sprite(SelectedBox);
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.DOWN)){
+        if(Play.backpackup){
             selectedSlot -= 2;
             if(selectedSlot < 0) selectedSlot += slots.length;
             for(int i = 0; i < slots.length; i++){
@@ -66,50 +66,60 @@ public class Backpack {
             }
             slots[selectedSlot] = new Sprite(SelectedBox);
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.LEFT) && selectedSlot % 2 == 1){
+        if(Play.switchslot && selectedSlot % 2 == 1){
             selectedSlot -= 1;
             for(int i = 0; i < slots.length; i++){
                 slots[i] = new Sprite(ItemBox);
             }
             slots[selectedSlot] = new Sprite(SelectedBox);
+            Play.switchslot = false;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT) && selectedSlot % 2 == 0){
+        if(Play.switchslot && selectedSlot % 2 == 0){
             selectedSlot += 1;
             for(int i = 0; i < slots.length; i++){
                 slots[i] = new Sprite(ItemBox);
             }
             slots[selectedSlot] = new Sprite(SelectedBox);
+            Play.switchslot = false;
         }
 
+        if(Play.backpackup) Play.backpackup = false;
+        if(Play.backpackdn) Play.backpackdn = false;
+
         /** Switches backpack selected slot with hot bar item */
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
+        if(Play.switchitem && Play.getGui().getSelected() == 0){
             tempItem = itemSlots[selectedSlot];
             itemSlots[selectedSlot] = Play.getGui().getEquipped();
             Play.getGui().setItem1(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem1());
             Play.getPlayer().setDmg(Play.getGui().getItem1().getDmg());
+
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)){
+        if(Play.switchitem && Play.getGui().getSelected() == 1){
             tempItem = itemSlots[selectedSlot];
             itemSlots[selectedSlot] = Play.getGui().getEquipped();
             Play.getGui().setItem2(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem2());
             Play.getPlayer().setDmg(Play.getGui().getItem2().getDmg());
+
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)){
+        if(Play.switchitem && Play.getGui().getSelected() == 2){
             tempItem = itemSlots[selectedSlot];
             itemSlots[selectedSlot] = Play.getGui().getEquipped();
             Play.getGui().setItem3(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem3());
             Play.getPlayer().setDmg(Play.getGui().getItem3().getDmg());
+
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)){
+        if(Play.switchitem && Play.getGui().getSelected() == 3){
             tempItem = itemSlots[selectedSlot];
             itemSlots[selectedSlot] = Play.getGui().getEquipped();
             Play.getGui().setItem4(tempItem);
             Play.getGui().setEquipped(Play.getGui().getItem4());
             Play.getPlayer().setDmg(Play.getGui().getItem4().getDmg());
+
         }
+        if (Play.switchitem) Play.switchitem = false;
 
         /** Delete unwanted items */
 

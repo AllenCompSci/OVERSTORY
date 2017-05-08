@@ -15,7 +15,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by 226812 on 1/27/2017.
  */
 public class Gui {
-    public int getSelected() {
+    public static int getSelected() {
         return selected;
     }
     private static int selected = 0;
@@ -170,6 +170,80 @@ public class Gui {
 
     public void input(){
         /** Switching between item boxes */
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            switch(selected){
+                case 0:
+                    itemBox4 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    selected = 3;
+                    Equipped = item4;
+                    break;
+                case 1:
+                    itemBox1 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 0;
+                    Equipped = item1;
+                    break;
+                case 2:
+                    itemBox2 = new Sprite(SelectedBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 1;
+                    Equipped = item2;
+                    break;
+                case 3:
+                    itemBox3 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 2;
+                    Equipped = item3;
+                    break;
+            }
+                Play.getPlayer().setDmg(Equipped.getDmg());
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E)){
+            switch(selected){
+                case 0:
+                    itemBox2 = new Sprite(SelectedBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 1;
+                    Equipped = item2;
+                    break;
+                case 1:
+                    itemBox3 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 2;
+                    Equipped = item3;
+                    break;
+                case 2:
+                    itemBox4 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox1 = new Sprite(ItemBox);
+                    selected = 3;
+                    Equipped = item4;
+                    break;
+                case 3:
+                    itemBox1 = new Sprite(SelectedBox);
+                    itemBox2 = new Sprite(ItemBox);
+                    itemBox3 = new Sprite(ItemBox);
+                    itemBox4 = new Sprite(ItemBox);
+                    selected = 0;
+                    Equipped = item1;
+                    break;
+            }
+            Play.getPlayer().setDmg(Equipped.getDmg());
+        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)){
             itemBox1 = new Sprite(SelectedBox);
             itemBox2 = new Sprite(ItemBox);

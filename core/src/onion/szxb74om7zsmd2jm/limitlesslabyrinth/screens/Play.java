@@ -1,10 +1,7 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens;
 
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -198,6 +195,40 @@ public class Play implements Screen {
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
     private int spawnInterval = 200;
 
+    public static boolean backpackup = false;
+    public static boolean backpackdn = false;
+    public static boolean switchitem = false;
+    public static boolean switchslot = false;
+
+    public static InputProcessor inp = new InputAdapter() {
+        @Override
+        public boolean scrolled(int amount){
+            if(amount == 1) {
+                backpackup = true;
+                backpackdn = false;
+            }
+            else if (amount == -1){
+                backpackdn = true;
+                backpackup = false;
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean touchDown(int screenX,int screenY,int pointer,int button){
+            if(button == Input.Buttons.RIGHT){
+                switchitem = true;
+            }
+
+            else if (button == Input.Buttons.MIDDLE){
+                switchslot = true;
+            }
+            return true;
+        }
+
+    };
+
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)
     {
         Texture img = new Texture(Gdx.files.internal(pathToSprite));
@@ -320,7 +351,7 @@ public class Play implements Screen {
         spawnArea = "Area0";
         SpawnTiles = (checkMapLayerForArray((TiledMapTileLayer) map.getLayers().get(2), "spawnEnemy"));
 
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(inp);
         //path = new Pathfinding();
         movePaths = 0;
         mapPath = LimitlessLabyrinth.getMapPath();
@@ -354,7 +385,7 @@ public class Play implements Screen {
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(null);
+        Gdx.input.setInputProcessor(inp);
     }
 
     @Override

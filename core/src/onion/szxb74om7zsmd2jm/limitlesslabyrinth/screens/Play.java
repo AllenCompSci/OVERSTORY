@@ -265,6 +265,7 @@ public class Play implements Screen {
         superTraps = new HashMap<String, Array<EnemyTraps>>();
         Play.spawnCount = 0;
         Play.garbageTime = 0;
+        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), goTo));
 
     }
 
@@ -278,6 +279,8 @@ public class Play implements Screen {
         Play.walls = Play.wallsEmpty;
         Play.spawnCount = 0;
         Play.garbageTime = 0;
+        playerPOS = (checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(2), goTo));
+
     }
 
     public Play(String PathToMap, int spawnLimit, int spawnGroupRange, int spawnGroupStart, boolean isFirstSpawnIn){
@@ -342,7 +345,7 @@ public class Play implements Screen {
         if(KillCount.get(mapPath) < (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel")){
             KillCount.put(mapPath, (int)((map.getLayers().get(0)).getProperties()).get("StartingLevel"));
         }
-    
+
 
     }
 
@@ -509,18 +512,18 @@ public class Play implements Screen {
     }
 
     //checks a TMX map layer tiles for a property
-    public int[][] checkMapLayerFor(TiledMapTileLayer layer, String string){
+    public static int[][] checkMapLayerFor(TiledMapTileLayer layer, String string){
         int count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) count++;
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string)) count++;
             }
         }
         int[][] tiles = new int[count][2];
         count = 0;
         for(int x = 0; x < layer.getWidth(); x++){
             for(int y = 0; y < layer.getHeight(); y++){
-                if(layer.getCell(x, y).getTile().getProperties().containsKey(string) && !(layer.getCell(x, y).getTile().getProperties().containsKey("SpawnImmediately"))) {
+                if(layer.getCell(x, y).getTile().getProperties().containsKey(string)) {
                     tiles[count][0] = x;
                     tiles[count++][1] = y;
                 }

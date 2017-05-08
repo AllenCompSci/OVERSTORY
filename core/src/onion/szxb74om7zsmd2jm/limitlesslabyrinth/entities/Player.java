@@ -171,7 +171,7 @@ public class Player extends Entity {
 //        playerWalkingUp = Play.fourFrameAnimationCreator("knight/knightwalkingup.png", 2, 2);
     try {
         sprite.setPosition(collisionLayer.getTileWidth() * Play.getPlayerPOS()[0][0], collisionLayer.getTileHeight() * Play.getPlayerPOS()[0][1]);
-    } catch(IndexOutOfBoundsException ex){
+    } catch(ArrayIndexOutOfBoundsException ex){
         System.out.println(ex.getMessage());
         throw ex;
     }

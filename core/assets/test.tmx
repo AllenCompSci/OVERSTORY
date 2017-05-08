@@ -140,7 +140,7 @@
   </tile>
   <tile id="79">
    <properties>
-    <property name="goto" value="position1"/>
+    <property name="goto" value="StartPosition"/>
     <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>

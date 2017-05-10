@@ -179,7 +179,7 @@ public class Player extends Entity {
     }
 
     public void establishHealth(){
-        this.health = 1000f;
+        this.health = 2000f;
         this.fullHealth = health;
     }
 
@@ -222,7 +222,7 @@ public class Player extends Entity {
             level++;
             dmg += level;
             xpToLevel *= 2;
-            fullHealth *= 1.5;
+            fullHealth *= 1.25;
             health = fullHealth;
             Play.getGui().refillHealth();
             Gdx.app.log("Level", String.valueOf(level));

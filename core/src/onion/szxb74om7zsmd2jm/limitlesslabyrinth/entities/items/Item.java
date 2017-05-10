@@ -45,7 +45,7 @@ public class Item {
         this.XPtoLVL = XPtoLVL;
     }
 
-    protected long XPtoLVL = 100;
+    protected long XPtoLVL = 40;
     public long getCooldown() {
         return cooldown;
     }
@@ -70,14 +70,13 @@ public class Item {
 
     public void LVLup(){
         lvl++;
-        this.dmg += lvl * 100;
+        this.dmg += (lvl - 1) * 100;
     }
 
     public void LVLup(String weaponname){
         switch(weaponname){
             case "wizardstaff":
                 this.dmg = (float) ((14.719) * Math.log(this.lvl) + 5);
-                System.out.println("New: " + this.dmg);
                 break;
         }
         lvl++;

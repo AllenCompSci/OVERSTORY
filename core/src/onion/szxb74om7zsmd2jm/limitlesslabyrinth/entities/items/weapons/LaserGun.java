@@ -29,7 +29,7 @@ public class LaserGun extends Weapon{
 
     public LaserGun(int level){
         sprite = new Sprite(spriteTextures.LaserGunSprite);
-        dmg = (float) (100f * Math.pow(level, 1.1));
+        dmg = 100f + (lvl - 1) * 100;
         lvl = level;
         type = "projectile";
         cooldown = 50;

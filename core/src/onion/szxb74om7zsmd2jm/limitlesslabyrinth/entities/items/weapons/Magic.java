@@ -15,7 +15,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 public class Magic extends Weapon {
     public Magic(int level){
         sprite = new Sprite(spriteTextures.MagicItemSprite);
-        dmg = 100f;
+        dmg = 100f + (lvl - 1) * 100;
         lvl = level;
         type = "projectile";
         cooldown = 40;

@@ -22,7 +22,7 @@ public class Shuriken extends Weapon{
 
     public Shuriken(int level){
         sprite = new Sprite(spriteTextures.ShurikenItemSprite);
-        dmg = 15f;
+        dmg = 15f + (lvl - 1) * 100;
         lvl = level;
         type = "projectile";
         cooldown = 20;

@@ -23,7 +23,7 @@ public class Rune extends Weapon {
         setSprite();
         setEFFECT();
         setNUM();
-        dmg = 100f;
+        dmg = 100f + (lvl - 1) * 100;
         lvl = level;
         type = "rune";
         cooldown = 40;

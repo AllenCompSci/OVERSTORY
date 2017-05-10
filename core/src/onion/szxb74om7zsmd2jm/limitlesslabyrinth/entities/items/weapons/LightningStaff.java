@@ -17,7 +17,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 public class LightningStaff extends Weapon{
     public LightningStaff(int level){
         sprite = new Sprite(spriteTextures.LightningStaffSprite);
-        dmg = 100f;
+        dmg = 100f + (lvl - 1) * 100;
         lvl = level;
         type = "projectile";
         cooldown = 40;

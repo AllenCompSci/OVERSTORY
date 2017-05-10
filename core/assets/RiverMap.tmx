@@ -2916,20 +2916,20 @@
   <image source="TileSets/Dungeon_B.png" width="512" height="512"/>
   <tile id="93">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="94">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="95">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="96">
@@ -2974,20 +2974,20 @@
   </tile>
   <tile id="109">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="110">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="111">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="GiantChasm.tmx"/>
    </properties>
   </tile>
   <tile id="112">
@@ -3276,43 +3276,43 @@
   <tile id="93">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
   <tile id="94">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
   <tile id="95">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
   <tile id="109">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
   <tile id="110">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
   <tile id="111">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="portal" value="ForestMap.tmx"/>
    </properties>
   </tile>
  </tileset>
  <layer name="Tile Layer 2" width="400" height="400">
   <properties>
-   <property name="StartingLevel" type="int" value="1"/>
+   <property name="StartingLevel" type="int" value="30"/>
   </properties>
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,

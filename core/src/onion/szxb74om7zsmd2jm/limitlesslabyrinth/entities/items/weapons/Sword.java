@@ -13,7 +13,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 public class Sword extends Weapon {
     public Sword(int level){
         sprite = new Sprite(spriteTextures.SwordItemSprite);
-        dmg = 200f;
+        dmg = 100f + (lvl - 1) * 100;
         lvl = level;
         type = "projectile";
         cooldown = 0;

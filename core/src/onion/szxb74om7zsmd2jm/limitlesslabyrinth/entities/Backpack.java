@@ -27,24 +27,18 @@ public class Backpack {
     public void reset(){
         selectedSlot = 0;
         slots[0] = new Sprite(SelectedBox);
-        itemSlots[0] = new Sword(1);
-        for(int i = 1; i < slots.length; i++){
+        for(int i = 0; i < slots.length; i++){
             slots[i] = new Sprite(ItemBox);
             itemSlots[i] = new NullWeapon();
         }
-        itemSlots[1] = new Mine(1);
-        itemSlots[2] = new TurretItem();
     }
 
     public Backpack(){
         slots[0] = new Sprite(SelectedBox);
-        itemSlots[0] = new Sword(1);
-        for(int i = 1; i < slots.length; i++){
+        for(int i = 0; i < slots.length; i++){
             slots[i] = new Sprite(ItemBox);
             itemSlots[i] = new NullWeapon();
         }
-        itemSlots[1] = new Mine(1);
-        itemSlots[2] = new TurretItem();
 
     }
 

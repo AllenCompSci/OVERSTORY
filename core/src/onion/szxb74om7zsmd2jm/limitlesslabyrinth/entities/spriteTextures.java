@@ -146,6 +146,7 @@ public class spriteTextures {
             return target;
     }
 
+    public static Texture MiniGunSprite = new Texture("MiniGun.png");
     public static Texture LoadingScreenSprite = new Texture("LoadingScreen.jpeg");
     public static Texture swordProjectileSprite = new Texture("swordProjectile.png");
     public static Texture MainMenuButtonSprite = new Texture("MainMenuButton.png");

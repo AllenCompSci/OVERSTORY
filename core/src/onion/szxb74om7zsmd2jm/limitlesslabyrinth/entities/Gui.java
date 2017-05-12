@@ -127,7 +127,7 @@ public class Gui {
         isBackpackOpen = false;
         playerHealthBar = new Sprite(HealthBar);
         item1 = new Sword(1);
-        item2 = new NullWeapon();
+        item2 = new MiniGun(1);
         item3 = new NullWeapon();
         item4 = new NullWeapon();
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);

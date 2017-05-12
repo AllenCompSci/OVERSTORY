@@ -30,13 +30,17 @@ public class Player extends Entity {
     public void setXp(int xp) {
         this.xp = xp;
     }
-    public int getXp() {
+    public static int getXp() {
         return xp;
     }
     private static int xp = 0;
     private static int level = 1;
     public static int getpLevel(){
         return level;
+    }
+
+    public static int getXpToLevel() {
+        return xpToLevel;
     }
 
     private static int xpToLevel = 10;
@@ -179,7 +183,7 @@ public class Player extends Entity {
     }
 
     public void establishHealth(){
-        this.health = 20000f;
+        this.health = 2000f;
         this.fullHealth = health;
     }
 

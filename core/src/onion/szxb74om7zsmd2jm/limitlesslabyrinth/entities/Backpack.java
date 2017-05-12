@@ -2,7 +2,9 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
@@ -23,6 +25,7 @@ public class Backpack {
     private Texture SelectedBox = new Texture("selectedBox.png");
     private static int selectedSlot = 0;
     private boolean worked;
+    private static BitmapFont font = new BitmapFont();
 
     public void reset(){
         selectedSlot = 0;
@@ -126,6 +129,13 @@ public class Backpack {
 
         if(selectedSlot >= slots.length / pages * pageOn) pageOn++;
         if(selectedSlot < 0 + slots.length / pages * pageOn - slots.length / pages) pageOn--;
+
+        /** Weapon Stats */
+        font.setColor(Color.WHITE);
+        font.draw(Play.getRenderer().getBatch(), "Weapon Level : " + itemSlots[selectedSlot].getLvl(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 140);
+        font.draw(Play.getRenderer().getBatch(), "Weapon Damage : " + itemSlots[selectedSlot].getDmg(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 160);
+        font.draw(Play.getRenderer().getBatch(), "Weapon XP : " + itemSlots[selectedSlot].getItemXP() + " / " + itemSlots[selectedSlot].getXPtoLVL(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 180);
+        font.draw(Play.getRenderer().getBatch(), "BACKPACK SELECTED", Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 200);
 
         /** Draws the backpack item slots */
         slots[0 + (pageOn * slots.length / pages - slots.length/pages)].setPosition(Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 150, Play.getCamera().position.y - Play.getCamera().viewportHeight/4);

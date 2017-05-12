@@ -11,8 +11,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 public class Fists extends Weapon{
     public Fists(int level){
         sprite = new Sprite(spriteTextures.FistSprite);
-        dmg = 10f + (lvl - 1) * 100;
         lvl = level;
+        dmg = 10f + (lvl - 1) * 100;
         type = "melee";
     }
 }

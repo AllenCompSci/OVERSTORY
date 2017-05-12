@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -141,6 +142,11 @@ public class Play implements Screen {
         walls.add(wallType);
     }
     private static int spawnCount = 100;
+    public static Map<String, Integer> getKillCount() {
+        return KillCount;
+    }
+
+    private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
     public static Gui getGui() {
         return gui;
     }
@@ -189,7 +195,7 @@ public class Play implements Screen {
         return superTraps;
     }
     private static Map<String, Array<EnemyTraps>> superTraps = new HashMap<String, Array<EnemyTraps>>();
-    private static Map<String, Integer> KillCount = new HashMap<String, Integer>();
+
     private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));

@@ -2,6 +2,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -23,6 +24,8 @@ public class Gui {
     private long time2 = 0;
     private long time3 = 0;
     private long time4 = 0;
+
+    private static BitmapFont font = new BitmapFont();
 
     public static Sprite getPlayerHealthBar() {
         return playerHealthBar;
@@ -306,12 +309,29 @@ public class Gui {
     }
 
     public void update(){
+        /** Weapon Stats */
+        font.setColor(Color.WHITE);
+        font.draw(Play.getRenderer().getBatch(), "Weapon Level : " + getEquipped().getLvl(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 40);
+        font.draw(Play.getRenderer().getBatch(), "Weapon Damage : " + getEquipped().getDmg(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 60);
+        font.draw(Play.getRenderer().getBatch(), "Weapon XP : " + getEquipped().getItemXP() + " / " + getEquipped().getXPtoLVL(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 80);
+        font.draw(Play.getRenderer().getBatch(), "EQUIPPED WEAPON", Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 40, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 100);
 
         /** Health Bar Update */
         playerHealthBar.setPosition(Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10 - healthBarX, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 28);
         playerLostHealthBar.setPosition(Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 28);
         playerLostHealthBar.draw(Play.getRenderer().getBatch());
         playerHealthBar.draw(Play.getRenderer().getBatch());
+        font.setColor(Color.BLACK);
+        font.draw(Play.getRenderer().getBatch(), ((int)Player.getHealth()) + " / " + ((int)Player.getFullHealth()), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 220, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 13);
+
+        /** Display player level and Xp */
+        font.setColor(Color.WHITE);
+        font.draw(Play.getRenderer().getBatch(), "Player XP : " + Player.getXp() + " / " + Player.getXpToLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 40);
+        font.draw(Play.getRenderer().getBatch(), "Player Level : " + Player.getpLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 60);
+
+        /** Display Map Level of enemies */
+        font.draw(Play.getRenderer().getBatch(), "Enemy Levels : " + Play.getKillCount().get(Play.getMapPath()) + "-" + (Play.getKillCount().get(Play.getMapPath()) + 3), Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 200, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 30);
+
 
         /** itemBox update */
         itemBox1.setPosition(Play.getCamera().position.x - 150 - itemBox1.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);

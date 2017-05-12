@@ -13,8 +13,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 public class Bow extends Weapon {
     public Bow(int level){
         sprite = new Sprite(spriteTextures.BowSprite);
-        dmg = 170f + (lvl - 1) * 100;
         lvl = level;
+        dmg = 170f + (lvl - 1) * 100;
         type = "projectile";
         cooldown = 40;
     }

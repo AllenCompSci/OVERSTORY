@@ -21,6 +21,11 @@ public class Item {
     protected Projectile projectile;
     protected float dmg;
     protected long cooldown;
+
+    public int getLvl() {
+        return lvl;
+    }
+
     protected int lvl;
     protected String type;
     public float getDmg() {

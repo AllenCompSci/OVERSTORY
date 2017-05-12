@@ -179,7 +179,7 @@ public class Player extends Entity {
     }
 
     public void establishHealth(){
-        this.health = 2000f;
+        this.health = 20000f;
         this.fullHealth = health;
     }
 

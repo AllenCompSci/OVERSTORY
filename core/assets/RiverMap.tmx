@@ -3276,37 +3276,37 @@
   <tile id="93">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
   <tile id="94">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
   <tile id="95">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
   <tile id="109">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
   <tile id="110">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
   <tile id="111">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="ForestMap.tmx"/>
+    <property name="portal" value="ForestMap!.tmx"/>
    </properties>
   </tile>
  </tileset>

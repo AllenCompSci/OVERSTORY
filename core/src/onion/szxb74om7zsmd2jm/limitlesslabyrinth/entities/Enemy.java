@@ -98,6 +98,10 @@ public class Enemy extends Entity{
 
      }
 
+     public double distanceFromPlayer(){
+        return Math.sqrt(Math.pow((this.getSprite().getX() + this.getSprite().getWidth()/2) - (Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth()/2), 2) + Math.pow((this.getSprite().getY() + this.getSprite().getHeight()/2) - (Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight()/2), 2));
+     }
+
     public void DMGDETECT(){
         dmgTaken = detection.projectileInRadiusDmg(this);
 
@@ -329,6 +333,11 @@ public class Enemy extends Entity{
         }
 
         Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
+        Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
+    }
+
+    public void Despawn(){
         Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
         Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
     }

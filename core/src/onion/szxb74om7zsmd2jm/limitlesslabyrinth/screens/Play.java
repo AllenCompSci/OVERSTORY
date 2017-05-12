@@ -453,8 +453,17 @@ public class Play implements Screen {
 
         //renders the enemies
         for(Enemy i : enemies){
+
+            if(i.distanceFromPlayer() > 1000){
+                i.Despawn();
+                continue;
+            }
+
             i.draw(renderer.getBatch());
             //checks if enemy is dead
+
+
+
             if(i.getHealth() <= 0) {
                 spawnCount++;
                 if(spawnCount >= 10){

@@ -17,7 +17,7 @@ public class WizardStaff extends Weapon{
         lvl = level;
         type = "projectile";
         dmg = 15f + (lvl - 1) * 100;
-        cooldown = 40;
+        cooldown = 80;
         XPtoLVL = 10 * lvl;
     }
 

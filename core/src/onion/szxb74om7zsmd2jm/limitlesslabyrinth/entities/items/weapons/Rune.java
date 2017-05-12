@@ -26,7 +26,7 @@ public class Rune extends Weapon {
         lvl = level;
         dmg = 100f + (lvl - 1) * 100;
         type = "rune";
-        cooldown = 40;
+        cooldown = 80;
     }
     public void switchRuneType(){
         rune = spriteTextures.getRUNETYPE();

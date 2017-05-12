@@ -363,23 +363,35 @@ public class Gui {
         refreshItem[2].draw(Play.getRenderer().getBatch());
         refreshItem[3].draw(Play.getRenderer().getBatch());
         if(isRefreshing[0] && System.currentTimeMillis() > time1){
-            refreshItem[0].setScale(refreshItem[0].getScaleX() - .1f, refreshItem[0].getScaleY() - .1f);
+            refreshItem[0].setScale(refreshItem[0].getScaleX() - .2f, refreshItem[0].getScaleY() - .2f);
             time1 = System.currentTimeMillis() + item1.getCooldown();
+            if(item1.getCooldown() == 0){
+                refreshItem[0].setScale(refreshItem[0].getScaleX() - .2f, refreshItem[0].getScaleY() - .2f);
+            }
             if (refreshItem[0].getScaleX() <= 0) isRefreshing[0] = false;
         }
         if(isRefreshing[1] && System.currentTimeMillis() > time2){
-            refreshItem[1].setScale(refreshItem[1].getScaleX() - .1f, refreshItem[1].getScaleY() - .1f);
+            refreshItem[1].setScale(refreshItem[1].getScaleX() - .2f, refreshItem[1].getScaleY() - .2f);
             time2 = System.currentTimeMillis() + item2.getCooldown();
+            if(item2.getCooldown() == 0){
+                refreshItem[1].setScale(refreshItem[1].getScaleX() - .2f, refreshItem[1].getScaleY() - .2f);
+            }
             if (refreshItem[1].getScaleX() <= 0) isRefreshing[1] = false;
         }
         if(isRefreshing[2] && System.currentTimeMillis() > time3){
-            refreshItem[2].setScale(refreshItem[2].getScaleX() - .1f, refreshItem[2].getScaleY() - .1f);
+            refreshItem[2].setScale(refreshItem[2].getScaleX() - .2f, refreshItem[2].getScaleY() - .2f);
             time3 = System.currentTimeMillis() + item3.getCooldown();
+            if(item3.getCooldown() == 0){
+                refreshItem[2].setScale(refreshItem[2].getScaleX() - .2f, refreshItem[2].getScaleY() - .2f);
+            }
             if (refreshItem[2].getScaleX() <= 0) isRefreshing[2] = false;
         }
         if(isRefreshing[3] && System.currentTimeMillis() > time4){
-            refreshItem[3].setScale(refreshItem[3].getScaleX() - .1f, refreshItem[3].getScaleY() - .1f);
+            refreshItem[3].setScale(refreshItem[3].getScaleX() - .2f, refreshItem[3].getScaleY() - .2f);
             time4 = System.currentTimeMillis() + item4.getCooldown();
+            if(item4.getCooldown() == 0){
+                refreshItem[3].setScale(refreshItem[3].getScaleX() - .2f, refreshItem[3].getScaleY() - .2f);
+            }
             if (refreshItem[3].getScaleX() <= 0) isRefreshing[3] = false;
         }
 

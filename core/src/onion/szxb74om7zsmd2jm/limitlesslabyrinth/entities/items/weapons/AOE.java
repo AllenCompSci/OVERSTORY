@@ -18,7 +18,7 @@ public class AOE extends Weapon {
         lvl = level;
         dmg = 100f + (lvl - 1) * 100;
         type = "projectile";
-        cooldown = 80;
+        cooldown = 160;
     }
 
     @Override

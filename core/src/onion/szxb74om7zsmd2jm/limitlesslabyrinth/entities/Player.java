@@ -225,8 +225,8 @@ public class Player extends Entity {
             //s.ad
             level++;
             dmg += level;
-            xpToLevel *= 2;
-            fullHealth *= 1.5;
+            xpToLevel *= 1.6;
+            fullHealth *= 1.6;
             health = fullHealth;
             Play.getGui().refillHealth();
             Gdx.app.log("Level", String.valueOf(level));

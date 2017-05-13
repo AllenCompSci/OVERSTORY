@@ -30,7 +30,10 @@ public class LaserGun extends Weapon{
     public LaserGun(int level){
         sprite = new Sprite(spriteTextures.LaserGunSprite);
         lvl = level;
-        dmg = 100f + (lvl - 1) * 100;
+        dmg = 100f;
+        for(int i = 0; i < lvl; i++){
+            dmg += 100 * i;
+        }
         type = "projectile";
         cooldown = 50;
     }

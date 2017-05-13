@@ -14,7 +14,10 @@ public class Bow extends Weapon {
     public Bow(int level){
         sprite = new Sprite(spriteTextures.BowSprite);
         lvl = level;
-        dmg = 170f + (lvl - 1) * 100;
+        dmg = 170f;
+        for(int i = 0; i < lvl; i++){
+            dmg += 170 * i;
+        }
         type = "projectile";
         cooldown = 40;
     }

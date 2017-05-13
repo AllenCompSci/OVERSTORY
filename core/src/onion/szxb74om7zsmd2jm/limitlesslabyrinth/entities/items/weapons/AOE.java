@@ -16,7 +16,10 @@ public class AOE extends Weapon {
     public AOE(int level){
         sprite = new Sprite(spriteTextures.spellbook);
         lvl = level;
-        dmg = 100f + (lvl - 1) * 100;
+        dmg = 100f;
+        for(int i = 0; i < lvl; i++){
+            dmg += 100 * i;
+        }
         type = "projectile";
         cooldown = 80;
     }

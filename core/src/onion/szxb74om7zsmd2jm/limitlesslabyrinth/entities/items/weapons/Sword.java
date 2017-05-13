@@ -16,7 +16,7 @@ public class Sword extends Weapon {
         lvl = level;
         dmg = 100f + ((lvl - 1) * 100);
         type = "projectile";
-        cooldown = 30;
+        cooldown = 1;
         XPtoLVL = 10 * lvl;
     }
 

@@ -76,7 +76,7 @@ public class AnimatedEnemy extends Enemy {
 
             if(reloadTime < System.currentTimeMillis() && detection.isInBigRadius(this)){
                 Play.getEnemyProjectiles().add(weapon.getProjectile(sprite.getX() + sprite.getWidth()/4, sprite.getY() + sprite.getHeight()/4, Play.getPlayer().getSprite().getX(), Play.getPlayer().getSprite().getY(), "Enemy"));
-                reloadTime = System.currentTimeMillis() + 2000;
+                reloadTime = (weapon.getCooldown() == 0) ? System.currentTimeMillis() + weapon.getCooldown() + 100 : System.currentTimeMillis() + weapon.getCooldown() + 1000;
             }
 
 

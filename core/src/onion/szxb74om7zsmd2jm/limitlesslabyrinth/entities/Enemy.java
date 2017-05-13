@@ -328,7 +328,7 @@ public class Enemy extends Entity{
         if(VAL == 4 || VAL == 44 || VAL == 444){
             Play.getGui().getBackpack().addToBackpack(new TurretItem());
         }
-        if(VAL > 400 && VAL < 444){
+        if(VAL >= 300 && VAL <= 400){
             Play.getGui().getBackpack().addToBackpack(weapon);
         }
 

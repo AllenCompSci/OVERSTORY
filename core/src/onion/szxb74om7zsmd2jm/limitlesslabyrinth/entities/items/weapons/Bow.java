@@ -16,7 +16,7 @@ public class Bow extends Weapon {
         lvl = level;
         dmg = 170f + (lvl - 1) * 100;
         type = "projectile";
-        cooldown = 80;
+        cooldown = 40;
     }
 
     @Override

@@ -10,6 +10,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Enemy;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Entity;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.RandomEnemySpawn;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullProjectileItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.NullWeapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
@@ -69,7 +70,7 @@ public class Turret extends Entity{
                         sprite.setFlip(false, false);
                     }
                     Play.getProjectiles().add(itemHeld.getProjectile(sprite.getX(), sprite.getY(), i.getSprite().getX() + i.getSprite().getWidth() / 2, i.getSprite().getY() + i.getSprite().getHeight() / 2, "Turret"));
-                    AttackTime = System.currentTimeMillis() + 500;
+                    AttackTime = (itemHeld.getCooldown() == 0) ? System.currentTimeMillis() + itemHeld.getCooldown() + 40 : System.currentTimeMillis() + itemHeld.getCooldown() + 160;
                     break;
                 }
                 else if(distance < 500 && itemHeld.getType() == "melee"){
@@ -85,7 +86,7 @@ public class Turret extends Entity{
     private void checkWeaponSwap(){
         distance = Math.sqrt(Math.pow((Play.getPlayer().getSprite().getX() + Play.getPlayer().getSprite().getWidth() / 2) - (sprite.getX() + sprite.getWidth() / 2), 2) +
                 Math.pow((Play.getPlayer().getSprite().getY() + Play.getPlayer().getSprite().getHeight() / 2) - (sprite.getY() + sprite.getHeight() / 2), 2));
-        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.R) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "melee"|| Play.getGui().getEquipped().getType() == "rune")){
+        if(distance < 50 && Gdx.input.isKeyJustPressed(Input.Keys.F) && (Play.getGui().getEquipped().getType() == "projectile" || Play.getGui().getEquipped().getType() == "melee"|| Play.getGui().getEquipped().getType() == "rune")){
             tempItem = itemHeld;
             if(Play.getGui().getSelected() == 0){
                 itemHeld = Play.getGui().getItem1();

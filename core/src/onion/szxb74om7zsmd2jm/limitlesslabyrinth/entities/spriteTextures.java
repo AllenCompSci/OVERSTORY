@@ -1134,19 +1134,14 @@ public class spriteTextures {
         lvl = rand.nextInt(4) + level;
         if(weapon.equals("random")) {
             int VAL;
-            VAL = rand.nextInt(4);
+            VAL = rand.nextInt(1000);
 
-
-            switch (VAL) {
-                case 0:
-                    return new Bow(lvl);
-                case 1:
-                    return new LightningStaff(lvl);
-                case 2:
-                    return new Shuriken(lvl);
-                case 3:
-                    return new WizardStaff(lvl);
-            }
+            if(VAL >= 0 && VAL <= 300) return new Bow(lvl);
+            if(VAL >= 600 && VAL <= 799) return new LightningStaff(lvl);
+            if(VAL >= 800 && VAL <= 929) return new Shuriken(lvl);
+            if(VAL >= 301 && VAL <= 599) return new WizardStaff(lvl);
+            if(VAL >= 999 && VAL <= 1000) return new LaserGun(lvl);
+            if(VAL >= 930 && VAL <= 998) return new MiniGun(lvl);
             return new Bow(lvl);
         }
         else{
@@ -1169,6 +1164,8 @@ public class spriteTextures {
                     return new Sword(lvl);
                 case "WizardStaff":
                     return new WizardStaff(lvl);
+                case "MiniGun":
+                    return new MiniGun(lvl);
             }
             return new Bow(lvl);
         }

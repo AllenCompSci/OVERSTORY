@@ -32,7 +32,7 @@ public class LaserGun extends Weapon{
         lvl = level;
         dmg = 100f + (lvl - 1) * 100;
         type = "projectile";
-        cooldown = 100;
+        cooldown = 50;
     }
 
     @Override

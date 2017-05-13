@@ -15,7 +15,7 @@ public class MiniGun extends Weapon {
         sprite = new Sprite(spriteTextures.MiniGunSprite);
         lvl = level;
         type = "projectile";
-        dmg = 40f + (lvl - 1) * 40;
+        dmg = 60f + (lvl - 1) * 60;
         cooldown = 0;
         XPtoLVL = 500 * lvl;
     }

@@ -10,6 +10,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mine;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
@@ -128,7 +129,7 @@ public class Gui {
         playerHealthBar = new Sprite(HealthBar);
         item1 = new Sword(1);
         item2 = new MiniGun(1);
-        item3 = new NullWeapon();
+        item3 = new TurretItem();
         item4 = new NullWeapon();
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
@@ -153,8 +154,8 @@ public class Gui {
         itemBox3 = new Sprite(ItemBox);
         itemBox4 = new Sprite(ItemBox);
         item1 = new Sword(1);
-        item2 = new NullWeapon();
-        item3 = new NullWeapon();
+        item2 = new MiniGun(1);
+        item3 = new TurretItem();
         item4 = new NullWeapon();
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
@@ -296,11 +297,11 @@ public class Gui {
 
 
         /** Refer here to know how to remove health from player properly */
-        if(Gdx.input.isKeyPressed(Input.Keys.N)){
-            Play.getPlayer().setHealth(Play.getPlayer().getHealth() - 10f);
-            healthBarX += ((10f / Play.getPlayer().getFullHealth()) * playerHealthBar.getWidth()) / 2;
-            playerHealthBar.setScale(playerHealthBar.getScaleX() - 10f / Play.getPlayer().getFullHealth(), playerHealthBar.getScaleY());
-        }
+        //if(Gdx.input.isKeyPressed(Input.Keys.N)){
+           // Play.getPlayer().setHealth(Play.getPlayer().getHealth() - 10f);
+           // healthBarX += ((10f / Play.getPlayer().getFullHealth()) * playerHealthBar.getWidth()) / 2;
+           // playerHealthBar.setScale(playerHealthBar.getScaleX() - 10f / Play.getPlayer().getFullHealth(), playerHealthBar.getScaleY());
+       // }
     }
 
     public void refillHealth(){
@@ -363,34 +364,34 @@ public class Gui {
         refreshItem[2].draw(Play.getRenderer().getBatch());
         refreshItem[3].draw(Play.getRenderer().getBatch());
         if(isRefreshing[0] && System.currentTimeMillis() > time1){
-            refreshItem[0].setScale(refreshItem[0].getScaleX() - .2f, refreshItem[0].getScaleY() - .2f);
+            refreshItem[0].setScale(refreshItem[0].getScaleX() - .1f, refreshItem[0].getScaleY() - .1f);
             time1 = System.currentTimeMillis() + item1.getCooldown();
             if(item1.getCooldown() == 0){
-                refreshItem[0].setScale(refreshItem[0].getScaleX() - .2f, refreshItem[0].getScaleY() - .2f);
+                refreshItem[0].setScale(refreshItem[0].getScaleX() - .3f, refreshItem[0].getScaleY() - .3f);
             }
             if (refreshItem[0].getScaleX() <= 0) isRefreshing[0] = false;
         }
         if(isRefreshing[1] && System.currentTimeMillis() > time2){
-            refreshItem[1].setScale(refreshItem[1].getScaleX() - .2f, refreshItem[1].getScaleY() - .2f);
+            refreshItem[1].setScale(refreshItem[1].getScaleX() - .1f, refreshItem[1].getScaleY() - .1f);
             time2 = System.currentTimeMillis() + item2.getCooldown();
             if(item2.getCooldown() == 0){
-                refreshItem[1].setScale(refreshItem[1].getScaleX() - .2f, refreshItem[1].getScaleY() - .2f);
+                refreshItem[1].setScale(refreshItem[1].getScaleX() - .3f, refreshItem[1].getScaleY() - .3f);
             }
             if (refreshItem[1].getScaleX() <= 0) isRefreshing[1] = false;
         }
         if(isRefreshing[2] && System.currentTimeMillis() > time3){
-            refreshItem[2].setScale(refreshItem[2].getScaleX() - .2f, refreshItem[2].getScaleY() - .2f);
+            refreshItem[2].setScale(refreshItem[2].getScaleX() - .1f, refreshItem[2].getScaleY() - .1f);
             time3 = System.currentTimeMillis() + item3.getCooldown();
             if(item3.getCooldown() == 0){
-                refreshItem[2].setScale(refreshItem[2].getScaleX() - .2f, refreshItem[2].getScaleY() - .2f);
+                refreshItem[2].setScale(refreshItem[2].getScaleX() - .3f, refreshItem[2].getScaleY() - .3f);
             }
             if (refreshItem[2].getScaleX() <= 0) isRefreshing[2] = false;
         }
         if(isRefreshing[3] && System.currentTimeMillis() > time4){
-            refreshItem[3].setScale(refreshItem[3].getScaleX() - .2f, refreshItem[3].getScaleY() - .2f);
+            refreshItem[3].setScale(refreshItem[3].getScaleX() - .1f, refreshItem[3].getScaleY() - .1f);
             time4 = System.currentTimeMillis() + item4.getCooldown();
             if(item4.getCooldown() == 0){
-                refreshItem[3].setScale(refreshItem[3].getScaleX() - .2f, refreshItem[3].getScaleY() - .2f);
+                refreshItem[3].setScale(refreshItem[3].getScaleX() - .3f, refreshItem[3].getScaleY() - .3f);
             }
             if (refreshItem[3].getScaleX() <= 0) isRefreshing[3] = false;
         }

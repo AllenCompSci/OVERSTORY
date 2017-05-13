@@ -208,31 +208,32 @@ public class Play implements Screen {
 
     public static InputProcessor inp = new InputAdapter() {
         @Override
-        public boolean scrolled(int amount){
-            if(amount == 1) {
-                backpackup = true;
-                backpackdn = false;
-            }
-            else if (amount == -1){
-                backpackdn = true;
-                backpackup = false;
+        public boolean scrolled(int amount) {
+            if (gui.getIsBackpackOpen()) {
+                if (amount == 1) {
+                    backpackup = true;
+                    backpackdn = false;
+                } else if (amount == -1) {
+                    backpackdn = true;
+                    backpackup = false;
+                }
             }
 
             return true;
         }
 
         @Override
-        public boolean touchDown(int screenX,int screenY,int pointer,int button){
-            if(button == Input.Buttons.RIGHT){
-                switchitem = true;
-            }
-
-            else if (button == Input.Buttons.MIDDLE){
-                switchslot = true;
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            if (gui.getIsBackpackOpen()) {
+                if (button == Input.Buttons.RIGHT) {
+                    switchitem = true;
+                } else if (button == Input.Buttons.MIDDLE) {
+                    switchslot = true;
+                }
+                return true;
             }
             return true;
         }
-
     };
 
     public static Animation fourFrameAnimationCreator(String pathToSprite, int row, int col)

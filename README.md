@@ -49,3 +49,5 @@ Created the tilemap, the player, the enemies. Added health, xp, leveling, and en
 Added more items and weapons. Also added a health bar for the player, and a backpack that functions correctly, as well as hot bars for items that can be swapped out with items in the backpack.
 ## Week 3
 Worked on projectiles more, added proper explosions and shuriken that shoots 3 projectiles each time. Also fixed memory leakage to a great extent.
+## Week 4 - the rest
+The whole game...

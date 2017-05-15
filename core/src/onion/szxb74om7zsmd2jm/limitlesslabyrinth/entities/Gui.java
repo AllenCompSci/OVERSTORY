@@ -130,7 +130,7 @@ public class Gui {
         item1 = new Sword(1);
         item2 = new MiniGun(1);
         item3 = new TurretItem();
-        item4 = new NullWeapon();
+        item4 = new Rune(1);
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);
@@ -156,7 +156,7 @@ public class Gui {
         item1 = new Sword(1);
         item2 = new MiniGun(1);
         item3 = new TurretItem();
-        item4 = new NullWeapon();
+        item4 = new Rune(1);
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);

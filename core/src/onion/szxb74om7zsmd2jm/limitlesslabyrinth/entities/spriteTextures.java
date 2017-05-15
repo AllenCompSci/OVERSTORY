@@ -145,7 +145,7 @@ public class spriteTextures {
             }
             return target;
     }
-
+    public static Texture DonaldTrump = new Texture("32 pix/DonaldTrump.png");
     public static Texture MiniGunSprite = new Texture("MiniGun.png");
     public static Texture LoadingScreenSprite = new Texture("LoadingScreen.jpeg");
     public static Texture swordProjectileSprite = new Texture("swordProjectile.png");
@@ -934,6 +934,8 @@ public class spriteTextures {
                 return pitberserker;
             case PITBLACKLING:
                 return pitblacking;
+            case DONALDTRUMP:
+                return DonaldTrump;
         }
         return basic32;
     }
@@ -1055,6 +1057,8 @@ public class spriteTextures {
             case SLIME:
             case DEATHSLICER:
                 return 3;
+            case DONALDTRUMP:
+                return 1;
 
         }
 
@@ -1623,6 +1627,8 @@ public class spriteTextures {
                 return BEHOLDER;
             case 222:
                 return EVILEYE;
+            case 223:
+                return DONALDTRUMP;
         }
         return WEREWOLF;
     }

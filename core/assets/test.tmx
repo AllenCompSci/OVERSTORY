@@ -117,7 +117,7 @@
   <tile id="64">
    <properties>
     <property name="SpawnRange" type="int" value="10"/>
-    <property name="SpawnStart" type="int" value="150"/>
+    <property name="SpawnStart" type="int" value="120"/>
     <property name="spawnEnemy" value="Area2"/>
    </properties>
   </tile>
@@ -784,37 +784,37 @@
   <tile id="104">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
   <tile id="105">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
   <tile id="106">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
   <tile id="120">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
   <tile id="121">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
   <tile id="122">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="FinalBoss.tmx"/>
    </properties>
   </tile>
  </tileset>

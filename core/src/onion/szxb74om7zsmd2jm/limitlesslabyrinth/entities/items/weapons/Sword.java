@@ -14,9 +14,9 @@ public class Sword extends Weapon {
     public Sword(int level){
         sprite = new Sprite(spriteTextures.SwordItemSprite);
         lvl = level;
-        dmg = 100f;
+        dmg = 2f;
         for(int i = 0; i < lvl; i++){
-            dmg += 60 * i;
+            dmg += 2 * i;
         }
         type = "projectile";
         cooldown = 1;

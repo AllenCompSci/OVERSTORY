@@ -75,13 +75,13 @@ public class Item {
 
     public void LVLup(){
         lvl++;
-        this.dmg += (lvl - 1) * 100;
+        this.dmg *= 2;
     }
 
     public void LVLup(String weaponname){
 
         lvl++;
-        this.dmg += (lvl - 1) * 100;
+        this.dmg *= 2;
        // this.dmg += lvl * 100;
     }
 }

@@ -512,7 +512,7 @@ public class Play implements Screen {
                 spawnCount++;
                 int nextLvlAt = 10;
                 for(int k = 1; k < KillCount.get(mapPath); k++){
-                    nextLvlAt *= 1.2;
+                    nextLvlAt = (int)((Math.pow(nextLvlAt, 2) * 20));
                 }
                 if(spawnCount >= nextLvlAt){
                     KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);

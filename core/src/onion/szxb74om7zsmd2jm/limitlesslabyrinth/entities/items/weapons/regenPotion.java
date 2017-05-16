@@ -16,9 +16,9 @@ public class regenPotion extends Trap {
     public regenPotion(int level){
         sprite = new Sprite(spriteTextures.RegenPotionSprite);
         lvl = level;
-        dmg = 30f;
+        dmg = 1f;
         for(int i = 0; i < lvl; i++){
-            dmg += 30 * i;
+            dmg += 1 * i;
         }
         type = "projectile";
         cooldown = 40;

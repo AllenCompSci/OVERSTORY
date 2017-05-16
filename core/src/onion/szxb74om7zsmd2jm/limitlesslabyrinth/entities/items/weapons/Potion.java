@@ -18,9 +18,9 @@ public class Potion extends Trap {
     public Potion(int level){
         sprite = new Sprite(spriteTextures.HealthPotionSprite);
         lvl = level;
-        dmg = 10000f;
+        dmg = 333.3f;
         for(int i = 0; i < lvl; i++){
-            dmg += 1000 * i;
+            dmg += 333.3 * i;
         }
         type = "projectile";
         cooldown = 40;

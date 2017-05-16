@@ -54,7 +54,7 @@ public class AnimatedEnemy extends Enemy {
 
         @Override
         public float determineHealth(int level) {
-            return 2000f * (float) level;
+            return 20f * (float) level;
         }
 
         @Override

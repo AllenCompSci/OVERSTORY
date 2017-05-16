@@ -106,7 +106,7 @@ public class Player extends Entity {
         level = 1;
         xpToLevel = 10;
         waveAmount = 200;
-        regenRate = 30;
+        regenRate = 1;
         establishHealth();
         isWalking = false;
     }
@@ -189,7 +189,7 @@ public class Player extends Entity {
     }
 
     public void establishHealth(){
-        this.health = 3000f;
+        this.health = 100f;
         this.fullHealth = health;
     }
 
@@ -231,8 +231,8 @@ public class Player extends Entity {
             //s.ad
             level++;
             dmg += level;
-            xpToLevel = (int)((Math.pow(level, 2) * 20));
-            fullHealth *= 1.5;
+            xpToLevel = (int)((Math.pow(level, 2) * 80));
+            fullHealth *= 1.3;
             health = fullHealth;
             regenRate = (float)(.02 * health);
             Play.getGui().refillHealth();

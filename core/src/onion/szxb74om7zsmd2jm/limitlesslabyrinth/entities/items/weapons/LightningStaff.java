@@ -18,9 +18,9 @@ public class LightningStaff extends Weapon{
     public LightningStaff(int level){
         sprite = new Sprite(spriteTextures.LightningStaffSprite);
         lvl = level;
-        dmg = 100f;
+        dmg = 3.3f;
         for(int i = 0; i < lvl; i++){
-            dmg += 100 * i;
+            dmg += 3.3 * i;
         }
         type = "projectile";
         cooldown = 40;

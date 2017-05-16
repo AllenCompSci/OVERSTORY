@@ -16,9 +16,9 @@ public class WizardStaff extends Weapon{
         sprite = new Sprite(spriteTextures.WizardStaffSprite);
         lvl = level;
         type = "projectile";
-        dmg = 15f ;
+        dmg = 2.5f ;
         for(int i = 0; i < lvl; i++){
-            dmg += 100 * i;
+            dmg += 2.5 * i;
         }
         cooldown = 40;
         XPtoLVL = 10 * lvl;

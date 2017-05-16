@@ -27,7 +27,7 @@ public class regenPotion extends Trap {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
-        Player.addRegenRate(dmg);
+        Player.addRegenRate();
         itemXP += lvl;
         ammo--;
         if(ammo <= 0){

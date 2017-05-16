@@ -34,6 +34,7 @@ public class Player extends Entity {
         return xp;
     }
     private static int xp = 0;
+    private static double addedRegen = 0;
     private static int level = 1;
     public static int getpLevel(){
         return level;
@@ -45,8 +46,9 @@ public class Player extends Entity {
 
     private static int xpToLevel = 10;
 
-    public static void addRegenRate(float regenRate) {
-        Player.regenRate += regenRate;
+    public static void addRegenRate() {
+        addedRegen += .005;
+        Player.regenRate = (float)((.02 * fullHealth) + (addedRegen * fullHealth));
     }
 
     private static float regenRate = 30;
@@ -236,7 +238,7 @@ public class Player extends Entity {
             xpToLevel = (int)((Math.pow(level, 2) * 80));
             fullHealth *= 1.3;
             health = fullHealth;
-            regenRate = (float)(.02 * health);
+            regenRate = (float)((.02 * health) + (addedRegen * health));
             Play.getGui().refillHealth();
             leveledup = true;
             Gdx.app.log("Level", String.valueOf(level));

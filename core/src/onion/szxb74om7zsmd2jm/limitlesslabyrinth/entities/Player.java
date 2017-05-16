@@ -231,10 +231,10 @@ public class Player extends Entity {
             //s.ad
             level++;
             dmg += level;
-            xpToLevel *= 2.5;
+            xpToLevel = (int)((Math.pow(level, 2) * 20));
             fullHealth *= 1.5;
             health = fullHealth;
-            regenRate *= 1.3;
+            regenRate = (float)(.02 * health);
             Play.getGui().refillHealth();
             Gdx.app.log("Level", String.valueOf(level));
            // Dialog d = new Dialog("Level", )

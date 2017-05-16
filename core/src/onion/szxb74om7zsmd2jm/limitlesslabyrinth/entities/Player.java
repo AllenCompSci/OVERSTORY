@@ -86,6 +86,8 @@ public class Player extends Entity {
     protected float dmgTaken;
     static MusicDirector playerSounds = new MusicDirector(MusicDirector.SoundName.PLAYERHIT);
 
+    public static boolean leveledup = false;
+
     static Hashtable<String, Conversation> _conversations;
     static ConversationGraph _graph;
     static String quit = "q";
@@ -236,6 +238,7 @@ public class Player extends Entity {
             health = fullHealth;
             regenRate = (float)(.02 * health);
             Play.getGui().refillHealth();
+            leveledup = true;
             Gdx.app.log("Level", String.valueOf(level));
            // Dialog d = new Dialog("Level", )
         }

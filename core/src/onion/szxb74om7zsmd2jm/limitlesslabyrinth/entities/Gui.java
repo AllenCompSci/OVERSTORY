@@ -13,6 +13,8 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Mi
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
+import java.math.BigInteger;
+
 /**
  * Created by 226812 on 1/27/2017.
  */
@@ -55,6 +57,8 @@ public class Gui {
     }
 
     private Backpack backpack = new Backpack();
+
+    private int lvlcnt = 0;
 
     public static float getHealthBarX() {
         return healthBarX;
@@ -323,9 +327,9 @@ public class Gui {
         playerLostHealthBar.draw(Play.getRenderer().getBatch());
         playerHealthBar.draw(Play.getRenderer().getBatch());
         font.setColor(Color.BLACK);
-        font.draw(Play.getRenderer().getBatch(), ((int)Player.getHealth()) + " / " + ((int)Player.getFullHealth()), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 220, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 13);
+        font.draw(Play.getRenderer().getBatch(), (((int)(Player.getHealth() / (Player.getFullHealth()) * 100) + "%")), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 220, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 13);
         font.setColor(Color.WHITE);
-        font.draw(Play.getRenderer().getBatch(), "RegenPerTick : " + Player.getRegenRate(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 40);
+        font.draw(Play.getRenderer().getBatch(), "RegenPerTick : " + (int)((Player.getRegenRate() / Player.getFullHealth()) * 100) + "%", Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 40);
 
 
         /** Display player level and Xp */
@@ -336,6 +340,16 @@ public class Gui {
         /** Display Map Level of enemies */
         font.draw(Play.getRenderer().getBatch(), "Enemy Levels : " + Play.getKillCount().get(Play.getMapPath()) + "-" + (Play.getKillCount().get(Play.getMapPath()) + 3), Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 200, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 30);
 
+        /** Level up text above Player*/
+        if(Player.leveledup) {
+            font.setColor(Color.GREEN);
+            font.draw(Play.getRenderer().getBatch(), "Level Up", Play.getCamera().position.x - 40, Play.getCamera().position.y + 50);
+            lvlcnt++;
+            if(lvlcnt == 30){
+                Player.leveledup = false;
+                lvlcnt = 0;
+            }
+        }
 
         /** itemBox update */
         itemBox1.setPosition(Play.getCamera().position.x - 150 - itemBox1.getWidth()/2, Play.getCamera().position.y - Play.getCamera().viewportHeight/2 + 70);

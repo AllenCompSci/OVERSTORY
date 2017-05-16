@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.utils.Array;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Item;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.Potion;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.regenPotion;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.TurretItem;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
@@ -328,6 +329,9 @@ public class Enemy extends Entity{
 
         if(VAL == 4 || VAL == 44 || VAL == 444){
             Play.getGui().getBackpack().addToBackpack(new TurretItem());
+        }
+        if(VAL == 555){
+            Play.getGui().getBackpack().addToBackpack(new regenPotion(level));
         }
         if(VAL == 7 || VAL == 77 || VAL == 777){
             Play.getGui().getBackpack().addToBackpack(new Potion(level));

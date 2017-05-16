@@ -145,6 +145,9 @@ public class spriteTextures {
             }
             return target;
     }
+
+    public static Texture HealthPotionSprite = new Texture("HealthPotion.png");
+    public static Texture RegenPotionSprite = new Texture("RegenPotion.png");
     public static Texture DonaldTrump = new Texture("32 pix/DonaldTrump.png");
     public static Texture MiniGunSprite = new Texture("MiniGun.png");
     public static Texture LoadingScreenSprite = new Texture("LoadingScreen.jpeg");

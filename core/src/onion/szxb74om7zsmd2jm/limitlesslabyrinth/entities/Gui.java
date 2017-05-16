@@ -324,11 +324,14 @@ public class Gui {
         playerHealthBar.draw(Play.getRenderer().getBatch());
         font.setColor(Color.BLACK);
         font.draw(Play.getRenderer().getBatch(), ((int)Player.getHealth()) + " / " + ((int)Player.getFullHealth()), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 220, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 13);
+        font.setColor(Color.WHITE);
+        font.draw(Play.getRenderer().getBatch(), "RegenPerTick : " + Player.getRegenRate(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 40);
+
 
         /** Display player level and Xp */
         font.setColor(Color.WHITE);
-        font.draw(Play.getRenderer().getBatch(), "Player XP : " + Player.getXp() + " / " + Player.getXpToLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 40);
-        font.draw(Play.getRenderer().getBatch(), "Player Level : " + Player.getpLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 60);
+        font.draw(Play.getRenderer().getBatch(), "Player XP : " + Player.getXp() + " / " + Player.getXpToLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 60);
+        font.draw(Play.getRenderer().getBatch(), "Player Level : " + Player.getpLevel(), Play.getCamera().position.x - Play.getCamera().viewportWidth/2 + 10, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 80);
 
         /** Display Map Level of enemies */
         font.draw(Play.getRenderer().getBatch(), "Enemy Levels : " + Play.getKillCount().get(Play.getMapPath()) + "-" + (Play.getKillCount().get(Play.getMapPath()) + 3), Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 200, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 30);

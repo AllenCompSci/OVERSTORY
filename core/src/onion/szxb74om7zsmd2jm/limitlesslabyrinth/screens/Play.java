@@ -196,14 +196,39 @@ public class Play implements Screen {
     }
     private static Map<String, Array<EnemyTraps>> superTraps = new HashMap<String, Array<EnemyTraps>>();
 
+    public static Map<String, Boolean> getIsBossMapComplete() {
+        return isBossMapComplete;
+    }
+
+    private static Map<String, Boolean> isBossMapComplete = new HashMap<>();
+
     private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
     static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
     private int spawnInterval = 200;
 
+    public static void setBackpackup(boolean backpackup) {
+        Play.backpackup = backpackup;
+    }
+
     public static boolean backpackup = false;
+
+    public static void setBackpackdn(boolean backpackdn) {
+        Play.backpackdn = backpackdn;
+    }
+
     public static boolean backpackdn = false;
+
+    public static void setSwitchitem(boolean switchitem) {
+        Play.switchitem = switchitem;
+    }
+
     public static boolean switchitem = false;
+
+    public static void setSwitchslot(boolean switchslot) {
+        Play.switchslot = switchslot;
+    }
+
     public static boolean switchslot = false;
 
     public static InputProcessor inp = new InputAdapter() {
@@ -366,6 +391,7 @@ public class Play implements Screen {
         turrets.putIfAbsent(mapPath, turretsEmpty);
         KillCount.putIfAbsent(mapPath, 0);
         superTraps.putIfAbsent(mapPath, SuperTrapsEmpty);
+        isBossMapComplete.putIfAbsent(mapPath, false);
 
         /*
         if(music.isPlaying()){
@@ -397,6 +423,17 @@ public class Play implements Screen {
 
     @Override
     public void render(float delta) {
+
+        /** If boss has been killed already in the map, change the portal to on */
+        if(isBossMapComplete.get(mapPath) == true){
+            int tempTiles[][] = checkMapLayerFor((TiledMapTileLayer) map.getLayers().get(1), "ReplaceWith");
+            for(int i = 0; i < tempTiles.length; i++){
+                int tile = ((TiledMapTileLayer) map.getLayers().get(1)).getCell(tempTiles[i][0], tempTiles[i][1]).getTile().getId() + 3;
+                int x = tempTiles[i][0];
+                int y = tempTiles[i][1];
+                    ((TiledMapTileLayer) map.getLayers().get(1)).getCell(x, y).setTile(map.getTileSets().getTile(tile));
+            }
+        }
 
         /** Check for change in spawnArea */
         checkSpawnArea((TiledMapTileLayer) map.getLayers().get(2));
@@ -473,7 +510,11 @@ public class Play implements Screen {
 
             if(i.getHealth() <= 0) {
                 spawnCount++;
-                if(spawnCount >= 10){
+                int nextLvlAt = 10;
+                for(int k = 1; k < KillCount.get(mapPath); k++){
+                    nextLvlAt *= 1.2;
+                }
+                if(spawnCount >= nextLvlAt){
                     KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);
                     spawnCount = 0;
                 }
@@ -506,7 +547,7 @@ public class Play implements Screen {
             if (System.currentTimeMillis() > time) {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
                     if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("Boss")) {
-                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                        spawnBossEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
                     }
                     else if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weapon") && ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weaponLvlIncrease")) {
                         spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
@@ -569,6 +610,13 @@ public class Play implements Screen {
     public void spawnEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart, String weapon){
         count++;
         enemies.add(new RandomEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart), weapon));
+
+        //enemies.add(new Brute(x, y, level, collisionLayer));
+    }
+
+    public void spawnBossEnemy(float x, float y, int level, TiledMapTileLayer collisionLayer, int spawnRange, int spawnStart, String weapon){
+        count++;
+        enemies.add(new BossEnemySpawn(x,y,level,collisionLayer, .2f, spriteTextures.makeAMonster(spawnRange, spawnStart), weapon));
 
         //enemies.add(new Brute(x, y, level, collisionLayer));
     }

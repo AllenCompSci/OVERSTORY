@@ -4,23 +4,21 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.Weapon;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.Trap;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Arrow;
-import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.LandMine;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.NullProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.spriteTextures;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 /**
- * Created by chris on 5/14/2017.
+ * Created by chris on 5/15/2017.
  */
-public class Potion extends Trap {
-    public Potion(int level){
-        sprite = new Sprite(spriteTextures.HealthPotionSprite);
+public class regenPotion extends Trap {
+    public regenPotion(int level){
+        sprite = new Sprite(spriteTextures.RegenPotionSprite);
         lvl = level;
-        dmg = 10000f;
+        dmg = 30f;
         for(int i = 0; i < lvl; i++){
-            dmg += 1000 * i;
+            dmg += 30 * i;
         }
         type = "projectile";
         cooldown = 40;
@@ -29,7 +27,7 @@ public class Potion extends Trap {
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
-        Player.giveHealth(dmg);
+        Player.addRegenRate(dmg);
         itemXP += lvl;
         ammo--;
         if(ammo <= 0){

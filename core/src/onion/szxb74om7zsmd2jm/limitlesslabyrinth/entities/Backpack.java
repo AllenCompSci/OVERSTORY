@@ -16,7 +16,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
  * Created by chris on 2/1/2017.
  */
 public class Backpack {
-    private int pages = 1;
+    private int pages = 100;
     private Sprite[] slots = new Sprite[16 * pages];
     private static int pageOn = 1;
     private Item[] itemSlots = new Item[16 * pages];
@@ -29,11 +29,11 @@ public class Backpack {
 
     public void reset(){
         selectedSlot = 0;
-        slots[0] = new Sprite(SelectedBox);
         for(int i = 0; i < slots.length; i++){
             slots[i] = new Sprite(ItemBox);
             itemSlots[i] = new NullWeapon();
         }
+        slots[0] = new Sprite(SelectedBox);
     }
 
     public Backpack(){
@@ -129,6 +129,11 @@ public class Backpack {
 
         if(selectedSlot >= slots.length / pages * pageOn) pageOn++;
         if(selectedSlot < 0 + slots.length / pages * pageOn - slots.length / pages) pageOn--;
+
+        /** Display the page number */
+        font.setColor(Color.WHITE);
+        font.draw(Play.getRenderer().getBatch(), "Page " + pageOn + " / " + pages, Play.getCamera().position.x + Play.getCamera().viewportWidth/2 - 140, Play.getCamera().position.y + Play.getCamera().viewportHeight/2 - 385);
+
 
         /** Weapon Stats */
         font.setColor(Color.WHITE);

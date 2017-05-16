@@ -1,8 +1,6 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,11 +30,42 @@ public class PauseScreen implements Screen {
 
     private static ScreenViewport viewport;
 
+    public static InputProcessor inp = new InputAdapter() {
+        @Override
+        public boolean scrolled(int amount) {
+            if (Play.getGui().getIsBackpackOpen()) {
+                if (amount == 1) {
+                    Play.setBackpackup(true);
+                    Play.setBackpackdn(false);
+                } else if (amount == -1) {
+                    Play.setBackpackdn(true);
+                    Play.setBackpackup(false);
+                }
+            }
+
+            return true;
+        }
+
+        @Override
+        public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+            if (Play.getGui().getIsBackpackOpen()) {
+                if (button == Input.Buttons.RIGHT) {
+                    Play.setSwitchitem(true);
+                } else if (button == Input.Buttons.MIDDLE) {
+                    Play.setSwitchslot(true);
+                }
+                return true;
+            }
+            return true;
+        }
+    };
+
     @Override
     public void show() {
         viewport = new ScreenViewport();
         stage = new Stage(viewport);
-        Gdx.input.setInputProcessor(stage);
+        InputMultiplexer mult = new InputMultiplexer(stage, inp);
+        Gdx.input.setInputProcessor(mult);
 
         pauseBackGround = new PauseBackGround();
         resumeButton = new ResumeButton();

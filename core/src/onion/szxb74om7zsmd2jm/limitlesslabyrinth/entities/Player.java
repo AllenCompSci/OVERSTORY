@@ -44,7 +44,12 @@ public class Player extends Entity {
     }
 
     private static int xpToLevel = 10;
-    private static float regenRate = 100;
+
+    public static void addRegenRate(float regenRate) {
+        Player.regenRate += regenRate;
+    }
+
+    private static float regenRate = 30;
     public static float getRegenRate(){
         return regenRate;
     }
@@ -101,6 +106,7 @@ public class Player extends Entity {
         level = 1;
         xpToLevel = 10;
         waveAmount = 200;
+        regenRate = 30;
         establishHealth();
         isWalking = false;
     }
@@ -183,7 +189,7 @@ public class Player extends Entity {
     }
 
     public void establishHealth(){
-        this.health = 2000f;
+        this.health = 3000f;
         this.fullHealth = health;
     }
 
@@ -225,10 +231,10 @@ public class Player extends Entity {
             //s.ad
             level++;
             dmg += level;
-            xpToLevel *= 1.6;
-            fullHealth *= 1.6;
+            xpToLevel *= 2.5;
+            fullHealth *= 1.5;
             health = fullHealth;
-            regenRate *= 1.1;
+            regenRate *= 1.3;
             Play.getGui().refillHealth();
             Gdx.app.log("Level", String.valueOf(level));
            // Dialog d = new Dialog("Level", )

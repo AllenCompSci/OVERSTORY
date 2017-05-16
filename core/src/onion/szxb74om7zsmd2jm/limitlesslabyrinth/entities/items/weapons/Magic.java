@@ -16,7 +16,10 @@ public class Magic extends Weapon {
     public Magic(int level){
         sprite = new Sprite(spriteTextures.MagicItemSprite);
         lvl = level;
-        dmg = 100f + (lvl - 1) * 100;
+        dmg = 50f;
+        for(int i = 0; i < lvl; i++){
+            dmg += 50 * i;
+        }
         type = "projectile";
         cooldown = 40;
     }

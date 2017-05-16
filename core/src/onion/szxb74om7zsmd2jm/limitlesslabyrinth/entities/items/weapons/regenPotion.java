@@ -20,7 +20,7 @@ public class regenPotion extends Trap {
         for(int i = 0; i < lvl; i++){
             dmg += 1 * i;
         }
-        type = "projectile";
+        type = "trap";
         cooldown = 40;
         ammo = 1;
     }

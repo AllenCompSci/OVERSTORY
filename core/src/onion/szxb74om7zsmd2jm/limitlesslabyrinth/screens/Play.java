@@ -509,14 +509,10 @@ public class Play implements Screen {
 
 
             if(i.getHealth() <= 0) {
-                spawnCount++;
-                int nextLvlAt = 10;
-                for(int k = 1; k < KillCount.get(mapPath); k++){
-                    nextLvlAt *= 1.4;
-                }
+                spawnCount += (KillCount.get(mapPath) <= (int)map.getLayers().get(0).getProperties().get("LevelCap")) ? i.getXpDrop() : 1;
+                int nextLvlAt = (int) Math.pow(KillCount.get(mapPath), 2) * 40;
                 if(spawnCount >= nextLvlAt){
                     KillCount.replace(mapPath, KillCount.get(mapPath),KillCount.get(mapPath) + 1);
-                    spawnCount = 0;
                 }
                 i.onDeath();
 
@@ -544,22 +540,23 @@ public class Play implements Screen {
             Random rand = new Random();
 
             int num = rand.nextInt(spawnTiles.length);
+            int lvl = rand.nextInt(4) + KillCount.get(mapPath);
             if (System.currentTimeMillis() > time) {
                 if(SpawnTiles.get(num).getProperties().get("spawnEnemy").equals(spawnArea)) {
                     if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("Boss")) {
-                        spawnBossEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                        spawnBossEnemy(spawnTiles[num][0], spawnTiles[num][1], lvl + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
                     }
                     else if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weapon") && ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weaponLvlIncrease")) {
-                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], lvl + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
                     }
                     else if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weaponLvlIncrease")) {
-                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath) + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), "random");
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], lvl + (int)((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weaponLvlIncrease"), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), "random");
                     }
                     else if (((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().containsKey("weapon")) {
-                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], lvl, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), (String) ((TiledMapTileLayer) map.getLayers().get(2)).getCell(spawnTiles[num][0], spawnTiles[num][1]).getTile().getProperties().get("weapon"));
                     }
                     else {
-                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], KillCount.get(mapPath), (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), "random");
+                        spawnEnemy(spawnTiles[num][0], spawnTiles[num][1], lvl, (TiledMapTileLayer) getMap().getLayers().get(CollisionLayerNum), (int) SpawnTiles.get(num).getProperties().get("SpawnRange"), (int) SpawnTiles.get(num).getProperties().get("SpawnStart"), "random");
                     }
                 }
                 time = System.currentTimeMillis() + spawnInterval;

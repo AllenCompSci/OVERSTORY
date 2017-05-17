@@ -17,6 +17,7 @@ public class regenPotion extends Trap {
         sprite = new Sprite(spriteTextures.RegenPotionSprite);
         lvl = level;
         dmg = 1f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 1 * i;
         }

@@ -17,6 +17,7 @@ public class WizardStaff extends Weapon{
         lvl = level;
         type = "projectile";
         dmg = 2.5f ;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 2.5 * i;
         }

@@ -15,6 +15,7 @@ public class Sword extends Weapon {
         sprite = new Sprite(spriteTextures.SwordItemSprite);
         lvl = level;
         dmg = 2f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 2 * i;
         }

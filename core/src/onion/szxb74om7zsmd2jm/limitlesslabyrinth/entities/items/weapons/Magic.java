@@ -17,6 +17,7 @@ public class Magic extends Weapon {
         sprite = new Sprite(spriteTextures.MagicItemSprite);
         lvl = level;
         dmg = 1.7f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 1.7 * i;
         }

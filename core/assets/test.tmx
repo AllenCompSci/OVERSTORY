@@ -820,6 +820,7 @@
  </tileset>
  <layer name="Ground" width="120" height="120">
   <properties>
+   <property name="LevelCap" type="int" value="15"/>
    <property name="StartingLevel" type="int" value="1"/>
   </properties>
   <data encoding="csv">

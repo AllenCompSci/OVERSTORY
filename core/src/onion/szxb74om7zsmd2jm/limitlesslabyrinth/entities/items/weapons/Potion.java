@@ -19,6 +19,7 @@ public class Potion extends Trap {
         sprite = new Sprite(spriteTextures.HealthPotionSprite);
         lvl = level;
         dmg = 333.3f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 333.3 * i;
         }

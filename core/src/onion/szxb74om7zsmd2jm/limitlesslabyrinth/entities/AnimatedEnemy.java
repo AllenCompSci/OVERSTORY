@@ -49,12 +49,16 @@ public class AnimatedEnemy extends Enemy {
 
         @Override
         public int determineXP(int level) {
-            return 10 * level;
+            return weapon.getLvl();
         }
 
         @Override
         public float determineHealth(int level) {
-            return 20f * (float) level;
+            float h = 20f;
+            for(int i = 1; i < level; i++){
+                h *= 1.3;
+            }
+            return h;
         }
 
         @Override

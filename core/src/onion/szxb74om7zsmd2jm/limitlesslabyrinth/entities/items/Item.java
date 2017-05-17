@@ -20,6 +20,7 @@ public class Item {
     protected Sprite projectileSprite;
     protected Projectile projectile;
     protected float dmg;
+    protected float basedmg;
     protected long cooldown;
 
     public int getLvl() {
@@ -75,13 +76,13 @@ public class Item {
 
     public void LVLup(){
         lvl++;
-        this.dmg *= 2;
+        this.dmg += basedmg * (lvl - 1);
     }
 
     public void LVLup(String weaponname){
 
         lvl++;
-        this.dmg *= 2;
+        this.dmg += basedmg * (lvl - 1);
        // this.dmg += lvl * 100;
     }
 }

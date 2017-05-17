@@ -340,7 +340,12 @@ public class Enemy extends Entity{
             Play.getGui().getBackpack().addToBackpack(weapon);
         }
 
-        Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        if((Play.getKillCount().get(Play.getMapPath()) <= (int)Play.getMap().getLayers().get(0).getProperties().get("LevelCap"))){
+            Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        }
+        else{
+            Play.getPlayer().setXp(Play.getPlayer().getXp() + 1);
+        }
         Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
         Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
     }

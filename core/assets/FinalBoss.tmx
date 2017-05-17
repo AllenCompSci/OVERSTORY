@@ -492,7 +492,8 @@
  </tileset>
  <layer name="Tile Layer 1" width="50" height="70">
   <properties>
-   <property name="StartingLevel" type="int" value="1"/>
+   <property name="LevelCap" type="int" value="1000000000"/>
+   <property name="StartingLevel" type="int" value="90"/>
   </properties>
   <data encoding="csv">
 728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,728,

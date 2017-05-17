@@ -16,6 +16,7 @@ public class MiniGun extends Weapon {
         lvl = level;
         type = "projectile";
         dmg = 2f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 2 * i;
         }

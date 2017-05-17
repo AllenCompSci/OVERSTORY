@@ -1138,7 +1138,7 @@ public class spriteTextures {
 
         Random rand = new Random();
         int lvl;
-        lvl = rand.nextInt(4) + level;
+        lvl = level;
         if(weapon.equals("random")) {
             int VAL;
             VAL = rand.nextInt(1000);

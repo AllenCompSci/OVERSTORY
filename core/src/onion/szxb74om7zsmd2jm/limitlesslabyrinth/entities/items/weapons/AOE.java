@@ -17,6 +17,7 @@ public class AOE extends Weapon {
         sprite = new Sprite(spriteTextures.spellbook);
         lvl = level;
         dmg = 3.3f;
+        basedmg = dmg;
         for(int i = 0; i < lvl; i++){
             dmg += 3.3 * i;
         }

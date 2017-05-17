@@ -1,5 +1,6 @@
 package onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -9,6 +10,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 import javax.xml.soap.Text;
 
+import java.io.IOException;
 import java.util.Random;
 
 import static onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play.MonsterType.*;
@@ -178,7 +180,7 @@ public class spriteTextures {
     public static Texture shurikenProjectileTexture = new Texture("shurikenProjectile.png");
     public static Texture ashTexture = new Texture("still1.png");
     public static Texture goblinTexture = new Texture("thor32.png");
-    public static Texture bruteTexture = new Texture("brute.png");
+    public static Texture bruteTexture = new Texture("Brute.png");
     public static Texture demonTexture = new Texture("demon(64x64)(4col2row)(256x128).png");
     public static Texture dragonTexture = new Texture("redDragon(64x64)(4col2row)(256x128).png");
     public static Texture hydraTexture = new Texture("hydra 2col1row.png");
@@ -207,13 +209,13 @@ public class spriteTextures {
     public static Texture explosion = new Texture ("FX/Explosion(1x8).png");
     public static Texture fire = new Texture("FX/Fire(1x8).png");
     public static Texture whitedeath = new Texture("FX/WhiteDeath(1x8).png");
-    public static Texture energy = new Texture("FX/energy(1x8).png");
+    public static Texture energy = new Texture("FX/Energy(1x8).png");
     public static Texture icicle = new Texture("FX/ICE(1x3).png");
     public static Texture stone = new Texture("FX/STONE(1x4).png");
     public static Texture physical = new Texture("FX/PHYl(1x3).png");
     public static Texture magicWall = new Texture("FX/MagicWallCreation(1x9).png");
     public static Texture magicwall = new Texture("FX/MagicWall(1x3).png");
-    
+
     public static Animation<TextureRegion> FX(int count1){
         switch(count1)
         {

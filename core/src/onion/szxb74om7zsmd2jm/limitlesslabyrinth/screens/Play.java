@@ -204,7 +204,7 @@ public class Play implements Screen {
 
     private static String goTo = "StartPosition";
     MusicDirector dj = new MusicDirector(MusicDirector.SongName.MEGALOVANIA);
-    static Music music = Gdx.audio.newMusic(Gdx.files.internal("megalovania/117.mp3"));
+    static Music music = Gdx.audio.newMusic(Gdx.files.internal("Megalovania/117.mp3"));
     private int spawnInterval = 200;
 
     public static void setBackpackup(boolean backpackup) {

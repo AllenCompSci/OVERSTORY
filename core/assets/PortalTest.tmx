@@ -201,7 +201,7 @@
   <tile id="90">
    <properties>
     <property name="goto" value="position1"/>
-    <property name="portal" value="test.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="92">

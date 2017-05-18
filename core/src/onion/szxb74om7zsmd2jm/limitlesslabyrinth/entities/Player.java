@@ -236,7 +236,6 @@ public class Player extends Entity {
             level++;
             dmg += level;
             xpToLevel = ((int)((Math.pow(level, 2) * 40)));
-            fullHealth *= 1.75;
             health = fullHealth;
             regenRate = (float)((.02 * health) + (addedRegen * health));
             Play.getGui().refillHealth();

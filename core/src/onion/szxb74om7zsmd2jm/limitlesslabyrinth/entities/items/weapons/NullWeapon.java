@@ -15,6 +15,6 @@ public class NullWeapon extends Weapon {
         dmg = 0f;
         lvl = 0;
         XPtoLVL = 10;
-        cooldown = 40;
+        cooldown = 40;//
     }
 }

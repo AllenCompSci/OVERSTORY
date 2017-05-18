@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.LaserGun;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.invisProjectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Detection;
@@ -236,7 +237,7 @@ public class Player extends Entity {
             level++;
             dmg += level;
             xpToLevel = ((int)((Math.pow(level, 2) * 40)));
-            fullHealth *= 1.75;
+            fullHealth *= 1.51;
             health = fullHealth;
             regenRate = (float)((.02 * health) + (addedRegen * health));
             Play.getGui().refillHealth();
@@ -277,8 +278,6 @@ public class Player extends Entity {
             //testConversation();
         }
 
-        /** HAX */
-        
 
         /** Checking if hit by projectile */
 

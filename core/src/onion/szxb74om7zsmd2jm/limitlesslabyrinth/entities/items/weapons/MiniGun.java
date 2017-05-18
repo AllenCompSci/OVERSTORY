@@ -18,7 +18,7 @@ public class MiniGun extends Weapon {
         dmg = 2f;
         basedmg = dmg;
         for(int i = 0; i < lvl; i++){
-            dmg += 2 * i;
+            dmg += 2 * i;//
         }
         cooldown = 0;
         XPtoLVL = 500 * lvl;

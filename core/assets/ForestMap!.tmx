@@ -5632,13 +5632,13 @@
   <tile id="250">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="Castle.tmx"/>
+    <property name="portal" value="ForestMiniBoss.tmx"/>
    </properties>
   </tile>
   <tile id="251">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="Castle.tmx"/>
+    <property name="portal" value="ForestMiniBoss.tmx"/>
    </properties>
   </tile>
  </tileset>

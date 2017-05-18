@@ -26,7 +26,7 @@ public class Rune extends Weapon {
         lvl = level;
         dmg = 3.3f;
         basedmg = dmg;
-        for(int i = 0; i < lvl; i++){
+        for(int i = 0; i < lvl; i++){//
             dmg += 3.3 * i;
         }
         type = "rune";

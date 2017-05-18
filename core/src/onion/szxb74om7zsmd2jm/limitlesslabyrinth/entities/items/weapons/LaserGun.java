@@ -26,7 +26,7 @@ public class LaserGun extends Weapon{
     private LaserBullet s11;
     private LaserBullet s12;
     private LaserBullet s0;
-
+//
     public LaserGun(int level){
         sprite = new Sprite(spriteTextures.LaserGunSprite);
         lvl = level;

@@ -18,7 +18,7 @@ public class Magic extends Weapon {
         lvl = level;
         dmg = 1.7f;
         basedmg = dmg;
-        for(int i = 0; i < lvl; i++){
+        for(int i = 0; i < lvl; i++){//
             dmg += 1.7 * i;
         }
         type = "projectile";

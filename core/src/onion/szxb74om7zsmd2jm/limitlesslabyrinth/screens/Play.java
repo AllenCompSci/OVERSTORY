@@ -34,6 +34,7 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.enemies.*;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.traps.EnemyTraps;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.projectiles.Projectile;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.turrets.Turret;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Dijkstra;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.MusicDirector;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics.Pathfinding;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.threads.Spawn;
@@ -467,6 +468,7 @@ public class Play implements Screen {
                 walls.removeIndex(walls.indexOf(null, true));
             }
         }
+        Dijkstra.deffixNewNode();
         for(Projectile i : projectiles){
             i.draw();
             if(System.currentTimeMillis() > i.getTime()){

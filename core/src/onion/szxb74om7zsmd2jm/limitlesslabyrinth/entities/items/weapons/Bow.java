@@ -15,7 +15,7 @@ public class Bow extends Weapon {
         sprite = new Sprite(spriteTextures.BowSprite);
         lvl = level;
         dmg = 5.7f;
-        basedmg = dmg;
+        basedmg = dmg;//
         for(int i = 0; i < lvl; i++){
             dmg += 5.7 * i;
         }

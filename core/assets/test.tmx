@@ -792,37 +792,37 @@
   <tile id="104">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
   <tile id="105">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
   <tile id="106">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
   <tile id="120">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
   <tile id="121">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
   <tile id="122">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="testboss.tmx"/>
+    <property name="portal" value="PortalTest.tmx"/>
    </properties>
   </tile>
  </tileset>
@@ -1078,7 +1078,7 @@
 3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008,3007,3008
 </data>
  </layer>
- <layer name="SpawnLayer" width="120" height="120" visible="0" opacity="0.4">
+ <layer name="SpawnLayer" width="120" height="120" visible="0" opacity="0.59">
   <data encoding="csv">
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,

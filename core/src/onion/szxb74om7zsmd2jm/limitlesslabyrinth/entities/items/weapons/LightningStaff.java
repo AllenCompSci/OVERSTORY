@@ -25,7 +25,7 @@ public class LightningStaff extends Weapon{
         }
         type = "projectile";
         cooldown = 40;
-    }
+    }//
 
     @Override
     public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){

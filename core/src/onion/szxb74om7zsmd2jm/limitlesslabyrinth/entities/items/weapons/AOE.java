@@ -22,7 +22,7 @@ public class AOE extends Weapon {
             dmg += 3.3 * i;
         }
         type = "projectile";
-        cooldown = 80;
+        cooldown = 80;//
     }
 
     @Override

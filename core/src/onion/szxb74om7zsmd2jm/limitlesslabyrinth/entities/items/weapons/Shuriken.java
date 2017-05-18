@@ -28,7 +28,7 @@ public class Shuriken extends Weapon{
         for(int i = 0; i < lvl; i++){
             dmg += 1 * i;
         }
-        type = "projectile";
+        type = "projectile";//
         cooldown = 20;
 
     }

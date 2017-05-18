@@ -23,7 +23,7 @@ public class regenPotion extends Trap {
         }
         type = "trap";
         cooldown = 40;
-        ammo = 1;
+        ammo = 1;//
     }
 
     @Override

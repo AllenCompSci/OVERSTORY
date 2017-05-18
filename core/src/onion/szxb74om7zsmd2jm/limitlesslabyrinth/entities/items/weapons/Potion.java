@@ -28,7 +28,7 @@ public class Potion extends Trap {
         ammo = 1;
     }
 
-    @Override
+    @Override//
     public Projectile getProjectile(float x1, float y1, float x2, float y2, String Origin){
         Player.giveHealth(dmg);
         itemXP += lvl;

@@ -22,7 +22,7 @@ public class WizardStaff extends Weapon{
             dmg += 2.5 * i;
         }
         cooldown = 40;
-        XPtoLVL = 10 * lvl;
+        XPtoLVL = 10 * lvl;//
     }
 
     @Override

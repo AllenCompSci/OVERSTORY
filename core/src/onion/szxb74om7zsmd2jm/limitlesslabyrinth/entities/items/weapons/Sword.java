@@ -21,7 +21,7 @@ public class Sword extends Weapon {
         }
         type = "projectile";
         cooldown = 1;
-        XPtoLVL = 20 * lvl;
+        XPtoLVL = 20 * lvl;//
     }
 
     @Override

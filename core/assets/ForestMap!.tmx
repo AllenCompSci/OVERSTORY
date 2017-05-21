@@ -496,20 +496,20 @@
   </tile>
   <tile id="29">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="30">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="31">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="34">
@@ -544,20 +544,20 @@
   </tile>
   <tile id="45">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="46">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="47">
    <properties>
-    <property name="goto" value="StartPosition"/>
-    <property name="portal" value="GiantChasm.tmx"/>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="RiverMap.tmx"/>
    </properties>
   </tile>
   <tile id="50">

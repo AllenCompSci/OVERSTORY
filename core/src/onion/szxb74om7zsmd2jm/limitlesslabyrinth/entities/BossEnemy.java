@@ -52,12 +52,16 @@ public class BossEnemy extends Enemy {
 
     @Override
     public int determineXP(int level) {
-        return 10 * level;
+        return weapon.getLvl();
     }
 
     @Override
     public float determineHealth(int level) {
-        return 2000f * (float) level;
+        float h = 20f;
+        for(int i = 1; i < level; i++){
+            h *= 1.2;
+        }
+        return h;
     }
 
     @Override
@@ -178,7 +182,12 @@ public class BossEnemy extends Enemy {
 
         Play.getIsBossMapComplete().replace(Play.getMapPath(), false, true);
 
-        Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        if((Play.getKillCount().get(Play.getMapPath()) <= (int)Play.getMap().getLayers().get(0).getProperties().get("LevelCap"))){
+            Play.getPlayer().setXp(Play.getPlayer().getXp() + this.getXpDrop());
+        }
+        else{
+            Play.getPlayer().setXp(Play.getPlayer().getXp() + 1);
+        }
         Play.getEnemies().set(Play.getEnemies().indexOf(this, true), null);
         Play.getEnemies().removeIndex(Play.getEnemies().indexOf(null, true));
     }

@@ -228,6 +228,42 @@
     <property name="blocked" value=""/>
    </properties>
   </tile>
+  <tile id="104">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
+  <tile id="106">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
+  <tile id="120">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
+  <tile id="121">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
+  <tile id="122">
+   <properties>
+    <property name="goto" value="position1"/>
+    <property name="portal" value="test.tmx"/>
+   </properties>
+  </tile>
  </tileset>
  <tileset firstgid="705" name="Dungeon_B" tilewidth="32" tileheight="32" tilecount="256" columns="16">
   <image source="TileSets/Dungeon_B.png" width="512" height="512"/>

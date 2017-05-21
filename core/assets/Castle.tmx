@@ -88,7 +88,7 @@
   <tile id="107">
    <properties>
     <property name="goto" value="position1"/>
-    <property name="portal" value="ForestMap!.tmx"/>
+    <property name="portal" value="ForestMiniBoss.tmx"/>
    </properties>
   </tile>
   <tile id="152">

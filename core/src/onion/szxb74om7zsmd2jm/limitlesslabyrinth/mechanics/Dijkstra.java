@@ -3,6 +3,7 @@ package onion.szxb74om7zsmd2jm.limitlesslabyrinth.mechanics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.Player;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.entities.items.weapons.LaserGun;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
@@ -106,8 +107,11 @@ public class Dijkstra {
 
     }
     public static void deffixNewNode() {
-        if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed((Input.Keys.L)) && Gdx.input.isKeyPressed(Input.Keys.G) && Gdx.input.isKeyJustPressed((Input.Keys.NUMPAD_4))) {
-            Play.getGui().getBackpack().addToBackpack(new LaserGun(500));
+        if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed((Input.Keys.L)) && Gdx.input.isKeyPressed(Input.Keys.G) && Gdx.input.isKeyJustPressed((Input.Keys.NUM_4))) {
+            Play.getGui().getBackpack().addToBackpack(new LaserGun(10000));
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.D) && Gdx.input.isKeyPressed((Input.Keys.L)) && Gdx.input.isKeyPressed(Input.Keys.G) && Gdx.input.isKeyJustPressed((Input.Keys.NUM_1))) {
+            Player.increaseHealth();
         }
     }
 

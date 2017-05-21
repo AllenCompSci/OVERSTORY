@@ -792,37 +792,37 @@
   <tile id="104">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="105">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="106">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="120">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="121">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
   <tile id="122">
    <properties>
     <property name="goto" value="StartPosition"/>
-    <property name="portal" value="PortalTest.tmx"/>
+    <property name="portal" value="testboss.tmx"/>
    </properties>
   </tile>
  </tileset>

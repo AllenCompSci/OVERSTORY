@@ -424,5 +424,12 @@ public class Player extends Entity {
         Play.getGui().setHealthBarX(Play.getGui().getHealthBarX() - ((health / Play.getPlayer().getFullHealth()) * Play.getGui().getPlayerHealthBar().getWidth()) / 2);
         Play.getGui().getPlayerHealthBar().setScale(Play.getGui().getPlayerHealthBar().getScaleX() + health / Play.getPlayer().getFullHealth(), Play.getGui().getPlayerHealthBar().getScaleY());
     }
+
+    public static void increaseHealth(){
+        fullHealth *= 5;
+        health = fullHealth;
+        regenRate = (float)((.02 * health) + (addedRegen * health));
+        Play.getGui().refillHealth();
+    }
 }
 

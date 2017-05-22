@@ -132,9 +132,9 @@ public class Gui {
         isBackpackOpen = false;
         playerHealthBar = new Sprite(HealthBar);
         item1 = new Sword(1);
-        item2 = new MiniGun(1);
-        item3 = new TurretItem();
-        item4 = new Potion(1);
+        item2 = new NullWeapon();
+        item3 = new NullWeapon();
+        item4 = new NullWeapon();
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);
@@ -158,9 +158,9 @@ public class Gui {
         itemBox3 = new Sprite(ItemBox);
         itemBox4 = new Sprite(ItemBox);
         item1 = new Sword(1);
-        item2 = new MiniGun(1);
-        item3 = new TurretItem();
-        item4 = new Potion(1);
+        item2 = new NullWeapon();
+        item3 = new NullWeapon();
+        item4 = new NullWeapon();
         refreshItem[0] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[1] = new Sprite(spriteTextures.guiRefreshBox);
         refreshItem[2] = new Sprite(spriteTextures.guiRefreshBox);

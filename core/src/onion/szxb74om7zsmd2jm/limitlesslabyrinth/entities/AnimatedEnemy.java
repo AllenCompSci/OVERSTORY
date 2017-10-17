@@ -56,7 +56,7 @@ public class AnimatedEnemy extends Enemy {
         public float determineHealth(int level) {
             float h = 20f;
             for(int i = 1; i < level; i++){
-                h *= 1.2;
+                h *= 1.105;
             }
             return h;
         }

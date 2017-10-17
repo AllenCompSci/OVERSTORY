@@ -48,7 +48,7 @@ public class Player extends Entity {
     private static int xpToLevel = 10;
 
     public static void addRegenRate() {
-        addedRegen += .005;
+        addedRegen += .0075;
         Player.regenRate = (float)((.02 * fullHealth) + (addedRegen * fullHealth));
     }
 
@@ -426,7 +426,7 @@ public class Player extends Entity {
     }
 
     public static void increaseHealth(){
-        fullHealth *= 5;
+        fullHealth *= 7;
         health = fullHealth;
         regenRate = (float)((.02 * health) + (addedRegen * health));
         Play.getGui().refillHealth();

@@ -14,57 +14,71 @@ import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.PauseScreen;
 import onion.szxb74om7zsmd2jm.limitlesslabyrinth.screens.Play;
 
 public class LimitlessLabyrinth extends Game {
-	public static void setPlay(String PathToMap) {
-		MapPath = PathToMap;
-		resetScreen = true;
-	}
-	public static void setPlay(){
-		loadCurrentGame = true;
-	}
-	public static void pauseScreen(){
-		isPauseScreen = true;
-	}
-	public static void ChangeMap(String PathToMap) {
-		MapPath = PathToMap;
-		changeMap = true;
-	}
-	public static void LoadingScreen(String PathToMap){
-		MapPath = PathToMap;
-		loadScreen = true;
-	}
 	private static boolean loadScreen = false;
 	private static boolean changeMap = false;
 	private static boolean isPauseScreen = false;
 	private static boolean resetScreen = false;
 	private static boolean loadCurrentGame = false;
 	private static boolean mainMenuScreen = false;
+	private static boolean PlayerDeath = true;
+	private static String MapPath;
+	private static MainMenu mainMenu = new MainMenu();
+	private static PauseScreen pauseScreen = new PauseScreen();
+	private static Play play;
 
+	
+	//restart play
+	public static void setPlay(String PathToMap) {
+		MapPath = PathToMap;
+		resetScreen = true;
+	}
+	//start play
+	public static void setPlay(){
+		loadCurrentGame = true;
+	}
+	//initiates pause screen
+	public static void pauseScreen(){
+		isPauseScreen = true;
+	}
+	//changes map
+	public static void ChangeMap(String PathToMap) {
+		MapPath = PathToMap;
+		changeMap = true;
+	}
+	//initiates loadingscreen
+	public static void LoadingScreen(String PathToMap){
+		MapPath = PathToMap;
+		loadScreen = true;
+	}
+	
+	//getter func
+	//   for PlayerDeath
 	public static boolean isPlayerDeath() {
 		return PlayerDeath;
 	}
-
+	
+	//setter func
+	//   for PlayerDeath
 	public static void setPlayerDeath(boolean playerDeath) {
 		PlayerDeath = playerDeath;
 	}
-
-	private static boolean PlayerDeath = true;
-
+	
+	//getter func
+	//   for MapPath
 	public static String getMapPath() {
 		return MapPath;
 	}
-
-	private static String MapPath;
+	
+	//returns to main menu
 	public static void setMainMenu(){
 		mainMenuScreen = true;
 	}
-	private static MainMenu mainMenu = new MainMenu();
-	private static PauseScreen pauseScreen = new PauseScreen();
-
+	
+	//starts play
 	public static void setPlayTo(Play play) {
 		LimitlessLabyrinth.play = play;
 	}
 
-	private static Play play;
 
 	@Override
 	public void create () {
@@ -74,6 +88,7 @@ public class LimitlessLabyrinth extends Game {
 
 	}
 
+	//handles game functions using the private variables in class
 	@Override
 	public void render () {
 		if(loadScreen){

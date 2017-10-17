@@ -3,6 +3,8 @@ Ryan Jacobs, Justin Carter, Ryan King, Chris DeLaGarza
 
 (Read Me instructions 1 (#) at the begining of a line followed by space for Small Heading 2(#) for large font heading. Keep Weekly Progress in Read Me)
 
+DOWNLOAD THE GAME AT: https://drive.google.com/open?id=0B_W7SEG-FlKmQzh2R0JHaVQ5R3M
+
 # Ryan Jacobs
 ## Week 1
 focused on learning the libgdx library, created an animation function that takes in a spritesheet and converts it to an animation, changed character models, attempted to implement states

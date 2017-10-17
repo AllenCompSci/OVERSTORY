@@ -53,3 +53,14 @@ Added more items and weapons. Also added a health bar for the player, and a back
 Worked on projectiles more, added proper explosions and shuriken that shoots 3 projectiles each time. Also fixed memory leakage to a great extent.
 ## Week 4 - the rest
 The whole game...
+There is only one problem....
+
+
+
+
+
+
+
+
+He didn't put enough comments.
+I have no idea how this thing works!!!
